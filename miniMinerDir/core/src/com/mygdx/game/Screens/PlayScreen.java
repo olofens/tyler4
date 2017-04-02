@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Scenes.Hud;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -26,17 +27,20 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
-
+    private Hud hud;
 
     public PlayScreen(MiniMiner game){
         this.game = game;
         gameCam = new OrthographicCamera();
-        viewPort = new FitViewport(480,800, gameCam);
+        viewPort = new FitViewport(MiniMiner.V_WIDTH,MiniMiner.V_HEIGHT, gameCam);
+        hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("tmxtest.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(viewPort.getWorldWidth()/2, 1400, 0);
+
+
     }
 
     @Override
@@ -45,9 +49,10 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isTouched()){
-            gameCam.position.x += 200 * dt;
-        }
+
+            gameCam.position.x = hud.blockSprite.getX();
+            gameCam.position.y = hud.blockSprite.getY();
+
     }
 
     public void update(float dt){
@@ -67,7 +72,12 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
+        hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX()*hud.blockSpeed);
+        //System.out.print(hud.blockSprite.getX());
+        hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY()*hud.blockSpeed);
 
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
         //game.batch.begin();
         //game.batch.draw(texture, 0, 0);
