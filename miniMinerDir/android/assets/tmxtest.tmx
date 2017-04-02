@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="140" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="breadinator_tileset" tilewidth="16" tileheight="16" tilecount="1292" columns="38">
+  <image source="breadinator_tileset.png" width="608" height="544"/>
+ </tileset>
+ <layer name="Background" width="70" height="140">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6CanX8LF3JIWDVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV9dUDTzgbSg==
+  </data>
+ </layer>
+ <layer name="Graphics" width="70" height="140">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAIADANYf+IVrCA+AsbLAIAAAAAAAAAAAAAAAAAAACAS7uuVFVVVVVVVVVVVVVVVVVVVVVVVVVV9fMB3zoctQ==
+  </data>
+ </layer>
+</map>
