@@ -61,7 +61,7 @@ public class Hud {
         //Create new TouchPad with the created style
         touchpad = new Touchpad(10, touchpadStyle);
         //setBounds(x,y,width,height)
-        touchpad.setBounds(15, 15, 200, 200);
+        touchpad.setBounds(MiniMiner.V_WIDTH-15-200, 15, 200, 200);
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
