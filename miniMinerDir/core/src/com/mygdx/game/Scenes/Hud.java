@@ -47,16 +47,16 @@ public class Hud {
         //Create a touchpad skin
         Skin touchpadSkin = new Skin();
         //Set background image
-        touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
+        //touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
         //Set knob image
         touchpadSkin.add("touchKnob", new Texture("touchPad/touchKnob.png"));
         //Create TouchPad Style
         Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
         //Create Drawable's from TouchPad skin
-        Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
+        //Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
         Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
         //Apply the Drawables to the TouchPad Style
-        touchpadStyle.background = touchBackground;
+        //touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
         //Create new TouchPad with the created style
         touchpad = new Touchpad(10, touchpadStyle);
