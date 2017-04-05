@@ -46,6 +46,8 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
+    MapProperties prop;
+
     public PlayScreen(MiniMiner game){
         this.game = game;
         gameCam = new OrthographicCamera();
@@ -57,6 +59,10 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2, 0);
 
+        prop = map.getProperties();
+
+
+
         world = new World(new Vector2(0,0), true);
         b2dr = new Box2DDebugRenderer();
 
@@ -64,6 +70,10 @@ public class PlayScreen implements Screen {
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
+
+        //hud.blockSprite.setCenter(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2);
+        hud.blockSprite.setX(getMapPixelWidth()/2);
+        hud.blockSprite.setY(getMapPixelHeight()/2 + 426);
 
 
         //adding ground layer
@@ -127,6 +137,18 @@ public class PlayScreen implements Screen {
 
     }
 
+    private int getMapPixelWidth() {
+        int mapWidth = prop.get("width", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        return mapWidth * tilePixelWidth;
+
+    }
+
+    private int getMapPixelHeight() {
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        return mapHeight * tilePixelHeight;
+    }
     @Override
     public void resize(int width, int height) {
         viewPort.update(width,height);
