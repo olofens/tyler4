@@ -35,39 +35,47 @@ import com.mygdx.game.items.Miner;
 
 public class PlayScreen implements Screen {
 
+    // Game Variables
     private MiniMiner game;
     private OrthographicCamera gameCam;
     private Viewport viewPort;
 
+
+    // Miner variables
     private Miner miner;
+
+    // Tiledmap variables
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
+    // Hud variables
     private Hud hud;
 
+    // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
 
     MapProperties prop;
 
-    public PlayScreen(MiniMiner game){
+    public PlayScreen(MiniMiner game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        viewPort = new FitViewport(MiniMiner.V_WIDTH,MiniMiner.V_HEIGHT, gameCam);
+        viewPort = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, gameCam);
         hud = new Hud(game.batch);
 
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
-        gameCam.position.set(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2, 0);
+        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
         prop = map.getProperties();
 
+        this.miner = new Miner(world);
 
-
-        world = new World(new Vector2(0,0), true);
+        // Create a new world with 0 gravity for now
+        world = new World(new Vector2(0, 0), true);
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bdef = new BodyDef();
@@ -76,8 +84,8 @@ public class PlayScreen implements Screen {
         Body body;
 
         //hud.blockSprite.setCenter(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2);
-        hud.blockSprite.setX(getMapPixelWidth()/2);
-        hud.blockSprite.setY(getMapPixelHeight()/2 + 426);
+        hud.blockSprite.setX(getMapPixelWidth() / 2);
+        hud.blockSprite.setY(getMapPixelHeight() / 2 + 426);
 
 
         //adding ground layer
@@ -85,17 +93,16 @@ public class PlayScreen implements Screen {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rect.getX() + rect.getWidth()/2, rect.getY() + rect.getHeight()/2);
+            bdef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
+            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
             fdef.shape = shape;
             body.createFixture(fdef);
 
         }
 
-        this.miner = new Miner(100 ,150);
     }
 
     @Override
@@ -103,22 +110,23 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void handleInput(float dt){
+    public void handleInput(float dt) {
 
 
-            gameCam.position.x = hud.blockSprite.getX();
-            gameCam.position.y = hud.blockSprite.getY();
+        gameCam.position.x = hud.blockSprite.getX();
+        gameCam.position.y = hud.blockSprite.getY();
 
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         handleInput(dt);
 
-        miner.update(dt);
+        world.step(1 / 60f, 6, 2);
+
 
         gameCam.update();
-        renderer.setView(gameCam);
 
+        renderer.setView(gameCam);
 
 
     }
@@ -136,9 +144,9 @@ public class PlayScreen implements Screen {
         //render box2d lines
         b2dr.render(world, gameCam.combined);
 
-        hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX()*hud.blockSpeed);
+        hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX() * hud.blockSpeed);
         //System.out.print(hud.blockSprite.getX());
-        hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY()*hud.blockSpeed);
+        hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY() * hud.blockSpeed);
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -150,9 +158,8 @@ public class PlayScreen implements Screen {
         /*
         * Draw our miner
         */
-        game.batch.begin();
-        game.batch.draw(miner.getMiner(), miner.getPosition().x, miner.getPosition().y);
-        game.batch.end();
+
+
     }
 
     private int getMapPixelWidth() {
@@ -167,9 +174,10 @@ public class PlayScreen implements Screen {
         int mapHeight = prop.get("height", Integer.class);
         return mapHeight * tilePixelHeight;
     }
+
     @Override
     public void resize(int width, int height) {
-        viewPort.update(width,height);
+        viewPort.update(width, height);
 
     }
 
@@ -190,6 +198,5 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        miner.dispose();
     }
 }
