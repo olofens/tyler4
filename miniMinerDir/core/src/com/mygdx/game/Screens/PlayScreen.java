@@ -72,10 +72,10 @@ public class PlayScreen implements Screen {
 
         prop = map.getProperties();
 
-        this.miner = new Miner(world);
+
 
         // Create a new world with 0 gravity for now
-        world = new World(new Vector2(0, 0), true);
+        world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bdef = new BodyDef();
@@ -83,6 +83,7 @@ public class PlayScreen implements Screen {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
+        this.miner = new Miner(world);
         //hud.blockSprite.setCenter(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2);
         hud.blockSprite.setX(getMapPixelWidth() / 2);
         hud.blockSprite.setY(getMapPixelHeight() / 2 + 426);
@@ -123,6 +124,7 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
+        gameCam.position.x = miner.b2body.getPosition().x;
 
         gameCam.update();
 

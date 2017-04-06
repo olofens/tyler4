@@ -32,14 +32,14 @@ public class Miner extends Sprite {
 
     public void defineMiner() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(320, 600);
+        bdef.position.set(320, 1400);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdefine = new FixtureDef();
 
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(300);
+        circleShape.setRadius(50);
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine);
