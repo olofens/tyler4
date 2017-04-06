@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Created by Omaroueidat on 03/04/17.
@@ -8,8 +9,11 @@ import com.badlogic.gdx.Screen;
 
 public class StartMenuScreen implements Screen {
 
-    
+    private Texture playButton;
 
+    public StartMenuScreen(){
+        this.playButton = new Texture("playButton.png");
+    }
     @Override
     public void show() {
 
