@@ -24,10 +24,12 @@ www-test/
 *.iws
 *.iml
 vcs.xml
+works
 /android/out/
 com_crashlytics_export_strings.xml
 .idea/
 .idea/workspace.xml
+.idea/misc.xml
 
 
 

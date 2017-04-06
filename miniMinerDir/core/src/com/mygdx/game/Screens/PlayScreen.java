@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
@@ -26,6 +27,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.items.Miner;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -37,6 +39,7 @@ public class PlayScreen implements Screen {
     private OrthographicCamera gameCam;
     private Viewport viewPort;
 
+    private Miner miner;
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
@@ -53,6 +56,7 @@ public class PlayScreen implements Screen {
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(MiniMiner.V_WIDTH,MiniMiner.V_HEIGHT, gameCam);
         hud = new Hud(game.batch);
+
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMap.tmx");
@@ -88,7 +92,10 @@ public class PlayScreen implements Screen {
             shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
             fdef.shape = shape;
             body.createFixture(fdef);
+
         }
+
+        this.miner = new Miner(100 ,150);
     }
 
     @Override
@@ -98,6 +105,7 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt){
 
+
             gameCam.position.x = hud.blockSprite.getX();
             gameCam.position.y = hud.blockSprite.getY();
 
@@ -106,14 +114,18 @@ public class PlayScreen implements Screen {
     public void update(float dt){
         handleInput(dt);
 
+        miner.update(dt);
+
         gameCam.update();
         renderer.setView(gameCam);
+
+
+
     }
 
     @Override
-    public void render(float delta) {
-        update(delta);
-
+    public void render(float dt) {
+        update(dt);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -135,6 +147,12 @@ public class PlayScreen implements Screen {
         //game.batch.draw(texture, 0, 0);
         //game.batch.end();
 
+        /*
+        * Draw our miner
+        */
+        game.batch.begin();
+        game.batch.draw(miner.getMiner(), miner.getPosition().x, miner.getPosition().y);
+        game.batch.end();
     }
 
     private int getMapPixelWidth() {
@@ -172,6 +190,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        miner.dispose();
     }
 }
