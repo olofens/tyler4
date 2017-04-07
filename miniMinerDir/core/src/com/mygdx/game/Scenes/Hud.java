@@ -32,9 +32,9 @@ public class Hud {
 
     public Touchpad touchpad;
 
-    public Integer blockSpeed;
+    //public Integer blockSpeed;
 
-    public Sprite blockSprite;
+    //public Sprite blockSprite;
 
 
     public Hud(SpriteBatch spriteBatch){
@@ -49,7 +49,7 @@ public class Hud {
         //Set background image
         //touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
         //Set knob image
-        touchpadSkin.add("touchKnob", new Texture("touchPad/touchKnob.png"));
+        touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchKnob.png"));
         //Create TouchPad Style
         Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
         //Create Drawable's from TouchPad skin
@@ -61,7 +61,10 @@ public class Hud {
         //Create new TouchPad with the created style
         touchpad = new Touchpad(10, touchpadStyle);
         //setBounds(x,y,width,height)
-        touchpad.setBounds(MiniMiner.V_WIDTH-15-200, 15, 200, 200);
+
+        touchpad.setBounds(MiniMiner.V_WIDTH-110, 15, 100, 100);
+
+
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
@@ -69,12 +72,12 @@ public class Hud {
         Gdx.input.setInputProcessor(stage);
 
         //Create block sprite
-        Texture blockTexture = new Texture(Gdx.files.internal("touchPad/block.png"));
-        blockSprite = new Sprite(blockTexture);
+        //Texture blockTexture = new Texture(Gdx.files.internal("touchPad/block.png"));
+        //blockSprite = new Sprite(blockTexture);
         //Set position to centre of the screen
-        blockSprite.setPosition(0, 0);
+        //blockSprite.setPosition(0, 0);
 
-        blockSpeed = 10;
+        //blockSpeed = 10;
         score = 0;
 
 

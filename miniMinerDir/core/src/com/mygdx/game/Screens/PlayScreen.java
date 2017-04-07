@@ -75,7 +75,7 @@ public class PlayScreen implements Screen {
 
 
         // Create a new world with 0 gravity for now
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, Miner.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
 
         BodyDef bdef = new BodyDef();
@@ -84,9 +84,7 @@ public class PlayScreen implements Screen {
         Body body;
 
         this.miner = new Miner(world);
-        //hud.blockSprite.setCenter(viewPort.getWorldWidth()/2, viewPort.getWorldHeight()/2);
-        hud.blockSprite.setX(getMapPixelWidth() / 2);
-        hud.blockSprite.setY(getMapPixelHeight() / 2 + 426);
+
 
 
         //adding ground layer
@@ -113,9 +111,17 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt) {
 
+        if(hud.touchpad.getKnobPercentY() > 0){
+            miner.b2body.applyForceToCenter(0, 1000f*hud.touchpad.getKnobPercentY(), true);
+        }
 
-        gameCam.position.x = hud.blockSprite.getX();
-        gameCam.position.y = hud.blockSprite.getY();
+        if(hud.touchpad.getKnobPercentX() != 0){
+            miner.b2body.applyLinearImpulse(new Vector2(10f*hud.touchpad.getKnobPercentX(),0),
+                    miner.b2body.getWorldCenter(), true);
+
+
+        }
+
 
     }
 
@@ -125,6 +131,8 @@ public class PlayScreen implements Screen {
         world.step(1 / 60f, 6, 2);
 
         gameCam.position.x = miner.b2body.getPosition().x;
+        gameCam.position.y = miner.b2body.getPosition().y;
+
 
         gameCam.update();
 
@@ -146,9 +154,9 @@ public class PlayScreen implements Screen {
         //render box2d lines
         b2dr.render(world, gameCam.combined);
 
-        hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX() * hud.blockSpeed);
+        //hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX() * hud.blockSpeed);
         //System.out.print(hud.blockSprite.getX());
-        hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY() * hud.blockSpeed);
+        //hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY() * hud.blockSpeed);
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

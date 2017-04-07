@@ -21,7 +21,7 @@ public class Miner extends Sprite {
 
     private Texture miner;
 
-    private static final int GRAVITY = -30;
+    public static final int GRAVITY = -500;
 
     public Miner(World world) {
         this.world = world;
