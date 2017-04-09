@@ -1,7 +1,10 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * Created by Omaroueidat on 03/04/17.
@@ -10,9 +13,24 @@ import com.badlogic.gdx.graphics.Texture;
 public class StartMenuScreen implements Screen {
 
     private Texture playButton;
+    protected OrthographicCamera cam;
+    protected Vector3 mouse;
+    protected ScreenSwitcher ss;
 
-    public StartMenuScreen(){
+    public StartMenuScreen(ScreenSwitcher ss){
         this.playButton = new Texture("playButton.png");
+        this.ss=ss;
+        cam = new OrthographicCamera();
+        mouse = new Vector3();
+    }
+    public void handleInput(){
+
+    }
+    public void update(float dt){
+
+    }
+    public void render(SpriteBatch sb){
+
     }
     @Override
     public void show() {
