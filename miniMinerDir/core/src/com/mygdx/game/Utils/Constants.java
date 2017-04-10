@@ -9,5 +9,5 @@ public final class Constants {
     /**
      * The scaling constant for our game to scale properly.
      */
-    public static final float PPM = 100;
+    public static final float PPM = 32;
 }
