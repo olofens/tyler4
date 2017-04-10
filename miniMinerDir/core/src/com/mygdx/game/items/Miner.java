@@ -40,7 +40,7 @@ public class Miner extends Sprite {
         FixtureDef fdefine = new FixtureDef();
 
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(50 / Constants.PPM);
+        circleShape.setRadius(16 / Constants.PPM);
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine);

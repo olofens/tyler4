@@ -75,8 +75,6 @@ public class PlayScreen implements Screen {
 
         prop = map.getProperties();
 
-
-
         // Create a new world with 0 gravity for now
         world = new World(new Vector2(0, Miner.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
@@ -122,11 +120,7 @@ public class PlayScreen implements Screen {
         if(hud.touchpad.getKnobPercentX() != 0){
             miner.b2body.applyLinearImpulse(new Vector2(0.05f*hud.touchpad.getKnobPercentX(),0),
                     miner.b2body.getWorldCenter(), true);
-
-
         }
-
-
     }
 
     public void update(float dt) {
