@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" nextobjectid="26">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="32" tileheight="32" nextobjectid="27">
  <tileset firstgid="1" name="breadinator_tileset" tilewidth="32" tileheight="32" tilecount="323" columns="19">
   <image source="breadinator_tileset.png" width="608" height="544"/>
  </tileset>
@@ -115,17 +115,8 @@
 </data>
  </layer>
  <objectgroup name="Edges">
-  <object id="22" x="0" y="0">
-   <polyline points="0,0 0,1600"/>
-  </object>
-  <object id="23" x="0" y="1600">
-   <polyline points="0,0 3200,0"/>
-  </object>
-  <object id="24" x="3200" y="1600">
-   <polyline points="0,0 0,-1600"/>
-  </object>
-  <object id="25" x="3200" y="0">
-   <polyline points="0,0 -3200,0"/>
+  <object id="26" x="0" y="0">
+   <polyline points="0,0 0,1600 3200,1600 3200,0 0,0"/>
   </object>
  </objectgroup>
  <objectgroup name="GroundLayer">
