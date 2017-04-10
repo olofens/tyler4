@@ -30,6 +30,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Utils.TiledObjectUtil;
 import com.mygdx.game.items.Miner;
+import com.mygdx.game.Utils.Constants;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -63,13 +64,13 @@ public class PlayScreen implements Screen {
     public PlayScreen(MiniMiner game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        viewPort = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, gameCam);
+        viewPort = new FitViewport(MiniMiner.V_WIDTH / Constants.PPM,
+                                    MiniMiner.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
-
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMap.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
         prop = map.getProperties();
@@ -94,11 +95,11 @@ public class PlayScreen implements Screen {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
+            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
 
@@ -115,11 +116,11 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt) {
 
         if(hud.touchpad.getKnobPercentY() > 0){
-            miner.b2body.applyForceToCenter(0, 1000f*hud.touchpad.getKnobPercentY(), true);
+            miner.b2body.applyForceToCenter(0, 15f*hud.touchpad.getKnobPercentY(), true);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
-            miner.b2body.applyLinearImpulse(new Vector2(10f*hud.touchpad.getKnobPercentX(),0),
+            miner.b2body.applyLinearImpulse(new Vector2(0.05f*hud.touchpad.getKnobPercentX(),0),
                     miner.b2body.getWorldCenter(), true);
 
 

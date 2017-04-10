@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Utils.Constants;
 
 import java.awt.geom.RectangularShape;
 
@@ -21,7 +22,7 @@ public class Miner extends Sprite {
 
     private Texture miner;
 
-    public static final int GRAVITY = -500;
+    public static final int GRAVITY = -10;
 
     public Miner(World world) {
         this.world = world;
@@ -32,14 +33,14 @@ public class Miner extends Sprite {
 
     public void defineMiner() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(320, 1400);
+        bdef.position.set(320 / Constants.PPM, 1400 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
         FixtureDef fdefine = new FixtureDef();
 
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(50);
+        circleShape.setRadius(50 / Constants.PPM);
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine);

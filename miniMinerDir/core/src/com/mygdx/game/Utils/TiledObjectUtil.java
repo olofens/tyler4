@@ -35,7 +35,8 @@ public class TiledObjectUtil {
         Vector2[] worldVertices = new Vector2[vertices.length / 2];
 
         for (int i = 0; i < worldVertices.length; i++) {
-            worldVertices[i] = new Vector2(vertices[i * 2], vertices[i * 2 + 1]); //TODO divide both of these arguments by Constants.PPM
+            worldVertices[i] = new Vector2(vertices[i * 2] / Constants.PPM,
+                                            vertices[i * 2 + 1] / Constants.PPM);
         }
         ChainShape cs = new ChainShape();
         cs.createChain(worldVertices);
