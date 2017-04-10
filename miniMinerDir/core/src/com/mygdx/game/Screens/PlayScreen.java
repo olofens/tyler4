@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2D;
@@ -59,7 +60,10 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
-    MapProperties prop;
+    private MapProperties prop;
+
+    private float startX;
+    private float startY;
 
 
     /**
@@ -94,6 +98,7 @@ public class PlayScreen implements Screen {
 
 
 
+
         //adding ground layer
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -110,6 +115,13 @@ public class PlayScreen implements Screen {
         }
 
         TiledObjectUtil.parseTiledObject(world, map.getLayers().get("Edges").getObjects());
+
+        startX = gameCam.viewportWidth / 2;
+        startY = gameCam.viewportHeight / 2;
+        System.out.println("Startx = " + startX);
+        System.out.println("Starty = " + startY);
+        System.out.println("pixelwidth: " + getMapPixelWidth());
+        System.out.println("pixelheight: " + getMapPixelHeight());
     }
 
     @Override
@@ -134,8 +146,8 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
-        gameCam.position.x = miner.b2body.getPosition().x;
-        gameCam.position.y = miner.b2body.getPosition().y;
+        updateCamera(gameCam, startX, startY, getMapPixelWidth() - startX * 2, getMapPixelHeight() - startY * 2);
+
 
 
         gameCam.update();
@@ -174,6 +186,44 @@ public class PlayScreen implements Screen {
         */
 
 
+    }
+
+    private void updateCamera(OrthographicCamera cam, float startX, float startY, float width, float height) {
+
+        width /= Constants.PPM;
+        height /= Constants.PPM;
+        Vector3 position = cam.position;
+
+        position.x = miner.b2body.getPosition().x;
+        position.y = miner.b2body.getPosition().y;
+
+        System.out.println("width: " + width);
+        System.out.println("height" + height);
+
+        System.out.println("cam xpos: " +position.x);
+        System.out.println("cam ypos: " + position.y);
+
+        if (position.x < startX) {
+            System.out.println("Ran");
+            position.x = startX;
+        }
+
+        if (position.y < startY) {
+            System.out.println("Ran");
+            position.y = startY;
+        }
+
+        if (position.x > startX + width) {
+            System.out.println("Ran");
+            position.x = startX + width;
+        }
+
+        if (position.y > startY + height) {
+            System.out.println("Ran");
+            position.y = startY + height;
+        }
+
+        cam.position.set(position);
     }
 
     private int getMapPixelWidth() {
