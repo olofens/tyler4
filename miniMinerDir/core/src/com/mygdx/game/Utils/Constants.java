@@ -5,5 +5,9 @@ package com.mygdx.game.Utils;
  */
 
 public final class Constants {
+
+    /**
+     * The scaling constant for our game to scale properly.
+     */
     public static final float PPM = 100;
 }

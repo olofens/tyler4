@@ -12,6 +12,12 @@ import com.badlogic.gdx.physics.box2d.World;
 
 
 public class TiledObjectUtil {
+
+    /**
+     * Oklart, någon får förklara denna.
+     * @param world
+     * @param objects
+     */
     public static void parseTiledObject(World world, MapObjects objects) {
         for(MapObject object : objects) {
             Shape shape;

@@ -28,7 +28,7 @@ public class Hud {
 
     private Integer score;
 
-    Label scoreLabel;
+    private Label scoreLabel;
 
     public Touchpad touchpad;
 
@@ -36,7 +36,11 @@ public class Hud {
 
     //public Sprite blockSprite;
 
-
+    /**
+     * Creates the HUD for the framework of the game
+     *
+     * @param spriteBatch
+     */
     public Hud(SpriteBatch spriteBatch){
 
         viewport = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, new OrthographicCamera());

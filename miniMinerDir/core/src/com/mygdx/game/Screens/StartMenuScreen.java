@@ -17,6 +17,11 @@ public class StartMenuScreen implements Screen {
     protected Vector3 mouse;
     protected ScreenSwitcher ss;
 
+    /**
+     * The screen where you will be able to choose to play, edit the options, or read eventual instructions.
+     *
+     * @param ss
+     */
     public StartMenuScreen(ScreenSwitcher ss){
         this.playButton = new Texture("playButton.png");
         this.ss=ss;

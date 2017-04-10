@@ -15,15 +15,22 @@ import java.awt.geom.RectangularShape;
 
 public class Miner extends Sprite {
 
+    /**
+     * Define our world and Body for our miner
+     */
     public World world;
     public Body b2body;
-    private Vector3 position;
-    private Vector3 velocity;
 
-    private Texture miner;
-
+    /**
+     * The integer that is used for a vector in its y-axis for gravity feel.
+     */
     public static final int GRAVITY = -10;
 
+    /**
+     * @param world the world we defined in our miner class
+     *
+     * Takes in a world and calls to our define miner method to create the miner.
+     */
     public Miner(World world) {
         this.world = world;
         defineMiner();
@@ -31,7 +38,10 @@ public class Miner extends Sprite {
     }
 
 
-    public void defineMiner() {
+    /**
+     * Creates a miner with the help of the world we create
+     */
+    private void defineMiner() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(320 / Constants.PPM, 1400 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;

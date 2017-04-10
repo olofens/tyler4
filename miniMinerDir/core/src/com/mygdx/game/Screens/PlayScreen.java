@@ -61,6 +61,12 @@ public class PlayScreen implements Screen {
 
     MapProperties prop;
 
+
+    /**
+     * The main playscreen where the game is actually interacted with and controlled
+     *
+     * @param game
+     */
     public PlayScreen(MiniMiner game) {
         this.game = game;
         gameCam = new OrthographicCamera();
