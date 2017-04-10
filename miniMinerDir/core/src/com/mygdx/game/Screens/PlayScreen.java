@@ -28,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Utils.TiledObjectUtil;
 import com.mygdx.game.items.Miner;
 
 /**
@@ -102,6 +103,8 @@ public class PlayScreen implements Screen {
             body.createFixture(fdef);
 
         }
+
+        TiledObjectUtil.parseTiledObject(world, map.getLayers().get("Edges").getObjects());
     }
 
     @Override
