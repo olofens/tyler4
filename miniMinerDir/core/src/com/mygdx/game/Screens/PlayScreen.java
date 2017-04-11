@@ -146,15 +146,10 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
-        updateCamera(gameCam, startX, startY, getMapPixelWidth() - startX * 2, getMapPixelHeight() - startY * 2);
-
-
-
+        moveCamera(gameCam, startX, startY, getMapPixelWidth() - startX * 2, getMapPixelHeight() - startY * 2);
         gameCam.update();
 
         renderer.setView(gameCam);
-
-
     }
 
     @Override
@@ -188,41 +183,52 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void updateCamera(OrthographicCamera cam, float startX, float startY, float width, float height) {
+    private void moveCamera(OrthographicCamera cam, float startX, float startY, float width, float height) {
 
+
+        //Divide by PPM since width and height are measurements in pixels and not tiles...
+        //... and the camera's position is currently set in tiles. PPM is set to the side
+        //of a tile (32px)
         width /= Constants.PPM;
         height /= Constants.PPM;
+
+        //instantiate a position
         Vector3 position = cam.position;
 
+        //mathematical understanding: startX is the position of the camera, which in turn is the
+        //position of the player. The player is in the middle of the screen at all times.
+        //to get the leftmost bit of the gameCam's view, we get HALF the width of the screen and
+        //add it to startX. Same with startY
+        startX = startX + MiniMiner.V_WIDTH / 2 / Constants.PPM;
+        startY += MiniMiner.V_HEIGHT / 2 / Constants.PPM;
+
+        //same here but we subtract the width and height
+        height -= MiniMiner.V_HEIGHT / 2 / Constants.PPM;
+        width -= MiniMiner.V_WIDTH / 2 / Constants.PPM;
+
+        //self-explanatory
         position.x = miner.b2body.getPosition().x;
         position.y = miner.b2body.getPosition().y;
 
-        System.out.println("width: " + width);
-        System.out.println("height" + height);
-
-        System.out.println("cam xpos: " +position.x);
-        System.out.println("cam ypos: " + position.y);
-
+        //if the position of the camera's left most bit is outside of the map, reset the cameras
+        //position to the left most bit of the map
         if (position.x < startX) {
-            System.out.println("Ran");
             position.x = startX;
         }
 
         if (position.y < startY) {
-            System.out.println("Ran");
             position.y = startY;
         }
 
-        if (position.x > startX + width) {
-            System.out.println("Ran");
-            position.x = startX + width;
+        if (position.x > width) {
+            position.x = width;
         }
 
-        if (position.y > startY + height) {
-            System.out.println("Ran");
-            position.y = startY + height;
+        if (position.y > height) {
+            position.y = height;
         }
 
+        //set the new camera position
         cam.position.set(position);
     }
 
