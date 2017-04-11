@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Tools.Box2DWorldCreator;
 import com.mygdx.game.Utils.TiledObjectUtil;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
@@ -89,30 +90,8 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, Miner.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
-
+        new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
-
-
-
-
-        //adding ground layer
-        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
-
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth() / 2 / Constants.PPM, rect.getHeight() / 2 / Constants.PPM);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-
-        }
 
         TiledObjectUtil.parseTiledObject(world, map.getLayers().get("Edges").getObjects());
 
