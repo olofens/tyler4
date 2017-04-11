@@ -116,8 +116,8 @@ public class PlayScreen implements Screen {
 
         TiledObjectUtil.parseTiledObject(world, map.getLayers().get("Edges").getObjects());
 
-        startX = gameCam.viewportWidth / 2;
-        startY = gameCam.viewportHeight / 2;
+        //startX = gameCam.viewportWidth / 2;
+        //startY = gameCam.viewportHeight / 2;
         System.out.println("Startx = " + startX);
         System.out.println("Starty = " + startY);
         System.out.println("pixelwidth: " + getMapPixelWidth());
@@ -146,7 +146,7 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
-        moveCamera(gameCam, startX, startY, getMapPixelWidth() - startX * 2, getMapPixelHeight() - startY * 2);
+        moveCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         gameCam.update();
 
         renderer.setView(gameCam);
@@ -183,9 +183,10 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void moveCamera(OrthographicCamera cam, float startX, float startY, float width, float height) {
+    private void moveCamera(OrthographicCamera cam, float width, float height) {
 
-
+        float startX = 0;
+        float startY = 0;
         //Divide by PPM since width and height are measurements in pixels and not tiles...
         //... and the camera's position is currently set in tiles. PPM is set to the side
         //of a tile (32px)
@@ -199,7 +200,7 @@ public class PlayScreen implements Screen {
         //position of the player. The player is in the middle of the screen at all times.
         //to get the leftmost bit of the gameCam's view, we get HALF the width of the screen and
         //add it to startX. Same with startY
-        startX = startX + MiniMiner.V_WIDTH / 2 / Constants.PPM;
+        startX += MiniMiner.V_WIDTH / 2 / Constants.PPM;
         startY += MiniMiner.V_HEIGHT / 2 / Constants.PPM;
 
         //same here but we subtract the width and height
