@@ -1,4 +1,4 @@
-package com.mygdx.game.Utils;
+package com.mygdx.game.items;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -9,9 +9,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.Utils.Constants;
 
 
-public class TiledObjectUtil {
+public abstract class Edge {
 
     /**
      * Oklart, någon får förklara denna.
