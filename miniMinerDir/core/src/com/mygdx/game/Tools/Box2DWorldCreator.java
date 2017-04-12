@@ -19,17 +19,12 @@ import com.mygdx.game.items.Tile;
 
 public class Box2DWorldCreator {
     public Box2DWorldCreator(World world, TiledMap map){
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
 
         //adding ground layer
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Tile(world, map, rect);
-
         }
     }
 }
