@@ -125,8 +125,8 @@ public class PlayScreen implements Screen {
 
         world.step(1 / 60f, 6, 2);
 
-        moveCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
-        gameCam.update();
+        updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
+
 
         renderer.setView(gameCam);
     }
@@ -162,10 +162,11 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void moveCamera(OrthographicCamera cam, float width, float height) {
+    private void updateCamera(OrthographicCamera cam, float width, float height) {
 
         float startX = 0;
         float startY = 0;
+        
         //Divide by PPM since width and height are measurements in pixels and not tiles...
         //... and the camera's position is currently set in tiles. PPM is set to the side
         //of a tile (32px)
@@ -210,6 +211,7 @@ public class PlayScreen implements Screen {
 
         //set the new camera position
         cam.position.set(position);
+        cam.update();
     }
 
     private int getMapPixelWidth() {
