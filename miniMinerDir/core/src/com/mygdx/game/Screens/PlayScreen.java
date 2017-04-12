@@ -71,6 +71,7 @@ public class PlayScreen implements Screen {
      * The main playscreen where the game is actually interacted with and controlled
      *
      * @param game
+     *      Brings in MiniMiner variable in order to get Width and Height of desired screen.
      */
     public PlayScreen(MiniMiner game) {
         this.game = game;
@@ -95,8 +96,6 @@ public class PlayScreen implements Screen {
 
         TiledObjectUtil.parseTiledObject(world, map.getLayers().get("Edges").getObjects());
 
-        //startX = gameCam.viewportWidth / 2;
-        //startY = gameCam.viewportHeight / 2;
         System.out.println("Startx = " + startX);
         System.out.println("Starty = " + startY);
         System.out.println("pixelwidth: " + getMapPixelWidth());
@@ -127,7 +126,6 @@ public class PlayScreen implements Screen {
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
 
-
         renderer.setView(gameCam);
     }
 
@@ -144,29 +142,16 @@ public class PlayScreen implements Screen {
         //render box2d lines
         b2dr.render(world, gameCam.combined);
 
-        //hud.blockSprite.setX(hud.blockSprite.getX() + hud.touchpad.getKnobPercentX() * hud.blockSpeed);
-        //System.out.print(hud.blockSprite.getX());
-        //hud.blockSprite.setY(hud.blockSprite.getY() + hud.touchpad.getKnobPercentY() * hud.blockSpeed);
-
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
-        //game.batch.begin();
-        //game.batch.draw(texture, 0, 0);
-        //game.batch.end();
-
-        /*
-        * Draw our miner
-        */
-
-
     }
 
     private void updateCamera(OrthographicCamera cam, float width, float height) {
 
         float startX = 0;
         float startY = 0;
-        
+
         //Divide by PPM since width and height are measurements in pixels and not tiles...
         //... and the camera's position is currently set in tiles. PPM is set to the side
         //of a tile (32px)
@@ -218,7 +203,6 @@ public class PlayScreen implements Screen {
         int mapWidth = prop.get("width", Integer.class);
         int tilePixelWidth = prop.get("tilewidth", Integer.class);
         return mapWidth * tilePixelWidth;
-
     }
 
     private int getMapPixelHeight() {
@@ -230,7 +214,6 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewPort.update(width, height);
-
     }
 
     @Override
