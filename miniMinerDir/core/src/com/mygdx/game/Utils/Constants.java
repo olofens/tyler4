@@ -10,4 +10,5 @@ public final class Constants {
      * The scaling constant for our game to scale properly.
      */
     public static final float PPM = 32;
+    public static final int GRAVITY = -10;
 }

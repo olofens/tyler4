@@ -22,14 +22,9 @@ public class Miner extends Sprite {
     public Body b2body;
 
     /**
-     * The integer that is used for a vector in its y-axis for gravity feel.
-     */
-    public static final int GRAVITY = -10;
-
-    /**
      * @param world the world we defined in our miner class
-     *
-     * Takes in a world and calls to our define miner method to create the miner.
+     *              <p>
+     *              Takes in a world and calls to our define miner method to create the miner.
      */
     public Miner(World world) {
         this.world = world;
@@ -57,28 +52,4 @@ public class Miner extends Sprite {
 
 
     }
-
-
-  /*  public void update(float dt){
-
-
-
-        this.velocity.add(0, GRAVITY,0);
-        this.velocity.scl(dt);
-        this.position.add(0 , velocity.y, 0);
-
-        velocity.scl(1/dt);
-
-    }
-    public void dispose(){
-        miner.dispose();
-    }
-
-    public Vector3 getPosition() {
-        return position;
-    }
-
-    public Texture getMiner() {
-        return miner;
-    }*/
 }

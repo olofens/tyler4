@@ -87,7 +87,7 @@ public class PlayScreen implements Screen {
         prop = map.getProperties();
 
         // Create a new world with 0 gravity for now
-        world = new World(new Vector2(0, Miner.GRAVITY), true);
+        world = new World(new Vector2(0, Constants.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
 
         new Box2DWorldCreator(world,map);
