@@ -54,7 +54,7 @@ public class Hud implements Disposable {
         //Set background image
         //touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
         //Set knob image
-        touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchKnob.png"));
+        touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchknob.png"));
         //Create TouchPad Style
         Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
         //Create Drawable's from TouchPad skin
