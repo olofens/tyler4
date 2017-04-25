@@ -43,19 +43,17 @@ public class Miner extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdefine = new FixtureDef();
-        fdefine.friction = 5f;
+
+        fdefine.friction = 15;
+
 
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(8 / Constants.PPM,8 / Constants.PPM);
+        polygonShape.setAsBox(10/Constants.PPM, 10/Constants.PPM);
 
         fdefine.shape = polygonShape;
         b2body.createFixture(fdefine);
 
-        //CircleShape circleShape = new CircleShape();
-        //circleShape.setRadius(16 / Constants.PPM);
 
-        //fdefine.shape = circleShape;
-        //b2body.createFixture(fdefine);
 
 
     }

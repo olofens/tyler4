@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -11,6 +13,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -34,6 +38,9 @@ public class PlayScreen implements Screen {
 
     // Miner variables
     private Miner miner;
+    private Texture minerIMG;
+    private Sprite minerSprite;
+    private Vector2 minerPos;
 
     // Tiledmap variables
     private TmxMapLoader mapLoader;
@@ -77,6 +84,11 @@ public class PlayScreen implements Screen {
         this.miner = new Miner(world);
 
 
+
+        minerIMG = new Texture("minerTextureTest.jpg");
+        minerSprite = new Sprite(minerIMG);
+
+
     }
 
     @Override
@@ -88,23 +100,26 @@ public class PlayScreen implements Screen {
 
         if(hud.touchpad.getKnobPercentY() > 0){
             miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
-            //miner.b2body.applyLinearImpulse(new Vector2(0,1f*hud.touchpad.getKnobPercentY()),miner.b2body.getWorldCenter(),true);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
-            //miner.b2body.applyLinearImpulse(new Vector2(0.2f*hud.touchpad.getKnobPercentX(),0), miner.b2body.getWorldCenter(), true);
-            //miner.b2body.applyForceToCenter(20f*hud.touchpad.getKnobPercentX(), 0, true);
+
 
             miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
 
         }
         else{
-            //miner.b2body.setLinearVelocity(new Vector2(0,miner.b2body.getLinearVelocity().y));
         }
     }
 
     public void update(float dt) {
         handleInput(dt);
+
+
+        minerPos = miner.b2body.getPosition();
+
+        //direction/angle
+        //if(miner.b2body.)
 
         world.step(1 / 60f, 6, 2);
 
@@ -112,6 +127,11 @@ public class PlayScreen implements Screen {
 
         renderer.setView(gameCam);
     }
+
+
+
+
+
 
     @Override
     public void render(float dt) {
@@ -123,14 +143,22 @@ public class PlayScreen implements Screen {
         //render our game map
         renderer.render();
 
+        //render miner
+        game.batch.begin();
+        game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
+                30 / Constants.PPM, 30 / Constants.PPM);
+        game.batch.end();
+
+
         //render box2d lines
         b2dr.render(world, gameCam.combined);
+
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
 
-        Vector2 minerPos = miner.b2body.getPosition();
+
     }
 
     private void updateCamera(OrthographicCamera cam, float width, float height) {
