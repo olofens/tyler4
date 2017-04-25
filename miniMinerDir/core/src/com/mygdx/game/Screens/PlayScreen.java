@@ -75,6 +75,8 @@ public class PlayScreen implements Screen {
 
         new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
+
+
     }
 
     @Override
@@ -85,12 +87,19 @@ public class PlayScreen implements Screen {
     public void handleInput(float dt) {
 
         if(hud.touchpad.getKnobPercentY() > 0){
-            miner.b2body.applyForceToCenter(0, 15f*hud.touchpad.getKnobPercentY(), true);
+            miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
+            //miner.b2body.applyLinearImpulse(new Vector2(0,1f*hud.touchpad.getKnobPercentY()),miner.b2body.getWorldCenter(),true);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
-            miner.b2body.applyLinearImpulse(new Vector2(0.05f*hud.touchpad.getKnobPercentX(),0),
-                    miner.b2body.getWorldCenter(), true);
+            //miner.b2body.applyLinearImpulse(new Vector2(0.2f*hud.touchpad.getKnobPercentX(),0), miner.b2body.getWorldCenter(), true);
+            //miner.b2body.applyForceToCenter(20f*hud.touchpad.getKnobPercentX(), 0, true);
+
+            miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
+
+        }
+        else{
+            //miner.b2body.setLinearVelocity(new Vector2(0,miner.b2body.getLinearVelocity().y));
         }
     }
 
@@ -120,6 +129,8 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
+
+        Vector2 minerPos = miner.b2body.getPosition();
     }
 
     private void updateCamera(OrthographicCamera cam, float width, float height) {
