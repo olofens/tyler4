@@ -39,7 +39,9 @@ public class PlayScreen implements Screen {
     // Miner variables
     private Miner miner;
     private Texture minerIMG;
+    private Texture minerIMG2;
     private Sprite minerSprite;
+    private Sprite minerSpriteDrillDown;
     private Vector2 minerPos;
 
     // Tiledmap variables
@@ -85,8 +87,11 @@ public class PlayScreen implements Screen {
 
 
 
-        minerIMG = new Texture("minerTextureTest.jpg");
+        minerIMG = new Texture("driller_neutral_right.png");
         minerSprite = new Sprite(minerIMG);
+
+        minerIMG2 = new Texture("driller_drill_down.png");
+        minerSpriteDrillDown = new Sprite(minerIMG2);
 
 
     }
@@ -98,23 +103,48 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt) {
 
+        //if body has contact with ground & touchpadY < -0.5
+        //THEN drill
+        //if().......
+
+
         if(hud.touchpad.getKnobPercentY() > 0){
             miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
 
-
             miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
+        }
 
+        else{
+        }
+
+
+    }
+
+    public boolean isMovingRight(){
+        if(hud.touchpad.getKnobPercentX() >= 0){
+            return true;
         }
         else{
+            return false;
+        }
+    }
+
+    public boolean isTouchingDown(){
+        if(hud.touchpad.getKnobPercentY() < -0.4){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
     public void update(float dt) {
         handleInput(dt);
 
+        System.out.print(miner.b2body.getLinearVelocity().y);
 
         minerPos = miner.b2body.getPosition();
 
@@ -145,8 +175,24 @@ public class PlayScreen implements Screen {
 
         //render miner
         game.batch.begin();
-        game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                30 / Constants.PPM, 30 / Constants.PPM);
+
+        //temp solution until contact listener has been created
+        if(isTouchingDown() == true){
+            game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
+                    25 / Constants.PPM, 28 / Constants.PPM);
+        }
+
+        else if(isMovingRight() == true){
+            game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
+                    35 / Constants.PPM, 25 / Constants.PPM);
+        }
+
+        else{
+
+            game.batch.draw(minerSprite, minerPos.x + 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
+                    -35 / Constants.PPM, 25 / Constants.PPM);
+        }
+
         game.batch.end();
 
 
