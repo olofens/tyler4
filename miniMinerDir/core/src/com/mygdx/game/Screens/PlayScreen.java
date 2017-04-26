@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -43,6 +44,7 @@ public class PlayScreen implements Screen {
     private Sprite minerSprite;
     private Sprite minerSpriteDrillDown;
     private Vector2 minerPos;
+    private boolean isFacingRight;
 
     // Tiledmap variables
     private TmxMapLoader mapLoader;
@@ -85,6 +87,7 @@ public class PlayScreen implements Screen {
         new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
 
+        isFacingRight = true;
 
 
         minerIMG = new Texture("driller_neutral_right.png");
@@ -123,44 +126,63 @@ public class PlayScreen implements Screen {
 
     }
 
-    public boolean isMovingRight(){
-        if(hud.touchpad.getKnobPercentX() >= 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
-    public boolean isTouchingDown(){
-        if(hud.touchpad.getKnobPercentY() < -0.4){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     public void update(float dt) {
         handleInput(dt);
 
-        System.out.print(miner.b2body.getLinearVelocity().y);
-
         minerPos = miner.b2body.getPosition();
 
-        //direction/angle
-        //if(miner.b2body.)
-
         world.step(1 / 60f, 6, 2);
-
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
-
         renderer.setView(gameCam);
     }
 
 
+    public boolean drawDown(){
 
+        if(hud.isTouchingDown() == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
+    public boolean drawRight(){
+        //Check touchpad
+        if(hud.isTouchingRight() == true){
+            //RIGHT
+            return true;
+        }
+        else if(hud.isTouchingLeft() == true){
+            //LEFT
+            return false;
+        }
+        //Check velocity
+        else if(miner.b2body.getLinearVelocity().x > 0){
+            //RIGHT
+            isFacingRight = true;
+            return true;
+        }
+        else if(miner.b2body.getLinearVelocity().x < 0){
+            //LEFT
+            isFacingRight = false;
+            return false;
+        }
+        //Check last direction
+        else if(isFacingRight == true){
+            //RIGHT
+            return true;
+        }
+        else if(isFacingRight == false){
+            //LEFT
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
 
 
     @Override
@@ -176,21 +198,20 @@ public class PlayScreen implements Screen {
         //render miner
         game.batch.begin();
 
-        //temp solution until contact listener has been created
-        if(isTouchingDown() == true){
+        if(drawDown()){
+            //Draw DOWN
             game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     25 / Constants.PPM, 28 / Constants.PPM);
         }
-
-        else if(isMovingRight() == true){
+        else if(drawRight()){
+            //Draw RIGHT
             game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     35 / Constants.PPM, 25 / Constants.PPM);
         }
-
         else{
-
+            //Draw LEFT
             game.batch.draw(minerSprite, minerPos.x + 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                    -35 / Constants.PPM, 25 / Constants.PPM);
+                    - 35 / Constants.PPM, 25 / Constants.PPM);
         }
 
         game.batch.end();

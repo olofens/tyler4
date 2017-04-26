@@ -47,8 +47,6 @@ public class Hud implements Disposable {
         viewport = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
-
-
         //Create a touchpad skin
         Skin touchpadSkin = new Skin();
         //Set background image
@@ -69,20 +67,11 @@ public class Hud implements Disposable {
 
         touchpad.setBounds(MiniMiner.V_WIDTH-110, 15, 100, 100);
 
-
-
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
 
-        //Create block sprite
-        //Texture blockTexture = new Texture(Gdx.files.internal("touchPad/block.png"));
-        //blockSprite = new Sprite(blockTexture);
-        //Set position to centre of the screen
-        //blockSprite.setPosition(0, 0);
-
-        //blockSpeed = 10;
         score = 0;
 
 
@@ -97,6 +86,31 @@ public class Hud implements Disposable {
         stage.addActor(table);
 
 
+    }
+
+    public boolean isTouchingRight(){
+        if(touchpad.getKnobPercentX() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean isTouchingLeft(){
+        if(touchpad.getKnobPercentX() < 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean isTouchingDown(){
+        if(touchpad.getKnobPercentY() < -0.4){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
