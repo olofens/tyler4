@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -26,6 +28,7 @@ import com.mygdx.game.MiniMiner;
 public class Hud implements Disposable {
     public Stage stage;
     private Viewport viewport;
+    private Dialog storePopup;
 
     private Integer score;
 
@@ -47,6 +50,27 @@ public class Hud implements Disposable {
         viewport = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
+        //Store
+
+        Skin storeSkin = new Skin();
+        Window.WindowStyle ws = new Window.WindowStyle();
+        ws.titleFont = new BitmapFont();
+        storeSkin.add("default", ws);
+
+        Texture storepopupImage = new Texture("storepopup.png");
+        storeSkin.add("popUpImage", storepopupImage);
+
+        Drawable storeBackground = storeSkin.getDrawable("popUpImage");
+        ws.background = storeBackground;
+
+        storePopup = new Dialog("Store", storeSkin);
+        storePopup.setBounds((MiniMiner.V_WIDTH - storepopupImage.getWidth()) / 2,
+                (MiniMiner.V_HEIGHT - storepopupImage.getHeight()) / 2,
+                storepopupImage.getWidth(), storepopupImage.getHeight());
+
+        storePopup.setVisible(false);
+
+        //Touchpad
         //Create a touchpad skin
         Skin touchpadSkin = new Skin();
         //Set background image
@@ -69,6 +93,7 @@ public class Hud implements Disposable {
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
+        stage.addActor(storePopup);
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
 
@@ -111,6 +136,10 @@ public class Hud implements Disposable {
         else{
             return false;
         }
+    }
+
+    public void toggleStoreVisibility() {
+        storePopup.setVisible(!storePopup.isVisible());
     }
 
     @Override
