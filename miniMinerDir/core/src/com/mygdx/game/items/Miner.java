@@ -50,7 +50,7 @@ public class Miner extends Sprite {
         polygonShape.setAsBox(10/Constants.PPM, 10/Constants.PPM);
 
         fdefine.shape = polygonShape;
-        b2body.createFixture(fdefine);
+        b2body.createFixture(fdefine).setUserData("miner");
 
 
 
