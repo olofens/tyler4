@@ -11,16 +11,24 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  */
 
 public class MinerWorldContactListener implements ContactListener {
+    Fixture a;
+    Fixture b;
     @Override
     public void beginContact(Contact contact) {
-        Fixture a = contact.getFixtureA();
-        Fixture b = contact.getFixtureB();
-        if ()
+        a = contact.getFixtureA();
+        b = contact.getFixtureB();
+        if (inContact("miner", "store")) {
+            System.out.println("Welcome to the store!");
+        }
     }
 
     @Override
     public void endContact(Contact contact) {
-
+        a = contact.getFixtureA();
+        b = contact.getFixtureB();
+        if (inContact("miner", "store")) {
+            System.out.println("Hope to see you soon!");
+        }
     }
 
     @Override
@@ -31,5 +39,10 @@ public class MinerWorldContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    private boolean inContact(String stringIDa, String stringIDb) {
+        return ((a.getUserData().equals(stringIDa) && b.getUserData().equals(stringIDb)) ||
+                (a.getUserData().equals(stringIDb) && b.getUserData().equals(stringIDa)));
     }
 }

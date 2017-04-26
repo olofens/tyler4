@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.Box2DWorldCreator;
+import com.mygdx.game.Tools.MinerWorldContactListener;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
 
@@ -86,6 +87,8 @@ public class PlayScreen implements Screen {
 
         new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
+
+        world.setContactListener(new MinerWorldContactListener());
 
         isFacingRight = true;
 
