@@ -43,7 +43,6 @@ public class Miner extends Sprite {
         b2body = world.createBody(bdef);
 
         FixtureDef fdefine = new FixtureDef();
-
         fdefine.friction = 15;
 
 

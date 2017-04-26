@@ -16,5 +16,6 @@ import com.mygdx.game.Utils.Constants;
 public class Tile extends TileTemplate {
     public Tile(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
+        body.getFixtureList().get(0).setUserData("ground");
     }
 }
