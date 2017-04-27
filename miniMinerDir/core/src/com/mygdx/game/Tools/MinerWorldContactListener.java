@@ -20,6 +20,9 @@ public class MinerWorldContactListener implements ContactListener {
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
         }
+        if (inContact("drill", "tile")){
+            System.out.println("Initiate drill contact");
+        }
     }
 
     @Override
@@ -28,6 +31,9 @@ public class MinerWorldContactListener implements ContactListener {
         b = contact.getFixtureB();
         if (inContact("miner", "store")) {
             System.out.println("Hope to see you soon!");
+        }
+        if (inContact("drill", "tile")){
+            System.out.println("End drill contact");
         }
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -20,6 +21,8 @@ public abstract class TileTemplate {
     protected TiledMapTile tile;
     protected Rectangle constrains;
     protected Body body;
+
+    protected Fixture fixture;
 
     public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains){
         this.world = world;
@@ -37,6 +40,6 @@ public abstract class TileTemplate {
 
         pShape.setAsBox(constrains.getWidth() / 2 / Constants.PPM, constrains.getHeight() / 2 / Constants.PPM);
         fixDef.shape = pShape;
-        body.createFixture(fixDef);
+        fixture = body.createFixture(fixDef);
     }
 }

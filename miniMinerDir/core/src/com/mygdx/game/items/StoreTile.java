@@ -1,5 +1,6 @@
 package com.mygdx.game.items;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -14,6 +15,8 @@ public class StoreTile extends TileTemplate {
     public StoreTile(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
         body.getFixtureList().get(0).setSensor(true);
-        body.getFixtureList().get(0).setUserData("store");
+        fixture.setUserData("store");
     }
+
+
 }
