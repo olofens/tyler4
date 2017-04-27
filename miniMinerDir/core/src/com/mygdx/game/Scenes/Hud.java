@@ -65,7 +65,7 @@ public class Hud implements Disposable {
 
         storePopup = new Dialog("Store", storeSkin);
         storePopup.setBounds((MiniMiner.V_WIDTH - storepopupImage.getWidth()) / 2,
-                (MiniMiner.V_HEIGHT - storepopupImage.getHeight()) / 2,
+                (MiniMiner.V_HEIGHT - storepopupImage.getHeight() - 10),
                 storepopupImage.getWidth(), storepopupImage.getHeight());
 
         storePopup.setVisible(false);
