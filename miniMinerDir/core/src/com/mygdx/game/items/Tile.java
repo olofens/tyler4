@@ -1,5 +1,6 @@
 package com.mygdx.game.items;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,6 +17,10 @@ import com.mygdx.game.Utils.Constants;
 public class Tile extends TileTemplate {
     public Tile(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
-        body.getFixtureList().get(0).setUserData("ground");
+        fixture.setUserData("tile");
+    }
+
+    public void onDrillhit() {
+        Gdx.app.log("drill","Collision");
     }
 }
