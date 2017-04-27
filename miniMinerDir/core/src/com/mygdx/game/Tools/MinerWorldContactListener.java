@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.event.Listener;
 
 /**
  * Created by Olof Enström on 2017-04-26.
@@ -19,6 +20,7 @@ public class MinerWorldContactListener implements ContactListener {
         b = contact.getFixtureB();
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
+            Listener.BUS.update();
         }
         if (inContact("drill", "tile")){
             System.out.println("Initiate drill contact");
@@ -30,6 +32,7 @@ public class MinerWorldContactListener implements ContactListener {
         a = contact.getFixtureA();
         b = contact.getFixtureB();
         if (inContact("miner", "store")) {
+            Listener.BUS.update();
             System.out.println("Hope to see you soon!");
         }
         if (inContact("drill", "tile")){

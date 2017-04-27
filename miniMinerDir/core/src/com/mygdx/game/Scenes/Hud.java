@@ -20,12 +20,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.event.IListener;
+import com.mygdx.game.event.Listener;
 
 /**
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable {
+public class Hud implements Disposable, IListener {
     public Stage stage;
     private Viewport viewport;
     private Dialog storePopup;
@@ -109,6 +111,8 @@ public class Hud implements Disposable {
 
         stage.addActor(table);
 
+        Listener.BUS.addListener(this);
+
 
     }
 
@@ -139,6 +143,10 @@ public class Hud implements Disposable {
 
     public void toggleStoreVisibility() {
         storePopup.setVisible(!storePopup.isVisible());
+    }
+
+    public void update() {
+        toggleStoreVisibility();
     }
 
     @Override

@@ -7,7 +7,10 @@ import java.util.List;
  * Created by olofenstrom on 2017-04-27.
  */
 
-public class Listener {
+public enum Listener {
+
+    BUS;
+
     private List<IListener> listeners = new ArrayList<IListener>();
 
     public void addListener(IListener newListener) {
