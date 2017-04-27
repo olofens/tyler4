@@ -44,6 +44,7 @@ public abstract class Edge {
             bdef.type = BodyDef.BodyType.StaticBody;
             body = world.createBody(bdef);
             body.createFixture(shape, 1.0f).setFriction(0);
+            body.getFixtureList().get(0).setUserData("edge");
             shape.dispose();
         }
     }
