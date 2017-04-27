@@ -23,6 +23,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.Box2DWorldCreator;
 import com.mygdx.game.Tools.MinerWorldContactListener;
+import com.mygdx.game.event.Listener;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
 

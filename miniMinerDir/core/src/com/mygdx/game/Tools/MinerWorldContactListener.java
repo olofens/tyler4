@@ -51,4 +51,5 @@ public class MinerWorldContactListener implements ContactListener {
         return ((a.getUserData().equals(stringIDa) && b.getUserData().equals(stringIDb)) ||
                 (a.getUserData().equals(stringIDb) && b.getUserData().equals(stringIDa)));
     }
+
 }
