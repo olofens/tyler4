@@ -60,8 +60,7 @@ public class Hud implements Disposable {
         Texture storepopupImage = new Texture("storepopup.png");
         storeSkin.add("popUpImage", storepopupImage);
 
-        Drawable storeBackground = storeSkin.getDrawable("popUpImage");
-        ws.background = storeBackground;
+        ws.background = storeSkin.getDrawable("popUpImage");
 
         storePopup = new Dialog("Store", storeSkin);
         storePopup.setBounds((MiniMiner.V_WIDTH - storepopupImage.getWidth()) / 2,
