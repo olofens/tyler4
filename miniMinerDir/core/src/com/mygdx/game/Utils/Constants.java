@@ -11,4 +11,6 @@ public final class Constants {
      */
     public static final float PPM = 32;
     public static final int GRAVITY = -10;
+    public static final int V_WIDTH = 240;
+    public static final int V_HEIGHT = 400;
 }

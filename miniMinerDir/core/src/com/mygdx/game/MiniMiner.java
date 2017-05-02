@@ -15,8 +15,7 @@ import com.mygdx.game.Screens.PlayScreen;
 
 public class MiniMiner extends Game {
 
-    public static final int V_WIDTH = 240;
-    public static final int V_HEIGHT = 400;
+
 
     public SpriteBatch batch;
 
