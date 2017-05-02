@@ -47,11 +47,10 @@ public class Miner extends Sprite {
         FixtureDef fdefine = new FixtureDef();
         fdefine.friction = 15;
 
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(10 / Constants.PPM);
 
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(10/Constants.PPM, 10/Constants.PPM);
-
-        fdefine.shape = polygonShape;
+        fdefine.shape = circleShape;
         b2body.createFixture(fdefine).setUserData("miner");
 
         EdgeShape drill = new EdgeShape();
@@ -71,8 +70,5 @@ public class Miner extends Sprite {
         fdefine.shape = leftWing;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("leftWing");
-
-
-
     }
 }
