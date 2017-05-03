@@ -23,6 +23,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.Box2DWorldCreator;
 import com.mygdx.game.Tools.MinerWorldContactListener;
+import com.mygdx.game.Tools.SoundHandler;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
@@ -73,8 +74,8 @@ public class PlayScreen implements Screen {
     public PlayScreen(MiniMiner game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        viewPort = new FitViewport(MiniMiner.V_WIDTH / Constants.PPM,
-                                    MiniMiner.V_HEIGHT / Constants.PPM, gameCam);
+        viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
+                                    Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
@@ -151,8 +152,6 @@ public class PlayScreen implements Screen {
         world.step(1 / 60f, 6, 2);
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         renderer.setView(gameCam);
-
-
     }
 
     public boolean drawUp(){
@@ -284,12 +283,12 @@ public class PlayScreen implements Screen {
         //position of the player. The player is in the middle of the screen at all times.
         //to get the leftmost bit of the gameCam's view, we get HALF the width of the screen and
         //add it to startX. Same with startY
-        startX += MiniMiner.V_WIDTH / 2 / Constants.PPM;
-        startY += MiniMiner.V_HEIGHT / 2 / Constants.PPM;
+        startX += Constants.V_WIDTH / 2 / Constants.PPM;
+        startY += Constants.V_HEIGHT / 2 / Constants.PPM;
 
         //same here but we subtract the width and height
-        height -= MiniMiner.V_HEIGHT / 2 / Constants.PPM;
-        width -= MiniMiner.V_WIDTH / 2 / Constants.PPM;
+        height -= Constants.V_HEIGHT / 2 / Constants.PPM;
+        width -= Constants.V_WIDTH / 2 / Constants.PPM;
 
         //self-explanatory
         position.x = miner.b2body.getPosition().x;

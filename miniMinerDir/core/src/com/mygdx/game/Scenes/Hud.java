@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
 
@@ -53,7 +54,7 @@ public class Hud implements Disposable, IListener {
      */
     public Hud(SpriteBatch spriteBatch){
 
-        viewport = new FitViewport(MiniMiner.V_WIDTH, MiniMiner.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
         //Store
@@ -69,8 +70,8 @@ public class Hud implements Disposable, IListener {
         ws.background = storeSkin.getDrawable("popUpImage");
 
         storePopup = new Dialog("Store", storeSkin);
-        storePopup.setBounds((MiniMiner.V_WIDTH - storepopupImage.getWidth()) / 2,
-                (MiniMiner.V_HEIGHT - storepopupImage.getHeight() - 10),
+        storePopup.setBounds((Constants.V_WIDTH - storepopupImage.getWidth()) / 2,
+                (Constants.V_HEIGHT - storepopupImage.getHeight() - 10),
                 storepopupImage.getWidth(), storepopupImage.getHeight());
 
         storePopup.setVisible(false);
@@ -95,7 +96,7 @@ public class Hud implements Disposable, IListener {
         touchpad = new Touchpad(10, touchpadStyle);
         //setBounds(x,y,width,height)
 
-        touchpad.setBounds(MiniMiner.V_WIDTH-110, 15, 100, 100);
+        touchpad.setBounds(Constants.V_WIDTH-110, 15, 100, 100);
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
