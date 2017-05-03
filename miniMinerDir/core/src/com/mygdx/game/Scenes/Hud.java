@@ -134,7 +134,6 @@ public class Hud implements Disposable, IListener {
     public void adjustFuel(Integer knobPercent){
         fuel = fuel - Math.abs(3*knobPercent);
 
-        System.out.print(knobPercent.toString() + "\n");
 
         String strFuel = fuel.toString();
         Integer fuelLength = fuel.toString().length();
