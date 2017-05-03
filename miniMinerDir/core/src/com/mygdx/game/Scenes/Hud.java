@@ -25,6 +25,8 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.items.FuelTank;
+import com.mygdx.game.items.Hull;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -104,25 +106,26 @@ public class Hud implements Disposable, IListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
 
+        FuelTank ft = new FuelTank();
+        Hull hull = new Hull();
         fuel = 100000;
         score = 0;
-        hull = 100;
 
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        String strFuel = fuel.toString();
-        Integer fuelLength = fuel.toString().length();
+//        String strFuel = fuel.toString();
+  //      Integer fuelLength = fuel.toString().length();
 
-        fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
-        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
+        //ft.fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        //fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
+        //hull.hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         table.add(scoreLabel).expandX().padTop(10);
-        table.add(fuelLabel).expandX().padTop(10);
-        table.add(hullLabel).expandX().padTop(10);
+        table.add(ft.getFuelLabel()).expandX().padTop(10);
+        table.add(hull.getHullLabel()).expandX().padTop(10);
 
 
         stage.addActor(table);
@@ -131,7 +134,7 @@ public class Hud implements Disposable, IListener {
 
     }
 
-    public void adjustFuel(Integer knobPercent){
+  /*  public void adjustFuel(Integer knobPercent){
         fuel = fuel - Math.abs(3*knobPercent);
 
 
@@ -139,7 +142,7 @@ public class Hud implements Disposable, IListener {
         Integer fuelLength = fuel.toString().length();
         strFuel.substring(0,fuelLength-3);
         fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
-    }
+    }*/
 
     public boolean isTouchingUp(){
         if(touchpad.getKnobPercentY() > 0.5){

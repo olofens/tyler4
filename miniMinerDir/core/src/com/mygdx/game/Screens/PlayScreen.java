@@ -25,6 +25,7 @@ import com.mygdx.game.Tools.Box2DWorldCreator;
 import com.mygdx.game.Tools.MinerWorldContactListener;
 import com.mygdx.game.Tools.SoundHandler;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
 
@@ -65,6 +66,7 @@ public class PlayScreen implements Screen {
 
     private MapProperties prop;
 
+    private FuelTank ft;
     /**
      * The main playscreen where the game is actually interacted with and controlled
      *
@@ -106,6 +108,8 @@ public class PlayScreen implements Screen {
         minerIMG3 = new Texture("driller_projekt_RocketTest.png");
         minerSpriteRocket = new Sprite(minerIMG3);
 
+        ft = new FuelTank();
+
 
     }
 
@@ -126,13 +130,13 @@ public class PlayScreen implements Screen {
         if(hud.touchpad.getKnobPercentY() > 0){
             miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
             knobPercentY = hud.touchpad.getKnobPercentY()*10;
-            hud.adjustFuel((int)knobPercentY);
+            ft.adjustFuel((int)knobPercentY);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
             miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
             knobPercentX = hud.touchpad.getKnobPercentX()*10;
-            hud.adjustFuel((int)knobPercentX);
+            ft.adjustFuel((int)knobPercentX);
 
         }
 
