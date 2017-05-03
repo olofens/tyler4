@@ -14,5 +14,5 @@ public class FuelTank {
     public Integer fuel;
 
     private Label fuelLabel;
-    
+
 }
