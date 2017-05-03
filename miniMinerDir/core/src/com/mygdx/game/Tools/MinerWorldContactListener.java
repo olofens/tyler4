@@ -30,8 +30,6 @@ public class MinerWorldContactListener implements ContactListener {
             System.out.println("Welcome to the store!");
             Listener.BUS.update();
         }
-        //if (inContact("drill", "tile")){
-            System.out.println("Initiate drill contact");
             if(a.getUserData()=="drill"||b.getUserData()=="drill"){
                 Fixture drill  = a.getUserData() == "drill" ? a : b;
                 Fixture object = drill == a ? b : a;
@@ -41,7 +39,6 @@ public class MinerWorldContactListener implements ContactListener {
                     ((Tile) object.getUserData()).onDrillHit();
                 }
             }
-       // }
     }
 
     @Override
@@ -51,10 +48,6 @@ public class MinerWorldContactListener implements ContactListener {
         if (inContact("miner", "store")) {
             Listener.BUS.update();
             System.out.println("Hope to see you soon!");
-        }
-        if (inContact("drill", "tile")){
-            System.out.println("End drill contact");
-
         }
 
     }
