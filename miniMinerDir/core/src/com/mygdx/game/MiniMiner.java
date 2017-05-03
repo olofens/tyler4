@@ -15,6 +15,11 @@ import com.mygdx.game.Screens.PlayScreen;
 
 public class MiniMiner extends Game {
 
+    public static final short DEFAULT_BIT = 1;
+    public static final short MINER_BIT = 2;
+    public static final short TILE_BIT = 4;
+    public static final short STORE_BIT = 8;
+    public static final short DESTROYED_BIT = 16;
 
 
     public SpriteBatch batch;
