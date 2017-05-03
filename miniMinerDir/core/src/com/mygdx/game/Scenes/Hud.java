@@ -3,6 +3,7 @@ package com.mygdx.game.Scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
@@ -33,15 +35,17 @@ public class Hud implements Disposable, IListener {
     private Viewport viewport;
     private Dialog storePopup;
 
-    private Integer score;
+    public Integer score;
+    public Integer fuel;
+    public Integer hull;
 
     private Label scoreLabel;
+    private Label fuelLabel;
+    private Label hullLabel;
 
     public Touchpad touchpad;
 
-    //public Integer blockSpeed;
 
-    //public Sprite blockSprite;
 
     /**
      * Creates the HUD for the framework of the game
@@ -72,6 +76,7 @@ public class Hud implements Disposable, IListener {
 
         storePopup.setVisible(false);
 
+
         //Touchpad
         //Create a touchpad skin
         Skin touchpadSkin = new Skin();
@@ -99,22 +104,50 @@ public class Hud implements Disposable, IListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
 
+        fuel = 100000;
         score = 0;
-
+        hull = 100;
 
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
+        String strFuel = fuel.toString();
+        Integer fuelLength = fuel.toString().length();
+
+        fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         table.add(scoreLabel).expandX().padTop(10);
+        table.add(fuelLabel).expandX().padTop(10);
+        table.add(hullLabel).expandX().padTop(10);
+
 
         stage.addActor(table);
-
         Listener.BUS.addListener(this);
 
 
+    }
+
+    public void adjustFuel(Integer knobPercent){
+        fuel = fuel - Math.abs(3*knobPercent);
+
+
+        String strFuel = fuel.toString();
+        Integer fuelLength = fuel.toString().length();
+        strFuel.substring(0,fuelLength-3);
+        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
+    }
+
+    public boolean isTouchingUp(){
+        if(touchpad.getKnobPercentY() > 0.5){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean isTouchingRight(){

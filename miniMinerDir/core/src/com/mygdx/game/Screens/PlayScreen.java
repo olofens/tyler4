@@ -44,8 +44,10 @@ public class PlayScreen implements Screen {
     private Miner miner;
     private Texture minerIMG;
     private Texture minerIMG2;
+    private Texture minerIMG3;
     private Sprite minerSprite;
     private Sprite minerSpriteDrillDown;
+    private Sprite minerSpriteRocket;
     private Vector2 minerPos;
     private boolean isFacingRight;
 
@@ -83,7 +85,7 @@ public class PlayScreen implements Screen {
 
         prop = map.getProperties();
 
-        // Create a new world with 0 gravity for now
+        // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
 
@@ -100,6 +102,11 @@ public class PlayScreen implements Screen {
 
         minerIMG2 = new Texture("driller_drill_down.png");
         minerSpriteDrillDown = new Sprite(minerIMG2);
+
+        minerIMG3 = new Texture("driller_projekt_RocketTest.png");
+        minerSpriteRocket = new Sprite(minerIMG3);
+
+
     }
 
     @Override
@@ -112,15 +119,21 @@ public class PlayScreen implements Screen {
         //if body has contact with ground & touchpadY < -0.5
         //THEN drill
         //if().......
+        float knobPercentX = 0;
+        float knobPercentY = 0;
 
 
         if(hud.touchpad.getKnobPercentY() > 0){
             miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
+            knobPercentY = hud.touchpad.getKnobPercentY()*10;
+            hud.adjustFuel((int)knobPercentY);
         }
 
         if(hud.touchpad.getKnobPercentX() != 0){
-
             miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
+            knobPercentX = hud.touchpad.getKnobPercentX()*10;
+            hud.adjustFuel((int)knobPercentX);
+
         }
 
         else{
@@ -141,6 +154,14 @@ public class PlayScreen implements Screen {
         renderer.setView(gameCam);
     }
 
+    public boolean drawUp(){
+        if(hud.isTouchingUp()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public boolean drawDown(){
 
@@ -201,7 +222,20 @@ public class PlayScreen implements Screen {
         //render miner
         game.batch.begin();
 
-        if(drawDown()){
+        if(hud.isTouchingUp()){
+            //Draw UP
+            if(drawRight()){
+                game.batch.draw(minerSpriteRocket, minerPos.x - 10 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
+                        12 / Constants.PPM, 15 / Constants.PPM);
+            }
+            else{
+                game.batch.draw(minerSpriteRocket, minerPos.x - 1 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
+                        12 / Constants.PPM, 15 / Constants.PPM);
+            }
+
+        }
+
+        if(hud.isTouchingDown()){
             //Draw DOWN
             game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     25 / Constants.PPM, 28 / Constants.PPM);
