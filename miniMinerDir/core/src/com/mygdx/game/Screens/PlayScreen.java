@@ -145,7 +145,7 @@ public class PlayScreen implements Screen {
 
     public boolean drawDown(){
 
-        if(hud.isTouchingDown() == true){
+        if(hud.isTouchingDown()){
             return true;
         }
         else{
@@ -155,11 +155,11 @@ public class PlayScreen implements Screen {
 
     public boolean drawRight(){
         //Check touchpad
-        if(hud.isTouchingRight() == true){
+        if(hud.isTouchingRight()){
             //RIGHT
             return true;
         }
-        else if(hud.isTouchingLeft() == true){
+        else if(hud.isTouchingLeft()){
             //LEFT
             return false;
         }
@@ -175,14 +175,14 @@ public class PlayScreen implements Screen {
             return false;
         }
         //Check last direction
-        else if(isFacingRight == true){
+        else if(isFacingRight){
             //RIGHT
             return true;
         }
-        else if(isFacingRight == false){
+        /*else if(isFacingRight){
             //LEFT
             return false;
-        }
+        }*/
         else{
             return false;
         }
