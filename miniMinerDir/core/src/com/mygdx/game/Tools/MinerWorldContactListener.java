@@ -1,11 +1,19 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.MiniMiner;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.items.Miner;
+import com.mygdx.game.items.Tile;
+import com.mygdx.game.items.TileTemplate;
 
 /**
  * Created by Olof Enström on 2017-04-26.
@@ -22,9 +30,15 @@ public class MinerWorldContactListener implements ContactListener {
             System.out.println("Welcome to the store!");
             Listener.BUS.update();
         }
-        if (inContact("drill", "tile")){
-            System.out.println("Initiate drill contact");
-        }
+            if(a.getUserData()=="drill"||b.getUserData()=="drill"){
+                Fixture drill  = a.getUserData() == "drill" ? a : b;
+                Fixture object = drill == a ? b : a;
+
+
+                if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) && Gdx.input.isKeyPressed(Input.Keys.A)){
+                    ((Tile) object.getUserData()).onDrillHit();
+                }
+            }
     }
 
     @Override
@@ -35,9 +49,7 @@ public class MinerWorldContactListener implements ContactListener {
             Listener.BUS.update();
             System.out.println("Hope to see you soon!");
         }
-        if (inContact("drill", "tile")){
-            System.out.println("End drill contact");
-        }
+
     }
 
     @Override

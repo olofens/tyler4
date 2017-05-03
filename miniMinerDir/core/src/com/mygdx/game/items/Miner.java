@@ -49,6 +49,8 @@ public class Miner extends Sprite {
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(10 / Constants.PPM);
+        fdefine.filter.categoryBits = MiniMiner.MINER_BIT;
+        fdefine.filter.maskBits = MiniMiner.DEFAULT_BIT | MiniMiner.TILE_BIT;
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine).setUserData("miner");
@@ -59,6 +61,7 @@ public class Miner extends Sprite {
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("drill");
 
+        /*
         EdgeShape rightWing = new EdgeShape();
         rightWing.set(new Vector2(11/Constants.PPM, -2/Constants.PPM), new Vector2(11/Constants.PPM, 2/Constants.PPM));
         fdefine.shape = rightWing;
@@ -70,5 +73,6 @@ public class Miner extends Sprite {
         fdefine.shape = leftWing;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("leftWing");
+        */
     }
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -17,10 +18,14 @@ import com.mygdx.game.Utils.Constants;
 public class Tile extends TileTemplate {
     public Tile(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
-        fixture.setUserData("tile");
+        fixture.setUserData(this);
+        setCategoryFilter(MiniMiner.TILE_BIT);
     }
 
-    public void onDrillhit() {
-        Gdx.app.log("drill","Collision");
+    @Override
+    public void onDrillHit() {
+        Gdx.app.log("Tile","Collision");
+        setCategoryFilter(MiniMiner.DESTROYED_BIT);
     }
+
 }
