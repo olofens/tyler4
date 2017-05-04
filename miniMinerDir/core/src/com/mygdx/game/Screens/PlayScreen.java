@@ -153,7 +153,7 @@ public class PlayScreen implements Screen {
 
         minerPos = miner.b2body.getPosition();
 
-        world.step(1 / 30f, 6, 2);
+        world.step(1 / 60f, 6, 2);
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         renderer.setView(gameCam);
     }
