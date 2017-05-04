@@ -153,7 +153,7 @@ public class PlayScreen implements Screen {
 
         minerPos = miner.b2body.getPosition();
 
-        world.step(1 / 60f, 6, 2);
+        world.step(1 / 30f, 6, 2);
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         renderer.setView(gameCam);
     }
@@ -217,8 +217,8 @@ public class PlayScreen implements Screen {
     public void render(float dt) {
         update(dt);
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(0, 0, 0, 1);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         //render our game map
         renderer.render();
@@ -259,7 +259,7 @@ public class PlayScreen implements Screen {
 
 
         //render box2d lines
-        b2dr.render(world, gameCam.combined);
+        //b2dr.render(world, gameCam.combined);
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
