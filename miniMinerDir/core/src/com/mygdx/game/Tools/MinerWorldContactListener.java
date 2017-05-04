@@ -30,7 +30,8 @@ public class MinerWorldContactListener implements ContactListener {
             System.out.println("Welcome to the store!");
             Listener.BUS.update();
         }
-            if(a.getUserData()=="drill"||b.getUserData()=="drill"){
+
+        if(a.getUserData()=="drill"||b.getUserData()=="drill"){
                 Fixture drill  = a.getUserData() == "drill" ? a : b;
                 Fixture object = drill == a ? b : a;
 
@@ -39,6 +40,25 @@ public class MinerWorldContactListener implements ContactListener {
                     ((Tile) object.getUserData()).onDrillHit();
                 }
             }
+        if(a.getUserData()=="rightWing"||b.getUserData()=="rightWing"){
+            Fixture drill  = a.getUserData() == "rightWing" ? a : b;
+            Fixture object = drill == a ? b : a;
+
+
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass())){
+                ((Tile) object.getUserData()).onRightWingHit();
+            }
+        }
+        if(a.getUserData()=="leftWing"||b.getUserData()=="leftWing"){
+            Fixture drill  = a.getUserData() == "leftWing" ? a : b;
+            Fixture object = drill == a ? b : a;
+
+
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass())){
+                ((Tile) object.getUserData()).onLeftWingHit();
+            }
+        }
+
     }
 
     @Override
