@@ -56,20 +56,20 @@ public class Miner extends Sprite {
         b2body.createFixture(fdefine).setUserData("miner");
 
         EdgeShape drill = new EdgeShape();
-        drill.set(new Vector2(-2/Constants.PPM, -11/Constants.PPM), new Vector2(2/Constants.PPM, -11/Constants.PPM));
+        drill.set(new Vector2(-0.5f/Constants.PPM, -11/Constants.PPM), new Vector2(0.5f/Constants.PPM, -11/Constants.PPM));
         fdefine.shape = drill;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("drill");
 
 
         EdgeShape rightWing = new EdgeShape();
-        rightWing.set(new Vector2(11/Constants.PPM, -2/Constants.PPM), new Vector2(11/Constants.PPM, 2/Constants.PPM));
+        rightWing.set(new Vector2(10/Constants.PPM, -1/Constants.PPM), new Vector2(10/Constants.PPM, 0/Constants.PPM));
         fdefine.shape = rightWing;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("rightWing");
 
         EdgeShape leftWing = new EdgeShape();
-        leftWing.set(new Vector2(-11/Constants.PPM, -2/Constants.PPM), new Vector2(-11/Constants.PPM, 2/Constants.PPM));
+        leftWing.set(new Vector2(-10/Constants.PPM, -1/Constants.PPM), new Vector2(-10/Constants.PPM, 0/Constants.PPM));
         fdefine.shape = leftWing;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("leftWing");

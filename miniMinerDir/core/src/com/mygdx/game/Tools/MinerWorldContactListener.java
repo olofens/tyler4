@@ -32,31 +32,13 @@ public class MinerWorldContactListener implements ContactListener {
         }
 
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
-                Fixture drill  = a.getUserData() == "drill" ? a : b;
-                Fixture object = drill == a ? b : a;
-
-
-                if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) && Gdx.input.isKeyPressed(Input.Keys.A)){
-                    ((Tile) object.getUserData()).onDrillHit();
-                }
+            fixtureCheck("drill");
             }
         if(a.getUserData()=="rightWing"||b.getUserData()=="rightWing"){
-            Fixture drill  = a.getUserData() == "rightWing" ? a : b;
-            Fixture object = drill == a ? b : a;
-
-
-            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass())){
-                ((Tile) object.getUserData()).onRightWingHit();
-            }
+            fixtureCheck("rightWing");
         }
         if(a.getUserData()=="leftWing"||b.getUserData()=="leftWing"){
-            Fixture drill  = a.getUserData() == "leftWing" ? a : b;
-            Fixture object = drill == a ? b : a;
-
-
-            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass())){
-                ((Tile) object.getUserData()).onLeftWingHit();
-            }
+            fixtureCheck("leftWing");
         }
 
     }
@@ -86,5 +68,31 @@ public class MinerWorldContactListener implements ContactListener {
         return ((a.getUserData().equals(stringIDa) && b.getUserData().equals(stringIDb)) ||
                 (a.getUserData().equals(stringIDb) && b.getUserData().equals(stringIDa)));
     }
+
+    private void fixtureCheck(String id) {
+        Fixture drill; Fixture object;
+        if(id.equals("drill")){
+            drill  = a.getUserData() == "drill" ? a : b;
+            object = drill == a ? b : a;
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) && Gdx.input.isKeyPressed(Input.Keys.A)){
+                ((Tile) object.getUserData()).onTileHit();
+            }
+        }
+        else if(id.equals("rightWing")){
+            drill  = a.getUserData() == "rightWing" ? a : b;
+            object = drill == a ? b : a;
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) ){
+                ((Tile) object.getUserData()).onTileHit();
+            }
+        }
+        else if(id.equals("leftWing")){
+            drill  = a.getUserData() == "leftWing" ? a : b;
+            object = drill == a ? b : a;
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) ){
+                ((Tile) object.getUserData()).onTileHit();
+            }
+        }
+    }
+
 
 }

@@ -23,22 +23,12 @@ public class Tile extends TileTemplate {
         setCategoryFilter(MiniMiner.TILE_BIT);
     }
 
-    @Override
-    public void onDrillHit() {
+    public void onTileHit() {
         Gdx.app.log("Tile","Collision");
         setCategoryFilter(MiniMiner.DESTROYED_BIT);
         getCell().setTile(null);
     }
-    public void onRightWingHit() {
-        Gdx.app.log("Tile","Collision");
-        setCategoryFilter(MiniMiner.DESTROYED_BIT);
-        getCell().setTile(null);
-    }
-    public void onLeftWingHit() {
-        Gdx.app.log("Tile","Collision");
-        setCategoryFilter(MiniMiner.DESTROYED_BIT);
-        getCell().setTile(null);
-    }
+
     public TiledMapTileLayer.Cell getCell(){
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(4);
         return layer.getCell((int)((body.getPosition().x)*Constants.PPM/32),

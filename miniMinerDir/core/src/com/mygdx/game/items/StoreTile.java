@@ -20,10 +20,6 @@ public class StoreTile extends TileTemplate {
        // setCategoryFilter(MiniMiner.STORE_BIT);
     }
 
-    @Override
-    public void onDrillHit() {
-        System.out.println("Hello Olof");
-    }
 
 
 }
