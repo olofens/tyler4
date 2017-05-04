@@ -61,7 +61,7 @@ public class Miner extends Sprite {
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("drill");
 
-        /*
+
         EdgeShape rightWing = new EdgeShape();
         rightWing.set(new Vector2(11/Constants.PPM, -2/Constants.PPM), new Vector2(11/Constants.PPM, 2/Constants.PPM));
         fdefine.shape = rightWing;
@@ -73,6 +73,6 @@ public class Miner extends Sprite {
         fdefine.shape = leftWing;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("leftWing");
-        */
+
     }
 }

@@ -3,6 +3,7 @@ package com.mygdx.game.items;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -26,6 +27,12 @@ public class Tile extends TileTemplate {
     public void onDrillHit() {
         Gdx.app.log("Tile","Collision");
         setCategoryFilter(MiniMiner.DESTROYED_BIT);
+        getCell().setTile(null);
+    }
+    public TiledMapTileLayer.Cell getCell(){
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(4);
+        return layer.getCell((int)((body.getPosition().x)*Constants.PPM/32),
+                (int)((body.getPosition().y)*Constants.PPM/32));
     }
 
 }
