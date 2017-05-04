@@ -106,7 +106,6 @@ public class Hud implements Disposable, IListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
 
-        FuelTank ft = new FuelTank();
         Hull hull = new Hull();
         fuel = 100000;
         score = 0;
@@ -115,6 +114,8 @@ public class Hud implements Disposable, IListener {
         table.top();
         table.setFillParent(true);
 
+
+        FuelTank ft = new FuelTank(table);
 //        String strFuel = fuel.toString();
   //      Integer fuelLength = fuel.toString().length();
 
@@ -124,7 +125,7 @@ public class Hud implements Disposable, IListener {
         //hull.hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         table.add(scoreLabel).expandX().padTop(10);
-        table.add(ft.getFuelLabel()).expandX().padTop(10);
+       // table.add(ft.getFuelLabel()).expandX().padTop(10);
         table.add(hull.getHullLabel()).expandX().padTop(10);
 
 
