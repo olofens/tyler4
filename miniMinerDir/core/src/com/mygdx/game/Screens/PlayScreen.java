@@ -140,7 +140,10 @@ public class PlayScreen implements Screen {
 
         }
 
-        else{
+        else if (hud.touchpad.getKnobPercentX() == 0) {
+            if (!miner.b2body.getLinearVelocity().isZero()) {
+                miner.b2body.setLinearVelocity(0f, miner.b2body.getLinearVelocity().y);
+            }
         }
 
 

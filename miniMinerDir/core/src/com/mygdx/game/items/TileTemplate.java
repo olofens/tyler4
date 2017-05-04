@@ -43,6 +43,7 @@ public abstract class TileTemplate {
         pShape.setAsBox(constrains.getWidth() / 2 / Constants.PPM, constrains.getHeight() / 2 / Constants.PPM);
         fixDef.shape = pShape;
         fixture = body.createFixture(fixDef);
+        fixture.setFriction(0f);
     }
     //public abstract void  onDrillHit();
     public void setCategoryFilter(short filterBit){
