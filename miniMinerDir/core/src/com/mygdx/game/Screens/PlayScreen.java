@@ -28,6 +28,7 @@ import com.mygdx.game.event.Listener;
 import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.world.GameWorld;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -42,7 +43,7 @@ public class PlayScreen implements Screen {
 
 
     // Miner variables
-    private Miner miner;
+    //private Miner miner;
     private Texture minerIMG;
     private Texture minerIMG2;
     private Texture minerIMG3;
@@ -57,15 +58,16 @@ public class PlayScreen implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
+    private GameWorld gameWorld;
     // Hud variables
     private Hud hud;
 
-    // Box2D variables
+  /*  // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
 
     private MapProperties prop;
-
+*/
     private FuelTank ft;
     /**
      * The main playscreen where the game is actually interacted with and controlled
@@ -80,10 +82,13 @@ public class PlayScreen implements Screen {
                                     Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
+        gameWorld = new GameWorld();
+        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
+
+/*
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
-        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
         prop = map.getProperties();
 
@@ -93,8 +98,8 @@ public class PlayScreen implements Screen {
 
         new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
-
-        world.setContactListener(new MinerWorldContactListener());
+*/
+       // world.setContactListener(new MinerWorldContactListener());
 
         isFacingRight = true;
 
@@ -128,7 +133,7 @@ public class PlayScreen implements Screen {
 
 
         if(hud.touchpad.getKnobPercentY() > 0){
-            miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
+            gameWorld.miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
             knobPercentY = hud.touchpad.getKnobPercentY()*10;
             ft.adjustFuel((int)knobPercentY);
         }
@@ -156,8 +161,8 @@ public class PlayScreen implements Screen {
 
         minerPos = miner.b2body.getPosition();
 
-        world.step(1 / 60f, 6, 2);
-        updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
+        gameWorld.step();
+        updateCamera(gameCam, gameWorld.getMapPixelWidth(), gameWorld.getMapPixelHeight());
         renderer.setView(gameCam);
     }
 
@@ -314,6 +319,7 @@ public class PlayScreen implements Screen {
         cam.update();
     }
 
+    /*
     private int getMapPixelWidth() {
         int mapWidth = prop.get("width", Integer.class);
         int tilePixelWidth = prop.get("tilewidth", Integer.class);
@@ -325,6 +331,7 @@ public class PlayScreen implements Screen {
         int mapHeight = prop.get("height", Integer.class);
         return mapHeight * tilePixelHeight;
     }
+    */
 
     @Override
     public void resize(int width, int height) {
@@ -350,8 +357,8 @@ public class PlayScreen implements Screen {
     public void dispose() {
         map.dispose();
         renderer.dispose();
-        world.dispose();
-        b2dr.dispose();
+       // world.dispose();
+        //b2dr.dispose();
         hud.dispose();
 
     }

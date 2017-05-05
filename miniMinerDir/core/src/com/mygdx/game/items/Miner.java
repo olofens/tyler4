@@ -20,17 +20,15 @@ public class Miner extends Sprite {
     /**
      * Define our world and Body for our miner
      */
-    private World world;
+    //private World world;
     public Body b2body;
-
     /**
-     * @param world the world we defined in our miner class
      *              <p>
      *              Takes in a world and calls to our define miner method to create the miner.
      */
     public Miner(World world) {
-        this.world = world;
-        defineMiner();
+        //this.world = world;
+        defineMiner(world);
 
     }
 
@@ -38,7 +36,7 @@ public class Miner extends Sprite {
     /**
      * Creates a miner with the help of the world we create
      */
-    private void defineMiner() {
+    private void defineMiner(World world) {
         BodyDef bdef = new BodyDef();
         bdef.position.set(100 / Constants.PPM, 1400 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
