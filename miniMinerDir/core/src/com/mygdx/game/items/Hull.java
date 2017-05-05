@@ -30,7 +30,7 @@ public class Hull implements IResource {
      */
     public Hull(){
         hull = 100;
-        hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.GREEN));
+        hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.RED));
     }
 
     /**

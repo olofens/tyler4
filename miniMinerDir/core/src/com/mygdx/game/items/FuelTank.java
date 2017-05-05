@@ -34,7 +34,7 @@ public class FuelTank implements IResource {
         String strFuel = fuel.toString();
         Integer fuelLength = fuel.toString().length();
 
-        fuelLabel = new Label(String.format("%03d", fuel), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.RED));
+        fuelLabel = new Label(String.format("%03d", fuel), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.GREEN));
         fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
 
     }

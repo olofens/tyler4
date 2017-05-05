@@ -48,13 +48,12 @@ public class Hud implements Disposable, IListener {
     public Touchpad touchpad;
 
 
-
     /**
      * Creates the HUD for the framework of the game
      *
      * @param spriteBatch
      */
-    public Hud(SpriteBatch spriteBatch){
+    public Hud(SpriteBatch spriteBatch) {
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
@@ -98,7 +97,7 @@ public class Hud implements Disposable, IListener {
         touchpad = new Touchpad(10, touchpadStyle);
         //setBounds(x,y,width,height)
 
-        touchpad.setBounds(Constants.V_WIDTH-110, 15, 100, 100);
+        touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
@@ -117,7 +116,7 @@ public class Hud implements Disposable, IListener {
 
         FuelTank ft = new FuelTank(table);
 //        String strFuel = fuel.toString();
-  //      Integer fuelLength = fuel.toString().length();
+        //      Integer fuelLength = fuel.toString().length();
 
         //ft.fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
         //fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
@@ -125,7 +124,7 @@ public class Hud implements Disposable, IListener {
         //hull.hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         table.add(scoreLabel).expandX().padTop(10);
-       // table.add(ft.getFuelLabel()).expandX().padTop(10);
+        // table.add(ft.getFuelLabel()).expandX().padTop(10);
         table.add(hull.getHullLabel()).expandX().padTop(10);
 
 
@@ -145,38 +144,24 @@ public class Hud implements Disposable, IListener {
         fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
     }*/
 
-    public boolean isTouchingUp(){
-        if(touchpad.getKnobPercentY() > 0.5){
+    public boolean isTouchingUp() {
+        if (touchpad.getKnobPercentY() > 0.5) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public boolean isTouchingRight(){
-        if(touchpad.getKnobPercentX() > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean isTouchingRight() {
+        return touchpad.getKnobPercentX() > 0;
     }
-    public boolean isTouchingLeft(){
-        if(touchpad.getKnobPercentX() < 0){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+    public boolean isTouchingLeft() {
+        return touchpad.getKnobPercentX() < 0;
     }
-    public boolean isTouchingDown(){
-        if(touchpad.getKnobPercentY() < -0.4){
-            return true;
-        }
-        else{
-            return false;
-        }
+
+    public boolean isTouchingDown() {
+        return touchpad.getKnobPercentY() < -0.4;
     }
 
     public void toggleStoreVisibility() {
