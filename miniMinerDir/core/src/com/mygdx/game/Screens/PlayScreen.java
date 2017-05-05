@@ -162,22 +162,12 @@ public class PlayScreen implements Screen {
     }
 
     public boolean drawUp(){
-        if(hud.isTouchingUp()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return hud.isTouchingUp();
     }
 
     public boolean drawDown(){
 
-        if(hud.isTouchingDown()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return hud.isTouchingDown();
     }
 
     public boolean drawRight(){

@@ -20,7 +20,7 @@ public class Miner extends Sprite {
     /**
      * Define our world and Body for our miner
      */
-    public World world;
+    private World world;
     public Body b2body;
 
     /**

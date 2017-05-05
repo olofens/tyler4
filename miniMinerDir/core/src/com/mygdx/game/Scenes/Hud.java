@@ -145,11 +145,7 @@ public class Hud implements Disposable, IListener {
     }*/
 
     public boolean isTouchingUp() {
-        if (touchpad.getKnobPercentY() > 0.5) {
-            return true;
-        } else {
-            return false;
-        }
+        return touchpad.getKnobPercentY() > 0.5;
     }
 
     public boolean isTouchingRight() {
