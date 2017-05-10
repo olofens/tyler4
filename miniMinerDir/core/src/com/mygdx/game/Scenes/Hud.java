@@ -43,12 +43,14 @@ public class Hud implements Disposable, IListener {
 
     public Integer score;
     public Integer fuel;
+
+
     public Integer hull;
 
     private Label scoreLabel;
-    private Label fuelLabel;
-    private Label hullLabel;
-
+    //private Label fuelLabel;
+    //private Label hullLabel;
+    //
     //TODO fix public
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
@@ -83,12 +85,18 @@ public class Hud implements Disposable, IListener {
 
 
         FuelTank ft = new FuelTank(table);
+
+            // TODO REMOVE SOPP
 //        String strFuel = fuel.toString();
         //      Integer fuelLength = fuel.toString().length();
 
         //ft.fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
         //fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
+
+
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+
         //hull.hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
 
         table.add(scoreLabel).expandX().padTop(10);

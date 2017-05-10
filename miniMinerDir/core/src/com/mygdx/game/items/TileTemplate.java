@@ -18,7 +18,7 @@ import com.mygdx.game.Utils.Constants;
  */
 
 public abstract class TileTemplate {
-    protected World world;
+
     protected TiledMap tiledMap;
     protected TiledMapTile tile;
     protected Rectangle constrains;
@@ -27,7 +27,7 @@ public abstract class TileTemplate {
     protected Fixture fixture;
 
     public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains){
-        this.world = world;
+
         this.tiledMap = tiledMap;
         this.constrains = constrains;
 

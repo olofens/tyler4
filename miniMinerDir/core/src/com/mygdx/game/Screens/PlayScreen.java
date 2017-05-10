@@ -42,6 +42,8 @@ public class PlayScreen implements Screen {
 
 
     // Miner variables
+
+    // TODO MOVE TO MINER
     private Miner miner;
     private Texture minerIMG;
     private Texture minerIMG2;
@@ -63,24 +65,30 @@ public class PlayScreen implements Screen {
     // Hud variables
     private Hud hud;
 
+    // TODO MOVE TO GAMEWORLD
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
 
     private MapProperties prop;
 
+    //TODO Remove sopp(?)
     private FuelTank ft;
+
+
     /**
      * The main playscreen where the game is actually interacted with and controlled
      *
-     * @param game
-     *      Brings in MiniMiner variable in order to get Width and Height of desired screen.
+     * @param game Brings in MiniMiner variable in order to get Width and Height of desired screen.
      */
     public PlayScreen(MiniMiner game) {
         this.game = game;
+
+
+        // Our camera and our viewport, this is where the camera focuses during the game
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
-                                    Constants.V_HEIGHT / Constants.PPM, gameCam);
+                Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
         //TODO move to gameWorld
@@ -95,14 +103,14 @@ public class PlayScreen implements Screen {
         // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
-        new Box2DWorldCreator(world,map);
+        new Box2DWorldCreator(world, map);
         this.miner = new Miner(world);
 
         world.setContactListener(new MinerWorldContactListener());
 
         isFacingRight = true;
 
-
+        //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right.png");
         minerSprite = new Sprite(minerIMG);
 
@@ -131,20 +139,18 @@ public class PlayScreen implements Screen {
         float knobPercentY = 0;
 
 
-        if(hud.tpHandler.touchpad.getKnobPercentY() > 0){
-            miner.b2body.applyForceToCenter(0, 18f*hud.tpHandler.touchpad.getKnobPercentY(), true);
-            knobPercentY = hud.tpHandler.touchpad.getKnobPercentY()*10;
-            ft.adjustFuel((int)knobPercentY);
+        if (hud.tpHandler.touchpad.getKnobPercentY() > 0) {
+            miner.b2body.applyForceToCenter(0, 18f * hud.tpHandler.touchpad.getKnobPercentY(), true);
+            knobPercentY = hud.tpHandler.touchpad.getKnobPercentY() * 10;
+            ft.adjustFuel((int) knobPercentY);
         }
 
-        if(hud.tpHandler.touchpad.getKnobPercentX() != 0){
-            miner.b2body.setLinearVelocity(new Vector2(5f*hud.tpHandler.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
-            knobPercentX = hud.tpHandler.touchpad.getKnobPercentX()*10;
-            ft.adjustFuel((int)knobPercentX);
+        if (hud.tpHandler.touchpad.getKnobPercentX() != 0) {
+            miner.b2body.setLinearVelocity(new Vector2(5f * hud.tpHandler.touchpad.getKnobPercentX(), miner.b2body.getLinearVelocity().y));
+            knobPercentX = hud.tpHandler.touchpad.getKnobPercentX() * 10;
+            ft.adjustFuel((int) knobPercentX);
 
-        }
-
-        else if (hud.tpHandler.touchpad.getKnobPercentX() == 0) {
+        } else if (hud.tpHandler.touchpad.getKnobPercentX() == 0) {
             if (!miner.b2body.getLinearVelocity().isZero()) {
                 miner.b2body.setLinearVelocity(0f, miner.b2body.getLinearVelocity().y);
             }
@@ -152,7 +158,6 @@ public class PlayScreen implements Screen {
 
 
     }
-
 
 
     public void update(float dt) {
@@ -165,38 +170,36 @@ public class PlayScreen implements Screen {
         renderer.setView(gameCam);
     }
 
-    public boolean drawUp(){
+    public boolean drawUp() {
         return hud.tpHandler.isTouchingUp();
     }
 
-    public boolean drawDown(){
+    public boolean drawDown() {
 
         return hud.tpHandler.isTouchingDown();
     }
 
-    public boolean drawRight(){
+    public boolean drawRight() {
         //Check touchpad
-        if(hud.tpHandler.isTouchingRight()){
+        if (hud.tpHandler.isTouchingRight()) {
             //RIGHT
             return true;
-        }
-        else if(hud.tpHandler.isTouchingLeft()){
+        } else if (hud.tpHandler.isTouchingLeft()) {
             //LEFT
             return false;
         }
         //Check velocity
-        else if(miner.b2body.getLinearVelocity().x > 0){
+        else if (miner.b2body.getLinearVelocity().x > 0) {
             //RIGHT
             isFacingRight = true;
             return true;
-        }
-        else if(miner.b2body.getLinearVelocity().x < 0){
+        } else if (miner.b2body.getLinearVelocity().x < 0) {
             //LEFT
             isFacingRight = false;
             return false;
         }
         //Check last direction
-        else if(isFacingRight){
+        else if (isFacingRight) {
             //RIGHT
             return true;
         }
@@ -204,7 +207,7 @@ public class PlayScreen implements Screen {
             //LEFT
             return false;
         }*/
-        else{
+        else {
             return false;
         }
     }
@@ -223,33 +226,30 @@ public class PlayScreen implements Screen {
         //render miner
         game.batch.begin();
 
-        if(hud.tpHandler.isTouchingUp()){
+        if (hud.tpHandler.isTouchingUp()) {
             //Draw UP
-            if(drawRight()){
+            if (drawRight()) {
                 game.batch.draw(minerSpriteRocket, minerPos.x - 10 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
                         12 / Constants.PPM, 15 / Constants.PPM);
-            }
-            else{
+            } else {
                 game.batch.draw(minerSpriteRocket, minerPos.x - 1 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
                         12 / Constants.PPM, 15 / Constants.PPM);
             }
 
         }
 
-        if(hud.tpHandler.isTouchingDown()){
+        if (hud.tpHandler.isTouchingDown()) {
             //Draw DOWN
             game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     25 / Constants.PPM, 28 / Constants.PPM);
-        }
-        else if(drawRight()){
+        } else if (drawRight()) {
             //Draw RIGHT
             game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     35 / Constants.PPM, 25 / Constants.PPM);
-        }
-        else{
+        } else {
             //Draw LEFT
             game.batch.draw(minerSprite, minerPos.x + 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                    - 35 / Constants.PPM, 25 / Constants.PPM);
+                    -35 / Constants.PPM, 25 / Constants.PPM);
         }
 
         game.batch.end();
