@@ -20,8 +20,7 @@ public class TouchpadHandler {
     public Touchpad touchpad;
 
 
-
-    public TouchpadHandler(){
+    public TouchpadHandler() {
         //Touchpad
         //Create a touchpad skin
         Skin touchpadSkin = new Skin();
@@ -36,7 +35,6 @@ public class TouchpadHandler {
         //Create Drawable's from TouchPad skin
         //Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
         Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
-
 
 
         //Apply the Drawables to the TouchPad Style
@@ -66,34 +64,20 @@ public class TouchpadHandler {
     }
 
 
-    public void handleInput(GameModel gameModel) {
-
-        //if body has contact with ground & touchpadY < -0.5
-        //THEN drill
-        //if().......
-        float knobPercentX = 0;
-        float knobPercentY = 0;
-
-
+    public Vector2 handleInput() {
+         Vector2 vector2 = new Vector2(0,0);
         if (touchpad.getKnobPercentY() > 0) {
-            gameModel.adjustSpeedY(touchpad.getKnobPercentY());
+            vector2.y = touchpad.getKnobPercentY();
 
-            //TODO REMOVE SOPP
-            knobPercentY = touchpad.getKnobPercentY() * 10;
-            //ft.adjustFuel((int) knobPercentY);
         }
 
         if (touchpad.getKnobPercentX() != 0) {
-            gameModel.adjustSpeedX(touchpad.getKnobPercentX());
-
-            //TODO REMOVE SOPP
-            knobPercentX = touchpad.getKnobPercentX() * 10;
-         //   ft.adjustFuel((int) knobPercentX);
-
+            vector2.x = touchpad.getKnobPercentX();
         }
-        }
-
-
+        return vector2;
     }
+
+
+}
 
 

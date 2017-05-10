@@ -82,7 +82,6 @@ public class PlayScreen implements Screen, IListener {
         hud = new Hud(game.batch);
 
 
-
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
@@ -98,8 +97,6 @@ public class PlayScreen implements Screen, IListener {
         minerSpriteRocket = new Sprite(minerIMG3);
 
 
-
-
     }
 
     @Override
@@ -107,25 +104,18 @@ public class PlayScreen implements Screen, IListener {
 
     }
 
-
     /**
-     * Touchpadhandler handles our input and shit
+     *
      * @param dt
      */
-    public void handleInput(float dt) {
-        hud.tpHandler.handleInput(gameModel);
-
-
-    }
-
-
     public void update(float dt) {
-        handleInput(dt);
-        gameModel.update();
+        //The Vector that our Touchpadhandler creates
+        Vector2 v2 = hud.tpHandler.handleInput();
+
+        gameModel.update(v2);
 
         //TODO MOVE TO GAMEMODEL
-        minerPos = gameModel.getMiner().b2body.getPosition();
-
+        //minerPos = gameModel.getMiner().b2body.getPosition();
 
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
@@ -219,7 +209,7 @@ public class PlayScreen implements Screen, IListener {
         */
 
         //Render b2dr lines
-        gameModel.getB2dr().render(gameModel.getWorld(),gameCam.combined);
+        gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -229,7 +219,7 @@ public class PlayScreen implements Screen, IListener {
 
     }
 
-    public void drawMiner(){
+    public void drawMiner() {
 
     }
 

@@ -61,9 +61,16 @@ public class GameModel {
         miner.b2body.applyForceToCenter(0, 18f * knobPercentage, true);
     }
 
-    public void update(){
+    public void update(Vector2 vector2){
+
         world.step(1 / 60f, 6, 2);
+
+        adjustSpeedX(vector2.x);
+        adjustSpeedY(vector2.y);
+
+
     }
+
 
 
     public TmxMapLoader getMapLoader() {
