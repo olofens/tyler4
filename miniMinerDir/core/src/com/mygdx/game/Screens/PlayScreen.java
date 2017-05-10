@@ -26,6 +26,7 @@ import com.mygdx.game.Tools.MinerWorldContactListener;
 import com.mygdx.game.Tools.SoundHandler;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.items.FuelTank;
+import com.mygdx.game.items.GameModel;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.Utils.Constants;
 
@@ -55,9 +56,6 @@ public class PlayScreen implements Screen {
     private boolean isFacingRight;
 
     //TODO move to gameWorld
-    // Tiledmap variables
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
 
     //STAY
     private OrthogonalTiledMapRenderer renderer;
@@ -69,10 +67,12 @@ public class PlayScreen implements Screen {
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
-    private MapProperties prop;
+
 
     //TODO Remove sopp(?)
     private FuelTank ft;
+
+    private GameModel gameModel;
 
 
     /**
@@ -83,26 +83,23 @@ public class PlayScreen implements Screen {
     public PlayScreen(MiniMiner game) {
         this.game = game;
 
-
+        this.gameModel = new GameModel();
         // Our camera and our viewport, this is where the camera focuses during the game
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
-        //TODO move to gameWorld
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("MiniMinerMap.tmx");
-        prop = map.getProperties();
 
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
+
+        renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
         //TODO move to gameWorld
         // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
-        new Box2DWorldCreator(world, map);
+        new Box2DWorldCreator(world, gameModel.getMap());
         this.miner = new Miner(world);
         world.setContactListener(new MinerWorldContactListener());
         isFacingRight = true;
@@ -323,14 +320,14 @@ public class PlayScreen implements Screen {
     }
 
     private int getMapPixelWidth() {
-        int mapWidth = prop.get("width", Integer.class);
-        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        int mapWidth = gameModel.getProp().get("width", Integer.class);
+        int tilePixelWidth = gameModel.getProp().get("tilewidth", Integer.class);
         return mapWidth * tilePixelWidth;
     }
 
     private int getMapPixelHeight() {
-        int tilePixelHeight = prop.get("tileheight", Integer.class);
-        int mapHeight = prop.get("height", Integer.class);
+        int tilePixelHeight = gameModel.getProp().get("tileheight", Integer.class);
+        int mapHeight = gameModel.getProp().get("height", Integer.class);
         return mapHeight * tilePixelHeight;
     }
 
@@ -356,7 +353,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        map.dispose();
+        gameModel.getMap().dispose();
         renderer.dispose();
         world.dispose();
         b2dr.dispose();
