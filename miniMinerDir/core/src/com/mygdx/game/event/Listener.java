@@ -9,7 +9,9 @@ import java.util.List;
 
 public enum Listener {
 
+
     BUS;
+
 
     private List<IListener> listeners = new ArrayList<IListener>();
 
@@ -17,9 +19,11 @@ public enum Listener {
         listeners.add(newListener);
     }
 
-    public void update() {
+    public void update(Shout shout) {
         for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).update();
+            listeners.get(i).update(shout);
         }
     }
+
+
 }

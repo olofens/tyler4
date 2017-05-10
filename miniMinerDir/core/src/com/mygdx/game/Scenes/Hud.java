@@ -27,6 +27,7 @@ import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Shout;
 import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Hull;
 
@@ -37,8 +38,6 @@ import com.mygdx.game.items.Hull;
 public class Hud implements Disposable, IListener {
     public Stage stage;
     private Viewport viewport;
-
-
 
 
     public Integer score;
@@ -54,6 +53,7 @@ public class Hud implements Disposable, IListener {
     //TODO fix public
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
+
     /**
      * Creates the HUD for the framework of the game
      *
@@ -66,7 +66,6 @@ public class Hud implements Disposable, IListener {
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
-
 
 
         //Create a Stage and add TouchPad
@@ -86,7 +85,7 @@ public class Hud implements Disposable, IListener {
 
         FuelTank ft = new FuelTank(table);
 
-            // TODO REMOVE SOPP
+        // TODO REMOVE SOPP
 //        String strFuel = fuel.toString();
         //      Integer fuelLength = fuel.toString().length();
 
@@ -121,13 +120,15 @@ public class Hud implements Disposable, IListener {
     }*/
 
 
-
     public void toggleStoreVisibility() {
         storeHandler.getStorePopup().setVisible(!storeHandler.getStorePopup().isVisible());
     }
 
-    public void update() {
-        toggleStoreVisibility();
+    @Override
+    public void update(Shout shout) {
+        if (shout.getTag() == Shout.Tag.STORE) {
+            toggleStoreVisibility();
+        }
     }
 
     @Override

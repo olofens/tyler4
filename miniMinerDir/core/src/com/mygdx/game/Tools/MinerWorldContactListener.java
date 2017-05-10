@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Shout;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.items.Tile;
 import com.mygdx.game.items.TileTemplate;
@@ -28,7 +29,7 @@ public class MinerWorldContactListener implements ContactListener {
         b = contact.getFixtureB();
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
-            Listener.BUS.update();
+            Listener.BUS.update(new Shout(Shout.Tag.STORE));
         }
 
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
@@ -45,10 +46,11 @@ public class MinerWorldContactListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+
         a = contact.getFixtureA();
         b = contact.getFixtureB();
         if (inContact("miner", "store")) {
-            Listener.BUS.update();
+            Listener.BUS.update(new Shout(Shout.Tag.STORE));
             System.out.println("Hope to see you soon!");
         }
 

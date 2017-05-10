@@ -59,7 +59,7 @@ public class PlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap map;
 
-
+    //STAY
     private OrthogonalTiledMapRenderer renderer;
 
     // Hud variables
@@ -69,7 +69,6 @@ public class PlayScreen implements Screen {
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
-
     private MapProperties prop;
 
     //TODO Remove sopp(?)
@@ -105,9 +104,7 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         new Box2DWorldCreator(world, map);
         this.miner = new Miner(world);
-
         world.setContactListener(new MinerWorldContactListener());
-
         isFacingRight = true;
 
         //TODO MOVE TO ASSETHANDLER
@@ -120,6 +117,8 @@ public class PlayScreen implements Screen {
         minerIMG3 = new Texture("driller_projekt_RocketTest.png");
         minerSpriteRocket = new Sprite(minerIMG3);
 
+        //TODO REMOVRE SOPP
+        //Remove
         ft = new FuelTank();
 
 
@@ -163,23 +162,28 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         handleInput(dt);
 
+        //TODO MOVE TO GAMEMODEL
         minerPos = miner.b2body.getPosition();
-
         world.step(1 / 60f, 6, 2);
+
+
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         renderer.setView(gameCam);
     }
 
+
+    //TODO REMOVE SOPP
     public boolean drawUp() {
         return hud.tpHandler.isTouchingUp();
     }
 
+    //TODO REMOVE SOPP
     public boolean drawDown() {
 
         return hud.tpHandler.isTouchingDown();
     }
 
-    public boolean drawRight() {
+    private boolean drawRight() {
         //Check touchpad
         if (hud.tpHandler.isTouchingRight()) {
             //RIGHT

@@ -28,7 +28,6 @@ public class Miner extends Sprite {
      *              Takes in a world and calls to our define miner method to create the miner.
      */
     public Miner(World world) {
-
         defineMiner(world);
 
     }
