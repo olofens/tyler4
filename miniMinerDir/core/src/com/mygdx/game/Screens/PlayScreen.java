@@ -52,9 +52,12 @@ public class PlayScreen implements Screen {
     private Vector2 minerPos;
     private boolean isFacingRight;
 
+    //TODO move to gameWorld
     // Tiledmap variables
     private TmxMapLoader mapLoader;
     private TiledMap map;
+
+
     private OrthogonalTiledMapRenderer renderer;
 
     // Hud variables
@@ -80,17 +83,18 @@ public class PlayScreen implements Screen {
                                     Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
+        //TODO move to gameWorld
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMap.tmx");
+        prop = map.getProperties();
+
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
-        prop = map.getProperties();
-
+        //TODO move to gameWorld
         // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
         b2dr = new Box2DDebugRenderer();
-
         new Box2DWorldCreator(world,map);
         this.miner = new Miner(world);
 
@@ -127,20 +131,20 @@ public class PlayScreen implements Screen {
         float knobPercentY = 0;
 
 
-        if(hud.touchpad.getKnobPercentY() > 0){
-            miner.b2body.applyForceToCenter(0, 18f*hud.touchpad.getKnobPercentY(), true);
-            knobPercentY = hud.touchpad.getKnobPercentY()*10;
+        if(hud.tpHandler.touchpad.getKnobPercentY() > 0){
+            miner.b2body.applyForceToCenter(0, 18f*hud.tpHandler.touchpad.getKnobPercentY(), true);
+            knobPercentY = hud.tpHandler.touchpad.getKnobPercentY()*10;
             ft.adjustFuel((int)knobPercentY);
         }
 
-        if(hud.touchpad.getKnobPercentX() != 0){
-            miner.b2body.setLinearVelocity(new Vector2(5f*hud.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
-            knobPercentX = hud.touchpad.getKnobPercentX()*10;
+        if(hud.tpHandler.touchpad.getKnobPercentX() != 0){
+            miner.b2body.setLinearVelocity(new Vector2(5f*hud.tpHandler.touchpad.getKnobPercentX(),miner.b2body.getLinearVelocity().y));
+            knobPercentX = hud.tpHandler.touchpad.getKnobPercentX()*10;
             ft.adjustFuel((int)knobPercentX);
 
         }
 
-        else if (hud.touchpad.getKnobPercentX() == 0) {
+        else if (hud.tpHandler.touchpad.getKnobPercentX() == 0) {
             if (!miner.b2body.getLinearVelocity().isZero()) {
                 miner.b2body.setLinearVelocity(0f, miner.b2body.getLinearVelocity().y);
             }

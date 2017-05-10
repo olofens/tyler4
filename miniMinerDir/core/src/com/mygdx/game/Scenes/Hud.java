@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
@@ -45,8 +46,8 @@ public class Hud implements Disposable, IListener {
     private Label fuelLabel;
     private Label hullLabel;
 
-    public Touchpad touchpad;
-
+    //TODO fix public
+    public TouchpadHandler tpHandler;
 
     /**
      * Creates the HUD for the framework of the game
@@ -54,6 +55,8 @@ public class Hud implements Disposable, IListener {
      * @param spriteBatch
      */
     public Hud(SpriteBatch spriteBatch) {
+
+        tpHandler = new TouchpadHandler();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
@@ -78,31 +81,11 @@ public class Hud implements Disposable, IListener {
         storePopup.setVisible(false);
 
 
-        //Touchpad
-        //Create a touchpad skin
-        Skin touchpadSkin = new Skin();
-        //Set background image
-        //touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
-        //Set knob image
-        touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchknob.png"));
-        //Create TouchPad Style
-        Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
-        //Create Drawable's from TouchPad skin
-        //Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
-        Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
-        //Apply the Drawables to the TouchPad Style
-        //touchpadStyle.background = touchBackground;
-        touchpadStyle.knob = touchKnob;
-        //Create new TouchPad with the created style
-        touchpad = new Touchpad(10, touchpadStyle);
-        //setBounds(x,y,width,height)
-
-        touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(storePopup);
-        stage.addActor(touchpad);
+        stage.addActor(tpHandler.touchpad);
         Gdx.input.setInputProcessor(stage);
 
         Hull hull = new Hull();
@@ -145,19 +128,19 @@ public class Hud implements Disposable, IListener {
     }*/
 
     public boolean isTouchingUp() {
-        return touchpad.getKnobPercentY() > 0.5;
+        return tpHandler.touchpad.getKnobPercentY() > 0.5;
     }
 
     public boolean isTouchingRight() {
-        return touchpad.getKnobPercentX() > 0;
+        return tpHandler.touchpad.getKnobPercentX() > 0;
     }
 
     public boolean isTouchingLeft() {
-        return touchpad.getKnobPercentX() < 0;
+        return tpHandler.touchpad.getKnobPercentX() < 0;
     }
 
     public boolean isTouchingDown() {
-        return touchpad.getKnobPercentY() < -0.4;
+        return tpHandler.touchpad.getKnobPercentY() < -0.4;
     }
 
     public void toggleStoreVisibility() {
