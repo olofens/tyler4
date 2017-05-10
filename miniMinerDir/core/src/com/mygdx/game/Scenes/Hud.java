@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.IListener;
@@ -36,7 +37,9 @@ import com.mygdx.game.items.Hull;
 public class Hud implements Disposable, IListener {
     public Stage stage;
     private Viewport viewport;
-    private Dialog storePopup;
+
+
+
 
     public Integer score;
     public Integer fuel;
@@ -48,7 +51,7 @@ public class Hud implements Disposable, IListener {
 
     //TODO fix public
     public TouchpadHandler tpHandler;
-
+    private StoreHandler storeHandler;
     /**
      * Creates the HUD for the framework of the game
      *
@@ -57,33 +60,16 @@ public class Hud implements Disposable, IListener {
     public Hud(SpriteBatch spriteBatch) {
 
         tpHandler = new TouchpadHandler();
+        storeHandler = new StoreHandler();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
-        //Store
-
-        Skin storeSkin = new Skin();
-        Window.WindowStyle ws = new Window.WindowStyle();
-        ws.titleFont = new BitmapFont();
-        storeSkin.add("default", ws);
-
-        Texture storepopupImage = new Texture("storepopup.png");
-        storeSkin.add("popUpImage", storepopupImage);
-
-        ws.background = storeSkin.getDrawable("popUpImage");
-
-        storePopup = new Dialog("Store", storeSkin);
-        storePopup.setBounds((Constants.V_WIDTH - storepopupImage.getWidth()) / 2,
-                (Constants.V_HEIGHT - storepopupImage.getHeight() - 10),
-                storepopupImage.getWidth(), storepopupImage.getHeight());
-
-        storePopup.setVisible(false);
 
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
-        stage.addActor(storePopup);
+        stage.addActor(storeHandler.getStorePopup());
         stage.addActor(tpHandler.touchpad);
         Gdx.input.setInputProcessor(stage);
 
@@ -129,7 +115,7 @@ public class Hud implements Disposable, IListener {
 
 
     public void toggleStoreVisibility() {
-        storePopup.setVisible(!storePopup.isVisible());
+        storeHandler.getStorePopup().setVisible(!storeHandler.getStorePopup().isVisible());
     }
 
     public void update() {
