@@ -45,7 +45,6 @@ public class PlayScreen implements Screen {
     // Miner variables
 
     // TODO MOVE TO MINER
-    private Miner miner;
     private Texture minerIMG;
     private Texture minerIMG2;
     private Texture minerIMG3;
@@ -91,7 +90,6 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
-       this.miner = new Miner(gameModel.getWorld());
 
         //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right.png");
@@ -115,31 +113,12 @@ public class PlayScreen implements Screen {
 
     }
 
+    //MOVE TO TOUCHPADHANDLER
     public void handleInput(float dt) {
-
+        hud.tpHandler.handleInput(gameModel);
         //if body has contact with ground & touchpadY < -0.5
         //THEN drill
-        //if().......
-        float knobPercentX = 0;
-        float knobPercentY = 0;
-
-
-        if (hud.tpHandler.touchpad.getKnobPercentY() > 0) {
-            miner.b2body.applyForceToCenter(0, 18f * hud.tpHandler.touchpad.getKnobPercentY(), true);
-            knobPercentY = hud.tpHandler.touchpad.getKnobPercentY() * 10;
-            ft.adjustFuel((int) knobPercentY);
-        }
-
-        if (hud.tpHandler.touchpad.getKnobPercentX() != 0) {
-            miner.b2body.setLinearVelocity(new Vector2(5f * hud.tpHandler.touchpad.getKnobPercentX(), miner.b2body.getLinearVelocity().y));
-            knobPercentX = hud.tpHandler.touchpad.getKnobPercentX() * 10;
-            ft.adjustFuel((int) knobPercentX);
-
-        } else if (hud.tpHandler.touchpad.getKnobPercentX() == 0) {
-            if (!miner.b2body.getLinearVelocity().isZero()) {
-                miner.b2body.setLinearVelocity(0f, miner.b2body.getLinearVelocity().y);
-            }
-        }
+   //if().......
 
 
     }
@@ -149,7 +128,7 @@ public class PlayScreen implements Screen {
         handleInput(dt);
 
         //TODO MOVE TO GAMEMODEL
-        minerPos = miner.b2body.getPosition();
+        minerPos = gameModel.getMiner().b2body.getPosition();
         gameModel.getWorld().step(1 / 60f, 6, 2);
 
 
@@ -179,11 +158,11 @@ public class PlayScreen implements Screen {
             return false;
         }
         //Check velocity
-        else if (miner.b2body.getLinearVelocity().x > 0) {
+        else if (gameModel.getMiner().b2body.getLinearVelocity().x > 0) {
             //RIGHT
             gameModel.setIsFacingRight(true);
             return true;
-        } else if (miner.b2body.getLinearVelocity().x < 0) {
+        } else if (gameModel.getMiner().b2body.getLinearVelocity().x < 0) {
             //LEFT
             gameModel.setIsFacingRight(false);
             return false;
@@ -282,8 +261,8 @@ public class PlayScreen implements Screen {
         width -= Constants.V_WIDTH / 2 / Constants.PPM;
 
         //self-explanatory
-        position.x = miner.b2body.getPosition().x;
-        position.y = miner.b2body.getPosition().y;
+        position.x = gameModel.getMiner().b2body.getPosition().x;
+        position.y = gameModel.getMiner().b2body.getPosition().y;
 
         //if the position of the camera's left most bit is outside of the map, reset the cameras
         //position to the left most bit of the map

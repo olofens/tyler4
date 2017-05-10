@@ -17,6 +17,9 @@ import com.mygdx.game.Utils.Constants;
 public class GameModel {
 
 
+    //Miner variables
+    private Miner miner;
+
     // Tiledmap variables
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -46,6 +49,16 @@ public class GameModel {
         world.setContactListener(new MinerWorldContactListener());
         isFacingRight = true;
 
+        this.miner = new Miner(world);
+
+    }
+
+    public void adjustSpeedX(float knobPercentage){
+        miner.b2body.setLinearVelocity(new Vector2(5f * knobPercentage, miner.b2body.getLinearVelocity().y));
+    }
+
+    public void adjustSpeedY(float knobPercentage){
+        miner.b2body.applyForceToCenter(0, 18f * knobPercentage, true);
     }
 
 
@@ -76,5 +89,9 @@ public class GameModel {
     public void setIsFacingRight(boolean value){
         this.isFacingRight = value;
 
+    }
+
+    public Miner getMiner(){
+        return this.miner;
     }
 }

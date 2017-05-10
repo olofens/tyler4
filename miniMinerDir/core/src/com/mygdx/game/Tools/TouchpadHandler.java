@@ -1,10 +1,13 @@
 package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.GameModel;
+import com.mygdx.game.items.Miner;
 
 /**
  * Created by erikstrid on 2017-05-10.
@@ -15,6 +18,8 @@ public class TouchpadHandler {
 
     //TODO fix public
     public Touchpad touchpad;
+
+
 
     public TouchpadHandler(){
         //Touchpad
@@ -61,4 +66,32 @@ public class TouchpadHandler {
     }
 
 
-}
+    public void handleInput(GameModel gameModel) {
+
+        //if body has contact with ground & touchpadY < -0.5
+        //THEN drill
+        //if().......
+        float knobPercentX = 0;
+        float knobPercentY = 0;
+
+
+        if (touchpad.getKnobPercentY() > 0) {
+            gameModel.adjustSpeedY(touchpad.getKnobPercentY());
+            //miner.b2body.applyForceToCenter(0, 18f * touchpad.getKnobPercentY(), true);
+            knobPercentY = touchpad.getKnobPercentY() * 10;
+            //ft.adjustFuel((int) knobPercentY);
+        }
+
+        if (touchpad.getKnobPercentX() != 0) {
+            gameModel.adjustSpeedX(touchpad.getKnobPercentX());
+            //miner.b2body.setLinearVelocity(new Vector2(5f * hud.tpHandler.touchpad.getKnobPercentX(), miner.b2body.getLinearVelocity().y));
+            knobPercentX = touchpad.getKnobPercentX() * 10;
+         //   ft.adjustFuel((int) knobPercentX);
+
+        }
+        }
+
+
+    }
+
+
