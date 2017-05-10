@@ -36,7 +36,7 @@ import com.mygdx.game.Utils.Constants;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class PlayScreen implements Screen, IListener {
+public class PlayScreen implements Screen {
 
     // Game Variables
     private MiniMiner game;
@@ -54,9 +54,7 @@ public class PlayScreen implements Screen, IListener {
     private Sprite minerSpriteRocket;
     private Vector2 minerPos;
 
-    //TODO move to gameWorld
 
-    //STAY
     private OrthogonalTiledMapRenderer renderer;
 
     // Hud variables
@@ -318,8 +316,4 @@ public class PlayScreen implements Screen, IListener {
 
     }
 
-    @Override
-    public void update(Shout shout) {
-
-    }
 }
