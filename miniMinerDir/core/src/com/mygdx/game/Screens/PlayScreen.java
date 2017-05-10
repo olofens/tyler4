@@ -24,7 +24,9 @@ import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.Box2DWorldCreator;
 import com.mygdx.game.Tools.MinerWorldContactListener;
 import com.mygdx.game.Tools.SoundHandler;
+import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Shout;
 import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.items.Miner;
@@ -34,7 +36,7 @@ import com.mygdx.game.Utils.Constants;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen, IListener {
 
     // Game Variables
     private MiniMiner game;
@@ -43,8 +45,7 @@ public class PlayScreen implements Screen {
 
 
     // Miner variables
-
-    // TODO MOVE TO MINER
+    // TODO FIX LISTENER
     private Texture minerIMG;
     private Texture minerIMG2;
     private Texture minerIMG3;
@@ -61,12 +62,7 @@ public class PlayScreen implements Screen {
     // Hud variables
     private Hud hud;
 
-
-
-
-    //TODO Remove sopp(?)
-    private FuelTank ft;
-
+    // GameModel variables
     private GameModel gameModel;
 
 
@@ -101,9 +97,7 @@ public class PlayScreen implements Screen {
         minerIMG3 = new Texture("driller_projekt_RocketTest.png");
         minerSpriteRocket = new Sprite(minerIMG3);
 
-        //TODO REMOVRE SOPP
-        //Remove
-        ft = new FuelTank();
+
 
 
     }
@@ -113,12 +107,13 @@ public class PlayScreen implements Screen {
 
     }
 
-    //MOVE TO TOUCHPADHANDLER
+
+    /**
+     * Touchpadhandler handles our input and shit
+     * @param dt
+     */
     public void handleInput(float dt) {
         hud.tpHandler.handleInput(gameModel);
-        //if body has contact with ground & touchpadY < -0.5
-        //THEN drill
-   //if().......
 
 
     }
@@ -126,10 +121,11 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
         handleInput(dt);
+        gameModel.update();
 
         //TODO MOVE TO GAMEMODEL
         minerPos = gameModel.getMiner().b2body.getPosition();
-        gameModel.getWorld().step(1 / 60f, 6, 2);
+
 
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
@@ -186,14 +182,12 @@ public class PlayScreen implements Screen {
     public void render(float dt) {
         update(dt);
 
-        //Gdx.gl.glClearColor(0, 0, 0, 1);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         //render our game map
         renderer.render();
 
-        //render miner
+        /*//render miner
         game.batch.begin();
+
 
         if (hud.tpHandler.isTouchingUp()) {
             //Draw UP
@@ -222,10 +216,10 @@ public class PlayScreen implements Screen {
         }
 
         game.batch.end();
+        */
 
-
-        //render box2d lines
-        //b2dr.render(world, gameCam.combined);
+        //Render b2dr lines
+        gameModel.getB2dr().render(gameModel.getWorld(),gameCam.combined);
 
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -235,10 +229,15 @@ public class PlayScreen implements Screen {
 
     }
 
+    public void drawMiner(){
+
+    }
+
     private void updateCamera(OrthographicCamera cam, float width, float height) {
 
         float startX = 0;
         float startY = 0;
+
 
         //Divide by PPM since width and height are measurements in pixels and not tiles...
         //... and the camera's position is currently set in tiles. PPM is set to the side
@@ -326,6 +325,11 @@ public class PlayScreen implements Screen {
         gameModel.getWorld().dispose();
         gameModel.getB2dr().dispose();
         hud.dispose();
+
+    }
+
+    @Override
+    public void update(Shout shout) {
 
     }
 }

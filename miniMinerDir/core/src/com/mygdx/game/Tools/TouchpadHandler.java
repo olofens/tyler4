@@ -77,14 +77,16 @@ public class TouchpadHandler {
 
         if (touchpad.getKnobPercentY() > 0) {
             gameModel.adjustSpeedY(touchpad.getKnobPercentY());
-            //miner.b2body.applyForceToCenter(0, 18f * touchpad.getKnobPercentY(), true);
+
+            //TODO REMOVE SOPP
             knobPercentY = touchpad.getKnobPercentY() * 10;
             //ft.adjustFuel((int) knobPercentY);
         }
 
         if (touchpad.getKnobPercentX() != 0) {
             gameModel.adjustSpeedX(touchpad.getKnobPercentX());
-            //miner.b2body.setLinearVelocity(new Vector2(5f * hud.tpHandler.touchpad.getKnobPercentX(), miner.b2body.getLinearVelocity().y));
+
+            //TODO REMOVE SOPP
             knobPercentX = touchpad.getKnobPercentX() * 10;
          //   ft.adjustFuel((int) knobPercentX);
 
