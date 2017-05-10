@@ -53,7 +53,6 @@ public class PlayScreen implements Screen {
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
     private Vector2 minerPos;
-    private boolean isFacingRight;
 
     //TODO move to gameWorld
 
@@ -63,10 +62,7 @@ public class PlayScreen implements Screen {
     // Hud variables
     private Hud hud;
 
-    // TODO MOVE TO GAMEWORLD
-    // Box2D variables
-    private World world;
-    private Box2DDebugRenderer b2dr;
+
 
 
     //TODO Remove sopp(?)
@@ -95,14 +91,7 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
-        //TODO move to gameWorld
-        // Create a new world
-        world = new World(new Vector2(0, Constants.GRAVITY), true);
-        b2dr = new Box2DDebugRenderer();
-        new Box2DWorldCreator(world, gameModel.getMap());
-        this.miner = new Miner(world);
-        world.setContactListener(new MinerWorldContactListener());
-        isFacingRight = true;
+       this.miner = new Miner(gameModel.getWorld());
 
         //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right.png");
@@ -161,7 +150,7 @@ public class PlayScreen implements Screen {
 
         //TODO MOVE TO GAMEMODEL
         minerPos = miner.b2body.getPosition();
-        world.step(1 / 60f, 6, 2);
+        gameModel.getWorld().step(1 / 60f, 6, 2);
 
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
@@ -192,15 +181,15 @@ public class PlayScreen implements Screen {
         //Check velocity
         else if (miner.b2body.getLinearVelocity().x > 0) {
             //RIGHT
-            isFacingRight = true;
+            gameModel.setIsFacingRight(true);
             return true;
         } else if (miner.b2body.getLinearVelocity().x < 0) {
             //LEFT
-            isFacingRight = false;
+            gameModel.setIsFacingRight(false);
             return false;
         }
         //Check last direction
-        else if (isFacingRight) {
+        else if (gameModel.getIsFacingRight()) {
             //RIGHT
             return true;
         }
@@ -355,8 +344,8 @@ public class PlayScreen implements Screen {
     public void dispose() {
         gameModel.getMap().dispose();
         renderer.dispose();
-        world.dispose();
-        b2dr.dispose();
+        gameModel.getWorld().dispose();
+        gameModel.getB2dr().dispose();
         hud.dispose();
 
     }
