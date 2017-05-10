@@ -81,7 +81,6 @@ public class Hud implements Disposable, IListener {
         storePopup.setVisible(false);
 
 
-
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(storePopup);
@@ -116,7 +115,7 @@ public class Hud implements Disposable, IListener {
 
 
     }
-
+    //TODO remove sopp
   /*  public void adjustFuel(Integer knobPercent){
         fuel = fuel - Math.abs(3*knobPercent);
 
@@ -127,21 +126,7 @@ public class Hud implements Disposable, IListener {
         fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
     }*/
 
-    public boolean isTouchingUp() {
-        return tpHandler.touchpad.getKnobPercentY() > 0.5;
-    }
 
-    public boolean isTouchingRight() {
-        return tpHandler.touchpad.getKnobPercentX() > 0;
-    }
-
-    public boolean isTouchingLeft() {
-        return tpHandler.touchpad.getKnobPercentX() < 0;
-    }
-
-    public boolean isTouchingDown() {
-        return tpHandler.touchpad.getKnobPercentY() < -0.4;
-    }
 
     public void toggleStoreVisibility() {
         storePopup.setVisible(!storePopup.isVisible());

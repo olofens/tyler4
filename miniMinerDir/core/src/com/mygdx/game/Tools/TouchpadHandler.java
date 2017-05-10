@@ -39,7 +39,21 @@ public class TouchpadHandler {
         touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
     }
 
+    public boolean isTouchingUp() {
+        return touchpad.getKnobPercentY() > 0.5;
+    }
 
+    public boolean isTouchingRight() {
+        return touchpad.getKnobPercentX() > 0;
+    }
+
+    public boolean isTouchingLeft() {
+        return touchpad.getKnobPercentX() < 0;
+    }
+
+    public boolean isTouchingDown() {
+        return touchpad.getKnobPercentY() < -0.4;
+    }
 
 
 }

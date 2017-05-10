@@ -166,21 +166,21 @@ public class PlayScreen implements Screen {
     }
 
     public boolean drawUp(){
-        return hud.isTouchingUp();
+        return hud.tpHandler.isTouchingUp();
     }
 
     public boolean drawDown(){
 
-        return hud.isTouchingDown();
+        return hud.tpHandler.isTouchingDown();
     }
 
     public boolean drawRight(){
         //Check touchpad
-        if(hud.isTouchingRight()){
+        if(hud.tpHandler.isTouchingRight()){
             //RIGHT
             return true;
         }
-        else if(hud.isTouchingLeft()){
+        else if(hud.tpHandler.isTouchingLeft()){
             //LEFT
             return false;
         }
@@ -223,7 +223,7 @@ public class PlayScreen implements Screen {
         //render miner
         game.batch.begin();
 
-        if(hud.isTouchingUp()){
+        if(hud.tpHandler.isTouchingUp()){
             //Draw UP
             if(drawRight()){
                 game.batch.draw(minerSpriteRocket, minerPos.x - 10 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
@@ -236,7 +236,7 @@ public class PlayScreen implements Screen {
 
         }
 
-        if(hud.isTouchingDown()){
+        if(hud.tpHandler.isTouchingDown()){
             //Draw DOWN
             game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
                     25 / Constants.PPM, 28 / Constants.PPM);
