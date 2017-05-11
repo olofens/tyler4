@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.Box2DWorldCreator;
+import com.mygdx.game.Tools.MinerDrawOptions;
 import com.mygdx.game.Tools.MinerWorldContactListener;
 import com.mygdx.game.Tools.SoundHandler;
 import com.mygdx.game.event.IListener;
@@ -113,7 +114,6 @@ public class PlayScreen implements Screen {
         gameModel.update(v2);
 
         //TODO MOVE TO GAMEMODEL
-        //minerPos = gameModel.getMiner().b2body.getPosition();
 
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
@@ -131,7 +131,7 @@ public class PlayScreen implements Screen {
 
         return hud.tpHandler.isTouchingDown();
     }
-
+/*
     private boolean drawRight() {
         //Check touchpad
         if (hud.tpHandler.isTouchingRight()) {
@@ -160,6 +160,7 @@ public class PlayScreen implements Screen {
             return false;
         }
     }
+    */
 
 
     @Override
@@ -169,38 +170,13 @@ public class PlayScreen implements Screen {
         //render our game map
         renderer.render();
 
-        /*//render miner
+        //render miner
         game.batch.begin();
 
-
-        if (hud.tpHandler.isTouchingUp()) {
-            //Draw UP
-            if (drawRight()) {
-                game.batch.draw(minerSpriteRocket, minerPos.x - 10 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
-                        12 / Constants.PPM, 15 / Constants.PPM);
-            } else {
-                game.batch.draw(minerSpriteRocket, minerPos.x - 1 / Constants.PPM, minerPos.y - 27 / Constants.PPM,
-                        12 / Constants.PPM, 15 / Constants.PPM);
-            }
-
-        }
-
-        if (hud.tpHandler.isTouchingDown()) {
-            //Draw DOWN
-            game.batch.draw(minerSpriteDrillDown, minerPos.x - 12 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                    25 / Constants.PPM, 28 / Constants.PPM);
-        } else if (drawRight()) {
-            //Draw RIGHT
-            game.batch.draw(minerSprite, minerPos.x - 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                    35 / Constants.PPM, 25 / Constants.PPM);
-        } else {
-            //Draw LEFT
-            game.batch.draw(minerSprite, minerPos.x + 15 / Constants.PPM, minerPos.y - 15 / Constants.PPM,
-                    -35 / Constants.PPM, 25 / Constants.PPM);
-        }
+        drawMiner();
 
         game.batch.end();
-        */
+
 
         //Render b2dr lines
         gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
@@ -214,6 +190,22 @@ public class PlayScreen implements Screen {
     }
 
     public void drawMiner() {
+
+        Sprite mySprite;
+        MinerDrawOptions mdo = gameModel.decideDirection();
+
+        if(mdo.getStrSprite().equals("minerSpriteRocket")){
+            mySprite = minerSpriteRocket;
+        }
+        else if(mdo.getStrSprite().equals("minerSpriteDrillDown")){
+            mySprite = minerSpriteDrillDown;
+        }
+        else{
+            mySprite = minerSprite;
+        }
+        game.batch.draw(mySprite, mdo.getX(), mdo.getY(),
+                mdo.getX1(), mdo.getY1());
+
 
     }
 
