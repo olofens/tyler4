@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Miner;
 
 import org.junit.Test;
@@ -17,15 +18,13 @@ import static org.junit.Assert.*;
  */
 public class TestClass {
     @org.junit.Test
-    public void minerTest() throws Exception {
-        //MiniMiner miniMiner = new MiniMiner();
-        //PlayScreen ps = new PlayScreen(miniMiner);
-        // ps.show();
+    public void fuelTankTest() throws Exception {
 
-        //ps.getMiner().setPosition(0,0);
 
-        //  assertTrue(ps.getMiner().getX()==0);
-
+        FuelTank ft =new FuelTank();
+        assertTrue(ft.getFuel() == 100000);
+        ft.adjustFuel(90);
+        assertTrue(ft.getFuel() != 100000);
 
 
     }
