@@ -86,13 +86,13 @@ public class PlayScreen implements Screen {
 
 
         //TODO MOVE TO ASSETHANDLER
-        minerIMG = new Texture("driller_neutral_right.png");
+        minerIMG = new Texture("driller_neutral_right1.png");
         minerSprite = new Sprite(minerIMG);
 
-        minerIMG2 = new Texture("driller_drill_down.png");
+        minerIMG2 = new Texture("driller_projekt_down1.png");
         minerSpriteDrillDown = new Sprite(minerIMG2);
 
-        minerIMG3 = new Texture("driller_projekt_RocketTest.png");
+        minerIMG3 = new Texture("driller_projekt_Rocket1.png");
         minerSpriteRocket = new Sprite(minerIMG3);
 
 
