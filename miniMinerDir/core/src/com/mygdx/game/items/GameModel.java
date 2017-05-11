@@ -19,7 +19,7 @@ public class GameModel {
 
 
     //Miner variables
-    private Miner miner;
+    private MinerModel minerModel;
 
 
     // Tiledmap variables
@@ -54,21 +54,21 @@ public class GameModel {
         world.setContactListener(new MinerWorldContactListener());
         isFacingRight = true;
 
-        this.miner = new Miner(world);
+        this.minerModel = new MinerModel(world);
 
     }
 
     public void adjustSpeedX(float knobPercentage){
-        miner.b2body.setLinearVelocity(new Vector2(5f * knobPercentage, miner.b2body.getLinearVelocity().y));
+       minerModel.getMiner().b2body.setLinearVelocity(new Vector2(5f * knobPercentage, minerModel.getMiner().b2body.getLinearVelocity().y));
     }
 
     public void adjustSpeedY(float knobPercentage){
-        miner.b2body.applyForceToCenter(0, 18f * knobPercentage, true);
+        minerModel.getMiner().b2body.applyForceToCenter(0, 18f * knobPercentage, true);
     }
 
     public void update(Vector2 vector2){
 
-        minerPos = getMiner().b2body.getPosition();
+        minerPos = minerModel.getMiner().b2body.getPosition();
 
         touchpadLocation = vector2;
 
@@ -91,11 +91,11 @@ public class GameModel {
             return false;
         }
         //Check velocity
-        else if (getMiner().b2body.getLinearVelocity().x > 0) {
+        else if (minerModel.getMiner().b2body.getLinearVelocity().x > 0) {
             //RIGHT
             setIsFacingRight(true);
             return true;
-        } else if (getMiner().b2body.getLinearVelocity().x < 0) {
+        } else if (minerModel.getMiner().b2body.getLinearVelocity().x < 0) {
             //LEFT
             setIsFacingRight(false);
             return false;
@@ -180,8 +180,8 @@ public class GameModel {
 
     }
 
-    public Miner getMiner(){
-        return this.miner;
+    public MinerModel getMinerModel(){
+        return this.minerModel;
     }
 
     public void dispose(){

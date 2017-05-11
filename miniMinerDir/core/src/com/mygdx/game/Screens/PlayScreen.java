@@ -237,8 +237,8 @@ public class PlayScreen implements Screen {
 
 
         //self-explanatory
-        position.x = gameModel.getMiner().b2body.getPosition().x;
-        position.y = gameModel.getMiner().b2body.getPosition().y;
+        position.x = gameModel.getMinerModel().getMiner().b2body.getPosition().x;
+        position.y = gameModel.getMinerModel().getMiner().b2body.getPosition().y;
 
         //if the position of the camera's left most bit is outside of the map, reset the cameras
         //position to the left most bit of the map
