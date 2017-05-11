@@ -37,7 +37,7 @@ public class TouchpadHandler {
         //touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
         //Create new TouchPad with the created style
-        touchpad = new Touchpad(10, touchpadStyle);
+        touchpad = new Touchpad(0, touchpadStyle);
         //setBounds(x,y,width,height)
 
         touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
