@@ -22,12 +22,8 @@ public class TouchpadHandler {
 
     public TouchpadHandler() {
         //Touchpad
-        //Create a touchpad skin
-        Skin touchpadSkin = new Skin();
-        //Set background image
-        //touchpadSkin.add("touchBackground", new Texture("touchPad/touchBackground.png"));
-        //Set knob image
 
+        Skin touchpadSkin = new Skin();
         //TODO MOVE TO ASSETHANDLER
         touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchknob.png"));
         //Create TouchPad Style

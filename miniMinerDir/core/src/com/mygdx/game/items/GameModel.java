@@ -105,4 +105,10 @@ public class GameModel {
     public Miner getMiner(){
         return this.miner;
     }
+
+    public void dispose(){
+        map.dispose();
+        world.dispose();
+        b2dr.dispose();
+    }
 }

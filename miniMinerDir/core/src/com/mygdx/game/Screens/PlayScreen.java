@@ -156,10 +156,6 @@ public class PlayScreen implements Screen {
             //RIGHT
             return true;
         }
-        /*else if(isFacingRight){
-            //LEFT
-            return false;
-        }*/
         else {
             return false;
         }
@@ -247,6 +243,7 @@ public class PlayScreen implements Screen {
         height -= Constants.V_HEIGHT / 2 / Constants.PPM;
         width -= Constants.V_WIDTH / 2 / Constants.PPM;
 
+
         //self-explanatory
         position.x = gameModel.getMiner().b2body.getPosition().x;
         position.y = gameModel.getMiner().b2body.getPosition().y;
@@ -308,10 +305,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        gameModel.getMap().dispose();
+        gameModel.dispose();
         renderer.dispose();
-        gameModel.getWorld().dispose();
-        gameModel.getB2dr().dispose();
         hud.dispose();
 
     }
