@@ -83,14 +83,14 @@ public class MinerWorldContactListener implements ContactListener {
         else if(id.equals("rightWing")){
             drill  = a.getUserData() == "rightWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) ){
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) && Gdx.input.isKeyPressed(Input.Keys.A) ){
                 ((Tile) object.getUserData()).onTileHit();
             }
         }
         else if(id.equals("leftWing")){
             drill  = a.getUserData() == "leftWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) ){
+            if(object.getUserData() != null && Tile.class.isAssignableFrom(object.getUserData().getClass()) && Gdx.input.isKeyPressed(Input.Keys.A) ){
                 ((Tile) object.getUserData()).onTileHit();
             }
         }

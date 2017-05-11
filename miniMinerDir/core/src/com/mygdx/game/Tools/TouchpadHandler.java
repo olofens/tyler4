@@ -62,9 +62,8 @@ public class TouchpadHandler {
 
     public Vector2 handleInput() {
          Vector2 vector2 = new Vector2(0,0);
-        if (touchpad.getKnobPercentY() > 0) {
+        if (touchpad.getKnobPercentY() != 0) {
             vector2.y = touchpad.getKnobPercentY();
-
         }
 
         if (touchpad.getKnobPercentX() != 0) {
