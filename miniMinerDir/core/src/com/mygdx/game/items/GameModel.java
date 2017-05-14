@@ -48,7 +48,7 @@ public class GameModel {
 
         // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
-        b2dr = new Box2DDebugRenderer();
+        //b2dr = new Box2DDebugRenderer();
         new Box2DWorldCreator(world, map);
         //this.miner = new Miner(world);
         world.setContactListener(new MinerWorldContactListener());

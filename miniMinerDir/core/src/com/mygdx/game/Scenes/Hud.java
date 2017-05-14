@@ -9,14 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -44,6 +49,7 @@ public class Hud implements Disposable, IListener {
     public Integer fuel;
 
 
+
     public Integer hull;
 
     private Label scoreLabel;
@@ -67,9 +73,24 @@ public class Hud implements Disposable, IListener {
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
+        Skin skin = new Skin();
+        Texture drillTexture = new Texture("driller_drill_only.png");
+
+        Drawable drawable = new TextureRegionDrawable(new TextureRegion(drillTexture));
+
+        ImageButton drillButton = new ImageButton(drawable);
+
+        drillButton.addListener(new ClickListener()
+        {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("clicked drill");
+            }
+        });
+
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
+        stage.addActor(drillButton);
         stage.addActor(storeHandler.getStorePopup());
         stage.addActor(tpHandler.touchpad);
         Gdx.input.setInputProcessor(stage);
