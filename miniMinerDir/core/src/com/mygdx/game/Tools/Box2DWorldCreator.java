@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.items.Coal;
 import com.mygdx.game.items.Edge;
 import com.mygdx.game.items.Iron;
+import com.mygdx.game.items.Lapiz;
 import com.mygdx.game.items.Redstone;
 import com.mygdx.game.items.StoreTile;
 import com.mygdx.game.items.Tile;
@@ -39,6 +40,11 @@ public class Box2DWorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Redstone(world, map, rect);
+        }
+        for (MapObject object : map.getLayers().get("Lapiz").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new Lapiz(world, map, rect);
         }
 
         for (MapObject object : map.getLayers().get("Store").getObjects().getByType(RectangleMapObject.class)) {
