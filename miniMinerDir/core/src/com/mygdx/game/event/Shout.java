@@ -12,7 +12,9 @@ public class Shout {
        UPRIGHTMINER,
        UPLEFTMINER,
        STORE,
-       DRILL;
+       DRILL,
+       FUEL;
+
 
    }
     private final Tag tag;

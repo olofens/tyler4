@@ -66,7 +66,7 @@ public class PlayScreen implements Screen {
 
 
     /**
-     * The main playscreen where the game is actually interacted with and controlled
+     * The main playscreen where everything is painted and shown
      *
      * @param game Brings in MiniMiner variable in order to get Width and Height of desired screen.
      */
@@ -113,7 +113,7 @@ public class PlayScreen implements Screen {
 
         gameModel.update(v2);
 
-        hud.adjustFuelLabel(gameModel.getMinerModel().getFuelTank());
+        //hud.adjustFuelLabel(gameModel.getMinerModel().getFuelTank());
 
         //TODO MOVE TO GAMEMODEL
 

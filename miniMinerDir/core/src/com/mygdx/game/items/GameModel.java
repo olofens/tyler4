@@ -106,8 +106,7 @@ public class GameModel {
         adjustSpeedX(touchpadLocation.x);
         adjustSpeedY(touchpadLocation.y);
 
-        minerModel.getFuelTank().adjustFuel((int) minerModel.getMiner().b2body.getLinearVelocity().x, (int) minerModel.getMiner().b2body.getLinearVelocity().y);
-
+        minerModel.update();
     }
 
 

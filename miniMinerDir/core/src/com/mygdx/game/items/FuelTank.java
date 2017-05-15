@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.mygdx.game.event.HudUpdater;
+import com.mygdx.game.event.IHudUpdater;
 
 /**
  * Created by Omaroueidat on 03/05/17.
@@ -38,7 +40,8 @@ public class FuelTank implements IGear {
 
 
     /**
-     *
+     * If the miner is moved by gravity the fuel will not decrease, method will check if the miner has a velocity
+     * on the X-axis then on the Y-axis to determine how much fuel to decrease.
      * @param minerVelocityX the velocity of the miner in the X axis
      * @param minerVelocityY the velocity of the miner in the Y axis
      */
@@ -69,4 +72,6 @@ public class FuelTank implements IGear {
     public int getDecreaseFuel(){
         return decreaseFuel;
     }
+
+
 }

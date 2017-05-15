@@ -30,9 +30,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.event.IListener;
-import com.mygdx.game.event.Listener;
-import com.mygdx.game.event.Shout;
+import com.mygdx.game.event.*;
 import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Hull;
 
@@ -40,7 +38,7 @@ import com.mygdx.game.items.Hull;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, IListener {
+public class Hud implements Disposable, IListener,IHudUpdater {
     public Stage stage;
     private Viewport viewport;
 
@@ -129,13 +127,12 @@ public class Hud implements Disposable, IListener {
 
         stage.addActor(table);
         Listener.BUS.addListener(this);
+        HudUpdater.FUEL.addListener(this);
 
 
     }
 
-    //TODO remove sopp
-    public void adjustFuelLabel(FuelTank ft) {
-        fuel = ft.getFuel();
+    private void adjustFuelLabel(Integer fuel) {
 
         if (fuel > 60000) {
             fuelLabel.setColor(Color.GREEN);
@@ -168,5 +165,10 @@ public class Hud implements Disposable, IListener {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    @Override
+    public void update(int fuelValue) {
+        adjustFuelLabel(fuelValue);
     }
 }

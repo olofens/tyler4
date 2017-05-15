@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import java.awt.*;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
@@ -13,24 +14,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 /**
  * The class that dictates the health of the miner
  */
-public class Hull implements IGear{
+public class Hull implements IGear {
 
     /**
-     * Variable for the ammount of health
+     * Variable for the amount of health
      */
     private Integer hull;
 
     /**
      * Constructor which gives our default value for the health and creates a label;
      */
-    public Hull(){
+    public Hull() {
         hull = 100;
 
     }
 
 
     /**
-     *
      * @return hull
      */
     public Integer getHull() {
