@@ -17,7 +17,7 @@ public class Box2DWorldCreator {
     public Box2DWorldCreator(World world, TiledMap map){
 
         //adding ground layer
-        for (MapObject object : map.getLayers().get("GroundLayer").getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get("Dirt").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Tile(world, map, rect);

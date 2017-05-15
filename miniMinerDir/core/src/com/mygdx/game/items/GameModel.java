@@ -41,7 +41,7 @@ public class GameModel {
     public GameModel(){
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("MiniMinerMap.tmx");
+        map = mapLoader.load("MiniMinerMapV2.tmx");
         prop = map.getProperties();
 
         //simple instantiation with the only purpose of adding a listener to MinerWorldContactListener

@@ -30,7 +30,7 @@ public class Tile extends TileTemplate {
     }
 
     public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(4);
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
         return layer.getCell((int)((body.getPosition().x)*Constants.PPM/32),
                 (int)((body.getPosition().y)*Constants.PPM/32));
     }
