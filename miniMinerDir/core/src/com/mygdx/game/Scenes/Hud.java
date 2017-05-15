@@ -49,7 +49,6 @@ public class Hud implements Disposable, IListener {
     public Integer fuel;
 
 
-
     public Integer hull;
 
     private Label scoreLabel;
@@ -81,8 +80,7 @@ public class Hud implements Disposable, IListener {
         ImageButton drillButton = new ImageButton(drawable);
         drillButton.setPosition(20, 45);
 
-        drillButton.addListener(new ClickListener()
-        {
+        drillButton.addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Listener.BUS.update(new Shout(Shout.Tag.DRILL));
                 System.out.println("ran the bus on PRESS");
@@ -94,8 +92,6 @@ public class Hud implements Disposable, IListener {
                 System.out.println("ran the bus on RELEASE");
             }
         });
-
-
 
 
         //Create a Stage and add TouchPad
@@ -115,9 +111,9 @@ public class Hud implements Disposable, IListener {
 
         FuelTank ft = new FuelTank();
 
-        fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.GREEN));
+        fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
 
-        fuelLabel.setText(ft.getStrFuel().substring(0,ft.getFuelLength()-3) + "%");
+        fuelLabel.setText(ft.getStrFuel().substring(0, ft.getFuelLength() - 3) + "%");
 
 
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -136,15 +132,25 @@ public class Hud implements Disposable, IListener {
 
 
     }
+
     //TODO remove sopp
-    public void adjustFuelLabel(FuelTank ft){
-       fuel = ft.getFuel();
+    public void adjustFuelLabel(FuelTank ft) {
+        fuel = ft.getFuel();
 
+        if (fuel > 60000) {
+            fuelLabel.setColor(Color.GREEN);
 
+        }
+        else if(fuel < 60000 && fuel > 20000){
+            fuelLabel.setColor(Color.ORANGE);
+        }
+        else{
+            fuelLabel.setColor(Color.RED);
+        }
         String strFuel = fuel.toString();
         Integer fuelLength = fuel.toString().length();
-        strFuel.substring(0,fuelLength-3);
-        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
+        strFuel.substring(0, fuelLength - 3);
+        fuelLabel.setText(strFuel.substring(0, fuelLength - 3) + "%");
     }
 
 
