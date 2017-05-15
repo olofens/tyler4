@@ -23,7 +23,7 @@ public class TestClass {
 
         FuelTank ft =new FuelTank();
         assertTrue(ft.getFuel() == 100000);
-        ft.adjustFuel(90);
+        ft.adjustFuel(90,0);
         assertTrue(ft.getFuel() != 100000);
 
 

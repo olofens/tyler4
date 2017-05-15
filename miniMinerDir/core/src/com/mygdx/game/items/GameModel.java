@@ -38,7 +38,7 @@ public class GameModel {
     private Vector2 touchpadLocation;
     private Vector2 minerPos;
 
-    public GameModel(){
+    public GameModel() {
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("MiniMinerMapV2.tmx");
@@ -59,14 +59,14 @@ public class GameModel {
 
     }
 
-    public void adjustSpeedX(float knobPercentage){
+    public void adjustSpeedX(float knobPercentage) {
         float speedX = minerModel.getMiner().b2body.getLinearVelocity().x;
 
-        if(knobPercentage != 0){
+        if (knobPercentage != 0) {
             minerModel.getMiner().b2body.setLinearVelocity(new Vector2(5f * knobPercentage, minerModel.getMiner().b2body.getLinearVelocity().y));
         }
         //Opposing force acting instead of "friction"
-        if(knobPercentage == 0 && speedX != 0){
+        if (knobPercentage == 0 && speedX != 0) {
             minerModel.getMiner().b2body.applyLinearImpulse(new Vector2(-0.09f * speedX, 0), minerPos, true);
 
         }
@@ -80,22 +80,22 @@ public class GameModel {
 
     }
 
-    public void adjustSpeedY(float knobPercentage){
+    public void adjustSpeedY(float knobPercentage) {
         float speedY = minerModel.getMiner().b2body.getLinearVelocity().y;
-        if(knobPercentage > 0){
+        if (knobPercentage > 0) {
             minerModel.getMiner().b2body.applyForceToCenter(0, 18f * knobPercentage, true);
         }
-        if(knobPercentage < -0.4 && minerModel.getMiner().b2body.getLinearVelocity().y == 0){
-            minerModel.getMiner().b2body.setLinearVelocity(0,0);
+        if (knobPercentage < -0.4 && minerModel.getMiner().b2body.getLinearVelocity().y == 0) {
+            minerModel.getMiner().b2body.setLinearVelocity(0, 0);
         }
 
         //max vertical velocity
-        if(speedY > 5){
+        if (speedY > 5) {
             minerModel.getMiner().b2body.setLinearVelocity(minerModel.getMiner().b2body.getLinearVelocity().x, 5);
         }
     }
 
-    public void update(Vector2 vector2){
+    public void update(Vector2 vector2) {
 
         minerPos = minerModel.getMiner().b2body.getPosition();
 
@@ -106,6 +106,7 @@ public class GameModel {
         adjustSpeedX(touchpadLocation.x);
         adjustSpeedY(touchpadLocation.y);
 
+        minerModel.getFuelTank().adjustFuel((int) minerModel.getMiner().b2body.getLinearVelocity().x, (int) minerModel.getMiner().b2body.getLinearVelocity().y);
 
     }
 
@@ -133,36 +134,35 @@ public class GameModel {
         else if (getIsFacingRight()) {
             //RIGHT
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    public MinerDrawOptions decideDirection(){
+    public MinerDrawOptions decideDirection() {
         if (touchpadLocation.y > 0.4) {
             //Draw UP
             if (drawRight()) {
                 return new MinerDrawOptions("minerSpriteRocket", minerPos.x - 15 / Constants.PPM,
-                        minerPos.y - 30 / Constants.PPM, (79/2) / Constants.PPM, (82/2) / Constants.PPM);
+                        minerPos.y - 30 / Constants.PPM, (79 / 2) / Constants.PPM, (82 / 2) / Constants.PPM);
             } else {
                 return new MinerDrawOptions("minerSpriteRocket", minerPos.x + 15 / Constants.PPM,
-                        minerPos.y - 30 / Constants.PPM, (-79/2) / Constants.PPM, (82/2) / Constants.PPM);
+                        minerPos.y - 30 / Constants.PPM, (-79 / 2) / Constants.PPM, (82 / 2) / Constants.PPM);
             }
         }
         if (touchpadLocation.y < -0.4) {
             //Draw DOWN
             return new MinerDrawOptions("minerSpriteDrillDown", minerPos.x - 12 / Constants.PPM,
-                    minerPos.y - 24 / Constants.PPM,(46/2) / Constants.PPM, (69/2) / Constants.PPM);
+                    minerPos.y - 24 / Constants.PPM, (46 / 2) / Constants.PPM, (69 / 2) / Constants.PPM);
         } else if (drawRight()) {
             //Draw RIGHT
             return new MinerDrawOptions("minerSprite", minerPos.x - 15 / Constants.PPM,
-                    minerPos.y - 15 / Constants.PPM,(79/2) / Constants.PPM, (51/2) / Constants.PPM);
+                    minerPos.y - 15 / Constants.PPM, (79 / 2) / Constants.PPM, (51 / 2) / Constants.PPM);
 
         } else {
             //Draw LEFT
             return new MinerDrawOptions("minerSprite", minerPos.x + 15 / Constants.PPM,
-                    minerPos.y - 15 / Constants.PPM,(-79/2) / Constants.PPM, (51/2) / Constants.PPM);
+                    minerPos.y - 15 / Constants.PPM, (-79 / 2) / Constants.PPM, (51 / 2) / Constants.PPM);
         }
     }
 
@@ -178,28 +178,28 @@ public class GameModel {
         return prop;
     }
 
-    public World getWorld(){
+    public World getWorld() {
         return world;
     }
 
-    public Box2DDebugRenderer getB2dr(){
+    public Box2DDebugRenderer getB2dr() {
         return this.b2dr;
     }
 
-    public boolean getIsFacingRight(){
+    public boolean getIsFacingRight() {
         return isFacingRight;
     }
 
-    public void setIsFacingRight(boolean value){
+    public void setIsFacingRight(boolean value) {
         this.isFacingRight = value;
 
     }
 
-    public MinerModel getMinerModel(){
+    public MinerModel getMinerModel() {
         return this.minerModel;
     }
 
-    public void dispose(){
+    public void dispose() {
         map.dispose();
         world.dispose();
         b2dr.dispose();

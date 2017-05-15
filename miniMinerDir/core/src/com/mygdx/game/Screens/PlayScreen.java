@@ -113,6 +113,8 @@ public class PlayScreen implements Screen {
 
         gameModel.update(v2);
 
+        hud.adjustFuelLabel(gameModel.getMinerModel().getFuelTank());
+
         //TODO MOVE TO GAMEMODEL
 
 

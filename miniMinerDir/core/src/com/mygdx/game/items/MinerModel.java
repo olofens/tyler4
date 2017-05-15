@@ -37,6 +37,11 @@ public class MinerModel {
         return this.miner;
     }
 
+    public FuelTank getFuelTank(){
+        return ft;
+    }
 
-
+    public Hull getHull(){
+        return hull;
+    }
 }

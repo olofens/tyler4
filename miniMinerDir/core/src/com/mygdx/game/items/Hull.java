@@ -16,11 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class Hull implements IGear{
 
     /**
-     * Label for the health
-     */
-    private Label hullLabel;
-
-    /**
      * Variable for the ammount of health
      */
     private Integer hull;
@@ -30,16 +25,9 @@ public class Hull implements IGear{
      */
     public Hull(){
         hull = 100;
-        hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.RED));
+
     }
 
-    /**
-     *
-     * @return hullLabel
-     */
-    public Label getHullLabel() {
-        return hullLabel;
-    }
 
     /**
      *

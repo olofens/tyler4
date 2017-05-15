@@ -20,64 +20,53 @@ public class FuelTank implements IGear {
      */
     private Integer fuel;
 
-    /**
-     * Fuel label
-     */
-    private Label fuelLabel;
+    private int decreaseFuel;
+
+    private String strFuel;
+    private Integer fuelLength;
 
     /**
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
      */
-    public FuelTank(){
+    public FuelTank() {
         fuel = 100000;
+        decreaseFuel = 10;
 
-        String strFuel = fuel.toString();
-        Integer fuelLength = fuel.toString().length();
-
-        fuelLabel = new Label(String.format("%03d", fuel), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.GREEN));
-        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
-
+        strFuel = fuel.toString();
+        fuelLength = fuel.toString().length();
     }
 
-    public FuelTank(Table table) {
-        fuel = 100000;
-
-        String strFuel = fuel.toString();
-        Integer fuelLength = fuel.toString().length();
-
-        fuelLabel = new Label(String.format("%03d", fuel), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.RED));
-        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
-
-        table.add(fuelLabel).expandX().padTop(10);
-    }
-
-    /**
-     * Method that adjusts the fuel when the miner is moving
-     * @param knobPercent
-     */
-    public void adjustFuel(Integer knobPercent){
-        fuel = fuel - Math.abs(3*knobPercent);
-
-
-        String strFuel = fuel.toString();
-        Integer fuelLength = fuel.toString().length();
-        strFuel.substring(0,fuelLength-3);
-        fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
-    }
 
     /**
      *
+     * @param minerVelocityX the velocity of the miner in the X axis
+     * @param minerVelocityY the velocity of the miner in the Y axis
+     */
+    public void adjustFuel(Integer minerVelocityX, Integer minerVelocityY) {
+
+        if (minerVelocityX != 0)
+        fuel = fuel - (Math.abs(minerVelocityX) * decreaseFuel);
+        if(minerVelocityY > 0)
+            fuel = fuel - (Math.abs(minerVelocityY) * decreaseFuel);
+
+    }
+
+    /**
      * @return fuel
      */
     public Integer getFuel() {
         return fuel;
     }
 
-    /**
-     * A lable getter
-     * @return fuelLabel
-     */
-    public Label getFuelLabel() {
-        return fuelLabel;
+    public String getStrFuel() {
+        return strFuel;
+    }
+
+    public Integer getFuelLength() {
+        return fuelLength;
+    }
+
+    public int getDecreaseFuel(){
+        return decreaseFuel;
     }
 }

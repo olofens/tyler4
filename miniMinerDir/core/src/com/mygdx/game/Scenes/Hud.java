@@ -53,8 +53,8 @@ public class Hud implements Disposable, IListener {
     public Integer hull;
 
     private Label scoreLabel;
-    //private Label fuelLabel;
-    //private Label hullLabel;
+    private Label fuelLabel;
+    private Label hullLabel;
     //
     //TODO fix public
     public TouchpadHandler tpHandler;
@@ -106,7 +106,6 @@ public class Hud implements Disposable, IListener {
         Gdx.input.setInputProcessor(stage);
 
         Hull hull = new Hull();
-        fuel = 100000;
         score = 0;
 
         Table table = new Table();
@@ -114,24 +113,22 @@ public class Hud implements Disposable, IListener {
         table.setFillParent(true);
 
 
-        FuelTank ft = new FuelTank(table);
+        FuelTank ft = new FuelTank();
 
-        // TODO REMOVE SOPP
-//        String strFuel = fuel.toString();
-        //      Integer fuelLength = fuel.toString().length();
+        fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.GREEN));
 
-        //ft.fuelLabel = new Label(String.format("%03d",  fuel), new Label.LabelStyle(new BitmapFont(), Color.RED));
-        //fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
+        fuelLabel.setText(ft.getStrFuel().substring(0,ft.getFuelLength()-3) + "%");
 
 
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
 
-        //hull.hullLabel = new Label(String.format("%03d", hull), new Label.LabelStyle(new BitmapFont(), Color.GREEN));
+        hullLabel = new Label(String.format("%03d", hull.getHull()), new Label.LabelStyle(new BitmapFont(), Color.RED));
 
+
+        table.add(fuelLabel).expandX().padTop(10);
         table.add(scoreLabel).expandX().padTop(10);
-        // table.add(ft.getFuelLabel()).expandX().padTop(10);
-        table.add(hull.getHullLabel()).expandX().padTop(10);
+        table.add(hullLabel).expandX().padTop(10);
 
 
         stage.addActor(table);
@@ -140,15 +137,15 @@ public class Hud implements Disposable, IListener {
 
     }
     //TODO remove sopp
-  /*  public void adjustFuel(Integer knobPercent){
-        fuel = fuel - Math.abs(3*knobPercent);
+    public void adjustFuelLabel(FuelTank ft){
+       fuel = ft.getFuel();
 
 
         String strFuel = fuel.toString();
         Integer fuelLength = fuel.toString().length();
         strFuel.substring(0,fuelLength-3);
         fuelLabel.setText(strFuel.substring(0,fuelLength-3) + "%");
-    }*/
+    }
 
 
     public void toggleStoreVisibility() {
