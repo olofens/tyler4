@@ -5,7 +5,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -16,13 +15,13 @@ public class Coal extends TileTemplate implements IResource {
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
-        setCategoryFilter(MiniMiner.COAL_BIT);
+        setCategoryFilter(Constants.COAL_BIT);
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Coal","Collision");
-        setCategoryFilter(MiniMiner.DESTROYED_BIT);
+        setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Coal added to inventory");
         getCell().setTile(null);
     }

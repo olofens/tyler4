@@ -17,6 +17,8 @@ public class MinerModel {
     private Miner miner;
     private Hull hull;
 
+    private int cash;
+
 
 
     /**
@@ -24,10 +26,10 @@ public class MinerModel {
      * @param world
      */
     public MinerModel(World world){
-
-        ft = new FuelTank();
-        hull = new Hull();
-        miner = new Miner(world);
+        this.cash = 0;
+        this.ft = new FuelTank();
+        this.hull = new Hull();
+        this.miner = new Miner(world);
 
     }
 

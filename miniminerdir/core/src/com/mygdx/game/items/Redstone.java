@@ -5,7 +5,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -16,13 +15,13 @@ public class Redstone extends TileTemplate {
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
-        setCategoryFilter(MiniMiner.REDSTONE_BIT);
+        setCategoryFilter(Constants.REDSTONE_BIT);
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Redstone","Collision");
-        setCategoryFilter(MiniMiner.DESTROYED_BIT);
+        setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Redstone added to inventory");
         getCell().setTile(null);
     }

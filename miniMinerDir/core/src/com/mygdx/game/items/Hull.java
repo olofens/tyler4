@@ -24,6 +24,10 @@ public class Hull implements IGear {
 
     }
 
+    public void adjustHull(){
+
+    }
+
 
     /**
      * @return hull

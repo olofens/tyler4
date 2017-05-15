@@ -5,7 +5,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -16,14 +15,14 @@ public class Lapiz extends TileTemplate implements IResource {
     public Lapiz(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
-        setCategoryFilter(MiniMiner.LAPIZ_BIT);
+        setCategoryFilter(Constants.LAPIZ_BIT);
 
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Lapiz","Collision");
-        setCategoryFilter(MiniMiner.DESTROYED_BIT);
+        setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Lapiz added to inventory");
         getCell().setTile(null);
     }

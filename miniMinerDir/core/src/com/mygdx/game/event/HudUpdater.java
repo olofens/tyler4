@@ -1,7 +1,6 @@
 package com.mygdx.game.event;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +16,10 @@ public enum HudUpdater {
     public void addListener(IHudUpdater newListener) {
         hudUpdaters.add(newListener);
     }
-    public void updateHud(int fuel){
 
-        for(IHudUpdater hudUpdater : hudUpdaters){
+    public void updateHud(int fuel) {
+
+        for (IHudUpdater hudUpdater : hudUpdaters) {
             hudUpdater.update(fuel);
         }
     }

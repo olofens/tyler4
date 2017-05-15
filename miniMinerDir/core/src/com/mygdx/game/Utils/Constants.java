@@ -13,4 +13,14 @@ public final class Constants {
     public static final int GRAVITY = -10;
     public static final int V_WIDTH = 240;
     public static final int V_HEIGHT = 400;
+    public static final short DEFAULT_BIT = 1;
+    public static final short MINER_BIT = 2;
+    public static final short TILE_BIT = 4;
+    public static final short STORE_BIT = 8;
+    public static final short DESTROYED_BIT = 16;
+    public static final short COAL_BIT = 32;
+    public static final short IRON_BIT = 64;
+    public static final short REDSTONE_BIT = 128;
+    public static final short LAPIZ_BIT = 256;
+
 }

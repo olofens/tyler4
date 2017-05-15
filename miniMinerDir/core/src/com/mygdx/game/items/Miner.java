@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Utils.Constants;
 
@@ -47,8 +46,8 @@ public class Miner extends Sprite {
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(10 / Constants.PPM);
-        fdefine.filter.categoryBits = MiniMiner.MINER_BIT;
-        fdefine.filter.maskBits = MiniMiner.DEFAULT_BIT | MiniMiner.TILE_BIT | MiniMiner.COAL_BIT | MiniMiner.IRON_BIT | MiniMiner.REDSTONE_BIT | MiniMiner.LAPIZ_BIT;
+        fdefine.filter.categoryBits = Constants.MINER_BIT;
+        fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT | Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT | Constants.LAPIZ_BIT;
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine).setUserData("miner");
