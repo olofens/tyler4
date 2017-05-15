@@ -84,21 +84,21 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         if(id.equals("drill")){
             drill  = a.getUserData() == "drill" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() != null && TileTemplate.class.isAssignableFrom(object.getUserData().getClass()) && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A))){
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A))){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
         }
         else if(id.equals("rightWing")){
             drill  = a.getUserData() == "rightWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() != null && TileTemplate.class.isAssignableFrom(object.getUserData().getClass()) && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
         }
         else if(id.equals("leftWing")){
             drill  = a.getUserData() == "leftWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() != null && TileTemplate.class.isAssignableFrom(object.getUserData().getClass()) && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
         }

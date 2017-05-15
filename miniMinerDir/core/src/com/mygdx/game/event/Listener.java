@@ -20,8 +20,8 @@ public enum Listener {
     }
 
     public void update(Shout shout) {
-        for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).update(shout);
+        for(IListener listener : listeners){
+            listener.update(shout);
         }
     }
 
