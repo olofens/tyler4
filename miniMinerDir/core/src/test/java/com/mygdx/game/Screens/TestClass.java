@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.items.FuelTank;
+import com.mygdx.game.items.Hull;
 import com.mygdx.game.items.Miner;
 
 import org.junit.Test;
@@ -48,6 +49,19 @@ public class TestClass {
         ft.upgrade();
         ft.repair();
         assertTrue(ft.getFuel() == 150000);
+    }
+
+    @Test
+    public void testHullRepair(){
+        Integer hulls;
+        Hull hull = new Hull();
+        hulls = hull.getHull();
+
+
+        assertTrue(hull.getDamageFactor() == 0.5f);
+        hull.upgrade();
+        assertTrue(hull.getDamageFactor() == 0.45f);
+
     }
 
 

@@ -18,12 +18,15 @@ public class Hull implements IGear {
      */
     private Integer hull;
 
+    private float damageFactor;
+
     /**
      * Constructor which gives our default value for the health and creates a label;
      */
     public Hull() {
         MAX_HULL = 100;
         hull = MAX_HULL;
+        damageFactor = 0.5f;
 
     }
 
@@ -39,9 +42,12 @@ public class Hull implements IGear {
         return hull;
     }
 
+    public float getDamageFactor(){
+        return damageFactor;
+    }
     @Override
     public void upgrade() {
-
+        damageFactor -= 0.05;
     }
 
     @Override
