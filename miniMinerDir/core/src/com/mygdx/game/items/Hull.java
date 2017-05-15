@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 /**
  * The class that dictates the health of the miner
  */
-public class Hull implements IResource {
+public class Hull implements IGear{
 
     /**
      * Label for the health

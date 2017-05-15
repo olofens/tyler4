@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
  * The class that dictates the fuel for the miner
  */
-public class FuelTank implements IResource {
+public class FuelTank implements IGear {
 
     /**
      * The fuel variable

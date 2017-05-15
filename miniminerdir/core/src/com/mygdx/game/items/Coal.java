@@ -12,7 +12,7 @@ import com.mygdx.game.Utils.Constants;
  * Created by walling on 5/15/2017.
  */
 
-public class Coal extends TileTemplate {
+public class Coal extends TileTemplate implements IResource {
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         super(world, tiledMap, constrains);
         fixture.setUserData(this);

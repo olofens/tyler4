@@ -23,6 +23,7 @@ public class MiniMiner extends Game {
     public static final short COAL_BIT = 32;
     public static final short IRON_BIT = 64;
     public static final short REDSTONE_BIT = 128;
+    public static final short LAPIZ_BIT = 256;
 
 
     public SpriteBatch batch;
