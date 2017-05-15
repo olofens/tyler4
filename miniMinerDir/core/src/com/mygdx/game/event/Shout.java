@@ -11,7 +11,8 @@ public class Shout {
        RIGHTMINER,
        UPRIGHTMINER,
        UPLEFTMINER,
-       STORE;
+       STORE,
+       DRILL;
 
    }
     private final Tag tag;

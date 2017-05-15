@@ -79,11 +79,12 @@ public class Hud implements Disposable, IListener {
         Drawable drawable = new TextureRegionDrawable(new TextureRegion(drillTexture));
 
         ImageButton drillButton = new ImageButton(drawable);
+        drillButton.setPosition(20, 45);
 
         drillButton.addListener(new ClickListener()
         {
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("clicked drill");
+            public void clicked(InputEvent event) {
+                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
             }
         });
 
