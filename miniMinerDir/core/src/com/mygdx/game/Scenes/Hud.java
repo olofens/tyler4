@@ -83,8 +83,9 @@ public class Hud implements Disposable, IListener {
 
         drillButton.addListener(new ClickListener()
         {
-            public void clicked(InputEvent event) {
+            public void clicked(InputEvent event, float x, float y) {
                 Listener.BUS.update(new Shout(Shout.Tag.DRILL));
+                System.out.println("clicked");
             }
         });
 

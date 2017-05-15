@@ -44,7 +44,8 @@ public class GameModel {
         map = mapLoader.load("MiniMinerMap.tmx");
         prop = map.getProperties();
 
-
+        //simple instantiation with the only purpose of adding a listener to MinerWorldContactListener
+        new MinerWorldContactListener();
 
         // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
