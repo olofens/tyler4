@@ -40,6 +40,15 @@ public class TestClass {
         map = mapLoader.load("MiniMinerMap.tmx");
         */
     }
+    @Test
+    public void testUpgrades()throws Exception{
+        FuelTank ft = new FuelTank();
+
+        assertTrue(ft.getFuel() == 100000);
+        ft.upgrade();
+        ft.repair();
+        assertTrue(ft.getFuel() == 150000);
+    }
 
 
 }

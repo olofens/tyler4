@@ -20,6 +20,7 @@ public class FuelTank implements IGear {
     /**
      * The fuel variable
      */
+    private int MAX_FUEL;
     private Integer fuel;
 
     private int decreaseFuel;
@@ -31,7 +32,8 @@ public class FuelTank implements IGear {
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
      */
     public FuelTank() {
-        fuel = 100000;
+        MAX_FUEL = 100000;
+        fuel = MAX_FUEL;
         decreaseFuel = 10;
 
         strFuel = fuel.toString();
@@ -74,4 +76,16 @@ public class FuelTank implements IGear {
     }
 
 
+    @Override
+    public void upgrade() {
+        this.MAX_FUEL += 50000;
+
+        this.decreaseFuel -= 1;
+    }
+
+    @Override
+    public void repair() {
+        this.fuel = MAX_FUEL;
+
+    }
 }

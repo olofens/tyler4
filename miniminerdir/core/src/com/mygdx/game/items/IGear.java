@@ -5,4 +5,8 @@ package com.mygdx.game.items;
  */
 
 public interface IGear {
+
+    public void upgrade();
+
+    public void repair();
 }
