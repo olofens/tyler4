@@ -83,11 +83,19 @@ public class Hud implements Disposable, IListener {
 
         drillButton.addListener(new ClickListener()
         {
-            public void clicked(InputEvent event, float x, float y) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("clicked");
+                System.out.println("ran the bus on PRESS");
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
+                System.out.println("ran the bus on RELEASE");
             }
         });
+
+
 
 
         //Create a Stage and add TouchPad

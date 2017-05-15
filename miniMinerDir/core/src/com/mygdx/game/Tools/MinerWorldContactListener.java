@@ -108,14 +108,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.DRILL) {
-            System.out.println("ran");
             minerButtonPressed = !minerButtonPressed;
-            if (minerButtonPressed) {
-                System.out.println("true");
-            }
-            else {
-                System.out.println("false");
-            }
         }
     }
 }
