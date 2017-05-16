@@ -2,8 +2,11 @@ package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.mygdx.game.Utils.Constants;
 
@@ -24,6 +27,7 @@ public class StoreHandler {
         Window.WindowStyle ws = new Window.WindowStyle();
         ws.titleFont = new BitmapFont();
         storeSkin.add("default", ws);
+        storeSkin.add("default", new TextButton.TextButtonStyle());
 
         Texture storepopupImage = new Texture("storepopup.png");
         storeSkin.add("popUpImage", storepopupImage);
@@ -34,6 +38,9 @@ public class StoreHandler {
         storePopup.setBounds((Constants.V_WIDTH - storepopupImage.getWidth()) / 2,
                 (Constants.V_HEIGHT - storepopupImage.getHeight() - 10),
                 storepopupImage.getWidth(), storepopupImage.getHeight());
+
+        //storePopup.text("Welcome");
+        storePopup.button("T1 baby");
 
         storePopup.setVisible(false);
 
