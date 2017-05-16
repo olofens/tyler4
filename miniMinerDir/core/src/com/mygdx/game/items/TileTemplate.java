@@ -55,5 +55,10 @@ public abstract class TileTemplate {
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
+    public TiledMapTileLayer.Cell getCell(){
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
+        return layer.getCell((int)((body.getPosition().x)* Constants.PPM/32),
+                (int)((body.getPosition().y)*Constants.PPM/32));
+    }
 
 }

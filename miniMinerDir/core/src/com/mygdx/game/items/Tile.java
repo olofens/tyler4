@@ -34,11 +34,4 @@ public class Tile extends TileTemplate implements IResource{
         getCell().setTile(null);
     }
 
-    public TiledMapTileLayer.Cell getCell(){
-        //Uses map to find the layer where miner is positioned
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
-        return layer.getCell((int)((body.getPosition().x)*Constants.PPM/32),
-                (int)((body.getPosition().y)*Constants.PPM/32));
-    }
-
 }

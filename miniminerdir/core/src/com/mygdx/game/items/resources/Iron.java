@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.items.resources;
 
 
 import com.badlogic.gdx.Gdx;
@@ -7,12 +7,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.IResource;
+import com.mygdx.game.items.TileTemplate;
 
 /**
  * Created by walling on 5/15/2017.
  */
 
-public class Iron extends TileTemplate implements IResource{
+public class Iron extends TileTemplate implements IResource {
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Tile-class for commenting
         super(world, tiledMap, constrains);
@@ -22,16 +24,9 @@ public class Iron extends TileTemplate implements IResource{
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Iron","Collision");
+        Gdx.app.log("Iron", "Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Iron added to inventory");
         getCell().setTile(null);
-    }
-
-
-    public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
-        return layer.getCell((int)((body.getPosition().x)* Constants.PPM/32),
-                (int)((body.getPosition().y)*Constants.PPM/32));
     }
 }
