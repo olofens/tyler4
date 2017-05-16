@@ -19,7 +19,7 @@ public class Inventory {
         clearInventory();
     }
 
-    public static void clearInventory(){
+    private static void clearInventory(){
         setCoal(0);
         setIron(0);
         setGold(0);
