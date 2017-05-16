@@ -1,5 +1,6 @@
 package com.mygdx.game.items;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -96,6 +97,7 @@ public class GameModel {
     }
 
     public void update(Vector2 vector2) {
+
 
         minerPos = minerModel.getMiner().b2body.getPosition();
 

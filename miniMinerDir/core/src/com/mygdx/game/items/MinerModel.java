@@ -54,6 +54,16 @@ public class MinerModel implements IListener {
 
     }
 
+    public boolean isAlive(){
+        if(ft.isEmpty()){
+            return false;
+        }
+        if (ft.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
     private Color fuelColor(){
         if(ft.getFuel() > 60000)
             return Color.GREEN;

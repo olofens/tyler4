@@ -29,6 +29,13 @@ public class Hull implements IGear {
 
     }
 
+    public boolean isEmpty(){
+        if(hull <= 0){
+            return true;
+        }
+        return false;
+    }
+
     public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
         System.out.println("hull decreased");
     }
