@@ -13,6 +13,7 @@ import com.mygdx.game.Utils.Constants;
 
 public class Lapiz extends TileTemplate implements IResource {
     public Lapiz(World world, TiledMap tiledMap, Rectangle constrains) {
+        //Se Tile-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.LAPIZ_BIT);

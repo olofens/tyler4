@@ -14,6 +14,7 @@ import com.mygdx.game.Utils.Constants;
 
 public class Iron extends TileTemplate implements IResource{
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
+        //Se Tile-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.IRON_BIT);
