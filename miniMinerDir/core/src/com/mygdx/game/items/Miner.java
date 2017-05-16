@@ -46,6 +46,7 @@ public class Miner extends Sprite {
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(10 / Constants.PPM);
+        //Defines all tiles that will contact with the miner
         fdefine.filter.categoryBits = Constants.MINER_BIT;
         fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT |
                 Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT |
@@ -55,13 +56,14 @@ public class Miner extends Sprite {
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine).setUserData("miner");
 
+        //Using the same process to create a drill. the .isSensor method makes the shape invisible to viewer
         EdgeShape drill = new EdgeShape();
         drill.set(new Vector2(-0.5f/Constants.PPM, -11/Constants.PPM), new Vector2(0.5f/Constants.PPM, -11/Constants.PPM));
         fdefine.shape = drill;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("drill");
 
-
+        //Using the same process to create wings. the .isSensor method makes the shape invisible to viewer
         EdgeShape rightWing = new EdgeShape();
         rightWing.set(new Vector2(10/Constants.PPM, -1/Constants.PPM), new Vector2(10/Constants.PPM, 0/Constants.PPM));
         fdefine.shape = rightWing;
