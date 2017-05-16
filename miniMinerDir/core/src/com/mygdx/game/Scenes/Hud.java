@@ -78,6 +78,7 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
         fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
 
+
         fuelLabel.setText(ft.getStrFuel().substring(0, ft.getFuelLength() - 3) + "%");
 
 
