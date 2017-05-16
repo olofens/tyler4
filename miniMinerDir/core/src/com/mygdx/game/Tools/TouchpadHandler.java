@@ -16,8 +16,8 @@ import com.mygdx.game.items.Miner;
 
 public class TouchpadHandler {
 
-    //TODO fix public
-    public Touchpad touchpad;
+    
+    private Touchpad touchpad;
 
 
     public TouchpadHandler() {
@@ -72,7 +72,9 @@ public class TouchpadHandler {
         return vector2;
     }
 
-
+    public Touchpad getTouchpad(){
+        return touchpad;
+    }
 }
 
 

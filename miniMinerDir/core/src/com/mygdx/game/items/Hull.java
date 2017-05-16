@@ -29,11 +29,11 @@ public class Hull implements IGear {
 
     }
 
-    public void adjustHull() {
-
+    public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
+        System.out.println("hull decreased");
     }
 
-    
+
     public Integer getHull() {
         return hull;
     }

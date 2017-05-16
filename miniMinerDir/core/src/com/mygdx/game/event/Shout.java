@@ -13,7 +13,8 @@ public class Shout {
        UPLEFTMINER,
        STORE,
        DRILL,
-       FUEL;
+       FUEL,
+       HULL;
 
 
    }

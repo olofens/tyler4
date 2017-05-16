@@ -60,7 +60,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeHandler.getStorePopup());
-        stage.addActor(tpHandler.touchpad);
+        stage.addActor(tpHandler.getTouchpad());
         Gdx.input.setInputProcessor(stage);
 
         score = 0;

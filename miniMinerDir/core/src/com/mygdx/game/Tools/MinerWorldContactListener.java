@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.event.HudUpdater;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.event.Shout;
@@ -40,16 +41,15 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
         }
 
-        if(a.getUserData()=="drill"||b.getUserData()=="drill"){
+        if (a.getUserData() == "drill" || b.getUserData() == "drill") {
             fixtureCheck("drill");
-            }
-        if(a.getUserData()=="rightWing"||b.getUserData()=="rightWing"){
+        }
+        if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
             fixtureCheck("rightWing");
         }
-        if(a.getUserData()=="leftWing"||b.getUserData()=="leftWing"){
+        if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             fixtureCheck("leftWing");
         }
-
     }
 
     @Override
@@ -80,25 +80,24 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     }
 
     private void fixtureCheck(String id) {
-        Fixture drill; Fixture object;
-        if(id.equals("drill")){
-            drill  = a.getUserData() == "drill" ? a : b;
+        Fixture drill;
+        Fixture object;
+        if (id.equals("drill")) {
+            drill = a.getUserData() == "drill" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A))){
+            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
-        }
-        else if(id.equals("rightWing")){
-            drill  = a.getUserData() == "rightWing" ? a : b;
+        } else if (id.equals("rightWing")) {
+            drill = a.getUserData() == "rightWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
+            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
-        }
-        else if(id.equals("leftWing")){
-            drill  = a.getUserData() == "leftWing" ? a : b;
+        } else if (id.equals("leftWing")) {
+            drill = a.getUserData() == "leftWing" ? a : b;
             object = drill == a ? b : a;
-            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
+            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
         }
