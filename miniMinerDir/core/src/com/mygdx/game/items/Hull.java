@@ -32,9 +32,9 @@ public class Hull implements IGear {
     }
 
     public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
-        if (minerVelocityX != 0 || minerVelocityX > 5)
+        if (minerVelocityX < -10 || minerVelocityX > 10)
             hull -= (Math.abs(minerVelocityX) * damageFactor);
-        if (minerVelocityY > 5 || minerVelocityY < -5) {
+        if (minerVelocityY > 10 || minerVelocityY < -10) {
             hull -= (Math.abs(minerVelocityY) * damageFactor);
         }
 
