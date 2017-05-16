@@ -1,5 +1,7 @@
 package com.mygdx.game.event;
 
+import com.mygdx.game.items.TileTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +17,9 @@ public enum OreListener {
 
     public void addListener(IOreListener newListener){listeners.add(newListener);}
 
-    public void update(Ore ore){
+    public void update(TileTemplate tileTemplate){
         for(IOreListener listener : listeners){
-            listener.update(ore);
+            listener.update(tileTemplate);
         }
     }
 }

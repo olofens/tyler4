@@ -12,6 +12,7 @@ import com.mygdx.game.items.resources.Diamond;
 import com.mygdx.game.items.resources.Gold;
 import com.mygdx.game.items.resources.Iron;
 import com.mygdx.game.items.resources.Lapiz;
+import com.mygdx.game.items.resources.Redstone;
 
 import java.awt.geom.RectangularShape;
 
@@ -82,30 +83,6 @@ public class Miner extends Sprite {
         b2body.createFixture(fdefine).setUserData("leftWing");
 
     }
-    public void onMined(TileTemplate ud){
 
-        if(ud instanceof Coal){
-            System.out.print("hej");
-            System.out.print("hej");
-            System.out.print("hej");
-            System.out.print("hej");
-        }
-        else if(ud instanceof Iron){
-
-        }
-        else if(ud instanceof Gold){
-
-        }
-        else if(ud instanceof Lapiz){
-
-        }
-        else if(ud instanceof Redstone){
-
-        }
-        else if(ud instanceof Diamond){
-
-        }
-
-    }
 
 }

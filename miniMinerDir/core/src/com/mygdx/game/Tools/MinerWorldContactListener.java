@@ -13,6 +13,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.event.HudUpdater;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.OreListener;
 import com.mygdx.game.event.Shout;
 import com.mygdx.game.items.Miner;
 import com.mygdx.game.items.Tile;
@@ -94,6 +95,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             object = minerSensor == a ? b : a;
             if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A))){
                 ((TileTemplate) object.getUserData()).onDrillHit();
+                OreListener.ORE.update((TileTemplate)object.getUserData());
             }
         }
         else if(id.equals("rightWing")){
@@ -101,6 +103,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             object = minerSensor == a ? b : a;
             if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
+                OreListener.ORE.update((TileTemplate)object.getUserData());
             }
         }
         else if(id.equals("leftWing")){
@@ -108,6 +111,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             object = minerSensor == a ? b : a;
             if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
+                OreListener.ORE.update((TileTemplate)object.getUserData());
             }
         }
     }

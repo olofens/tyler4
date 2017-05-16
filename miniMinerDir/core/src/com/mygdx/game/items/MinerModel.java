@@ -9,7 +9,14 @@ import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.IOreListener;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.event.Ore;
+import com.mygdx.game.event.OreListener;
 import com.mygdx.game.event.Shout;
+import com.mygdx.game.items.resources.Coal;
+import com.mygdx.game.items.resources.Diamond;
+import com.mygdx.game.items.resources.Gold;
+import com.mygdx.game.items.resources.Iron;
+import com.mygdx.game.items.resources.Lapiz;
+import com.mygdx.game.items.resources.Redstone;
 
 import java.awt.*;
 
@@ -25,6 +32,7 @@ public class MinerModel implements IListener, IOreListener {
     private FuelTank ft;
     private Miner miner;
     private Hull hull;
+    private Inventory inventory;
 
     private int cash;
 
@@ -39,8 +47,9 @@ public class MinerModel implements IListener, IOreListener {
         this.ft = new FuelTank();
         this.hull = new Hull();
         this.miner = new Miner(world);
+        this.inventory = new Inventory();
         Listener.BUS.addListener(this);
-
+        OreListener.ORE.addListener(this);
     }
 
     /**
@@ -88,6 +97,25 @@ public class MinerModel implements IListener, IOreListener {
     }
 
     @Override
-    public void update(Ore ore) {
+    public void update(TileTemplate tileTemplate) {
+        if(tileTemplate instanceof Coal){
+            inventory.setCoal(inventory.getCoal()+1);
+        }
+        else if(tileTemplate instanceof Iron){
+            inventory.setIron(inventory.getIron()+1);
+        }
+        else if(tileTemplate instanceof Gold){
+            inventory.setGold(inventory.getGold()+1);
+        }
+        else if(tileTemplate instanceof Lapiz){
+            inventory.setLapiz(inventory.getLapiz()+1);
+        }
+        else if(tileTemplate instanceof Redstone){
+            inventory.setRedstone(inventory.getRedstone()+1);
+        }
+        else if(tileTemplate instanceof Diamond){
+            inventory.setDiamond(inventory.getDiamond()+1);
+        }
+
     }
 }
