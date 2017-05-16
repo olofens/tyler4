@@ -23,21 +23,19 @@ import com.mygdx.game.items.Hull;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, IListener,IHudUpdater {
+public class Hud implements Disposable, IListener, IHudUpdater {
+
+
     public Stage stage;
     private Viewport viewport;
 
 
     public Integer score;
-    public Integer fuel;
-
-
-    public Integer hull;
 
     private Label scoreLabel;
     private Label fuelLabel;
     private Label hullLabel;
-    //
+
     //TODO fix public
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
@@ -58,7 +56,6 @@ public class Hud implements Disposable, IListener,IHudUpdater {
         stage = new Stage(viewport, spriteBatch);
 
 
-
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(dbHandler.getdrillButton());
@@ -66,7 +63,6 @@ public class Hud implements Disposable, IListener,IHudUpdater {
         stage.addActor(tpHandler.touchpad);
         Gdx.input.setInputProcessor(stage);
 
-        Hull hull = new Hull();
         score = 0;
 
         Table table = new Table();
@@ -74,24 +70,13 @@ public class Hud implements Disposable, IListener,IHudUpdater {
         table.setFillParent(true);
 
 
-        FuelTank ft = new FuelTank();
-
-        fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-
-
-        fuelLabel.setText(ft.getStrFuel().substring(0, ft.getFuelLength() - 3) + "%");
-
-
+        fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-
-        hullLabel = new Label(String.format("%03d", hull.getHull()), new Label.LabelStyle(new BitmapFont(), Color.RED));
-
+        hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
 
         table.add(fuelLabel).expandX().padTop(10);
         table.add(scoreLabel).expandX().padTop(10);
         table.add(hullLabel).expandX().padTop(10);
-
 
         stage.addActor(table);
         Listener.BUS.addListener(this);
@@ -100,22 +85,9 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
     }
 
-    private void adjustFuelLabel(Integer fuel) {
-
-        if (fuel > 60000) {
-            fuelLabel.setColor(Color.GREEN);
-
-        }
-        else if(fuel < 60000 && fuel > 20000){
-            fuelLabel.setColor(Color.ORANGE);
-        }
-        else{
-            fuelLabel.setColor(Color.RED);
-        }
-        String strFuel = fuel.toString();
-        Integer fuelLength = fuel.toString().length();
-        strFuel.substring(0, fuelLength - 3);
-        fuelLabel.setText(strFuel.substring(0, fuelLength - 3) + "%");
+    private void adjustFuelLabel(Integer fuel, Color color, String fuelString) {
+        fuelLabel.setColor(color);
+        fuelLabel.setText(fuelString);
     }
 
 
@@ -137,6 +109,6 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
     @Override
     public void update(HudData data) {
-        adjustFuelLabel(data.getFuel());
+        adjustFuelLabel(data.getFuel(), data.getColor(), data.getString());
     }
 }

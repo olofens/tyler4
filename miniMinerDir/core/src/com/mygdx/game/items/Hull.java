@@ -1,7 +1,6 @@
 package com.mygdx.game.items;
 
 
-
 /**
  * Created by Omaroueidat on 03/05/17.
  */
@@ -12,7 +11,7 @@ package com.mygdx.game.items;
 public class Hull implements IGear {
 
 
-    private Integer MAX_HULL;
+    private Integer maxHull;
     /**
      * Variable for the amount of health
      */
@@ -24,34 +23,38 @@ public class Hull implements IGear {
      * Constructor which gives our default value for the health and creates a label;
      */
     public Hull() {
-        MAX_HULL = 100;
-        hull = MAX_HULL;
+        maxHull = 100;
+        hull = maxHull;
         damageFactor = 0.5f;
 
     }
 
-    public void adjustHull(){
+    public void adjustHull() {
 
     }
 
-
-    /**
-     * @return hull
-     */
+    
     public Integer getHull() {
         return hull;
     }
 
-    public float getDamageFactor(){
+    public float getDamageFactor() {
         return damageFactor;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void upgrade() {
         damageFactor -= 0.05;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void repair() {
-        hull = MAX_HULL;
+        hull = maxHull;
     }
 }
