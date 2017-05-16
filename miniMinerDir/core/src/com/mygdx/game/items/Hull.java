@@ -1,7 +1,6 @@
 package com.mygdx.game.items;
 
 
-
 /**
  * Created by Omaroueidat on 03/05/17.
  */
@@ -30,26 +29,30 @@ public class Hull implements IGear {
 
     }
 
-    public void adjustHull(){
+    public void adjustHull() {
 
     }
 
-
-    /**
-     * @return hull
-     */
+    
     public Integer getHull() {
         return hull;
     }
 
-    public float getDamageFactor(){
+    public float getDamageFactor() {
         return damageFactor;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void upgrade() {
         damageFactor -= 0.05;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void repair() {
         hull = maxHull;

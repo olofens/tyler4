@@ -69,21 +69,13 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         table.top();
         table.setFillParent(true);
 
-
-
         fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-
-
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-
         hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
-
 
         table.add(fuelLabel).expandX().padTop(10);
         table.add(scoreLabel).expandX().padTop(10);
         table.add(hullLabel).expandX().padTop(10);
-
 
         stage.addActor(table);
         Listener.BUS.addListener(this);

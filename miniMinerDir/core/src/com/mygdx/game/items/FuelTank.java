@@ -19,8 +19,7 @@ public class FuelTank implements IGear {
     //This is the variable that decreases the fuel by a certain amount every update
     private int decreaseFuel;
 
-    //private String strFuel;
-    //private Integer fuelLength;
+    // String that is sent to hud to paint out
     private String fuelString;
 
     /**
@@ -30,9 +29,6 @@ public class FuelTank implements IGear {
         maxFuel = 100000;
         fuel = maxFuel;
         decreaseFuel = 10;
-
-        //strFuel = fuel.toString();
-        //fuelLength = fuel.toString().length();
     }
 
 
@@ -56,9 +52,7 @@ public class FuelTank implements IGear {
 
     }
 
-    /**
-     * @return fuel
-     */
+
     public Integer getFuel() {
         return fuel;
     }
@@ -72,6 +66,9 @@ public class FuelTank implements IGear {
         return fuelString;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void upgrade() {
         this.maxFuel += 50000;
@@ -79,7 +76,9 @@ public class FuelTank implements IGear {
         this.decreaseFuel -= 1;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void repair() {
         this.fuel = maxFuel;
