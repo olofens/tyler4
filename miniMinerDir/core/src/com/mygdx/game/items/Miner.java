@@ -47,7 +47,10 @@ public class Miner extends Sprite {
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(10 / Constants.PPM);
         fdefine.filter.categoryBits = Constants.MINER_BIT;
-        fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT | Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT | Constants.LAPIZ_BIT;
+        fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT |
+                Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT |
+                Constants.LAPIZ_BIT | Constants.GOLD_BIT;
+
 
         fdefine.shape = circleShape;
         b2body.createFixture(fdefine).setUserData("miner");
