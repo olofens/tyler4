@@ -8,13 +8,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.items.IResource;
+import com.mygdx.game.items.Inventory;
 import com.mygdx.game.items.TileTemplate;
 
 /**
  * Created by walling on 5/15/2017.
  */
 
-public class Iron extends TileTemplate implements IResource {
+public class Iron extends TileTemplate {
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Tile-class for commenting
         super(world, tiledMap, constrains);
@@ -27,6 +28,7 @@ public class Iron extends TileTemplate implements IResource {
         Gdx.app.log("Iron", "Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Iron added to inventory");
+        Inventory.setIron(1);
         getCell().setTile(null);
     }
 }

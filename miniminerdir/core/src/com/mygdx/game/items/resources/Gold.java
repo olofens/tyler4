@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.Inventory;
 import com.mygdx.game.items.TileTemplate;
 
 /**
@@ -25,6 +26,7 @@ public class Gold extends TileTemplate {
         Gdx.app.log("Gold", "Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Gold added to inventory");
+        Inventory.setGold(1);
         getCell().setTile(null);
     }
 }

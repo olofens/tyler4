@@ -7,13 +7,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.items.IResource;
+import com.mygdx.game.items.Inventory;
 import com.mygdx.game.items.TileTemplate;
 
 /**
  * Created by walling on 5/15/2017.
  */
 
-public class Coal extends TileTemplate implements IResource {
+public class Coal extends TileTemplate {
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Tile-class for commenting
         super(world, tiledMap, constrains);
@@ -26,6 +27,7 @@ public class Coal extends TileTemplate implements IResource {
         Gdx.app.log("Coal","Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Coal added to inventory");
+        Inventory.setCoal(1);
         getCell().setTile(null);
     }
 

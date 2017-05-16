@@ -11,6 +11,4 @@ import com.mygdx.game.Utils.Constants;
  * Meant to be an interface for our hull and fuel. It is intended to help with the store interaction
  */
 public interface IResource {
-
-    public TiledMapTileLayer.Cell getCell();
 }

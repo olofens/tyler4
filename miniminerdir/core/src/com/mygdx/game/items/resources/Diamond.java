@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.Inventory;
 import com.mygdx.game.items.TileTemplate;
 
 /**
@@ -25,6 +26,7 @@ public class Diamond extends TileTemplate {
         Gdx.app.log("Diamond","Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Diamond added to inventory");
+        Inventory.setDiamond(1);
         getCell().setTile(null);
     }
 
