@@ -11,11 +11,22 @@ public class Inventory {
     private int gold = 0;
     private int lapiz = 0;
     private int diamond = 0;
+    private int redstone = 0;
 
 
+    public Inventory(){
+        this.cash = 0;
+        this.coal = 0;
+        this.iron = 0;
+        this.gold = 0;
+        this.lapiz = 0;
+        this.redstone = 0;
+        this.diamond = 0;
+
+    }
 
     public void sellInventory(){
-        cash+=(coal*20)+(iron*50)+(gold*120)+(lapiz*250)+(diamond*520);
+        cash+=(coal*20)+(iron*50)+(gold*120)+(lapiz*250)+(redstone*350)+(diamond*520);
         clearInventory();
     }
 
@@ -25,6 +36,7 @@ public class Inventory {
         setGold(0);
         setLapiz(0);
         setDiamond(0);
+        setRedstone(0);
     }
 
     public int getCash() {
@@ -65,6 +77,14 @@ public class Inventory {
 
     public void setLapiz(int lapiz) {
         this.lapiz = lapiz;
+    }
+
+    public int getRedstone() {
+        return redstone;
+    }
+
+    public void setRedstone(int redstone) {
+        this.redstone = redstone;
     }
 
     public int getDiamond() {
