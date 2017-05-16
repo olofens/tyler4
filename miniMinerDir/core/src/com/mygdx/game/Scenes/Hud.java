@@ -1,34 +1,19 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.StringBuilder;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
+import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.*;
 import com.mygdx.game.items.FuelTank;
@@ -56,6 +41,7 @@ public class Hud implements Disposable, IListener,IHudUpdater {
     //TODO fix public
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
+    private DrillButtonHandler dbHandler;
 
     /**
      * Creates the HUD for the framework of the game
@@ -66,35 +52,16 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
         tpHandler = new TouchpadHandler();
         storeHandler = new StoreHandler();
+        dbHandler = new DrillButtonHandler();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
-        Skin skin = new Skin();
-        Texture drillTexture = new Texture("driller_drill_only.png");
-
-        Drawable drawable = new TextureRegionDrawable(new TextureRegion(drillTexture));
-
-        ImageButton drillButton = new ImageButton(drawable);
-        drillButton.setPosition(20, 45);
-
-        drillButton.addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on PRESS");
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on RELEASE");
-            }
-        });
 
 
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
-        stage.addActor(drillButton);
+        stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeHandler.getStorePopup());
         stage.addActor(tpHandler.touchpad);
         Gdx.input.setInputProcessor(stage);
