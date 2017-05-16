@@ -1,7 +1,9 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -22,8 +24,8 @@ public class StoreHandler {
     public StoreHandler(){
 
         //Store
-
-        Skin storeSkin = new Skin();
+        
+        Skin storeSkin = new Skin(new FileHandle("skins/rusty-robot-ui.json"), new TextureAtlas(new FileHandle("skins/rusty-robot-ui.atlas")));
         Window.WindowStyle ws = new Window.WindowStyle();
         ws.titleFont = new BitmapFont();
         storeSkin.add("default", ws);
