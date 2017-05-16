@@ -22,6 +22,8 @@ public class Box2DWorldCreator {
     public Box2DWorldCreator(World world, TiledMap map){
 
         //adding ground layer
+        //Uses one for loop for each different tile, uses the map in Tiled
+        //to import the different layers marked by a string, ex "Dirt"
         for (MapObject object : map.getLayers().get("Dirt").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 

@@ -34,14 +34,17 @@ public class MinerWorldContactListener implements ContactListener, IListener {
 
     @Override
     public void beginContact(Contact contact) {
+        //Sets the two fixtures to whats in contact
         a = contact.getFixtureA();
         b = contact.getFixtureB();
+        //Checks the popup for store with the BUS listener
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
         }
 
-        if (a.getUserData() == "drill" || b.getUserData() == "drill") {
+        //Fixturechecks for all three sensors
+        if(a.getUserData()=="drill"||b.getUserData()=="drill"){
             fixtureCheck("drill");
         }
         if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
@@ -57,6 +60,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
 
         a = contact.getFixtureA();
         b = contact.getFixtureB();
+        //Checkout for the store by end of contact (temp?)
         if (inContact("miner", "store")) {
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
             System.out.println("Hope to see you soon!");
@@ -75,29 +79,33 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     }
 
     private boolean inContact(String stringIDa, String stringIDb) {
+        //Gets the userdata and checks if either a or b matches for the case
         return ((a.getUserData().equals(stringIDa) && b.getUserData().equals(stringIDb)) ||
                 (a.getUserData().equals(stringIDb) && b.getUserData().equals(stringIDa)));
     }
 
     private void fixtureCheck(String id) {
-        Fixture drill;
-        Fixture object;
-        if (id.equals("drill")) {
-            drill = a.getUserData() == "drill" ? a : b;
-            object = drill == a ? b : a;
-            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
+        Fixture minerSensor; Fixture object;
+        //Statements sets minerSensor and object to the fixtures in contact,
+        //Checks the buttons pressed for drilling and calls the drilling method
+        if(id.equals("drill")){
+            minerSensor  = a.getUserData() == "drill" ? a : b;
+            object = minerSensor == a ? b : a;
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A))){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
-        } else if (id.equals("rightWing")) {
-            drill = a.getUserData() == "rightWing" ? a : b;
-            object = drill == a ? b : a;
-            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
+        }
+        else if(id.equals("rightWing")){
+            minerSensor  = a.getUserData() == "rightWing" ? a : b;
+            object = minerSensor == a ? b : a;
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
-        } else if (id.equals("leftWing")) {
-            drill = a.getUserData() == "leftWing" ? a : b;
-            object = drill == a ? b : a;
-            if (object.getUserData() instanceof TileTemplate && (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A))) {
+        }
+        else if(id.equals("leftWing")){
+            minerSensor  = a.getUserData() == "leftWing" ? a : b;
+            object = minerSensor == a ? b : a;
+            if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
                 ((TileTemplate) object.getUserData()).onDrillHit();
             }
         }

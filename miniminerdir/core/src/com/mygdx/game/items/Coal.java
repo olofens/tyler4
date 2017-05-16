@@ -13,6 +13,7 @@ import com.mygdx.game.Utils.Constants;
 
 public class Coal extends TileTemplate implements IResource {
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
+        //Se Tile-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.COAL_BIT);
