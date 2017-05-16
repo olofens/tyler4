@@ -11,11 +11,13 @@ public class HudData {
     private int fuel;
     private int hull;
     private Color color;
+    private String string;
 
-    public HudData(int fuel, int hull, Color color) {
+    public HudData(int fuel, int hull, Color color, String string) {
         this.fuel = fuel;
         this.hull = hull;
         this.color = color;
+        this.string = string;
     }
 
     public int getFuel() {
@@ -28,5 +30,9 @@ public class HudData {
 
     public Color getColor(){
         return color;
+    }
+
+    public String getString(){
+        return string;
     }
 }

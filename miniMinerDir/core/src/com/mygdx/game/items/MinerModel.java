@@ -45,7 +45,7 @@ public class MinerModel {
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
 
-        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0,fuelColor()));
+        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0,fuelColor(),ft.getFuelString()));
 
     }
 

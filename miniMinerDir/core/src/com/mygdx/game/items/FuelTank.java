@@ -19,8 +19,9 @@ public class FuelTank implements IGear {
     //This is the variable that decreases the fuel by a certain amount every update
     private int decreaseFuel;
 
-    private String strFuel;
-    private Integer fuelLength;
+    //private String strFuel;
+    //private Integer fuelLength;
+    private String fuelString;
 
     /**
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
@@ -30,23 +31,28 @@ public class FuelTank implements IGear {
         fuel = maxFuel;
         decreaseFuel = 10;
 
-        strFuel = fuel.toString();
-        fuelLength = fuel.toString().length();
+        //strFuel = fuel.toString();
+        //fuelLength = fuel.toString().length();
     }
 
 
     /**
      * If the miner is moved by gravity the fuel will not decrease, method will check if the miner has a velocity
      * on the X-axis then on the Y-axis to determine how much fuel to decrease.
+     *
      * @param minerVelocityX the velocity of the miner in the X axis
      * @param minerVelocityY the velocity of the miner in the Y axis
      */
     public void adjustFuel(Integer minerVelocityX, Integer minerVelocityY) {
 
         if (minerVelocityX != 0)
-        fuel = fuel - (Math.abs(minerVelocityX) * decreaseFuel);
-        if(minerVelocityY > 0)
+            fuel = fuel - (Math.abs(minerVelocityX) * decreaseFuel);
+        if (minerVelocityY > 0) {
             fuel = fuel - (Math.abs(minerVelocityY) * decreaseFuel);
+        }
+        String strFuel = fuel.toString();
+        Integer fuelLength = fuel.toString().length();
+        fuelString = strFuel.substring(0, fuelLength - 3) + "%";
 
     }
 
@@ -57,18 +63,14 @@ public class FuelTank implements IGear {
         return fuel;
     }
 
-    public String getStrFuel() {
-        return strFuel;
-    }
 
-    public Integer getFuelLength() {
-        return fuelLength;
-    }
-
-    public int getDecreaseFuel(){
+    public int getDecreaseFuel() {
         return decreaseFuel;
     }
 
+    public String getFuelString() {
+        return fuelString;
+    }
 
     @Override
     public void upgrade() {
@@ -76,6 +78,7 @@ public class FuelTank implements IGear {
 
         this.decreaseFuel -= 1;
     }
+
 
     @Override
     public void repair() {
