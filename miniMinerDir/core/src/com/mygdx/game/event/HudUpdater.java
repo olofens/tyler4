@@ -9,7 +9,7 @@ import java.util.List;
  */
 public enum HudUpdater {
 
-    FUEL;
+    FUEL,HULL;
 
     private List<IHudUpdater> hudUpdaters = new ArrayList<IHudUpdater>();
 

@@ -58,7 +58,6 @@ public class TestClass {
     public void testHullRepair(){
         Integer hulls;
         Hull hull = new Hull();
-        hulls = hull.getHull();
 
 
         assertTrue(hull.getDamageFactor() == 0.5f);

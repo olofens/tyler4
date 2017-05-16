@@ -85,9 +85,14 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     }
 
-    private void adjustFuelLabel(Integer fuel, Color color, String fuelString) {
+    private void adjustFuelLabel(Color color, String fuelString) {
         fuelLabel.setColor(color);
         fuelLabel.setText(fuelString);
+    }
+
+    private void adjustHullLabel(String hullString) {
+        hullLabel.setText(hullString);
+
     }
 
 
@@ -109,6 +114,12 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     @Override
     public void update(HudData data) {
-        adjustFuelLabel(data.getFuel(), data.getColor(), data.getString());
+        if (data.getTag().equals("Hull")) {
+            adjustHullLabel(data.getString());
+        }
+        if (data.getTag().equals("Fuel")) {
+
+            adjustFuelLabel(data.getColor(), data.getString());
+        }
     }
 }

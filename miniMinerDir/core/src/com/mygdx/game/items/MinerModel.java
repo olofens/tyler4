@@ -27,12 +27,12 @@ public class MinerModel implements IListener {
     private int cash;
 
 
-
     /**
      * Constructor which takes in world in order to create our Miner.
+     *
      * @param world
      */
-    public MinerModel(World world){
+    public MinerModel(World world) {
         this.cash = 0;
         this.ft = new FuelTank();
         this.hull = new Hull();
@@ -43,39 +43,45 @@ public class MinerModel implements IListener {
 
     /**
      * Getter for our miner
+     *
      * @return tnis.miner
      */
 
-    public void update(){
+    public void update() {
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
 
-        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0,fuelColor(),ft.getFuelString()));
+        HudUpdater.FUEL.updateHud(new HudData(0,hull.getHull(),null,hull.getHullString(),"Hull"));
+
+        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0, fuelColor(), ft.getFuelString(), "Fuel"));
 
     }
 
-    private Color fuelColor(){
-        if(ft.getFuel() > 60000)
+    private Color fuelColor() {
+        if (ft.getFuel() > 60000)
             return Color.GREEN;
         else if (ft.getFuel() < 60000 && ft.getFuel() > 20000)
             return Color.ORANGE;
         else
             return Color.RED;
     }
-    public Miner getMiner(){
+
+    public Miner getMiner() {
         return this.miner;
     }
 
-    public FuelTank getFuelTank(){
+    public FuelTank getFuelTank() {
         return ft;
     }
 
-    public Hull getHull(){
+    public Hull getHull() {
         return hull;
     }
 
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.FUEL) ft.repair();
+        if (shout.getTag() == Shout.Tag.HULL)
+            hull.adjustHull((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
     }
 }

@@ -15,9 +15,11 @@ public class Hull implements IGear {
     /**
      * Variable for the amount of health
      */
-    private Integer hull;
+    private float hull;
 
     private float damageFactor;
+
+    private String hullString;
 
     /**
      * Constructor which gives our default value for the health and creates a label;
@@ -30,12 +32,23 @@ public class Hull implements IGear {
     }
 
     public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
-        System.out.println("hull decreased");
+        if (minerVelocityX != 0 || minerVelocityX > 5)
+            hull -= (Math.abs(minerVelocityX) * damageFactor);
+        if (minerVelocityY > 5 || minerVelocityY < -5) {
+            hull -= (Math.abs(minerVelocityY) * damageFactor);
+        }
+
+        Integer integerHull = (int) hull;
+        hullString = integerHull.toString();
     }
 
 
-    public Integer getHull() {
+    public float getHull() {
         return hull;
+    }
+
+    public String getHullString(){
+        return hullString;
     }
 
     public float getDamageFactor() {
