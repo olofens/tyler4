@@ -168,7 +168,7 @@ public class Hud implements Disposable, IListener,IHudUpdater {
     }
 
     @Override
-    public void update(int fuelValue) {
-        adjustFuelLabel(fuelValue);
+    public void update(HudData data) {
+        adjustFuelLabel(data.getFuel());
     }
 }

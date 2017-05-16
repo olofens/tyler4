@@ -2,6 +2,7 @@ package com.mygdx.game.items;
 
 
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.event.HudData;
 import com.mygdx.game.event.HudUpdater;
 
 /**
@@ -41,7 +42,7 @@ public class MinerModel {
     public void update(){
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
-        HudUpdater.FUEL.updateHud(getFuelTank().getFuel());
+        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0));
 
     }
     public Miner getMiner(){
