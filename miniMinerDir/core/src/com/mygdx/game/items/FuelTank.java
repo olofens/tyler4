@@ -1,13 +1,5 @@
 package com.mygdx.game.items;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-
-
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.mygdx.game.event.HudUpdater;
-import com.mygdx.game.event.IHudUpdater;
-
 /**
  * Created by Omaroueidat on 03/05/17.
  */
@@ -20,9 +12,11 @@ public class FuelTank implements IGear {
     /**
      * The fuel variable
      */
-    private int MAX_FUEL;
+    //this is the maximum amount of fuel the Miner can have, can be upgraded to a bigger integer
+    private int maxFuel;
     private Integer fuel;
 
+    //This is the variable that decreases the fuel by a certain amount every update
     private int decreaseFuel;
 
     private String strFuel;
@@ -32,8 +26,8 @@ public class FuelTank implements IGear {
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
      */
     public FuelTank() {
-        MAX_FUEL = 100000;
-        fuel = MAX_FUEL;
+        maxFuel = 100000;
+        fuel = maxFuel;
         decreaseFuel = 10;
 
         strFuel = fuel.toString();
@@ -78,14 +72,14 @@ public class FuelTank implements IGear {
 
     @Override
     public void upgrade() {
-        this.MAX_FUEL += 50000;
+        this.maxFuel += 50000;
 
         this.decreaseFuel -= 1;
     }
 
     @Override
     public void repair() {
-        this.fuel = MAX_FUEL;
+        this.fuel = maxFuel;
 
     }
 }

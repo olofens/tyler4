@@ -1,15 +1,18 @@
 package com.mygdx.game.Screens;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.items.FuelTank;
 import com.mygdx.game.items.Hull;
 import com.mygdx.game.items.Miner;
 
+import com.mygdx.game.items.MinerModel;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -63,6 +66,7 @@ public class TestClass {
         assertTrue(hull.getDamageFactor() == 0.45f);
 
     }
+
 
 
 }

@@ -24,20 +24,18 @@ import com.mygdx.game.items.Hull;
  */
 
 public class Hud implements Disposable, IListener,IHudUpdater {
+
+
     public Stage stage;
     private Viewport viewport;
 
 
     public Integer score;
-    public Integer fuel;
-
-
-    public Integer hull;
 
     private Label scoreLabel;
     private Label fuelLabel;
     private Label hullLabel;
-    //
+
     //TODO fix public
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
@@ -73,7 +71,7 @@ public class Hud implements Disposable, IListener,IHudUpdater {
         table.top();
         table.setFillParent(true);
 
-
+        //TODO Find a way to access strFuel and FuelLength in a better way...
         FuelTank ft = new FuelTank();
 
         fuelLabel = new Label(String.format("%03d", ft.getFuel()), new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
@@ -99,18 +97,10 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
     }
 
-    private void adjustFuelLabel(Integer fuel) {
+    private void adjustFuelLabel(Integer fuel, Color color) {
 
-        if (fuel > 60000) {
-            fuelLabel.setColor(Color.GREEN);
 
-        }
-        else if(fuel < 60000 && fuel > 20000){
-            fuelLabel.setColor(Color.ORANGE);
-        }
-        else{
-            fuelLabel.setColor(Color.RED);
-        }
+        fuelLabel.setColor(color);
         String strFuel = fuel.toString();
         Integer fuelLength = fuel.toString().length();
         strFuel.substring(0, fuelLength - 3);
@@ -136,6 +126,6 @@ public class Hud implements Disposable, IListener,IHudUpdater {
 
     @Override
     public void update(HudData data) {
-        adjustFuelLabel(data.getFuel());
+        adjustFuelLabel(data.getFuel(),data.getColor());
     }
 }
