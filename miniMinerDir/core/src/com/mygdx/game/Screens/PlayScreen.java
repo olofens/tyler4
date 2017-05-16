@@ -112,9 +112,7 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
-        if(gameModel.gameOver()){
-            game.setScreen(new GameOverScreen(game));
-        }
+
 
         //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
@@ -127,7 +125,9 @@ public class PlayScreen implements Screen {
         //TODO MOVE TO GAMEMODEL
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
+
         renderer.setView(gameCam);
+
 
 
     }
@@ -167,7 +167,10 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
 
-
+        if(gameModel.gameOver()){
+            dispose();
+            game.setScreen(new GameOverScreen(game));
+        }
 
 
     }
