@@ -12,6 +12,7 @@ import com.mygdx.game.items.Gold;
 import com.mygdx.game.items.Iron;
 import com.mygdx.game.items.Lapiz;
 import com.mygdx.game.items.Redstone;
+import com.mygdx.game.items.Stone;
 import com.mygdx.game.items.StoreTile;
 import com.mygdx.game.items.Tile;
 
@@ -29,6 +30,11 @@ public class Box2DWorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Tile(world, map, rect);
+        }
+        for (MapObject object : map.getLayers().get("Stone").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new Stone(world, map, rect);
         }
         for (MapObject object : map.getLayers().get("Coal").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
