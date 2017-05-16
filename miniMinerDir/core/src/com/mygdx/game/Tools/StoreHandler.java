@@ -18,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Shout;
 
 import java.io.File;
 
@@ -44,7 +46,7 @@ public class StoreHandler {
         fillFuel.addListener(new ClickListener() {
 
             public void clicked(InputEvent event, float x, float y) {
-
+                Listener.BUS.update(new Shout(Shout.Tag.FUEL));
             }
 
         });
