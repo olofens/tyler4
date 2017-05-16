@@ -1,5 +1,6 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -39,8 +40,9 @@ public class StoreHandler {
 
         //Store
 
+
         //FileHandle fh = new FileHandle("skins/font-title-export.png");
-        Skin storeSkin = new Skin(new FileHandle("skins/rusty-robot-ui.json"), new TextureAtlas(new FileHandle("skins/rusty-robot-ui.atlas")));
+        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"), new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
         //Window.WindowStyle ws = storeSkin.get(Window.WindowStyle.class);
         fillFuel = new TextButton("Refill fuel", storeSkin);
         fillFuel.addListener(new ClickListener() {
