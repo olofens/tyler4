@@ -50,7 +50,7 @@ public class Miner extends Sprite {
         fdefine.filter.categoryBits = Constants.MINER_BIT;
         fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT |
                 Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT |
-                Constants.LAPIZ_BIT | Constants.GOLD_BIT;
+                Constants.LAPIZ_BIT | Constants.GOLD_BIT | Constants.DIAMOND_BIT;
 
 
         fdefine.shape = circleShape;

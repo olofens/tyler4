@@ -24,6 +24,7 @@ public final class Constants {
     public static final short REDSTONE_BIT = 128;
     public static final short LAPIZ_BIT = 256;
     public static final short GOLD_BIT = 512;
+    public static final short DIAMOND_BIT = 1024;
 
 
 }

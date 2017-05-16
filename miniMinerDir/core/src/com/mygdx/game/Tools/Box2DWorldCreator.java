@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.items.Coal;
+import com.mygdx.game.items.Diamond;
 import com.mygdx.game.items.Edge;
 import com.mygdx.game.items.Gold;
 import com.mygdx.game.items.Iron;
@@ -53,6 +54,11 @@ public class Box2DWorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Gold(world, map, rect);
+        }
+        for (MapObject object : map.getLayers().get("Diamond").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new Diamond(world, map, rect);
         }
 
         for (MapObject object : map.getLayers().get("Store").getObjects().getByType(RectangleMapObject.class)) {
