@@ -17,10 +17,10 @@ public enum HudUpdater {
         hudUpdaters.add(newListener);
     }
 
-    public void updateHud(int fuel) {
+    public void updateHud(HudData data) {
 
         for (IHudUpdater hudUpdater : hudUpdaters) {
-            hudUpdater.update(fuel);
+            hudUpdater.update(data);
         }
     }
 

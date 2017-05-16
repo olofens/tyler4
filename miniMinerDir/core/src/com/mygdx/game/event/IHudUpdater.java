@@ -5,5 +5,5 @@ package com.mygdx.game.event;
  */
 public interface IHudUpdater {
 
-    public void update(int fuelValue);
+    public void update(HudData data);
 }
