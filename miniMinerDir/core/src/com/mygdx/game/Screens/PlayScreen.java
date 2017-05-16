@@ -64,6 +64,8 @@ public class PlayScreen implements Screen {
     // GameModel variables
     private GameModel gameModel;
 
+    Vector2 v2;
+
 
     /**
      * The main playscreen where everything is painted and shown
@@ -98,6 +100,8 @@ public class PlayScreen implements Screen {
 
     }
 
+
+
     @Override
     public void show() {
 
@@ -108,18 +112,24 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
+        if(gameModel.gameOver()){
+            game.setScreen(new GameOverScreen(game));
+        }
+
         //The Vector that our Touchpadhandler creates
-        Vector2 v2 = hud.tpHandler.handleInput();
+        v2 = hud.tpHandler.handleInput();
 
         gameModel.update(v2);
+
 
         //hud.adjustFuelLabel(gameModel.getMinerModel().getFuelTank());
 
         //TODO MOVE TO GAMEMODEL
 
-
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
         renderer.setView(gameCam);
+
+
     }
 
 
@@ -130,43 +140,13 @@ public class PlayScreen implements Screen {
 
     //TODO REMOVE SOPP
     public boolean drawDown() {
-
         return hud.tpHandler.isTouchingDown();
     }
-/*
-    private boolean drawRight() {
-        //Check touchpad
-        if (hud.tpHandler.isTouchingRight()) {
-            //RIGHT
-            return true;
-        } else if (hud.tpHandler.isTouchingLeft()) {
-            //LEFT
-            return false;
-        }
-        //Check velocity
-        else if (gameModel.getMiner().b2body.getLinearVelocity().x > 0) {
-            //RIGHT
-            gameModel.setIsFacingRight(true);
-            return true;
-        } else if (gameModel.getMiner().b2body.getLinearVelocity().x < 0) {
-            //LEFT
-            gameModel.setIsFacingRight(false);
-            return false;
-        }
-        //Check last direction
-        else if (gameModel.getIsFacingRight()) {
-            //RIGHT
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    */
 
 
     @Override
     public void render(float dt) {
+
         update(dt);
 
         //render our game map
@@ -183,13 +163,15 @@ public class PlayScreen implements Screen {
         //Render b2dr lines
         //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
 
-
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
 
 
+
+
     }
+
 
     public void drawMiner() {
 

@@ -99,6 +99,7 @@ public class GameModel {
     public void update(Vector2 vector2) {
 
 
+
         minerPos = minerModel.getMiner().b2body.getPosition();
 
         touchpadLocation = vector2;
@@ -109,6 +110,15 @@ public class GameModel {
         adjustSpeedY(touchpadLocation.y);
 
         minerModel.update();
+    }
+
+    public boolean gameOver(){
+        if(minerModel.isAlive()){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 
@@ -203,6 +213,6 @@ public class GameModel {
     public void dispose() {
         map.dispose();
         world.dispose();
-        b2dr.dispose();
+        //b2dr.dispose();
     }
 }

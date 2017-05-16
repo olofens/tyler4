@@ -23,6 +23,7 @@ public class MiniMiner extends Game {
     public void create() {
         batch = new SpriteBatch();
         setScreen(new PlayScreen(this));
+
     }
 
     @Override
