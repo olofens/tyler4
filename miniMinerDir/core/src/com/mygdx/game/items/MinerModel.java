@@ -6,6 +6,7 @@ import com.mygdx.game.event.HudData;
 import com.mygdx.game.event.HudUpdater;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.event.IListener;
+import com.mygdx.game.event.Listener;
 import com.mygdx.game.event.Shout;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ import java.awt.*;
 /**
  * The class where the logic and calculations of the Miner will occur.
  */
-public class MinerModel implements IListener{
+public class MinerModel implements IListener {
 
     private FuelTank ft;
     private Miner miner;
@@ -36,9 +37,14 @@ public class MinerModel implements IListener{
         this.ft = new FuelTank();
         this.hull = new Hull();
         this.miner = new Miner(world);
+        Listener.BUS.addListener(this);
 
     }
 
+    /**
+     * Getter for our miner
+     * @return tnis.miner
+     */
 
     public void update(){
 
@@ -56,16 +62,20 @@ public class MinerModel implements IListener{
         else
             return Color.RED;
     }
-
-
     public Miner getMiner(){
         return this.miner;
     }
 
+    public FuelTank getFuelTank(){
+        return ft;
+    }
+
+    public Hull getHull(){
+        return hull;
+    }
 
     @Override
     public void update(Shout shout) {
-        if(shout.getTag() == Shout.Tag.STORE)
-            hull.adjustHull((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
+        if (shout.getTag() == Shout.Tag.FUEL) ft.repair();
     }
 }
