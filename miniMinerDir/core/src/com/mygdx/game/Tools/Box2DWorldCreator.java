@@ -11,7 +11,7 @@ import com.mygdx.game.items.Edge;
 import com.mygdx.game.items.resources.Gold;
 import com.mygdx.game.items.resources.Iron;
 import com.mygdx.game.items.resources.Lapiz;
-import com.mygdx.game.items.Redstone;
+import com.mygdx.game.items.resources.Redstone;
 import com.mygdx.game.items.resources.Stone;
 import com.mygdx.game.items.StoreTile;
 import com.mygdx.game.items.Tile;

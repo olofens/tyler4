@@ -28,7 +28,6 @@ public class Iron extends TileTemplate {
         Gdx.app.log("Iron", "Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Iron added to inventory");
-        Inventory.setIron(1);
         getCell().setTile(null);
     }
 }

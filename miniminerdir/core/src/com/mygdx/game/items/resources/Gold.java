@@ -26,7 +26,6 @@ public class Gold extends TileTemplate {
         Gdx.app.log("Gold", "Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Gold added to inventory");
-        Inventory.setGold(1);
         getCell().setTile(null);
     }
 }

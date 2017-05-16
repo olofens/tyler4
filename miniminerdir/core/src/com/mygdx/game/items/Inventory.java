@@ -5,21 +5,21 @@ package com.mygdx.game.items;
  */
 
 public class Inventory {
-    private static int cash = 0;
-    private static int coal = 0;
-    private static int iron = 0;
-    private static int gold = 0;
-    private static int lapiz = 0;
-    private static int diamond = 0;
+    private int cash = 0;
+    private int coal = 0;
+    private int iron = 0;
+    private int gold = 0;
+    private int lapiz = 0;
+    private int diamond = 0;
 
 
 
-    public static void sellInventory(){
+    public void sellInventory(){
         cash+=(coal*20)+(iron*50)+(gold*120)+(lapiz*250)+(diamond*520);
         clearInventory();
     }
 
-    private static void clearInventory(){
+    private void clearInventory(){
         setCoal(0);
         setIron(0);
         setGold(0);
@@ -27,52 +27,52 @@ public class Inventory {
         setDiamond(0);
     }
 
-    public static int getCash() {
+    public int getCash() {
         return cash;
     }
 
-    public static void setCash(int cash) {
-        Inventory.cash = cash;
+    public void setCash(int cash) {
+        this.cash = cash;
     }
 
-    public static int getCoal() {
+    public int getCoal() {
         return coal;
     }
 
-    public static void setCoal(int coal) {
-        Inventory.coal = coal;
+    public void setCoal(int coal) {
+        this.coal = coal;
     }
 
-    public static int getIron() {
+    public int getIron() {
         return iron;
     }
 
-    public static void setIron(int iron) {
-        Inventory.iron = iron;
+    public void setIron(int iron) {
+        this.iron = iron;
     }
 
-    public static int getGold() {
+    public int getGold() {
         return gold;
     }
 
-    public static void setGold(int gold) {
-        Inventory.gold = gold;
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
-    public static int getLapiz() {
+    public int getLapiz() {
         return lapiz;
     }
 
-    public static void setLapiz(int lapiz) {
-        Inventory.lapiz = lapiz;
+    public void setLapiz(int lapiz) {
+        this.lapiz = lapiz;
     }
 
-    public static int getDiamond() {
+    public int getDiamond() {
         return diamond;
     }
 
-    public static void setDiamond(int diamond) {
-        Inventory.diamond = diamond;
+    public void setDiamond(int diamond) {
+        this.diamond = diamond;
     }
 }
 

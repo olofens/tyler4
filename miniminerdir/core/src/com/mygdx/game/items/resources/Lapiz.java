@@ -28,7 +28,6 @@ public class Lapiz extends TileTemplate {
         Gdx.app.log("Lapiz","Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Lapiz added to inventory");
-        Inventory.setLapiz(1);
         getCell().setTile(null);
     }
 

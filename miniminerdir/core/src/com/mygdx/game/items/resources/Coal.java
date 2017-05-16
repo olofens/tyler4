@@ -27,7 +27,6 @@ public class Coal extends TileTemplate {
         Gdx.app.log("Coal","Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Coal added to inventory");
-        Inventory.setCoal(1);
         getCell().setTile(null);
     }
 

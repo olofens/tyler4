@@ -26,7 +26,6 @@ public class Diamond extends TileTemplate {
         Gdx.app.log("Diamond","Collision");
         setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Diamond added to inventory");
-        Inventory.setDiamond(1);
         getCell().setTile(null);
     }
 
