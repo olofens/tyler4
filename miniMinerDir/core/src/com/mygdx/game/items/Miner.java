@@ -64,7 +64,7 @@ public class Miner extends Sprite {
 
         //Using the same process to create a drill. the .isSensor method makes the shape invisible to viewer
         EdgeShape drill = new EdgeShape();
-        drill.set(new Vector2(-0.5f/Constants.PPM, -11/Constants.PPM), new Vector2(0.5f/Constants.PPM, -11/Constants.PPM));
+        drill.set(new Vector2(-0.1f/Constants.PPM, -11/Constants.PPM), new Vector2(0.1f/Constants.PPM, -11/Constants.PPM));
         fdefine.shape = drill;
         fdefine.isSensor = true;
         b2body.createFixture(fdefine).setUserData("drill");
