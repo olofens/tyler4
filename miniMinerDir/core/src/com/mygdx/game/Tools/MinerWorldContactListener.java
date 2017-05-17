@@ -90,18 +90,8 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         Fixture minerSensor; Fixture object;
         //Statements sets minerSensor and object to the fixtures in contact,
         //Checks the buttons pressed for drilling and calls the drilling method
-        if(id.equals("drill")){
-            minerSensor  = a.getUserData() == "drill" ? a : b;
-            object = minerSensor == a ? b : a;
-            return object;
-        }
-        else if(id.equals("rightWing")){
-            minerSensor  = a.getUserData() == "rightWing" ? a : b;
-            object = minerSensor == a ? b : a;
-            return object;
-        }
-        else if(id.equals("leftWing")){
-            minerSensor  = a.getUserData() == "leftWing" ? a : b;
+        if(id != null){
+            minerSensor  = a.getUserData() == id ? a : b;
             object = minerSensor == a ? b : a;
             return object;
         }
@@ -111,16 +101,8 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         Fixture minerSensor;
         //Statements sets minerSensor and object to the fixtures in contact,
         //Checks the buttons pressed for drilling and calls the drilling method
-        if(id.equals("drill")){
-            minerSensor  = a.getUserData() == "drill" ? a : b;
-            return minerSensor;
-        }
-        else if(id.equals("rightWing")){
-            minerSensor  = a.getUserData() == "rightWing" ? a : b;
-            return minerSensor;
-        }
-        else if(id.equals("leftWing")){
-            minerSensor  = a.getUserData() == "leftWing" ? a : b;
+        if(id != null){
+            minerSensor  = a.getUserData() == id ? a : b;
             return minerSensor;
         }
         return null;
