@@ -17,6 +17,7 @@ public class Shout {
        HULL;
 
 
+
    }
     private final Tag tag;
 

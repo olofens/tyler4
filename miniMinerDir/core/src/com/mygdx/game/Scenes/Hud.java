@@ -9,8 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Tools.PauseButtonHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
@@ -40,6 +42,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
+    private PauseButtonHandler pHandler;
 
     /**
      * Creates the HUD for the framework of the game
@@ -51,16 +54,21 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         tpHandler = new TouchpadHandler();
         storeHandler = new StoreHandler();
         dbHandler = new DrillButtonHandler();
+        pHandler = new PauseButtonHandler();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
 
 
         //Create a Stage and add TouchPad
+
+        pHandler.getPauseBtn().setTransform(true);
+
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeHandler.getStorePopup());
         stage.addActor(tpHandler.getTouchpad());
+        stage.addActor(pHandler.getPauseBtn());
         Gdx.input.setInputProcessor(stage);
 
         score = 0;
@@ -74,9 +82,11 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
 
-        table.add(fuelLabel).expandX().padTop(10);
-        table.add(scoreLabel).expandX().padTop(10);
-        table.add(hullLabel).expandX().padTop(10);
+        table.add(fuelLabel).expandX().padTop(5);
+        table.add(scoreLabel).expandX().padTop(5);
+        table.add(hullLabel).expandX().padTop(5);
+        table.add(pHandler.getPauseBtn()).expandX().padTop(10);
+
 
         stage.addActor(table);
         Listener.BUS.addListener(this);

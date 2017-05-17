@@ -121,6 +121,10 @@ public class GameModel {
         }
     }
 
+    public boolean gamePaused(){
+        return true;
+    }
+
 
     private boolean drawRight() {
         //Check touchpad
@@ -149,6 +153,7 @@ public class GameModel {
             return false;
         }
     }
+
 
     public MinerDrawOptions decideDirection() {
         if (touchpadLocation.y > 0.4) {

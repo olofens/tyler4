@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
@@ -44,7 +45,6 @@ public class PlayScreen implements Screen {
     private OrthographicCamera gameCam;
     private Viewport viewPort;
 
-
     // Miner variables
     // TODO FIX LISTENER
     private Texture minerIMG;
@@ -65,7 +65,6 @@ public class PlayScreen implements Screen {
     private GameModel gameModel;
 
     Vector2 v2;
-
 
     /**
      * The main playscreen where everything is painted and shown
@@ -96,10 +95,7 @@ public class PlayScreen implements Screen {
 
         minerIMG3 = new Texture("driller_projekt_Rocket1.png");
         minerSpriteRocket = new Sprite(minerIMG3);
-
-
     }
-
 
 
     @Override
@@ -127,8 +123,6 @@ public class PlayScreen implements Screen {
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
 
         renderer.setView(gameCam);
-
-
 
     }
 
@@ -168,8 +162,17 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
 
         if(gameModel.gameOver()){
-            dispose();
-            game.setScreen(new GameOverScreen(game));
+            hud.dispose();
+
+            //timer prevents hud sticking on to screen
+            Timer.schedule(new Timer.Task(){
+                @Override
+                public void run() {
+                    game.setScreen(new GameOverScreen(game));
+                }
+            }, 0.2f);
+
+
         }
 
 

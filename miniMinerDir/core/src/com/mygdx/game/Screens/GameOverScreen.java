@@ -47,9 +47,6 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(Game game) {
 
-        MiniMiner game1 = new MiniMiner();
-
-
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
 
@@ -74,10 +71,11 @@ public class GameOverScreen implements Screen {
         });
         table = new Table(storeSkin);
         table.center();
-        table.setBounds(0, 0, 230, 290);
+        table.setBounds(10, 80, 190, 290);
         table.add(playAgainButton).width(150).height(100);
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(5)));
         stage.addActor(table);
+
 
 
 
@@ -94,15 +92,16 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         ShapeRenderer shapeRenderer = new ShapeRenderer();
 
-
+/*
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(new Color(0.1f, 0, 0, 0.5f));
         shapeRenderer.rect(0, 0, Constants.V_WIDTH, Constants.V_HEIGHT);
         shapeRenderer.end();
 
-
+*/
         stage.act();
         stage.draw();
 /*
