@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
@@ -44,6 +45,7 @@ public class StartMenuScreen implements Screen {
     private SpriteBatch sb;
     private Sprite sprite;
     private Texture texture;
+    private MiniMiner game1;
 
     private OrthographicCamera gameCam;
 
@@ -55,6 +57,9 @@ public class StartMenuScreen implements Screen {
 
         sb = new SpriteBatch();
         this.game = game;
+        game1 = new MiniMiner();
+        SpriteBatch batch = new SpriteBatch();
+
 
         gameCam = new OrthographicCamera();
         viewport = new FitViewport(Constants.V_WIDTH,
@@ -77,12 +82,19 @@ public class StartMenuScreen implements Screen {
 
         Label miniMinerLabel = new Label("MINIMINER", font);
 
+        miniMinerLabel.scaleBy(0.5f);
+
         startGameButton = new TextButton("Play", storeSkin);
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //
-                System.out.print("Play pressed." + "\n" + x + " " + y);
+                Timer.schedule(new Timer.Task(){
+                    @Override
+                    public void run() {
+                        startGame();
+                    }
+                }, 0.2f);
             }
         });
 
@@ -91,7 +103,7 @@ public class StartMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //quit
-                System.out.print("Quit Game pressed." + "\n");
+                Gdx.app.exit();
             }
         });
 
@@ -99,16 +111,20 @@ public class StartMenuScreen implements Screen {
         table.center();
         table.setBounds(10, 90, 190, 210);
         System.out.print(table.getWidth());
-        table.add(miniMinerLabel);
-        table.row();
+        //table.add(miniMinerLabel);
+        //table.row();
         table.add(startGameButton);
         table.row();
         table.add(QuitGameButton);
-        //stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(5)));
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(3)));
         stage.addActor(table);
 
 
         //og.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
+    }
+
+    public void startGame(){
+                game.setScreen(new PlayScreen((MiniMiner)game));
     }
     public void handleInput(){
 
@@ -161,6 +177,7 @@ public class StartMenuScreen implements Screen {
 
     @Override
     public void dispose() {
+
 
     }
 }

@@ -42,6 +42,7 @@ public class GameOverScreen implements Screen {
 
     private MiniMiner game1;
     private TextButton playAgainButton;
+    private TextButton mainMenu;
     private Table table;
     private Game game;
 
@@ -69,10 +70,20 @@ public class GameOverScreen implements Screen {
                 createPlayScreen();
             }
         });
+
+        mainMenu = new TextButton("Main menu", storeSkin);
+        mainMenu.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                createMainMenu();
+            }
+        });
         table = new Table(storeSkin);
         table.center();
-        table.setBounds(10, 80, 190, 290);
+        table.setBounds(10, 80, 190, 230);
         table.add(playAgainButton).width(150).height(100);
+        table.row();
+        table.add(mainMenu).width(150).height(100);
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(5)));
         stage.addActor(table);
 
@@ -84,6 +95,11 @@ public class GameOverScreen implements Screen {
     public void createPlayScreen(){
         game.setScreen(new PlayScreen((MiniMiner)game));
     }
+
+    public void createMainMenu(){
+        game.setScreen(new StartMenuScreen((MiniMiner)game));
+    }
+
 
     @Override
     public void show() {
