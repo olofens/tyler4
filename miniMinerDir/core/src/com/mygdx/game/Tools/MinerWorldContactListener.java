@@ -48,10 +48,10 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
             fixtureCheck("drill");
         }
-        if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
+        else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
             fixtureCheck("rightWing");
         }
-        if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
+        else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             fixtureCheck("leftWing");
         }
         Listener.BUS.update(new Shout(Shout.Tag.HULL));
