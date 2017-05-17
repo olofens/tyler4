@@ -14,7 +14,7 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Stone extends TileTemplate {
     public Stone(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Tile-class for commenting
+        //Se Dirt-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.STONE_BIT);

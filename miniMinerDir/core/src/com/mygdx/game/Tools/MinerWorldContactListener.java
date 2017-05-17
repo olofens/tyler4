@@ -2,22 +2,16 @@ package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.game.MiniMiner;
-import com.mygdx.game.event.HudUpdater;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.event.Ore;
 import com.mygdx.game.event.OreListener;
 import com.mygdx.game.event.Shout;
-import com.mygdx.game.items.Miner;
-import com.mygdx.game.items.Tile;
 import com.mygdx.game.items.TileTemplate;
 
 /**

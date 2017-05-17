@@ -15,7 +15,7 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Gold extends TileTemplate {
     public Gold(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Tile-class for commenting
+        //Se Dirt-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.GOLD_BIT);

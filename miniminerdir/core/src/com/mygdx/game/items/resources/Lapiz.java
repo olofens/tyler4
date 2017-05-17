@@ -16,7 +16,7 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Lapiz extends TileTemplate {
     public Lapiz(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Tile-class for commenting
+        //Se Dirt-class for commenting
         super(world, tiledMap, constrains);
         fixture.setUserData(this);
         setCategoryFilter(Constants.LAPIZ_BIT);

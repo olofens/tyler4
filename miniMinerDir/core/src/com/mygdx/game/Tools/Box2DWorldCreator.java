@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.items.resources.Dirt;
 import com.mygdx.game.items.resources.Coal;
 import com.mygdx.game.items.resources.Diamond;
 import com.mygdx.game.items.Edge;
@@ -14,7 +15,6 @@ import com.mygdx.game.items.resources.Lapiz;
 import com.mygdx.game.items.resources.Redstone;
 import com.mygdx.game.items.resources.Stone;
 import com.mygdx.game.items.StoreTile;
-import com.mygdx.game.items.Tile;
 
 /**
  * Created by walling on 2017-04-11.
@@ -31,7 +31,7 @@ public class Box2DWorldCreator {
         for (MapObject object : map.getLayers().get("Dirt").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            new Tile(world, map, rect);
+            new Dirt(world, map, rect);
         }
         for (MapObject object : map.getLayers().get("Stone").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
