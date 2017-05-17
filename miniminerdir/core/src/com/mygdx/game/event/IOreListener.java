@@ -8,4 +8,5 @@ import com.mygdx.game.items.TileTemplate;
 
 public interface IOreListener {
     public void update(TileTemplate tileTemplate);
+    public void update(Ore ore);
 }

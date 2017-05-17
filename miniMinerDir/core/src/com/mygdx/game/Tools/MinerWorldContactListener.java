@@ -2,21 +2,16 @@ package com.mygdx.game.Tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.game.MiniMiner;
-import com.mygdx.game.event.HudUpdater;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Ore;
 import com.mygdx.game.event.OreListener;
 import com.mygdx.game.event.Shout;
-import com.mygdx.game.items.Miner;
-import com.mygdx.game.items.Tile;
 import com.mygdx.game.items.TileTemplate;
 
 /**
@@ -42,9 +37,11 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
+            //Calling Ore-bus to make minerModel sell minerals
+            OreListener.ORE.update(new Ore(Ore.OreSort.SELL));
         }
 
-        //Fixturechecks for all three sensors
+        //Fixturechecks for all three sensors, object sent to resolve contact, which follows upp with drilling etc
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
             resolveContact(fixtureCheckObject("drill"));
         }
@@ -54,7 +51,9 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             resolveContact(fixtureCheckObject("leftWing"));
         }
+        
         Listener.BUS.update(new Shout(Shout.Tag.HULLDAMAGE));
+
     }
 
     @Override
@@ -89,7 +88,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     private Fixture fixtureCheckObject(String id) {
         Fixture minerSensor; Fixture object;
         //Statements sets minerSensor and object to the fixtures in contact,
-        //Checks the buttons pressed for drilling and calls the drilling method
+        //returns object
         if(id != null){
             minerSensor  = a.getUserData() == id ? a : b;
             object = minerSensor == a ? b : a;
@@ -99,8 +98,8 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     }
     private Fixture fixtureCheckSensor(String id) {
         Fixture minerSensor;
-        //Statements sets minerSensor and object to the fixtures in contact,
-        //Checks the buttons pressed for drilling and calls the drilling method
+        //Statements sets minerSensor to the fixture in contact,
+        //returns sensor
         if(id != null){
             minerSensor  = a.getUserData() == id ? a : b;
             return minerSensor;
@@ -108,6 +107,8 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         return null;
     }
     private void resolveContact(Fixture object){
+        //Checks if object isnt null and if specific diggingbuttons are pressed.
+        //Calls object for drilling and updates inventory via Ore-bus
         if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
             ((TileTemplate) object.getUserData()).onDrillHit();
             OreListener.ORE.update((TileTemplate)object.getUserData());
