@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Tools.PauseButtonHandler;
+import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
@@ -38,6 +39,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public Stage stage;
     public Stage stage2;
     public Table table2;
+
     private Viewport viewport;
 
 
@@ -52,9 +54,20 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
     private PauseButtonHandler pHandler;
+    private PauseScreenHandler psHandler;
 
+    public boolean isPaused;
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
 
     /**
+
      * Creates the HUD for the framework of the game
      *
      * @param spriteBatch
@@ -66,10 +79,17 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         storeHandler = new StoreHandler();
         dbHandler = new DrillButtonHandler();
         pHandler = new PauseButtonHandler();
+        psHandler = new PauseScreenHandler();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
+
         stage2 = new Stage(viewport, spriteBatch);
+
+
+        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
+                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
+
 
 
 
@@ -107,38 +127,24 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         //table.setFillParent(true);
 
-
-
-
-        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
-        TextButton resumeButton = new TextButton("Resume", storeSkin);
-        resumeButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                pHandler.setIsPaused(false);
-                table2.setVisible(false);
-
-            }
-        });
         table2 = new Table(storeSkin);
         table2.center();
         table2.setBounds(10, 90, 190, 210);
-        System.out.print(table.getWidth());
         //table.add(miniMinerLabel);
         //table.row();
-        table2.add(resumeButton);
+        table2.add(psHandler.getResumeButton());
+        table2.row();
+        table2.add(psHandler.getMenuButton());
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
         stage2.addActor(table2);
         //table2.setVisible(false);
 
 
 
+
     }
 
-    public boolean getPauseState(){
-        return pHandler.getIsPaused();
-    }
+
 
     private void adjustFuelLabel(Integer fuel, Color color, String fuelString) {
         fuelLabel.setColor(color);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.event.Listener;
 import com.mygdx.game.event.Shout;
 
@@ -22,19 +23,12 @@ public class PauseButtonHandler {
 
     private ImageButton pauseBtn;
 
-    private boolean isPaused;
+
 
     public ImageButton getPauseBtn() {
         return pauseBtn;
     }
 
-    public boolean getIsPaused(){
-        return isPaused;
-    }
-
-    public void setIsPaused(boolean val){
-        isPaused = val;
-    }
 
     public PauseButtonHandler(){
 
@@ -51,13 +45,7 @@ public class PauseButtonHandler {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.out.print("CLICK.");
-                if(isPaused){
-                    isPaused = false;
-                }
-                else{
-                    isPaused = true;
-                }
-                //do something
+                //pause game
                 return true;
             }
 

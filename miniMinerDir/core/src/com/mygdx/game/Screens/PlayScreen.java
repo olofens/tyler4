@@ -136,12 +136,25 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
-        if(hud.getPauseState()){
+        /*
+        System.out.print("Paused" + hud.getPauseState1() + "\n");
+        System.out.print("Resumed" + hud.getPauseState2() + "\n");
+
+        if(hud.getPauseState1()){
             this.state = State.PAUSE;
+            //System.out.print("GAME IS PAUSED");
+
+
         }
-        else{
+        else if(hud.getPauseState2()) {
             this.state = State.RESUME;
+
+            //System.out.print("RESUME");
+
         }
+        */
+
+
 
         //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
@@ -174,7 +187,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float dt) {
-        System.out.print(state + "\n");
+        //System.out.print(state + "\n");
 
        if(state.equals(State.RESUME)) {
            Gdx.input.setInputProcessor(hud.stage);
@@ -208,13 +221,16 @@ public class PlayScreen implements Screen {
            //game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
            //hud.stage.draw();
 
-           update(dt);
-                hud.table2.setVisible(true);
-                Gdx.input.setInputProcessor(hud.stage2);
 
-                System.out.print("GAME IS PAUSED");
-                hud.stage2.act();
-                hud.stage2.draw();
+           update(dt);
+           hud.table2.setVisible(true);
+           Gdx.input.setInputProcessor(hud.stage2);
+
+           hud.stage2.act();
+           hud.stage2.draw();
+
+
+
 
 
        }
