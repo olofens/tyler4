@@ -1,5 +1,6 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Screens.StartMenuScreen;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
@@ -25,10 +27,21 @@ public class PauseScreenHandler {
     private TextButton resumeButton;
     private TextButton menuButton;
 
-    private boolean isResumed = true;
+
+    private Game game;
+
+    private boolean newScreen;
+
+    private boolean isPaused = false;
 
 
+    public boolean isPaused() {
+        return isPaused;
+    }
 
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
 
     public TextButton getResumeButton() {
         return resumeButton;
@@ -49,7 +62,7 @@ public class PauseScreenHandler {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //resume game
+                isPaused = false;
             }
         });
 
@@ -57,6 +70,9 @@ public class PauseScreenHandler {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                newScreen = true;
+                game.setScreen(new StartMenuScreen((MiniMiner)game));
+
 
 
             }

@@ -95,6 +95,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(MiniMiner game) {
         this.game = game;
 
+
         SpriteBatch sb = new SpriteBatch();
 
         this.gameModel = new GameModel();
@@ -131,30 +132,24 @@ public class PlayScreen implements Screen {
 
     }
 
+    public void checkState(){
+        if(hud.isPaused()){
+            this.state = State.PAUSE;
+            //System.out.print("GAME IS PAUSED");
+        }
+        else {
+            this.state = State.RESUME;
+            //System.out.print("RESUME");}
+        }
+    }
     /**
      *
      * @param dt
      */
     public void update(float dt) {
-        /*
-        System.out.print("Paused" + hud.getPauseState1() + "\n");
-        System.out.print("Resumed" + hud.getPauseState2() + "\n");
-
-        if(hud.getPauseState1()){
-            this.state = State.PAUSE;
-            //System.out.print("GAME IS PAUSED");
 
 
-        }
-        else if(hud.getPauseState2()) {
-            this.state = State.RESUME;
-
-            //System.out.print("RESUME");
-
-        }
-        */
-
-
+        checkState();
 
         //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
@@ -190,52 +185,53 @@ public class PlayScreen implements Screen {
         //System.out.print(state + "\n");
 
        if(state.equals(State.RESUME)) {
-           Gdx.input.setInputProcessor(hud.stage);
 
-
-           update(dt);
-           //render our game map
-           renderer.render();
-           //render miner
-           game.batch.begin();
-           drawMiner();
-           game.batch.end();
-           //Render b2dr lines
-           //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
-           game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-           hud.stage.draw();
-           game.batch.setProjectionMatrix(gameCam.combined);
-
-           if (gameModel.gameOver()) {
-               hud.dispose();
-               //timer prevents hud sticking on to screen
-               Timer.schedule(new Timer.Task() {
-                   @Override
-                   public void run() {
-                       game.setScreen(new GameOverScreen(game));
-                   }
-               }, 0.2f);
-           }
+           renderResume(dt);
        }
        else{
-           //game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-           //hud.stage.draw();
 
-
-           update(dt);
-           hud.table2.setVisible(true);
-           Gdx.input.setInputProcessor(hud.stage2);
-
-           hud.stage2.act();
-           hud.stage2.draw();
-
-
-
-
-
+            renderPause(dt);
        }
 
 
+    }
+
+    public void renderResume(float dt){
+        Gdx.input.setInputProcessor(hud.stage);
+
+        update(dt);
+        //render our game map
+        renderer.render();
+        //render miner
+        game.batch.begin();
+        drawMiner();
+        game.batch.end();
+        //Render b2dr lines
+        //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
+        game.batch.setProjectionMatrix(gameCam.combined);
+
+        if (gameModel.gameOver()) {
+            hud.dispose();
+            //timer prevents hud sticking on to screen
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    game.setScreen(new GameOverScreen(game));
+                }
+            }, 0.2f);
+        }
+    }
+
+    public void renderPause(float dt){
+        //update(dt);
+        checkState();
+        hud.table2.setVisible(true);
+        Gdx.input.setInputProcessor(hud.stage2);
+
+        hud.stage2.act();
+        hud.stage2.draw();
     }
 
 
