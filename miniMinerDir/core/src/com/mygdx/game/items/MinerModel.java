@@ -118,4 +118,12 @@ public class MinerModel implements IListener, IOreListener {
         }
 
     }
+
+    @Override
+    public void update(Ore ore) {
+        if(ore.getSort()==Ore.OreSort.SELL){
+            inventory.sellInventory();
+            //System.out.println(inventory.getCash());
+        }
+    }
 }

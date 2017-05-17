@@ -8,12 +8,7 @@ import com.badlogic.gdx.utils.Sort;
 
 public class Ore {
     public enum OreSort{
-        COAL,
-        IRON,
-        GOLD,
-        LAPIZ,
-        REDSTONE,
-        DIAMOND;
+        SELL
     }
     private final OreSort sort;
     public Ore(OreSort sort){this.sort = sort;}

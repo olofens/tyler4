@@ -22,4 +22,9 @@ public enum OreListener {
             listener.update(tileTemplate);
         }
     }
+    public void update(Ore ore){
+        for(IOreListener listener : listeners){
+            listener.update(ore);
+        }
+    }
 }

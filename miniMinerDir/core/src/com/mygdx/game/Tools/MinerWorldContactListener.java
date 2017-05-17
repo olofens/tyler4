@@ -13,6 +13,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.event.HudUpdater;
 import com.mygdx.game.event.IListener;
 import com.mygdx.game.event.Listener;
+import com.mygdx.game.event.Ore;
 import com.mygdx.game.event.OreListener;
 import com.mygdx.game.event.Shout;
 import com.mygdx.game.items.Miner;
@@ -42,6 +43,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
+            OreListener.ORE.update(new Ore(Ore.OreSort.SELL));
         }
 
         //Fixturechecks for all three sensors
