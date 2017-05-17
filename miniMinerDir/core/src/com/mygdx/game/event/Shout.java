@@ -7,16 +7,11 @@ package com.mygdx.game.event;
 public class Shout {
 
    public enum Tag {
-       LEFTMINER,
-       RIGHTMINER,
-       UPRIGHTMINER,
-       UPLEFTMINER,
        STORE,
        DRILL,
-       FUEL,
-       HULL;
-
-
+       FUELREPAIR,
+       HULLREPAIR,
+       HULLDAMAGE;
    }
     private final Tag tag;
 

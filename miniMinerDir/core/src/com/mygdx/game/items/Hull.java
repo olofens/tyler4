@@ -37,9 +37,6 @@ public class Hull implements IGear {
         if (minerVelocityY > 10 || minerVelocityY < -10) {
             hull -= (Math.abs(minerVelocityY) * damageFactor);
         }
-
-        Integer integerHull = (int) hull;
-        hullString = integerHull.toString();
     }
 
 
@@ -48,6 +45,8 @@ public class Hull implements IGear {
     }
 
     public String getHullString(){
+        Integer integerHull = (int) hull;
+        hullString = integerHull.toString();
         return hullString;
     }
 

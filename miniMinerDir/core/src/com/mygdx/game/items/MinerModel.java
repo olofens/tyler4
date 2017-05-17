@@ -59,12 +59,8 @@ public class MinerModel implements IListener, IOreListener {
      */
 
     public void update() {
-
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
-
-        HudUpdater.FUEL.updateHud(new HudData(0,hull.getHull(),null,hull.getHullString(),"Hull"));
-
-        HudUpdater.FUEL.updateHud(new HudData(ft.getFuel(), 0, fuelColor(), ft.getFuelString(), "Fuel"));
+        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), fuelColor()));
 
     }
 
@@ -91,9 +87,14 @@ public class MinerModel implements IListener, IOreListener {
 
     @Override
     public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.FUEL) ft.repair();
-        if (shout.getTag() == Shout.Tag.HULL)
-            hull.adjustHull((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
+        if (shout.getTag() == Shout.Tag.FUELREPAIR) ft.repair();
+        else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
+            hull.repair();
+        }
+        else if (shout.getTag() == Shout.Tag.HULLDAMAGE) hull.adjustHull(
+                (int) miner.b2body.getLinearVelocity().x,
+                (int) miner.b2body.getLinearVelocity().y);
+
     }
 
     @Override

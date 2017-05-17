@@ -54,7 +54,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             resolveContact(fixtureCheckObject("leftWing"));
         }
-        Listener.BUS.update(new Shout(Shout.Tag.HULL));
+        Listener.BUS.update(new Shout(Shout.Tag.HULLDAMAGE));
     }
 
     @Override

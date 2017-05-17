@@ -48,12 +48,18 @@ public class StoreHandler {
         fillFuel.addListener(new ClickListener() {
 
             public void clicked(InputEvent event, float x, float y) {
-                Listener.BUS.update(new Shout(Shout.Tag.FUEL));
+                Listener.BUS.update(new Shout(Shout.Tag.FUELREPAIR));
             }
 
         });
 
         fixHull = new TextButton("Repair", storeSkin);
+        fixHull.addListener(new ClickListener() {
+
+            public void clicked(InputEvent event, float x, float y) {
+                Listener.BUS.update(new Shout(Shout.Tag.HULLREPAIR));
+            }
+        });
 
 
         table = new Table(storeSkin);

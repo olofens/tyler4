@@ -82,6 +82,5 @@ public class FuelTank implements IGear {
     @Override
     public void repair() {
         this.fuel = maxFuel;
-
     }
 }

@@ -80,7 +80,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         stage.addActor(table);
         Listener.BUS.addListener(this);
-        HudUpdater.FUEL.addListener(this);
+        HudUpdater.BUS.addListener(this);
 
 
     }
@@ -114,12 +114,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     @Override
     public void update(HudData data) {
-        if (data.getTag().equals("Hull")) {
-            adjustHullLabel(data.getString());
-        }
-        if (data.getTag().equals("Fuel")) {
-
-            adjustFuelLabel(data.getColor(), data.getString());
-        }
+        fuelLabel.setText(data.getFuel());
+        fuelLabel.setColor(data.getColor());
+        hullLabel.setText(data.getHull());
     }
 }
