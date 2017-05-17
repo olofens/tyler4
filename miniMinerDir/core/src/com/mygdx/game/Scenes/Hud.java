@@ -24,7 +24,6 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Tools.PauseButtonHandler;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
@@ -60,7 +59,6 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
-    private PauseButtonHandler pHandler;
     private PauseScreenHandler psHandler;
 
 
