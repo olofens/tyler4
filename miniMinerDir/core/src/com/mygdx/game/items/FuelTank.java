@@ -53,7 +53,7 @@ public class FuelTank implements IGear {
     }
 
     public boolean isEmpty(){
-        if(fuel <= 95000){
+        if(fuel <= 80000){
             return true;
         }
         return false;

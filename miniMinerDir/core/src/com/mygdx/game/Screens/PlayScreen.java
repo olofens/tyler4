@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -18,6 +19,13 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -56,6 +64,10 @@ public class PlayScreen implements Screen {
     private Sprite minerSpriteRocket;
     private Vector2 minerPos;
 
+    private Stage stage;
+    private TextButton resumeButton;
+    private Table table;
+
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -65,7 +77,15 @@ public class PlayScreen implements Screen {
     // GameModel variables
     private GameModel gameModel;
 
+
     Vector2 v2;
+
+    public enum State{
+        PAUSE,
+        RESUME
+    }
+
+    private State state;
 
     /**
      * The main playscreen where everything is painted and shown
@@ -84,10 +104,11 @@ public class PlayScreen implements Screen {
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
+        //stage = new Stage(viewPort, ((MiniMiner) game).batch);
+
 
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
-
 
         //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right1.png");
@@ -98,6 +119,10 @@ public class PlayScreen implements Screen {
 
         minerIMG3 = new Texture("driller_projekt_Rocket1.png");
         minerSpriteRocket = new Sprite(minerIMG3);
+
+        state = State.RESUME;
+
+
     }
 
 
@@ -111,10 +136,16 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
-
+        if(hud.getPauseState()){
+            this.state = State.PAUSE;
+        }
+        else{
+            this.state = State.RESUME;
+        }
 
         //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
+
 
         gameModel.update(v2);
 
@@ -143,40 +174,50 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float dt) {
+        System.out.print(state + "\n");
 
-        update(dt);
-
-        //render our game map
-        renderer.render();
-
-        //render miner
-        game.batch.begin();
-
-        drawMiner();
-
-        game.batch.end();
+       if(state.equals(State.RESUME)) {
+           Gdx.input.setInputProcessor(hud.stage);
 
 
-        //Render b2dr lines
-        //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
+           update(dt);
+           //render our game map
+           renderer.render();
+           //render miner
+           game.batch.begin();
+           drawMiner();
+           game.batch.end();
+           //Render b2dr lines
+           //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
+           game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+           hud.stage.draw();
+           game.batch.setProjectionMatrix(gameCam.combined);
 
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
-        game.batch.setProjectionMatrix(gameCam.combined);
+           if (gameModel.gameOver()) {
+               hud.dispose();
+               //timer prevents hud sticking on to screen
+               Timer.schedule(new Timer.Task() {
+                   @Override
+                   public void run() {
+                       game.setScreen(new GameOverScreen(game));
+                   }
+               }, 0.2f);
+           }
+       }
+       else{
+           //game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+           //hud.stage.draw();
 
-        if(gameModel.gameOver()){
-            hud.dispose();
+           update(dt);
+                hud.table2.setVisible(true);
+                Gdx.input.setInputProcessor(hud.stage2);
 
-            //timer prevents hud sticking on to screen
-            Timer.schedule(new Timer.Task(){
-                @Override
-                public void run() {
-                    game.setScreen(new GameOverScreen(game));
-                }
-            }, 0.2f);
+                System.out.print("GAME IS PAUSED");
+                hud.stage2.act();
+                hud.stage2.draw();
 
 
-        }
+       }
 
 
     }
@@ -275,11 +316,13 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
+        this.state = State.PAUSE;
 
     }
 
     @Override
     public void resume() {
+        this.state = State.RESUME;
 
     }
 

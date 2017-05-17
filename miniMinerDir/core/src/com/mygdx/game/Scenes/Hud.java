@@ -5,13 +5,20 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Tools.PauseButtonHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
@@ -29,6 +36,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
 
     public Stage stage;
+    public Stage stage2;
+    public Table table2;
     private Viewport viewport;
 
 
@@ -44,11 +53,13 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private DrillButtonHandler dbHandler;
     private PauseButtonHandler pHandler;
 
+
     /**
      * Creates the HUD for the framework of the game
      *
      * @param spriteBatch
      */
+
     public Hud(SpriteBatch spriteBatch) {
 
         tpHandler = new TouchpadHandler();
@@ -58,6 +69,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
+        stage2 = new Stage(viewport, spriteBatch);
+
 
 
         //Create a Stage and add TouchPad
@@ -92,7 +105,39 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         Listener.BUS.addListener(this);
         HudUpdater.FUEL.addListener(this);
 
+        //table.setFillParent(true);
 
+
+
+
+        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
+                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
+        TextButton resumeButton = new TextButton("Resume", storeSkin);
+        resumeButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                pHandler.setIsPaused(false);
+                table2.setVisible(false);
+
+            }
+        });
+        table2 = new Table(storeSkin);
+        table2.center();
+        table2.setBounds(10, 90, 190, 210);
+        System.out.print(table.getWidth());
+        //table.add(miniMinerLabel);
+        //table.row();
+        table2.add(resumeButton);
+        stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
+        stage2.addActor(table2);
+        //table2.setVisible(false);
+
+
+
+    }
+
+    public boolean getPauseState(){
+        return pHandler.getIsPaused();
     }
 
     private void adjustFuelLabel(Integer fuel, Color color, String fuelString) {

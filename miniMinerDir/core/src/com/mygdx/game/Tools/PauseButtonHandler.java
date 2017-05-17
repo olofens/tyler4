@@ -22,8 +22,18 @@ public class PauseButtonHandler {
 
     private ImageButton pauseBtn;
 
+    private boolean isPaused;
+
     public ImageButton getPauseBtn() {
         return pauseBtn;
+    }
+
+    public boolean getIsPaused(){
+        return isPaused;
+    }
+
+    public void setIsPaused(boolean val){
+        isPaused = val;
     }
 
     public PauseButtonHandler(){
@@ -40,8 +50,13 @@ public class PauseButtonHandler {
 
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.print("Pause.");
-
+                System.out.print("CLICK.");
+                if(isPaused){
+                    isPaused = false;
+                }
+                else{
+                    isPaused = true;
+                }
                 //do something
                 return true;
             }
