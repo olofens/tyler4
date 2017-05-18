@@ -11,6 +11,14 @@ public class DrillData {
         RIGHT;
     }
 
-    private DrillDirection 
+    private DrillDirection drillDirection;
+
+    public DrillData(DrillDirection direction) {
+        this.drillDirection = direction;
+    }
+
+    public DrillDirection getDrillDirection() {
+        return drillDirection;
+    }
 
 }
