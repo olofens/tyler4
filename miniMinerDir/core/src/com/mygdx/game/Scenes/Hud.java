@@ -174,7 +174,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
 
 
-    private void adjustFuelLabel(Color color, String fuelString) {
+    private void adjustFuelLabel(Color color, String fuelString)
+    {
         fuelLabel.setColor(color);
         fuelLabel.setText(fuelString);
     }

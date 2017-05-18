@@ -60,7 +60,7 @@ public class PauseScreenHandler {
 
 
     public void createGameScreen(){
-        //game.setScreen(new StartMenuScreen((MiniMiner)game));
+        game.setScreen(new StartMenuScreen((MiniMiner)game));
         //MiniMiner mm = new MiniMiner();
         //mm.create();
     }
@@ -86,7 +86,7 @@ public class PauseScreenHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 newScreen = true;
-                //createGameScreen();
+                createGameScreen();
 
 
             }

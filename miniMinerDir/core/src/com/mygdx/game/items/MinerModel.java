@@ -76,8 +76,7 @@ public class MinerModel implements IListener, IOreListener {
     }
 
 
-    private Color fuelColor() {
-        if (ft.getFuel() > 60000)
+
 
 
     private Color fuelColor(){
