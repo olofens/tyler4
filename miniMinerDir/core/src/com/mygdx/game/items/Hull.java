@@ -27,7 +27,7 @@ public class Hull implements IGear {
     public Hull() {
         maxHull = 100;
         hull = maxHull;
-        damageFactor = 0.5f;
+        damageFactor = 3;
 
     }
 
@@ -38,12 +38,8 @@ public class Hull implements IGear {
         return false;
     }
 
-    public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
-        if (minerVelocityX < -10 || minerVelocityX > 10)
-            hull -= (Math.abs(minerVelocityX) * damageFactor);
-        if (minerVelocityY > 10 || minerVelocityY < -10) {
-            hull -= (Math.abs(minerVelocityY) * damageFactor);
-        }
+    public void adjustHull(Integer minerVelocityY) {
+        hull -= minerVelocityY * damageFactor;
     }
 
 
