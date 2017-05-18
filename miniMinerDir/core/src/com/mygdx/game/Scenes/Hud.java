@@ -1,6 +1,5 @@
 package com.mygdx.game.Scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,28 +15,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.event.*;
-import com.mygdx.game.items.FuelTank;
-import com.mygdx.game.items.Hull;
 
 /**
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, IListener, IHudUpdater {
+public class Hud implements Disposable, com.mygdx.game.event.general.IListener, com.mygdx.game.event.hud.IHudUpdater {
 
 
     public Stage stage;
@@ -138,8 +131,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
 
         stage.addActor(table);
-        Listener.BUS.addListener(this);
-        HudUpdater.BUS.addListener(this);
+        com.mygdx.game.event.general.Listener.BUS.addListener(this);
+        com.mygdx.game.event.hud.HudUpdater.BUS.addListener(this);
 
         //table.setFillParent(true);
 
@@ -191,8 +184,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     }
 
     @Override
-    public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.STORE) {
+    public void update(com.mygdx.game.event.general.Shout shout) {
+        if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.STORE) {
             toggleStoreVisibility();
         }
     }
@@ -203,7 +196,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     }
 
     @Override
-    public void update(HudData data) {
+    public void update(com.mygdx.game.event.hud.HudData data) {
         fuelLabel.setText(data.getFuel());
         fuelLabel.setColor(data.getColor());
         hullLabel.setText(data.getHull());

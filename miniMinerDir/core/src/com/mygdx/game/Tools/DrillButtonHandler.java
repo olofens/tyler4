@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.game.event.Listener;
-import com.mygdx.game.event.Shout;
+import com.mygdx.game.event.general.Listener;
+import com.mygdx.game.event.general.Shout;
 
 /**
  * Created by Olof Enström on 2017-05-16.

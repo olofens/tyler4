@@ -1,4 +1,4 @@
-package com.mygdx.game.event;
+package com.mygdx.game.event.ore;
 
 import com.badlogic.gdx.utils.Sort;
 
