@@ -31,6 +31,13 @@ public class Hull implements IGear {
 
     }
 
+    public boolean isEmpty(){
+        if(hull <= 0){
+            return true;
+        }
+        return false;
+    }
+
     public void adjustHull(Integer minerVelocityX, Integer minerVelocityY) {
         if (minerVelocityX < -10 || minerVelocityX > 10)
             hull -= (Math.abs(minerVelocityX) * damageFactor);

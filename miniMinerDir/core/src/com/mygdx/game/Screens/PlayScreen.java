@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -17,6 +19,14 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
@@ -44,7 +54,6 @@ public class PlayScreen implements Screen {
     private OrthographicCamera gameCam;
     private Viewport viewPort;
 
-
     // Miner variables
     // TODO FIX LISTENER
     private Texture minerIMG;
@@ -54,6 +63,10 @@ public class PlayScreen implements Screen {
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
     private Vector2 minerPos;
+
+    private Stage stage;
+    private TextButton resumeButton;
+    private Table table;
 
 
     private OrthogonalTiledMapRenderer renderer;
@@ -65,6 +78,15 @@ public class PlayScreen implements Screen {
     private GameModel gameModel;
 
 
+    Vector2 v2;
+
+    public enum State{
+        PAUSE,
+        RESUME
+    }
+
+    private State state;
+
     /**
      * The main playscreen where everything is painted and shown
      *
@@ -73,6 +95,9 @@ public class PlayScreen implements Screen {
     public PlayScreen(MiniMiner game) {
         this.game = game;
 
+
+        SpriteBatch sb = new SpriteBatch();
+
         this.gameModel = new GameModel();
         // Our camera and our viewport, this is where the camera focuses during the game
         gameCam = new OrthographicCamera();
@@ -80,10 +105,11 @@ public class PlayScreen implements Screen {
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
+        //stage = new Stage(viewPort, ((MiniMiner) game).batch);
+
 
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
-
 
         //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right1.png");
@@ -95,31 +121,51 @@ public class PlayScreen implements Screen {
         minerIMG3 = new Texture("driller_projekt_Rocket1.png");
         minerSpriteRocket = new Sprite(minerIMG3);
 
+        state = State.RESUME;
+
 
     }
+
 
     @Override
     public void show() {
 
     }
 
+    public void checkState(){
+        if(hud.isPaused()){
+            this.state = State.PAUSE;
+            //System.out.print("GAME IS PAUSED");
+        }
+        else {
+            this.state = State.RESUME;
+            //System.out.print("RESUME");}
+        }
+    }
     /**
      *
      * @param dt
      */
     public void update(float dt) {
+
+
+        checkState();
+
         //The Vector that our Touchpadhandler creates
-        Vector2 v2 = hud.tpHandler.handleInput();
+        v2 = hud.tpHandler.handleInput();
+
 
         gameModel.update(v2);
+
 
         //hud.adjustFuelLabel(gameModel.getMinerModel().getFuelTank());
 
         //TODO MOVE TO GAMEMODEL
 
-
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
+
         renderer.setView(gameCam);
+
     }
 
 
@@ -130,66 +176,66 @@ public class PlayScreen implements Screen {
 
     //TODO REMOVE SOPP
     public boolean drawDown() {
-
         return hud.tpHandler.isTouchingDown();
     }
-/*
-    private boolean drawRight() {
-        //Check touchpad
-        if (hud.tpHandler.isTouchingRight()) {
-            //RIGHT
-            return true;
-        } else if (hud.tpHandler.isTouchingLeft()) {
-            //LEFT
-            return false;
-        }
-        //Check velocity
-        else if (gameModel.getMiner().b2body.getLinearVelocity().x > 0) {
-            //RIGHT
-            gameModel.setIsFacingRight(true);
-            return true;
-        } else if (gameModel.getMiner().b2body.getLinearVelocity().x < 0) {
-            //LEFT
-            gameModel.setIsFacingRight(false);
-            return false;
-        }
-        //Check last direction
-        else if (gameModel.getIsFacingRight()) {
-            //RIGHT
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    */
 
 
     @Override
     public void render(float dt) {
-        update(dt);
 
+        //createNewScreen();
+        //System.out.print(state + "\n");
+
+       if(state.equals(State.RESUME)) {
+
+           renderResume(dt);
+       }
+       else{
+
+            renderPause(dt);
+       }
+
+
+    }
+
+    public void renderResume(float dt){
+        Gdx.input.setInputProcessor(hud.stage);
+
+        update(dt);
         //render our game map
         renderer.render();
-
         //render miner
         game.batch.begin();
-
         drawMiner();
-
         game.batch.end();
-
-
         //Render b2dr lines
         //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
-
-
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
 
-
+        if (gameModel.gameOver()) {
+            hud.dispose();
+            //timer prevents hud sticking on to screen
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    game.setScreen(new GameOverScreen(game));
+                }
+            }, 0.2f);
+        }
     }
+
+    public void renderPause(float dt){
+        //update(dt);
+        checkState();
+        hud.table2.setVisible(true);
+        Gdx.input.setInputProcessor(hud.stage2);
+
+        hud.stage2.act();
+        hud.stage2.draw();
+    }
+
 
     public void drawMiner() {
 
@@ -284,11 +330,13 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
+        this.state = State.PAUSE;
 
     }
 
     @Override
     public void resume() {
+        this.state = State.RESUME;
 
     }
 
@@ -296,6 +344,21 @@ public class PlayScreen implements Screen {
     public void hide() {
 
     }
+/*
+    public void createNewScreen(){
+        if(hud.isNewScreen()){
+            createMainMenu();
+            hud.setIsNewScreen(false);
+        }
+
+    }
+
+    public void createMainMenu(){
+        //game.setScreen(new StartMenuScreen((MiniMiner)game));
+        game.setScreen(new StartMenuScreen(game));
+
+    }
+    */
 
     @Override
     public void dispose() {

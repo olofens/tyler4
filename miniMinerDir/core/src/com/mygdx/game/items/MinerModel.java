@@ -64,8 +64,24 @@ public class MinerModel implements IListener, IOreListener {
 
     }
 
+
+    public boolean isAlive(){
+        if(ft.isEmpty()){
+            return false;
+        }
+        if (ft.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+
     private Color fuelColor() {
         if (ft.getFuel() > 60000)
+
+
+    private Color fuelColor(){
+        if(ft.getFuel() > 60000)
             return Color.GREEN;
         else if (ft.getFuel() < 60000 && ft.getFuel() > 20000)
             return Color.ORANGE;
