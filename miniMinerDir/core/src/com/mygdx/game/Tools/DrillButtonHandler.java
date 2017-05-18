@@ -25,19 +25,6 @@ public class DrillButtonHandler {
 
         drillButton = new ImageButton(drawable);
         drillButton.setPosition(20, 45);
-
-        drillButton.addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on PRESS");
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on RELEASE");
-            }
-        });
     }
 
     public ImageButton getdrillButton() {

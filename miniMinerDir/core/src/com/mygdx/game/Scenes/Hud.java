@@ -25,12 +25,18 @@ import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.event.general.IListener;
+import com.mygdx.game.event.general.Listener;
+import com.mygdx.game.event.general.Shout;
+import com.mygdx.game.event.hud.HudData;
+import com.mygdx.game.event.hud.HudUpdater;
+import com.mygdx.game.event.hud.IHudUpdater;
 
 /**
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, com.mygdx.game.event.general.IListener, com.mygdx.game.event.hud.IHudUpdater {
+public class Hud implements Disposable, IListener, IHudUpdater {
 
 
     public Stage stage;
@@ -66,6 +72,8 @@ public class Hud implements Disposable, com.mygdx.game.event.general.IListener, 
      */
 
     public Hud(SpriteBatch spriteBatch) {
+
+        initDrillButtonListener();
 
         Texture myTexture = new Texture(("Pause-26.png"));
         TextureRegion myTextureRegion = new TextureRegion(myTexture);
@@ -131,8 +139,8 @@ public class Hud implements Disposable, com.mygdx.game.event.general.IListener, 
 
 
         stage.addActor(table);
-        com.mygdx.game.event.general.Listener.BUS.addListener(this);
-        com.mygdx.game.event.hud.HudUpdater.BUS.addListener(this);
+        Listener.BUS.addListener(this);
+        HudUpdater.BUS.addListener(this);
 
         //table.setFillParent(true);
 
@@ -149,6 +157,21 @@ public class Hud implements Disposable, com.mygdx.game.event.general.IListener, 
         //table2.setVisible(false);
 
 
+    }
+
+    private void initDrillButtonListener() {
+        dbHandler.getdrillButton().addListener(new ClickListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
+                System.out.println("ran the bus on PRESS");
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
+                System.out.println("ran the bus on RELEASE");
+            }
+        });
     }
 
 
@@ -184,8 +207,8 @@ public class Hud implements Disposable, com.mygdx.game.event.general.IListener, 
     }
 
     @Override
-    public void update(com.mygdx.game.event.general.Shout shout) {
-        if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.STORE) {
+    public void update(Shout shout) {
+        if (shout.getTag() == Shout.Tag.STORE) {
             toggleStoreVisibility();
         }
     }
@@ -196,7 +219,7 @@ public class Hud implements Disposable, com.mygdx.game.event.general.IListener, 
     }
 
     @Override
-    public void update(com.mygdx.game.event.hud.HudData data) {
+    public void update(HudData data) {
         fuelLabel.setText(data.getFuel());
         fuelLabel.setColor(data.getColor());
         hullLabel.setText(data.getHull());
