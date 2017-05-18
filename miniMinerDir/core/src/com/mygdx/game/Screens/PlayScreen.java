@@ -182,6 +182,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float dt) {
+
+        //createNewScreen();
         //System.out.print(state + "\n");
 
        if(state.equals(State.RESUME)) {
@@ -342,6 +344,21 @@ public class PlayScreen implements Screen {
     public void hide() {
 
     }
+/*
+    public void createNewScreen(){
+        if(hud.isNewScreen()){
+            createMainMenu();
+            hud.setIsNewScreen(false);
+        }
+
+    }
+
+    public void createMainMenu(){
+        //game.setScreen(new StartMenuScreen((MiniMiner)game));
+        game.setScreen(new StartMenuScreen(game));
+
+    }
+    */
 
     @Override
     public void dispose() {

@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Screens.StartMenuScreen;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
@@ -34,6 +35,13 @@ public class PauseScreenHandler {
 
     private boolean isPaused = false;
 
+    public boolean isNewScreen() {
+        return newScreen;
+    }
+
+    public void setNewScreen(boolean newScreen) {
+        this.newScreen = newScreen;
+    }
 
     public boolean isPaused() {
         return isPaused;
@@ -48,6 +56,13 @@ public class PauseScreenHandler {
     }
     public TextButton getMenuButton() {
         return menuButton;
+    }
+
+
+    public void createGameScreen(){
+        //game.setScreen(new StartMenuScreen((MiniMiner)game));
+        //MiniMiner mm = new MiniMiner();
+        //mm.create();
     }
 
     public PauseScreenHandler(){
@@ -71,8 +86,7 @@ public class PauseScreenHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 newScreen = true;
-                game.setScreen(new StartMenuScreen((MiniMiner)game));
-
+                //createGameScreen();
 
 
             }

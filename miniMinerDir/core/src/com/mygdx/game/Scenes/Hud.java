@@ -164,6 +164,14 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         return psHandler.isPaused();
     }
 
+    public boolean isNewScreen(){
+        return psHandler.isNewScreen();
+    }
+
+    public void setIsNewScreen(boolean val){
+        psHandler.setNewScreen(val);
+    }
+
 
 
     private void adjustFuelLabel(Integer fuel, Color color, String fuelString) {
