@@ -74,7 +74,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     public Hud(SpriteBatch spriteBatch) {
 
-        Texture myTexture = new Texture(("pause-26.png"));
+        Texture myTexture = new Texture(("Pause-26.png"));
         TextureRegion myTextureRegion = new TextureRegion(myTexture);
         TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
         pauseBtn = new ImageButton(myTexRegionDrawable);
