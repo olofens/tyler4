@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.event.drill.DrillData;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.items.Miner;
 
@@ -59,6 +60,11 @@ public class TouchpadHandler {
         return touchpad.getKnobPercentY() < -0.4;
     }
 
+    public DrillData.DrillDirection getDrillDirection() {
+        if (isTouchingLeft() && !isTouchingUp() && !isTouchingDown()) return DrillData.DrillDirection.LEFT;
+        else if (isTouchingRight() && !isTouchingUp() && !isTouchingDown()) return DrillData.DrillDirection.RIGHT;
+        else return DrillData.DrillDirection.DOWN;
+    }
 
     public Vector2 handleInput() {
          Vector2 vector2 = new Vector2(0,0);

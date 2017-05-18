@@ -25,6 +25,8 @@ import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.event.drill.DrillData;
+import com.mygdx.game.event.drill.DrillListener;
 import com.mygdx.game.event.general.IListener;
 import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.general.Shout;
@@ -162,8 +164,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private void initDrillButtonListener() {
         dbHandler.getdrillButton().addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on PRESS");
+                DrillListener.BUS.update();
                 return true;
             }
 
@@ -172,6 +173,10 @@ public class Hud implements Disposable, IListener, IHudUpdater {
                 System.out.println("ran the bus on RELEASE");
             }
         });
+    }
+
+    private DrillData.DrillDirection getDrillDirection() {
+
     }
 
 
