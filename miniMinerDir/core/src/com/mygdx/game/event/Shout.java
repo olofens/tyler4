@@ -10,8 +10,7 @@ public class Shout {
        STORE,
        DRILL,
        FUELREPAIR,
-       HULLREPAIR,
-       HULLDAMAGE;
+       HULLREPAIR;
    }
     private final Tag tag;
 

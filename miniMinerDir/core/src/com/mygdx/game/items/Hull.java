@@ -32,14 +32,12 @@ public class Hull implements IGear {
     }
 
     public boolean isEmpty(){
-        if(hull <= 0){
-            return true;
-        }
-        return false;
+        return hull <= 0;
     }
 
-    public void adjustHull(Integer minerVelocityY) {
-        hull -= minerVelocityY * damageFactor;
+    public void adjustHull(float minerVelocityY) {
+        //explanation for incrementation of hull: minerVelY will be negative when falling
+        hull += minerVelocityY * damageFactor;
     }
 
 

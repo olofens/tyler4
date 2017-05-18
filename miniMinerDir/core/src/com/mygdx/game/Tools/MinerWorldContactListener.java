@@ -43,7 +43,6 @@ public class MinerWorldContactListener implements ContactListener, IListener {
 
         //Fixturechecks for all three sensors, object sent to resolve contact, which follows upp with drilling etc
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
-            Listener.BUS.update(new Shout(Shout.Tag.HULLDAMAGE));
             resolveContact(fixtureCheckObject("drill"));
         }
         else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {

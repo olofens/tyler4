@@ -1,6 +1,7 @@
 package com.mygdx.game.items;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.event.HudData;
 import com.mygdx.game.event.HudUpdater;
@@ -36,6 +37,8 @@ public class MinerModel implements IListener, IOreListener {
 
     private int cash;
 
+    float previousSpeed = 0;
+
 
     /**
      * Constructor which takes in world in order to create our Miner.
@@ -55,29 +58,26 @@ public class MinerModel implements IListener, IOreListener {
     /**
      * Getter for our miner
      *
-     * @return tnis.miner
+     * @return this.miner
      */
 
     public void update() {
+        if (minerFell()) hull.adjustHull(previousSpeed);
+
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
         HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), fuelColor()));
 
+        previousSpeed = miner.b2body.getLinearVelocity().y;
     }
 
 
     public boolean isAlive(){
-        if(ft.isEmpty()){
-            return false;
-        }
-        if (ft.isEmpty()){
-            return false;
-        }
-        return true;
+        return !ft.isEmpty();
     }
 
-
-
-
+    private boolean minerFell() {
+        return miner.b2body.getLinearVelocity().y == 0 && previousSpeed < -10;
+    }
 
     private Color fuelColor(){
         if(ft.getFuel() > 60000)
@@ -100,17 +100,7 @@ public class MinerModel implements IListener, IOreListener {
         return hull;
     }
 
-    @Override
-    public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.FUELREPAIR) ft.repair();
-        else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
-            hull.repair();
-        }
-        else if (shout.getTag() == Shout.Tag.HULLDAMAGE) hull.adjustHull(
-                (int) miner.b2body.getLinearVelocity().x,
-                (int) miner.b2body.getLinearVelocity().y);
 
-    }
 
     @Override
     public void update(TileTemplate tileTemplate) {
@@ -133,6 +123,14 @@ public class MinerModel implements IListener, IOreListener {
             inventory.setDiamond(inventory.getDiamond()+1);
         }
 
+    }
+
+    @Override
+    public void update(Shout shout) {
+        if (shout.getTag() == Shout.Tag.FUELREPAIR) ft.repair();
+        else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
+            hull.repair();
+        }
     }
 
     @Override
