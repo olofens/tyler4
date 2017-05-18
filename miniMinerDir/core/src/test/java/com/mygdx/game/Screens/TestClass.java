@@ -8,11 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
-import com.mygdx.game.items.FuelTank;
-import com.mygdx.game.items.Hull;
-import com.mygdx.game.items.Miner;
+import com.mygdx.game.items.*;
 
-import com.mygdx.game.items.MinerModel;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -63,6 +60,20 @@ public class TestClass {
         assertTrue(hull.getDamageFactor() == 0.5f);
         hull.upgrade();
         assertTrue(hull.getDamageFactor() == 0.45f);
+
+    }
+
+    @Test
+    public void testInventory(){
+        Inventory inv = new Inventory();
+
+        inv.setDiamond(2);
+        assertTrue(inv.getCash() == 0);
+        assertTrue(inv.getDiamond() == 2);
+        inv.sellInventory();
+        assertTrue(inv.getCash() == 1040);
+        assertTrue(inv.getDiamond() == 0);
+
 
     }
 
