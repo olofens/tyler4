@@ -113,7 +113,7 @@ public class GameModel {
     }
 
     public boolean gameOver() {
-        return minerModel.isAlive();
+        return !minerModel.isAlive();
     }
 
     public boolean gamePaused(){
@@ -192,11 +192,11 @@ public class GameModel {
         return this.b2dr;
     }
 
-    public boolean getIsFacingRight() {
+    private boolean getIsFacingRight() {
         return isFacingRight;
     }
 
-    public void setIsFacingRight(boolean value) {
+    private void setIsFacingRight(boolean value) {
         this.isFacingRight = value;
 
     }

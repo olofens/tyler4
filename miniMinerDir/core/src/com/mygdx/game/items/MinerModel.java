@@ -34,7 +34,7 @@ public class MinerModel implements IListener, IOreListener {
 
     private int cash;
 
-    float previousSpeed = 0;
+    private float previousSpeed = 0;
 
 
     /**
@@ -69,7 +69,7 @@ public class MinerModel implements IListener, IOreListener {
 
 
     public boolean isAlive(){
-        return ft.isEmpty();
+        return (!hull.isEmpty() && !ft.isEmpty());
     }
 
     private boolean minerFell() {
