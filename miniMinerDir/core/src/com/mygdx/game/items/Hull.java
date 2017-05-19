@@ -41,10 +41,6 @@ public class Hull implements IGear {
     }
 
 
-    public float getHull() {
-        return hull;
-    }
-
     public String getHullString(){
         Integer integerHull = (int) hull;
         hullString = integerHull.toString();

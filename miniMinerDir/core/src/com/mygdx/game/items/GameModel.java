@@ -112,13 +112,8 @@ public class GameModel {
         minerModel.update();
     }
 
-    public boolean gameOver(){
-        if(minerModel.isAlive()){
-            return false;
-        }
-        else{
-            return true;
-        }
+    public boolean gameOver() {
+        return minerModel.isAlive();
     }
 
     public boolean gamePaused(){
@@ -146,12 +141,7 @@ public class GameModel {
             return false;
         }
         //Check last direction
-        else if (getIsFacingRight()) {
-            //RIGHT
-            return true;
-        } else {
-            return false;
-        }
+        return getIsFacingRight();
     }
 
 

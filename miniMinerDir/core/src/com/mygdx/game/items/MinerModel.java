@@ -69,7 +69,7 @@ public class MinerModel implements IListener, IOreListener {
 
 
     public boolean isAlive(){
-        return !ft.isEmpty();
+        return ft.isEmpty();
     }
 
     private boolean minerFell() {
@@ -87,14 +87,6 @@ public class MinerModel implements IListener, IOreListener {
 
     public Miner getMiner() {
         return this.miner;
-    }
-
-    public FuelTank getFuelTank() {
-        return ft;
-    }
-
-    public Hull getHull() {
-        return hull;
     }
 
 

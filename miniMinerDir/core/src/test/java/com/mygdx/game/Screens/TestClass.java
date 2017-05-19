@@ -53,7 +53,6 @@ public class TestClass {
 
     @Test
     public void testHullRepair(){
-        Integer hulls;
         Hull hull = new Hull();
 
 

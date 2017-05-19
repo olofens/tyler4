@@ -56,7 +56,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     private ImageButton pauseBtn;
 
-    //TODO fix public
+
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
@@ -200,7 +200,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     }
 
 
-    public void toggleStoreVisibility() {
+    private void toggleStoreVisibility() {
         storeHandler.getStorePopup().setVisible(!storeHandler.getStorePopup().isVisible());
     }
 

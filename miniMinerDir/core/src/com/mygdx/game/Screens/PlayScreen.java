@@ -58,7 +58,7 @@ public class PlayScreen implements Screen {
 
     Vector2 v2;
 
-    public enum State{
+    public enum State {
         PAUSE,
         RESUME
     }
@@ -110,18 +110,17 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void checkState(){
-        if(hud.isPaused()){
+    private void checkState() {
+        if (hud.isPaused()) {
             this.state = State.PAUSE;
             //System.out.print("GAME IS PAUSED");
-        }
-        else {
+        } else {
             this.state = State.RESUME;
             //System.out.print("RESUME");}
         }
     }
+
     /**
-     *
      * @param dt
      */
     public void update(float dt) {
@@ -164,19 +163,17 @@ public class PlayScreen implements Screen {
         //createNewScreen();
         //System.out.print(state + "\n");
 
-       if(state.equals(State.RESUME)) {
+        if (state.equals(State.RESUME)) {
 
-           renderResume(dt);
-       }
-       else{
-
+            renderResume(dt);
+        } else {
             renderPause(dt);
-       }
+        }
 
 
     }
 
-    public void renderResume(float dt){
+    public void renderResume(float dt) {
         Gdx.input.setInputProcessor(hud.stage);
 
         update(dt);
@@ -204,7 +201,7 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void renderPause(float dt){
+    private void renderPause(float dt) {
         //update(dt);
         checkState();
         hud.table2.setVisible(true);
@@ -215,18 +212,16 @@ public class PlayScreen implements Screen {
     }
 
 
-    public void drawMiner() {
+    private void drawMiner() {
 
         Sprite mySprite;
         MinerDrawOptions mdo = gameModel.decideDirection();
 
-        if(mdo.getStrSprite().equals("minerSpriteRocket")){
+        if (mdo.getStrSprite().equals("minerSpriteRocket")) {
             mySprite = minerSpriteRocket;
-        }
-        else if(mdo.getStrSprite().equals("minerSpriteDrillDown")){
+        } else if (mdo.getStrSprite().equals("minerSpriteDrillDown")) {
             mySprite = minerSpriteDrillDown;
-        }
-        else{
+        } else {
             mySprite = minerSprite;
         }
         game.batch.draw(mySprite, mdo.getX(), mdo.getY(),
