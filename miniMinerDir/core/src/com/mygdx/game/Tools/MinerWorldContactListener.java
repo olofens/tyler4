@@ -7,6 +7,9 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.event.drill.DrillData;
+import com.mygdx.game.event.drill.DrillListener;
+import com.mygdx.game.event.drill.IDrillListener;
 import com.mygdx.game.event.general.IListener;
 import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.ore.Ore;
@@ -18,14 +21,24 @@ import com.mygdx.game.items.TileTemplate;
  * Created by Olof Enström on 2017-04-26.
  */
 
-public class MinerWorldContactListener implements ContactListener, IListener {
+public class MinerWorldContactListener implements ContactListener, IListener, IDrillListener {
     private Fixture a;
     private Fixture b;
     private boolean minerButtonPressed;
+    private DrillData.DrillDirection lastDirection;
+
+    private Fixture rightTile;
+    private Fixture bottomTile;
+    private Fixture leftTile;
+
+    private Fixture prevBottomTile;
+
+    private Fixture miner;
 
     public MinerWorldContactListener() {
         minerButtonPressed = false;
         Listener.BUS.addListener(this);
+        DrillListener.BUS.addListener(this);
     }
 
     @Override
@@ -33,6 +46,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         //Sets the two fixtures to whats in contact
         a = contact.getFixtureA();
         b = contact.getFixtureB();
+
         //Checks the popup for store with the BUS listener
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
@@ -41,6 +55,23 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             OreListener.ORE.update(new Ore(Ore.OreSort.SELL));
         }
 
+        //NEW
+        if(a.getUserData()=="drill"||b.getUserData()=="drill") {
+            setBottomTile(fixtureCheckObject("drill"));
+            miner = fixtureCheckSensor("drill");
+        } else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
+            rightTile = fixtureCheckObject("rightWing");
+            miner = fixtureCheckSensor("rightWing");
+        } else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
+            leftTile = fixtureCheckObject("leftWing");
+            miner = fixtureCheckSensor("leftWing");
+        }
+
+        if (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A)) {
+            drill(lastDirection);
+        }
+/*
+        //OLD
         //Fixturechecks for all three sensors, object sent to resolve contact, which follows upp with drilling etc
         if(a.getUserData()=="drill"||b.getUserData()=="drill"){
             resolveContact(fixtureCheckObject("drill"));
@@ -50,7 +81,7 @@ public class MinerWorldContactListener implements ContactListener, IListener {
         }
         else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             resolveContact(fixtureCheckObject("leftWing"));
-        }
+        }*/
     }
 
     @Override
@@ -64,6 +95,15 @@ public class MinerWorldContactListener implements ContactListener, IListener {
             System.out.println("Hope to see you soon!");
         }
 
+        if(a.getUserData()=="drill"||b.getUserData()=="drill") {
+            nullBottomTile();
+        } else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
+            rightTile = null;
+            System.out.println("nulled righttile");
+        } else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
+            leftTile = null;
+            System.out.println("nulled lefttile");
+        }
     }
 
     @Override
@@ -74,6 +114,22 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    private void setBottomTile(Fixture newBottomTile) {
+        prevBottomTile = bottomTile;
+        bottomTile = newBottomTile;
+        System.out.println("Set bottom tile");
+    }
+
+    private void nullBottomTile() {
+        if (prevBottomTile == null) {
+            bottomTile = null;
+            System.out.println("nulled current tile");
+        } else {
+            prevBottomTile = null;
+            System.out.println("nulled prev tile");
+        }
     }
 
     private boolean inContact(String stringIDa, String stringIDb) {
@@ -106,9 +162,23 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     private void resolveContact(Fixture object){
         //Checks if object isnt null and if specific diggingbuttons are pressed.
         //Calls object for drilling and updates inventory via Ore-bus
-        if(object.getUserData() instanceof TileTemplate && (minerButtonPressed ||  Gdx.input.isKeyPressed(Input.Keys.A)) ){
+        if(object.getUserData() instanceof TileTemplate && minerButtonPressed){
             ((TileTemplate) object.getUserData()).onDrillHit();
             OreListener.ORE.update((TileTemplate)object.getUserData());
+        }
+    }
+
+    private void drill(DrillData.DrillDirection direction) {
+        if (direction == DrillData.DrillDirection.RIGHT && rightTile != null) {
+            resolveContact(rightTile);
+            rightTile = null;
+        } else if (direction == DrillData.DrillDirection.LEFT && leftTile != null) {
+            resolveContact(leftTile);
+            leftTile = null;
+        } else if (direction == DrillData.DrillDirection.DOWN && bottomTile != null) {
+            resolveContact(bottomTile);
+            bottomTile = null;
+            System.out.println("ran drilldown");
         }
     }
 
@@ -116,7 +186,26 @@ public class MinerWorldContactListener implements ContactListener, IListener {
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.DRILL) {
-            minerButtonPressed = !minerButtonPressed;
+            //minerButtonPressed = !minerButtonPressed;
         }
+    }
+
+    @Override
+    public void update(DrillData drillData) {
+        if (!drillData.getNewDirection()) {
+            lastDirection = drillData.getDrillDirection();
+            minerButtonPressed = !minerButtonPressed;
+            if (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A)) {
+                drill(drillData.getDrillDirection());
+            } else {
+                lastDirection = null;
+            }
+        } else {
+          if (minerButtonPressed) {
+              //drill(drillData.getDrillDirection());
+              lastDirection = drillData.getDrillDirection();
+          }
+        }
+
     }
 }

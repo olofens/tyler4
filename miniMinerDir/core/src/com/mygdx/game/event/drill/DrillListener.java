@@ -17,9 +17,9 @@ public enum DrillListener {
         listeners.add(listener);
     }
 
-    public void update() {
+    public void update(DrillData drillData) {
         for (int i = 0; i < listeners.size(); i++) {
-            listeners.get(i).update();
+            listeners.get(i).update(drillData);
         }
     }
 }

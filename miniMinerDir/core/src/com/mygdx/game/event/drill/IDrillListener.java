@@ -5,5 +5,5 @@ package com.mygdx.game.event.drill;
  */
 
 public interface IDrillListener {
-    void update();
+    void update(DrillData drillData);
 }

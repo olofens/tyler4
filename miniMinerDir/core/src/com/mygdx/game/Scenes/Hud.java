@@ -1,6 +1,8 @@
 package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Tools.DesktopKeyController;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
@@ -75,8 +78,6 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     public Hud(SpriteBatch spriteBatch) {
 
-        initDrillButtonListener();
-
         Texture myTexture = new Texture(("Pause-26.png"));
         TextureRegion myTextureRegion = new TextureRegion(myTexture);
         TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
@@ -98,6 +99,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         storeHandler = new StoreHandler();
         dbHandler = new DrillButtonHandler();
         psHandler = new PauseScreenHandler();
+
+        initDrillButtonListener();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
@@ -164,22 +167,15 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private void initDrillButtonListener() {
         dbHandler.getdrillButton().addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DrillListener.BUS.update();
+                DrillListener.BUS.update(new DrillData(tpHandler.getDrillDirection(), false));
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Listener.BUS.update(new Shout(Shout.Tag.DRILL));
-                System.out.println("ran the bus on RELEASE");
+                DrillListener.BUS.update(new DrillData(tpHandler.getDrillDirection(), false));
             }
         });
     }
-
-    private DrillData.DrillDirection getDrillDirection() {
-
-    }
-
-
 
     public boolean isPaused(){
         return psHandler.isPaused();
@@ -215,6 +211,11 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.STORE) {
             toggleStoreVisibility();
+        } else if (shout.getTag() == Shout.Tag.NEW_TP_DIR) {
+            DrillData.DrillDirection dir = tpHandler.getDrillDirection();
+
+            DrillListener.BUS.update(new DrillData(dir, true));
+
         }
     }
 
@@ -225,8 +226,9 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     @Override
     public void update(HudData data) {
-        fuelLabel.setText(data.getFuel());
-        fuelLabel.setColor(data.getColor());
-        hullLabel.setText(data.getHull());
+        adjustFuelLabel(data.getColor(), data.getFuel());
+        adjustHullLabel(data.getHull());
     }
+
+
 }

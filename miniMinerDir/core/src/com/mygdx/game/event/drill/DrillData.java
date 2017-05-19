@@ -8,17 +8,20 @@ public class DrillData {
     public enum DrillDirection {
         LEFT,
         DOWN,
-        RIGHT;
+        RIGHT,
     }
 
     private DrillDirection drillDirection;
+    private boolean newDirection;
 
-    public DrillData(DrillDirection direction) {
+    public DrillData(DrillDirection direction, boolean newDirection) {
         this.drillDirection = direction;
+        this.newDirection = newDirection;
     }
 
     public DrillDirection getDrillDirection() {
         return drillDirection;
     }
+    public boolean getNewDirection() { return newDirection; }
 
 }

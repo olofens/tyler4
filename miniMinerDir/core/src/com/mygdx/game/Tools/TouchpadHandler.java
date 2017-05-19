@@ -1,5 +1,7 @@
 package com.mygdx.game.Tools;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -7,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.drill.DrillData;
+import com.mygdx.game.event.drill.DrillListener;
+import com.mygdx.game.event.general.Listener;
+import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.items.Miner;
 
@@ -19,6 +24,9 @@ public class TouchpadHandler {
 
     
     private Touchpad touchpad;
+
+    private DrillData.DrillDirection prevDirection;
+    private DrillData.DrillDirection currDirection;
 
 
     public TouchpadHandler() {
@@ -67,6 +75,16 @@ public class TouchpadHandler {
     }
 
     public Vector2 handleInput() {
+
+        checkDirection();
+
+        //POOR SOLUTION FOR DESKTOP TESTING
+        //TODO REMOVE
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            DrillListener.BUS.update(new DrillData(getDrillDirection(), false));
+        }
+
          Vector2 vector2 = new Vector2(0,0);
         if (touchpad.getKnobPercentY() != 0) {
             vector2.y = touchpad.getKnobPercentY();
@@ -81,6 +99,17 @@ public class TouchpadHandler {
     public Touchpad getTouchpad(){
         return touchpad;
     }
+
+    private void checkDirection() {
+        currDirection = getDrillDirection();
+
+        if (prevDirection != currDirection && prevDirection != null) {
+            Listener.BUS.update(new Shout(Shout.Tag.NEW_TP_DIR));
+        }
+
+        prevDirection = currDirection;
+    }
+
 }
 
 

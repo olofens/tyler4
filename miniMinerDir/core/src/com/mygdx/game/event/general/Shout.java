@@ -7,6 +7,8 @@ package com.mygdx.game.event.general;
 public class Shout {
 
    public enum Tag {
+       NEW_TP_DIR,
+       KEY_A,
        STORE,
        DRILL,
        FUELREPAIR,
