@@ -19,6 +19,8 @@ public class Hull implements IGear {
 
     private float damageFactor;
 
+    public final float damageFactorUpgrade = 0.05f;
+
 
 
     /**
@@ -56,7 +58,7 @@ public class Hull implements IGear {
      */
     @Override
     public void upgrade() {
-        damageFactor -= 0.05;
+        damageFactor -= damageFactorUpgrade;
     }
 
     /**

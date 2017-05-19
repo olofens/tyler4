@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.items.*;
 
 import org.junit.Test;
@@ -45,20 +46,22 @@ public class TestClass {
     public void testUpgrades()throws Exception{
         FuelTank ft = new FuelTank();
 
-        assertTrue(ft.getFuel() == 100000);
+        int originalFuel = ft.getFuel();
+
+        assertTrue(originalFuel == 100000);
         ft.upgrade();
         ft.repair();
-        assertTrue(ft.getFuel() == 150000);
+        assertTrue(ft.getFuel() == (originalFuel + ft.fuelUpgrade));
     }
 
     @Test
     public void testHullRepair(){
         Hull hull = new Hull();
+        float originalDamagfactor = hull.getDamageFactor();
 
-
-        assertTrue(hull.getDamageFactor() == 0.5f);
+        assertTrue(originalDamagfactor == 3);
         hull.upgrade();
-        assertTrue(hull.getDamageFactor() == 0.45f);
+        assertTrue(hull.getDamageFactor() == originalDamagfactor - hull.damageFactorUpgrade);
 
     }
 
@@ -70,12 +73,11 @@ public class TestClass {
         assertTrue(inv.getCash() == 0);
         assertTrue(inv.getDiamond() == 2);
         inv.sellInventory();
-        assertTrue(inv.getCash() == 1040);
+        assertTrue(inv.getCash() == (Constants.DIAMOND_VALUE*2));
         assertTrue(inv.getDiamond() == 0);
 
 
     }
-
 
 
 }

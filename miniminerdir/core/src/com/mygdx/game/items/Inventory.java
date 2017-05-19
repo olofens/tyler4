@@ -1,5 +1,7 @@
 package com.mygdx.game.items;
 
+import com.mygdx.game.Utils.Constants;
+
 /**
  * Created by walling on 5/16/2017.
  */
@@ -26,7 +28,8 @@ public class Inventory {
     }
 
     public void sellInventory(){
-        cash+=(coal*20)+(iron*50)+(gold*120)+(lapiz*250)+(redstone*350)+(diamond*520);
+        cash+=(coal* Constants.COAL_VALUE)+(iron*Constants.IRON_VALUE)+(gold*Constants.GOLD_VALUE)+(lapiz*Constants.LAPIZ_VALUE)
+                +(redstone*Constants.REDSTONE_VALUE)+(diamond*Constants.DIAMOND_VALUE);
         clearInventory();
     }
 

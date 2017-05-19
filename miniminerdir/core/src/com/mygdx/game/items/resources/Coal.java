@@ -15,6 +15,7 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public class Coal extends TileTemplate {
+
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
         super(world, tiledMap, constrains);

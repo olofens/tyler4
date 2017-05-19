@@ -15,6 +15,7 @@ public class FuelTank implements IGear {
     //this is the maximum amount of fuel the Miner can have, can be upgraded to a bigger integer
     private int maxFuel;
     private Integer fuel;
+    public final int fuelUpgrade = 50000;
 
     //This is the variable that decreases the fuel by a certain amount every update
     private int decreaseFuel;
@@ -74,7 +75,7 @@ public class FuelTank implements IGear {
      */
     @Override
     public void upgrade() {
-        this.maxFuel += 50000;
+        this.maxFuel += fuelUpgrade;
 
         this.decreaseFuel -= 1;
     }

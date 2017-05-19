@@ -26,5 +26,13 @@ public final class Constants {
     public static final short GOLD_BIT = 512;
     public static final short DIAMOND_BIT = 1024;
 
+    //Value of all minerals
+    public static final int COAL_VALUE = 20;
+    public static final int IRON_VALUE =50;
+    public static final int GOLD_VALUE =120;
+    public static final int LAPIZ_VALUE =250;
+    public static final int REDSTONE_VALUE =350;
+    public static final int DIAMOND_VALUE = 520;
+
 
 }
