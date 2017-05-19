@@ -19,7 +19,7 @@ public class Hull implements IGear {
 
     private float damageFactor;
 
-    private String hullString;
+
 
     /**
      * Constructor which gives our default value for the health and creates a label;
@@ -43,7 +43,7 @@ public class Hull implements IGear {
 
     public String getHullString(){
         Integer integerHull = (int) hull;
-        hullString = integerHull.toString();
+        String hullString = integerHull.toString();
         return hullString;
     }
 
