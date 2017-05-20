@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
+import com.mygdx.game.Tools.StoreUpgradeHandler;
 import com.mygdx.game.Tools.TouchpadHandler;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
@@ -61,6 +63,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
     private PauseScreenHandler psHandler;
+    private StoreUpgradeHandler suHandler;
 
 
 
@@ -96,6 +99,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         storeHandler = new StoreHandler();
         dbHandler = new DrillButtonHandler();
         psHandler = new PauseScreenHandler();
+        suHandler = new StoreUpgradeHandler();
+
 
         initDrillButtonListener();
 
@@ -121,6 +126,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         stage.addActor(storeHandler.getStorePopup());
         stage.addActor(tpHandler.getTouchpad());
         stage.addActor(pauseBtn);
+        stage.addActor(suHandler.getStorePopup());
         Gdx.input.setInputProcessor(stage);
 
         score = 0;
@@ -186,8 +192,6 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         psHandler.setNewScreen(val);
     }
 
-
-
     private void adjustFuelLabel(Color color, String fuelString)
     {
         fuelLabel.setColor(color);
@@ -199,15 +203,17 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     }
 
-
-    private void toggleStoreVisibility() {
-        storeHandler.getStorePopup().setVisible(!storeHandler.getStorePopup().isVisible());
+    private void toggleActorVisibility(Actor actor) {
+        boolean visible = actor.isVisible();
+        actor.setVisible(!visible);
     }
 
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.STORE) {
-            toggleStoreVisibility();
+            toggleActorVisibility(storeHandler.getStorePopup());
+        } else if (shout.getTag() == Shout.Tag.STORE_UPGRADE) {
+           toggleActorVisibility(suHandler.getStorePopup());
         } else if (shout.getTag() == Shout.Tag.NEW_TP_DIR) {
             DrillData.DrillDirection dir = tpHandler.getDrillDirection();
 
