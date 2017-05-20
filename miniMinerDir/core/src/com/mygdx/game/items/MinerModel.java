@@ -119,6 +119,10 @@ public class MinerModel implements IListener, IOreListener {
         if (shout.getTag() == Shout.Tag.FUELREPAIR) ft.repair();
         else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
             hull.repair();
+        } else if (shout.getTag() == Shout.Tag.FUELUPGRADE) {
+            ft.upgrade();
+        } else if (shout.getTag() == Shout.Tag.HULLUPGRADE) {
+            hull.upgrade();
         }
     }
 

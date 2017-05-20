@@ -96,6 +96,8 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
         if (inContact("miner", "store")) {
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
             System.out.println("Hope to see you soon!");
+        } else if (inContact("miner", "storeUpgrade")) {
+            Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
         }
 
         if(a.getUserData()=="drill"||b.getUserData()=="drill") {
