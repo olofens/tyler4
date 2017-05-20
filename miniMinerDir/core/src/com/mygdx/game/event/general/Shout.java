@@ -8,11 +8,13 @@ public class Shout {
 
    public enum Tag {
        NEW_TP_DIR,
-       KEY_A,
        STORE,
+       STORE_UPGRADE,
        DRILL,
        FUELREPAIR,
-       HULLREPAIR;
+       HULLREPAIR,
+       FUELUPGRADE,
+       HULLUPGRADE;
    }
     private final Tag tag;
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.items.StoreUpgradeTile;
 import com.mygdx.game.items.resources.Dirt;
 import com.mygdx.game.items.resources.Coal;
 import com.mygdx.game.items.resources.Diamond;
@@ -73,6 +74,12 @@ public class Box2DWorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new StoreTile(world, map, rect);
+        }
+
+        for (MapObject object : map.getLayers().get("StoreUpgrade").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            new StoreUpgradeTile(world, map, rect);
         }
 
         Edge.parseTiledObject(world, map.getLayers().get("Edges").getObjects());

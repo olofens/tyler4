@@ -2338,7 +2338,7 @@
  <objectgroup name="Store">
   <object id="2" x="256" y="416" width="32" height="64"/>
  </objectgroup>
- <objectgroup name="UpgradeStore">
+ <objectgroup name="StoreUpgrade">
   <object id="6796" x="768" y="416" width="32" height="64"/>
  </objectgroup>
  <objectgroup name="Edges">
