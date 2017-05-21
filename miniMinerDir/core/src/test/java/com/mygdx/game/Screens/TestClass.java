@@ -93,6 +93,27 @@ public class TestClass {
         assertTrue(ft.getUpgradeLevel() == ft.MAX_UPGRADE_LEVEL);
     }
 
+    @Test
+    public void testUpgradingHull(){
+
+        Hull hull = new Hull();
+
+
+        assertTrue(hull.getUpgradeLevel() == 0);
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        assertTrue(hull.getUpgradeLevel() == 5);
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        hull.upgrade();
+        assertTrue(hull.getUpgradeLevel() == hull.MAX_UPGRADE_LEVEL);
+
+    }
 
 
 
