@@ -65,9 +65,9 @@ public class FuelTank implements IGear {
     }
 
     public Color fuelColor() {
-        if (fuelPercentage > 60)
+        if (fuelPercentage >= 60)
             return Color.GREEN;
-        else if (fuelPercentage < 60 && fuelPercentage > 20)
+        else if (fuelPercentage < 60 && fuelPercentage >= 20)
             return Color.ORANGE;
         else
             return Color.RED;
