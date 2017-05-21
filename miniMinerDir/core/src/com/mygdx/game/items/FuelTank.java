@@ -4,6 +4,8 @@ package com.mygdx.game.items;
  * Created by Omaroueidat on 03/05/17.
  */
 
+import com.badlogic.gdx.graphics.Color;
+
 /**
  * The class that dictates the fuel for the miner
  */
@@ -28,6 +30,8 @@ public class FuelTank implements IGear {
     private int upgradeLevel = 0;
 
     public final int MAX_UPGRADE_LEVEL = 5;
+
+    private Integer fuelPercentage;
 
     /**
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
@@ -54,10 +58,19 @@ public class FuelTank implements IGear {
             fuel -= (Math.abs(minerVelocityY) * decreaseFuel);
         }
 
-        Integer percentage = (fuel*100)/maxFuel;
-        String strFuel = percentage.toString();
+        fuelPercentage = (fuel * 100) / maxFuel;
+        String strFuel = fuelPercentage.toString();
         fuelString = strFuel + "%";
 
+    }
+
+    public Color fuelColor() {
+        if (fuelPercentage > 60)
+            return Color.GREEN;
+        else if (fuelPercentage < 60 && fuelPercentage > 20)
+            return Color.ORANGE;
+        else
+            return Color.RED;
     }
 
     public boolean isEmpty() {
@@ -73,7 +86,7 @@ public class FuelTank implements IGear {
         return fuelString;
     }
 
-    public int getUpgradeLevel(){
+    public int getUpgradeLevel() {
         return this.upgradeLevel;
     }
 

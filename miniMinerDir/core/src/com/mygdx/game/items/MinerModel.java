@@ -62,7 +62,7 @@ public class MinerModel implements IListener, IOreListener {
         if (minerFell()) hull.adjustHull(previousSpeed);
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
-        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), fuelColor()));
+        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), ft.fuelColor()));
 
         previousSpeed = miner.b2body.getLinearVelocity().y;
     }
@@ -76,14 +76,7 @@ public class MinerModel implements IListener, IOreListener {
         return miner.b2body.getLinearVelocity().y == 0 && previousSpeed < -10;
     }
 
-    private Color fuelColor() {
-        if (ft.getFuel() > 60000)
-            return Color.GREEN;
-        else if (ft.getFuel() < 60000 && ft.getFuel() > 20000)
-            return Color.ORANGE;
-        else
-            return Color.RED;
-    }
+
 
     public Miner getMiner() {
         return this.miner;
