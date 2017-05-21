@@ -32,8 +32,6 @@ public class MinerModel implements IListener, IOreListener {
     private Hull hull;
     private Inventory inventory;
 
-    private int cash;
-
     private float previousSpeed = 0;
 
 
@@ -43,7 +41,6 @@ public class MinerModel implements IListener, IOreListener {
      * @param world
      */
     public MinerModel(World world) {
-        this.cash = 0;
         this.ft = new FuelTank();
         this.hull = new Hull();
         this.miner = new Miner(world);
@@ -77,7 +74,6 @@ public class MinerModel implements IListener, IOreListener {
     }
 
 
-
     public Miner getMiner() {
         return this.miner;
     }
@@ -103,10 +99,10 @@ public class MinerModel implements IListener, IOreListener {
 
     @Override
     public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.FUELREPAIR){
+        if (shout.getTag() == Shout.Tag.FUELREPAIR) {
+            ft.repair();
             inventory.decreaseCash(250);
-            ft.repair();}
-        else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
+        } else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
             hull.repair();
             inventory.decreaseCash(250);
         } else if (shout.getTag() == Shout.Tag.FUELUPGRADE) {

@@ -70,10 +70,11 @@ public class TestClass {
         Inventory inv = new Inventory();
 
         inv.setDiamond(2);
-        assertTrue(inv.getCash() == 0);
+        int originalCash = inv.getCash();
+        assertTrue(inv.getCash() == originalCash);
         assertTrue(inv.getDiamond() == 2);
         inv.sellInventory();
-        assertTrue(inv.getCash() == (Constants.DIAMOND_VALUE*2));
+        assertTrue(inv.getCash() == originalCash+(Constants.DIAMOND_VALUE*2));
         assertTrue(inv.getDiamond() == 0);
 
 
@@ -112,6 +113,16 @@ public class TestClass {
         hull.upgrade();
         hull.upgrade();
         assertTrue(hull.getUpgradeLevel() == hull.MAX_UPGRADE_LEVEL);
+
+    }
+
+    @Test
+    public void testDecreaseCash(){
+        Inventory inventory = new Inventory();
+
+        assertTrue(inventory.getCash() == 1000);
+        inventory.decreaseCash(200);
+        assertTrue(inventory.getCash() == 800);
 
     }
 

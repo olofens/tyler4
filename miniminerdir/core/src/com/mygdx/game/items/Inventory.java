@@ -7,13 +7,13 @@ import com.mygdx.game.Utils.Constants;
  */
 
 public class Inventory {
-    private int cash = 0;
-    private int coal = 0;
-    private int iron = 0;
-    private int gold = 0;
-    private int lapiz = 0;
-    private int diamond = 0;
-    private int redstone = 0;
+    private int cash;
+    private int coal;
+    private int iron;
+    private int gold;
+    private int lapiz;
+    private int diamond;
+    private int redstone;
 
 
     public Inventory(){
