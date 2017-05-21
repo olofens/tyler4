@@ -23,7 +23,7 @@ public class Hull implements IGear {
 
     private int upgradeLevel = 0;
 
-    private final int MAX_UPGRADE_LEVEL = 10;
+    public final int MAX_UPGRADE_LEVEL = 10;
 
 
     /**
@@ -55,6 +55,9 @@ public class Hull implements IGear {
         return damageFactor;
     }
 
+    public int getUpgradeLevel(){
+        return this.upgradeLevel;
+    }
 
 
     /**

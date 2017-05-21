@@ -79,5 +79,21 @@ public class TestClass {
 
     }
 
+    @Test
+    public void testUpgradingFuel(){
+
+        FuelTank ft = new FuelTank();
+
+        assertTrue(ft.getUpgradeLevel() == 0);
+        ft.upgrade();
+        ft.upgrade();
+        ft.upgrade();
+        ft.upgrade();
+        ft.upgrade();
+        assertTrue(ft.getUpgradeLevel() == ft.MAX_UPGRADE_LEVEL);
+    }
+
+
+
 
 }

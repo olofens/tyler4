@@ -75,6 +75,10 @@ public class FuelTank implements IGear {
         return fuelString;
     }
 
+    public int getUpgradeLevel(){
+        return this.upgradeLevel;
+    }
+
     /**
      * {@inheritDoc}
      */
