@@ -56,8 +56,6 @@ public class FuelTank implements IGear {
 
         Integer percentage = (fuel*100)/maxFuel;
         String strFuel = percentage.toString();
-        Integer fuelLength = fuel.toString().length();
-        //fuelString = strFuel.substring(0, fuelLength - 3) + "%";
         fuelString = strFuel + "%";
 
     }
