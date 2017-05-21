@@ -68,7 +68,7 @@ public class MinerModel implements IListener, IOreListener {
     }
 
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return (!hull.isEmpty() && !ft.isEmpty());
     }
 
@@ -76,8 +76,8 @@ public class MinerModel implements IListener, IOreListener {
         return miner.b2body.getLinearVelocity().y == 0 && previousSpeed < -10;
     }
 
-    private Color fuelColor(){
-        if(ft.getFuel() > 60000)
+    private Color fuelColor() {
+        if (ft.getFuel() > 60000)
             return Color.GREEN;
         else if (ft.getFuel() < 60000 && ft.getFuel() > 20000)
             return Color.ORANGE;
@@ -90,26 +90,20 @@ public class MinerModel implements IListener, IOreListener {
     }
 
 
-
     @Override
     public void update(TileTemplate tileTemplate) {
-        if(tileTemplate instanceof Coal){
-            inventory.setCoal(inventory.getCoal()+1);
-        }
-        else if(tileTemplate instanceof Iron){
-            inventory.setIron(inventory.getIron()+1);
-        }
-        else if(tileTemplate instanceof Gold){
-            inventory.setGold(inventory.getGold()+1);
-        }
-        else if(tileTemplate instanceof Lapiz){
-            inventory.setLapiz(inventory.getLapiz()+1);
-        }
-        else if(tileTemplate instanceof Redstone){
-            inventory.setRedstone(inventory.getRedstone()+1);
-        }
-        else if(tileTemplate instanceof Diamond){
-            inventory.setDiamond(inventory.getDiamond()+1);
+        if (tileTemplate instanceof Coal) {
+            inventory.setCoal(inventory.getCoal() + 1);
+        } else if (tileTemplate instanceof Iron) {
+            inventory.setIron(inventory.getIron() + 1);
+        } else if (tileTemplate instanceof Gold) {
+            inventory.setGold(inventory.getGold() + 1);
+        } else if (tileTemplate instanceof Lapiz) {
+            inventory.setLapiz(inventory.getLapiz() + 1);
+        } else if (tileTemplate instanceof Redstone) {
+            inventory.setRedstone(inventory.getRedstone() + 1);
+        } else if (tileTemplate instanceof Diamond) {
+            inventory.setDiamond(inventory.getDiamond() + 1);
         }
 
     }
@@ -128,7 +122,7 @@ public class MinerModel implements IListener, IOreListener {
 
     @Override
     public void update(Ore ore) {
-        if(ore.getSort()==Ore.OreSort.SELL){
+        if (ore.getSort() == Ore.OreSort.SELL) {
             inventory.sellInventory();
             System.out.println(inventory.getCash());
         }

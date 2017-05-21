@@ -19,8 +19,11 @@ public class Hull implements IGear {
 
     private float damageFactor;
 
-    public final float damageFactorUpgrade = 0.05f;
+    public final float damageFactorUpgrade = 0.1f;
 
+    private int upgradeLevel = 0;
+
+    private final int MAX_UPGRADE_LEVEL = 10;
 
 
     /**
@@ -33,7 +36,7 @@ public class Hull implements IGear {
 
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return hull <= 0;
     }
 
@@ -43,22 +46,28 @@ public class Hull implements IGear {
     }
 
 
-    public String getHullString(){
+    public String getHullString() {
         Integer integerHull = (int) hull;
-        String hullString = integerHull.toString();
-        return hullString;
+        return integerHull.toString();
     }
 
     public float getDamageFactor() {
         return damageFactor;
     }
 
+
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void upgrade() {
+        if(upgradeLevel <= MAX_UPGRADE_LEVEL){
         damageFactor -= damageFactorUpgrade;
+        upgradeLevel++;}
+        if(upgradeLevel == MAX_UPGRADE_LEVEL){
+            System.out.println("Hull upgraded to maximum");
+        }
     }
 
     /**

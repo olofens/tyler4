@@ -15,4 +15,5 @@ public interface IGear {
      * Restores the resources to a maximum value
      */
     public void repair();
+
 }

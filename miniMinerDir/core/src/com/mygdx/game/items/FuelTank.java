@@ -23,13 +23,19 @@ public class FuelTank implements IGear {
     // String that is sent to hud to paint out
     private String fuelString;
 
+    public final double FUEL_DECREASE_UPGRADE = 0.2;
+
+    private int upgradeLevel = 0;
+
+    public final int MAX_UPGRADE_LEVEL = 5;
+
     /**
      * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
      */
     public FuelTank() {
         maxFuel = 100000;
         fuel = maxFuel;
-        decreaseFuel = 10;
+        decreaseFuel = 20;
     }
 
 
@@ -47,24 +53,23 @@ public class FuelTank implements IGear {
         if (minerVelocityY > 0) {
             fuel -= (Math.abs(minerVelocityY) * decreaseFuel);
         }
-        String strFuel = fuel.toString();
+
+        Integer percentage = (fuel*100)/maxFuel;
+        String strFuel = percentage.toString();
         Integer fuelLength = fuel.toString().length();
-        fuelString = strFuel.substring(0, fuelLength - 3) + "%";
+        //fuelString = strFuel.substring(0, fuelLength - 3) + "%";
+        fuelString = strFuel + "%";
 
     }
 
-    public boolean isEmpty(){
-        return fuel <= 1000;
+    public boolean isEmpty() {
+        return fuel <= 0;
     }
 
     public Integer getFuel() {
         return fuel;
     }
 
-
-    public int getDecreaseFuel() {
-        return decreaseFuel;
-    }
 
     public String getFuelString() {
         return fuelString;
@@ -75,9 +80,15 @@ public class FuelTank implements IGear {
      */
     @Override
     public void upgrade() {
-        this.maxFuel += fuelUpgrade;
 
-        this.decreaseFuel -= 1;
+        if (upgradeLevel <= MAX_UPGRADE_LEVEL) {
+            this.maxFuel += fuelUpgrade;
+            this.decreaseFuel -= FUEL_DECREASE_UPGRADE;
+            upgradeLevel++;
+        }
+        if (upgradeLevel == MAX_UPGRADE_LEVEL) {
+            System.out.println("Fuel fully upgraded");
+        }
     }
 
     /**
