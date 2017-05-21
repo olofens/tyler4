@@ -17,7 +17,7 @@ public class Inventory {
 
 
     public Inventory(){
-        this.cash = 0;
+        this.cash = 1000;
         this.coal = 0;
         this.iron = 0;
         this.gold = 0;
@@ -40,6 +40,10 @@ public class Inventory {
         setLapiz(0);
         setDiamond(0);
         setRedstone(0);
+    }
+
+    public void decreaseCash(int cost){
+        this.cash -= cost;
     }
 
     public int getCash() {

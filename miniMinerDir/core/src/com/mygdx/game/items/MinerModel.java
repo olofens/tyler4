@@ -103,13 +103,18 @@ public class MinerModel implements IListener, IOreListener {
 
     @Override
     public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.FUELREPAIR) ft.repair();
+        if (shout.getTag() == Shout.Tag.FUELREPAIR){
+            inventory.decreaseCash(250);
+            ft.repair();}
         else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
             hull.repair();
+            inventory.decreaseCash(250);
         } else if (shout.getTag() == Shout.Tag.FUELUPGRADE) {
             ft.upgrade();
+            inventory.decreaseCash(250);
         } else if (shout.getTag() == Shout.Tag.HULLUPGRADE) {
             hull.upgrade();
+            inventory.decreaseCash(250);
         }
     }
 
