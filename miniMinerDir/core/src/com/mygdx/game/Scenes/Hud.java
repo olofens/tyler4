@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Tools.PauseScreenHandler;
@@ -45,7 +46,11 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     public Stage stage;
     public Stage stage2;
+    public Stage stage3;
+
+    public Table table;
     public Table table2;
+    public Table table3;
 
     private Viewport viewport;
 
@@ -55,6 +60,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private Label scoreLabel;
     private Label fuelLabel;
     private Label hullLabel;
+    private Label msgLabel;
 
     private ImageButton pauseBtn;
 
@@ -64,6 +70,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private DrillButtonHandler dbHandler;
     private PauseScreenHandler psHandler;
     private StoreUpgradeHandler suHandler;
+
+    String message;
 
 
 
@@ -106,8 +114,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
-
         stage2 = new Stage(viewport, spriteBatch);
+        stage3 = new Stage(viewport, spriteBatch);
 
 
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
@@ -131,7 +139,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         score = 0;
 
-        Table table = new Table();
+        table = new Table();
         table.top();
         table.setFillParent(true);
 
@@ -139,6 +147,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
         scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
+        msgLabel = new Label(message, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(fuelLabel).expandX().padTop(5);
         table.add(scoreLabel).expandX().padTop(5);
@@ -163,6 +172,17 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
         stage2.addActor(table2);
         //table2.setVisible(false);
+
+        table3 = new Table(storeSkin);
+        table3.center();
+        table3.setBounds(10, 90, 190, 210);
+        table3.add(msgLabel);
+        table3.setVisible(false);
+        stage3.addAction(Actions.sequence(Actions.alpha(1), Actions.fadeOut(3)));
+        stage3.addAction(Actions.moveBy(100,3));
+        stage3.addActor(table3);
+
+
 
 
     }
@@ -208,6 +228,26 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         actor.setVisible(!visible);
     }
 
+    private String decideMessage(){
+        //if
+        //if
+        //blabla
+        return message;
+    }
+
+    private void displayMessage(){
+        msgLabel.setText(decideMessage());
+        table3.setVisible(true);
+
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                table3.setVisible(false);
+                table3.reset();
+            }
+        }, 3f);
+    }
+
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.STORE) {
@@ -220,6 +260,10 @@ public class Hud implements Disposable, IListener, IHudUpdater {
             DrillListener.BUS.update(new DrillData(dir, true));
 
         }
+        //shop/upgrade message
+        //if(shout.getTag ???)
+        //displaymessage()?
+
     }
 
     @Override
@@ -231,6 +275,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public void update(HudData data) {
         adjustFuelLabel(data.getColor(), data.getFuel());
         adjustHullLabel(data.getHull());
+
     }
 
 
