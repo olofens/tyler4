@@ -80,18 +80,18 @@ public class MinerModel implements IListener, IOreListener {
 
 
     @Override
-    public void update(TileTemplate tileTemplate) {
-        if (tileTemplate instanceof Coal) {
+    public void update(IResource resource) {
+        if (resource instanceof Coal) {
             inventory.setCoal(inventory.getCoal() + 1);
-        } else if (tileTemplate instanceof Iron) {
+        } else if (resource instanceof Iron) {
             inventory.setIron(inventory.getIron() + 1);
-        } else if (tileTemplate instanceof Gold) {
+        } else if (resource instanceof Gold) {
             inventory.setGold(inventory.getGold() + 1);
-        } else if (tileTemplate instanceof Lapiz) {
+        } else if (resource instanceof Lapiz) {
             inventory.setLapiz(inventory.getLapiz() + 1);
-        } else if (tileTemplate instanceof Redstone) {
+        } else if (resource instanceof Redstone) {
             inventory.setRedstone(inventory.getRedstone() + 1);
-        } else if (tileTemplate instanceof Diamond) {
+        } else if (resource instanceof Diamond) {
             inventory.setDiamond(inventory.getDiamond() + 1);
         }
 

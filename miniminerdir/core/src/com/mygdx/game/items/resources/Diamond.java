@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.IResource;
 import com.mygdx.game.items.Inventory;
 import com.mygdx.game.items.TileTemplate;
 
@@ -13,7 +14,7 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/16/2017.
  */
 
-public class Diamond extends TileTemplate {
+public class Diamond extends TileTemplate implements IResource {
     public Diamond(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
         super(world, tiledMap, constrains);

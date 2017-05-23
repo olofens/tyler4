@@ -14,7 +14,7 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/15/2017.
  */
 
-public class Coal extends TileTemplate {
+public class Coal extends TileTemplate implements IResource{
 
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting

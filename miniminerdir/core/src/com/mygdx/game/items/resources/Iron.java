@@ -15,7 +15,7 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/15/2017.
  */
 
-public class Iron extends TileTemplate {
+public class Iron extends TileTemplate implements IResource{
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
         super(world, tiledMap, constrains);

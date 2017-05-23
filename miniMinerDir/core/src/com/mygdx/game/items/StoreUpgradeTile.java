@@ -16,8 +16,4 @@ public class StoreUpgradeTile extends TileTemplate {
         fixture.setUserData("storeUpgrade");
     }
 
-    @Override
-    public void onDrillHit() {
-
-    }
 }

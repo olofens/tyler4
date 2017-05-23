@@ -6,13 +6,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.IResource;
 import com.mygdx.game.items.TileTemplate;
 
 /**
  * Created by walling on 5/15/2017.
  */
 
-public class Redstone extends TileTemplate {
+public class Redstone extends TileTemplate implements IResource {
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
         super(world, tiledMap, constrains);

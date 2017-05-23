@@ -48,7 +48,6 @@ public abstract class TileTemplate {
         fixture = body.createFixture(fixDef);
         fixture.setFriction(0f);
     }
-    public abstract void  onDrillHit();
     public void setCategoryFilter(short filterBit){
         //Sets the imported bit in a new filter and sets the fixtures filterData
         Filter filter = new Filter();

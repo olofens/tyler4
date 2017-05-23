@@ -1,5 +1,6 @@
 package com.mygdx.game.event.ore;
 
+import com.mygdx.game.items.IResource;
 import com.mygdx.game.items.TileTemplate;
 
 /**
@@ -7,6 +8,6 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public interface IOreListener {
-    public void update(TileTemplate tileTemplate);
+    public void update(IResource resource);
     public void update(Ore ore);
 }

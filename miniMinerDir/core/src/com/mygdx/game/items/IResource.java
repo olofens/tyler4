@@ -10,4 +10,6 @@ import com.mygdx.game.Utils.Constants;
 /**
  */
 public interface IResource {
+     void  onDrillHit();
+
 }

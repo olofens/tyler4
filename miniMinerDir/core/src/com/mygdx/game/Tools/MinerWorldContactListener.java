@@ -15,6 +15,7 @@ import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.ore.Ore;
 import com.mygdx.game.event.ore.OreListener;
 import com.mygdx.game.event.general.Shout;
+import com.mygdx.game.items.IResource;
 import com.mygdx.game.items.TileTemplate;
 
 /**
@@ -167,9 +168,9 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
     private void resolveContact(Fixture object){
         //Checks if object isnt null and if specific diggingbuttons are pressed.
         //Calls object for drilling and updates inventory via Ore-bus
-        if(object.getUserData() instanceof TileTemplate && minerButtonPressed){
-            ((TileTemplate) object.getUserData()).onDrillHit();
-            OreListener.ORE.update((TileTemplate)object.getUserData());
+        if(object.getUserData() instanceof IResource && minerButtonPressed){
+            ((IResource) object.getUserData()).onDrillHit();
+            OreListener.ORE.update((IResource)object.getUserData());
         }
     }
 
