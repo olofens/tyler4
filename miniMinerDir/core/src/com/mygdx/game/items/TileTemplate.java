@@ -12,19 +12,20 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.resources.Coal;
 
 /**
  * Created by walling on 2017-04-11.
  */
 
-public abstract class TileTemplate {
+public class TileTemplate {
 
     protected TiledMap tiledMap;
     protected TiledMapTile tile;
     protected Rectangle constrains;
     protected Body body;
 
-    protected Fixture fixture;
+    public Fixture fixture;
 
     public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains){
 
@@ -60,4 +61,8 @@ public abstract class TileTemplate {
                 (int)((body.getPosition().y)*Constants.PPM/32));
     }
 
+
+    public void setUserData(IResource tile) {
+        fixture.setUserData(tile);
+    }
 }

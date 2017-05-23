@@ -14,21 +14,24 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/15/2017.
  */
 
-public class Coal extends TileTemplate implements IResource{
+public class Coal implements IResource {
+
+    private TileTemplate parent;
 
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        super(world, tiledMap, constrains);
-        fixture.setUserData(this);
-        setCategoryFilter(Constants.COAL_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        //super(world, tiledMap, constrains);
+        parent.setUserData(this);
+        parent.setCategoryFilter(Constants.COAL_BIT);
     }
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Coal","Collision");
-        setCategoryFilter(Constants.DESTROYED_BIT);
+        Gdx.app.log("Coal", "Collision");
+        parent.setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Coal added to inventory");
-        getCell().setTile(null);
+        parent.getCell().setTile(null);
     }
 
 }

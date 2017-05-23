@@ -14,20 +14,23 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/16/2017.
  */
 
-public class Diamond extends TileTemplate implements IResource {
+public class Diamond implements IResource {
+    private TileTemplate parent;
+
     public Diamond(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        super(world, tiledMap, constrains);
-        fixture.setUserData(this);
-        setCategoryFilter(Constants.DIAMOND_BIT);
+        //super(world, tiledMap, constrains);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        parent.setUserData(this);
+        parent.setCategoryFilter(Constants.DIAMOND_BIT);
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Diamond","Collision");
-        setCategoryFilter(Constants.DESTROYED_BIT);
+        parent.setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Diamond added to inventory");
-        getCell().setTile(null);
+        parent.getCell().setTile(null);
     }
 
 }
