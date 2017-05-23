@@ -18,7 +18,8 @@ public class Redstone implements IResource {
 
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains, this, Constants.REDSTONE_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        parent.initResource(this, Constants.REDSTONE_BIT);
 
     }
 

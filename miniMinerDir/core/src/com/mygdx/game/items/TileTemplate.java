@@ -27,7 +27,7 @@ public class TileTemplate {
 
     public Fixture fixture;
 
-    public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains, IResource resource, short bit){
+    public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains){
 
 
         this.tiledMap = tiledMap;
@@ -49,6 +49,8 @@ public class TileTemplate {
         fixture = body.createFixture(fixDef);
         fixture.setFriction(0f);
 
+    }
+    public void initResource(IResource resource, short bit){
         fixture.setUserData(resource);
         setCategoryFilter(bit);
     }

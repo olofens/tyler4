@@ -19,7 +19,8 @@ public class Lapiz implements IResource {
 
     public Lapiz(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap,constrains, this, Constants.LAPIZ_BIT);
+        parent = new TileTemplate(world, tiledMap,constrains);
+        parent.initResource(this, Constants.LAPIZ_BIT);
 
     }
 

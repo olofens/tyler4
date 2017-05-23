@@ -22,7 +22,8 @@ public class Dirt implements IResource {
     private TileTemplate parent;
     public Dirt(World world, TiledMap tiledMap, Rectangle constrains) {
         //Uses TileTemplate to create the fixture and body
-        parent = new TileTemplate(world,tiledMap,constrains, this, Constants.DIRT_BIT);
+        parent = new TileTemplate(world,tiledMap,constrains);
+        parent.initResource(this, Constants.DIRT_BIT);
 
     }
 
