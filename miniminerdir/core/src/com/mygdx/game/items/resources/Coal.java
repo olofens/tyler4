@@ -21,7 +21,6 @@ public class Coal implements IResource {
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
         parent = new TileTemplate(world, tiledMap, constrains);
-        //super(world, tiledMap, constrains);
         parent.setUserData(this);
         parent.setCategoryFilter(Constants.COAL_BIT);
     }

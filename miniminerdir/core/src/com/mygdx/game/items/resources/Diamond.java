@@ -19,7 +19,6 @@ public class Diamond implements IResource {
 
     public Diamond(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        //super(world, tiledMap, constrains);
         parent = new TileTemplate(world, tiledMap, constrains);
         parent.setUserData(this);
         parent.setCategoryFilter(Constants.DIAMOND_BIT);

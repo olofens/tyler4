@@ -17,14 +17,16 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 2017-04-11.
  */
 
-public class Dirt extends TileTemplate implements IResource {
+public class Dirt implements IResource {
+
+    private TileTemplate parent;
     public Dirt(World world, TiledMap tiledMap, Rectangle constrains) {
         //Uses TileTemplate to create the fixture and body
-        super(world, tiledMap, constrains);
+        parent = new TileTemplate(world,tiledMap,constrains);
         //Sets userdata for future contact
-        fixture.setUserData(this);
+        parent.setUserData(this);
         //Sets categoryfilter to enable the miner to collide with tile
-        setCategoryFilter(Constants.TILE_BIT);
+        parent.setCategoryFilter(Constants.TILE_BIT);
     }
 
     @Override
@@ -32,8 +34,8 @@ public class Dirt extends TileTemplate implements IResource {
         //Sets categoryfilter to DESTROYED_BIT which makes miner ignore tile
         //Sets cell to null, which removes it
         Gdx.app.log("Dirt","Collision");
-        setCategoryFilter(Constants.DESTROYED_BIT);
-        getCell().setTile(null);
+        parent.setCategoryFilter(Constants.DESTROYED_BIT);
+        parent.getCell().setTile(null);
     }
 
 }

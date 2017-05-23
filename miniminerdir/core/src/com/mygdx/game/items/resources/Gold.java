@@ -14,20 +14,21 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/16/2017.
  */
 
-public class Gold extends TileTemplate implements IResource {
+public class Gold implements IResource {
+    private TileTemplate parent;
     public Gold(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        super(world, tiledMap, constrains);
-        fixture.setUserData(this);
-        setCategoryFilter(Constants.GOLD_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        parent.setUserData(this);
+        parent.setCategoryFilter(Constants.GOLD_BIT);
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Gold", "Collision");
-        setCategoryFilter(Constants.DESTROYED_BIT);
+        parent.setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Gold added to inventory");
-        getCell().setTile(null);
+        parent.getCell().setTile(null);
     }
 }
 
