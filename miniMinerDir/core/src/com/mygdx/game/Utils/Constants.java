@@ -16,7 +16,7 @@ public final class Constants {
     //Constants for categorybits in binary
     public static final short DEFAULT_BIT = 1;
     public static final short MINER_BIT = 2;
-    public static final short TILE_BIT = 4;
+    public static final short DIRT_BIT = 4;
     public static final short STONE_BIT = 8;
     public static final short DESTROYED_BIT = 16;
     public static final short COAL_BIT = 32;

@@ -54,7 +54,7 @@ public class Miner extends Sprite {
         circleShape.setRadius(10 / Constants.PPM);
         //Defines all tiles that will contact with the miner
         fdefine.filter.categoryBits = Constants.MINER_BIT;
-        fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.TILE_BIT |
+        fdefine.filter.maskBits = Constants.DEFAULT_BIT | Constants.DIRT_BIT |
                 Constants.COAL_BIT | Constants.IRON_BIT | Constants.REDSTONE_BIT |
                 Constants.LAPIZ_BIT | Constants.GOLD_BIT | Constants.DIAMOND_BIT |
                 Constants.STONE_BIT;

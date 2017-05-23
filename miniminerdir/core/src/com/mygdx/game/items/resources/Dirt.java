@@ -22,11 +22,8 @@ public class Dirt implements IResource {
     private TileTemplate parent;
     public Dirt(World world, TiledMap tiledMap, Rectangle constrains) {
         //Uses TileTemplate to create the fixture and body
-        parent = new TileTemplate(world,tiledMap,constrains);
-        //Sets userdata for future contact
-        parent.setUserData(this);
-        //Sets categoryfilter to enable the miner to collide with tile
-        parent.setCategoryFilter(Constants.TILE_BIT);
+        parent = new TileTemplate(world,tiledMap,constrains, this, Constants.DIRT_BIT);
+
     }
 
     @Override
