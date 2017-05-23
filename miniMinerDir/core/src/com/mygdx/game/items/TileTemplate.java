@@ -27,7 +27,7 @@ public class TileTemplate {
 
     public Fixture fixture;
 
-    public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains){
+    public TileTemplate(World world, TiledMap tiledMap, Rectangle constrains, IResource resource, short bit){
 
 
         this.tiledMap = tiledMap;
@@ -48,6 +48,9 @@ public class TileTemplate {
         fixDef.shape = pShape;
         fixture = body.createFixture(fixDef);
         fixture.setFriction(0f);
+
+        fixture.setUserData(resource);
+        setCategoryFilter(bit);
     }
     public void setCategoryFilter(short filterBit){
         //Sets the imported bit in a new filter and sets the fixtures filterData
@@ -59,10 +62,5 @@ public class TileTemplate {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
         return layer.getCell((int)((body.getPosition().x)* Constants.PPM/32),
                 (int)((body.getPosition().y)*Constants.PPM/32));
-    }
-
-
-    public void setUserData(IResource tile) {
-        fixture.setUserData(tile);
     }
 }
