@@ -13,12 +13,14 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/16/2017.
  */
 
-public class Stone extends TileTemplate implements IResource {
+public class Stone implements IResource {
+    private TileTemplate parent;
+
     public Stone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        super(world, tiledMap, constrains);
-        fixture.setUserData(this);
-        setCategoryFilter(Constants.STONE_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        parent.setUserData(this);
+        parent.setCategoryFilter(Constants.STONE_BIT);
     }
 
     @Override

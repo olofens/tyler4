@@ -13,26 +13,22 @@ import com.mygdx.game.items.TileTemplate;
  * Created by walling on 5/15/2017.
  */
 
-public class Redstone extends TileTemplate implements IResource {
+public class Redstone implements IResource {
+    private TileTemplate parent;
+
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        super(world, tiledMap, constrains);
-        fixture.setUserData(this);
-        setCategoryFilter(Constants.REDSTONE_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains);
+        parent.setUserData(this);
+        parent.setCategoryFilter(Constants.REDSTONE_BIT);
     }
 
     @Override
     public void onDrillHit() {
         Gdx.app.log("Redstone","Collision");
-        setCategoryFilter(Constants.DESTROYED_BIT);
+        parent.setCategoryFilter(Constants.DESTROYED_BIT);
         System.out.println("Redstone added to inventory");
-        getCell().setTile(null);
+        parent.getCell().setTile(null);
     }
 
-
-    public TiledMapTileLayer.Cell getCell(){
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get("Diggable");
-        return layer.getCell((int)((body.getPosition().x)* Constants.PPM/32),
-                (int)((body.getPosition().y)*Constants.PPM/32));
-    }
 }
