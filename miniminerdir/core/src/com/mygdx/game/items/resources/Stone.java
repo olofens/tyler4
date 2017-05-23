@@ -14,13 +14,11 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public class Stone implements IResource {
-    private TileTemplate parent;
+
 
     public Stone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains);
-        parent.setUserData(this);
-        parent.setCategoryFilter(Constants.STONE_BIT);
+        new TileTemplate(world, tiledMap, constrains, this, Constants.STONE_BIT);
     }
 
     @Override
