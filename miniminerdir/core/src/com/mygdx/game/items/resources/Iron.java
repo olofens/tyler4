@@ -19,9 +19,8 @@ public class Iron implements IResource{
     private TileTemplate parent;
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains);
-        parent.setUserData(this);
-        parent.setCategoryFilter(Constants.IRON_BIT);
+        parent = new TileTemplate(world, tiledMap, constrains, this, Constants.IRON_BIT);
+
     }
 
     @Override
