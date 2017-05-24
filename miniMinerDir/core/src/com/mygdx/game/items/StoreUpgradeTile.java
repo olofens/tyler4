@@ -8,12 +8,11 @@ import com.badlogic.gdx.physics.box2d.World;
  * Created by olofenstrom on 2017-05-20.
  */
 
-public class StoreUpgradeTile extends TileTemplate {
+public class StoreUpgradeTile {
 
     public StoreUpgradeTile(World world, TiledMap tiledMap, Rectangle constrains) {
-        super(world, tiledMap, constrains);
-        body.getFixtureList().get(0).setSensor(true);
-        fixture.setUserData("storeUpgrade");
+        TileTemplate parent = new TileTemplate(world, tiledMap, constrains);
+        parent.body.getFixtureList().get(0).setSensor(true);
+        parent.fixture.setUserData("storeUpgrade");
     }
-
 }

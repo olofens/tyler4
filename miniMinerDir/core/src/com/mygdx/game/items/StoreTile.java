@@ -12,14 +12,11 @@ import com.mygdx.game.MiniMiner;
  * Created by Olof Enström on 2017-04-26.
  */
 
-public class StoreTile extends TileTemplate {
+public class StoreTile {
+
     public StoreTile(World world, TiledMap tiledMap, Rectangle constrains) {
-        super(world, tiledMap, constrains);
-        body.getFixtureList().get(0).setSensor(true);
-        fixture.setUserData("store");
-       // setCategoryFilter(MiniMiner.STORE_BIT);
+        TileTemplate parent = new TileTemplate(world, tiledMap, constrains);
+        parent.body.getFixtureList().get(0).setSensor(true);
+        parent.fixture.setUserData("store");
     }
-
-
-
 }
