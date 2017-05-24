@@ -43,7 +43,7 @@ public class Miner extends Sprite {
      */
     private void defineMiner(World world) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(10 / Constants.PPM, 200 );
+        bdef.position.set(10 / Constants.PPM, 185 );
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
