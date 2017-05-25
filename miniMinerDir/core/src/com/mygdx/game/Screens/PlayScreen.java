@@ -55,6 +55,7 @@ public class PlayScreen implements Screen {
     private GameWorld gameWorld;
 
 
+
     Vector2 v2;
 
     public enum State {
@@ -78,7 +79,6 @@ public class PlayScreen implements Screen {
 
         sh = new ScreenHandler(game);
 
-
         this.gameModel = new GameModel();
 
         // Our camera and our viewport, this is where the camera focuses during the game
@@ -86,7 +86,6 @@ public class PlayScreen implements Screen {
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
-
 
         renderer = new OrthogonalTiledMapRenderer(gameWorld.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
@@ -102,8 +101,6 @@ public class PlayScreen implements Screen {
         minerSpriteRocket = new Sprite(minerIMG3);
 
         state = State.RESUME;
-
-
     }
 
     @Override
@@ -246,6 +243,7 @@ public class PlayScreen implements Screen {
         cam.position.set(position);
         cam.update();
     }
+
 
     @Override
     public void resize(int width, int height) {
