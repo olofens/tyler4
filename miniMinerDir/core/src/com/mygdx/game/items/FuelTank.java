@@ -39,7 +39,7 @@ public class FuelTank implements IGear {
     public FuelTank() {
         maxFuel = 100000;
         fuel = maxFuel;
-        decreaseFuel = 20;
+        decreaseFuel = 10;
     }
 
 

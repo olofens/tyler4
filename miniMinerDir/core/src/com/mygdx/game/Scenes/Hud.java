@@ -36,12 +36,16 @@ import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.event.hud.HudData;
 import com.mygdx.game.event.hud.HudUpdater;
 import com.mygdx.game.event.hud.IHudUpdater;
+import com.mygdx.game.event.messages.IMessageListener;
+import com.mygdx.game.event.messages.MessageData;
+import com.mygdx.game.event.messages.MessageListener;
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 /**
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, IListener, IHudUpdater {
+public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener {
 
 
     public Stage stage;
@@ -64,6 +68,8 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     private ImageButton pauseBtn;
 
+    private Skin storeSkin;
+
 
     public TouchpadHandler tpHandler;
     private StoreHandler storeHandler;
@@ -71,7 +77,6 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private PauseScreenHandler psHandler;
     private StoreUpgradeHandler suHandler;
 
-    String message;
 
     /**
 
@@ -110,7 +115,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         pauseBtn.setTransform(true);
 
 
-        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
+        storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
 
         //Create a Stage and add TouchPad
@@ -132,7 +137,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
         cashLabel = new Label("1000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
-        msgLabel = new Label(message, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        msgLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(fuelLabel).expandX().padTop(5);
         table.add(cashLabel).expandX().padTop(5);
@@ -143,6 +148,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         Listener.BUS.addListener(this);
         HudUpdater.BUS.addListener(this);
+        MessageListener.BUS.addListener(this);
 
 
         table2 = new Table(storeSkin);
@@ -154,16 +160,6 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
         stage2.addActor(table2);
-
-        table3 = new Table(storeSkin);
-        table3.center();
-        table3.setBounds(10, 90, 190, 210);
-        table3.add(msgLabel);
-        table3.setVisible(false);
-
-        stage3.addAction(Actions.sequence(Actions.alpha(1), Actions.fadeOut(3)));
-        stage3.addAction(Actions.moveBy(100,3));
-        stage3.addActor(table3);
     }
 
     private void initDrillButtonListener() {
@@ -177,6 +173,32 @@ public class Hud implements Disposable, IListener, IHudUpdater {
                 DrillListener.BUS.update(new DrillData(tpHandler.getDrillDirection(), false));
             }
         });
+    }
+
+    private void initMessage(){
+
+        table3 = new Table(storeSkin);
+        table3.center();
+        table3.setBounds(0, 90, Constants.V_WIDTH, 210);
+        table3.add(msgLabel);
+
+        stage3.addAction(Actions.alpha(1));
+        stage3.addAction(Actions.moveBy(0,100,3));
+        stage3.addActor(table3);
+
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                stage3.addAction(Actions.sequence(Actions.fadeOut(2)));
+            }
+        }, 1f);
+
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                stage3.addAction(Actions.moveBy(0, -100));
+            }
+        }, 2f);
     }
 
     public boolean isPaused(){
@@ -213,24 +235,19 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         actor.setVisible(!visible);
     }
 
-    private String decideMessage(){
-        //if
-        //if
-        //blabla
-        return message;
-    }
 
-    private void displayMessage(){
-        msgLabel.setText(decideMessage());
-        table3.setVisible(true);
+
+    private void displayMessage(String msg){
+        initMessage();
+        msgLabel.setText(msg);
 
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
                 table3.setVisible(false);
-                table3.reset();
             }
-        }, 3f);
+        }, 2f);
+
     }
 
     @Override
@@ -243,11 +260,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
             DrillData.DrillDirection dir = tpHandler.getDrillDirection();
 
             DrillListener.BUS.update(new DrillData(dir, true));
-
         }
-        //shop/upgrade message
-        //if(shout.getTag ???)
-        //displaymessage()?
 
     }
 
@@ -262,6 +275,34 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         adjustHullLabel(data.getHull());
         adjustCashLabel(data.getCash());
 
+    }
+
+    @Override
+    public void update(MessageData messageData){
+        if(messageData.getMessageType() == MessageData.MessageType.ERROR){
+            displayMessage("Purchase failed: Insufficient funds");
+            System.out.print("error");
+        }
+        else if(messageData.getMessageType() == MessageData.MessageType.FUELREPAIR){
+            displayMessage("Fuel replenished: -" + messageData.getCash() );
+            System.out.print("fuel");
+
+        }
+        else if(messageData.getMessageType() == MessageData.MessageType.HULLREPAIR){
+            displayMessage("Hull repaired: -" + messageData.getCash() );
+            System.out.print("hull");
+
+        }
+        else if(messageData.getMessageType() == MessageData.MessageType.FUELUPGRADE){
+            displayMessage("Fuel tank upgraded: -" + messageData.getCash() );
+            System.out.print("fuel upgrade");
+
+        }
+        else if(messageData.getMessageType() == MessageData.MessageType.HULLUPGRADE){
+            displayMessage("Hull upgraded: -" + messageData.getCash() );
+            System.out.print("hull upgrade");
+
+        }
     }
 
 
