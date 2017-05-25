@@ -19,21 +19,16 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Dirt implements IResource {
 
-    private TileTemplate parent;
+    private Resource parent;
     public Dirt(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Uses TileTemplate to create the fixture and body
-        parent = new TileTemplate(world,tiledMap,constrains);
-        parent.initResource(this, Constants.DIRT_BIT);
+        //Uses Resource/TileTemplate to create the fixture and body
+        parent = new Resource(world,tiledMap,constrains, this,  Constants.DIRT_BIT);
 
     }
 
     @Override
     public void onDrillHit() {
-        //Sets categoryfilter to DESTROYED_BIT which makes miner ignore tile
-        //Sets cell to null, which removes it
-        Gdx.app.log("Dirt","Collision");
-        parent.setCategoryFilter(Constants.DESTROYED_BIT);
-        parent.getCell().setTile(null);
+        parent.onDrillHit();
     }
 
 }
