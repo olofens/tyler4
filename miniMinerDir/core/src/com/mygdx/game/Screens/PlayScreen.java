@@ -20,6 +20,7 @@ import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.MinerDrawOptions;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.items.GameWorld;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -49,6 +50,7 @@ public class PlayScreen implements Screen {
 
     // GameModel variables
     private GameModel gameModel;
+    private GameWorld gameWorld;
 
 
     Vector2 v2;
@@ -67,6 +69,8 @@ public class PlayScreen implements Screen {
      */
     public PlayScreen(MiniMiner game) {
 
+        gameWorld = GameWorld.getInstance();
+
         state = State.RESUME;
         this.game = game;
 
@@ -80,7 +84,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
 
-        renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
+        renderer = new OrthogonalTiledMapRenderer(gameWorld.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
         //TODO MOVE TO ASSETHANDLER
@@ -121,7 +125,7 @@ public class PlayScreen implements Screen {
 
         gameModel.update(v2);
 
-        updateCamera(gameCam, gameModel.getMapPixelWidth(), gameModel.getMapPixelHeight());
+        updateCamera(gameCam, gameWorld.getMapPixelWidth(), gameWorld.getMapPixelHeight());
 
         renderer.setView(gameCam);
     }
@@ -263,6 +267,7 @@ public class PlayScreen implements Screen {
     @Override
     public void dispose() {
         gameModel.dispose();
+        gameWorld.dispose();
         renderer.dispose();
         hud.dispose();
 
