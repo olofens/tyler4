@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Tools.PauseScreenHandler;
-import com.mygdx.game.Tools.StoreHandler;
+import com.mygdx.game.Tools.StoreRepairController;
 import com.mygdx.game.Tools.StoreUpgradeHandler;
 import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Tools.DrillButtonHandler;
@@ -39,7 +39,6 @@ import com.mygdx.game.event.hud.IHudUpdater;
 import com.mygdx.game.event.messages.IMessageListener;
 import com.mygdx.game.event.messages.MessageData;
 import com.mygdx.game.event.messages.MessageListener;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -72,7 +71,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
 
 
     public TouchpadController tpHandler;
-    private StoreHandler storeHandler;
+    private StoreRepairController storeRepairController;
     private DrillButtonHandler dbHandler;
     private PauseScreenHandler psHandler;
     private StoreUpgradeHandler suHandler;
@@ -92,7 +91,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         stage3 = new Stage(viewport, spriteBatch);
 
         tpHandler = new TouchpadController();
-        storeHandler = new StoreHandler();
+        storeRepairController = new StoreRepairController();
         dbHandler = new DrillButtonHandler();
         psHandler = new PauseScreenHandler();
         suHandler = new StoreUpgradeHandler();
@@ -121,7 +120,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         //Create a Stage and add TouchPad
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(dbHandler.getdrillButton());
-        stage.addActor(storeHandler.getStorePopup());
+        stage.addActor(storeRepairController.getStorePopup());
         stage.addActor(tpHandler.getTouchpad());
         stage.addActor(pauseBtn);
         stage.addActor(suHandler.getStorePopup());
@@ -253,7 +252,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     @Override
     public void update(Shout shout) {
         if (shout.getTag() == Shout.Tag.STORE) {
-            toggleActorVisibility(storeHandler.getStorePopup());
+            toggleActorVisibility(storeRepairController.getStorePopup());
         } else if (shout.getTag() == Shout.Tag.STORE_UPGRADE) {
            toggleActorVisibility(suHandler.getStorePopup());
         } else if (shout.getTag() == Shout.Tag.NEW_TP_DIR) {
