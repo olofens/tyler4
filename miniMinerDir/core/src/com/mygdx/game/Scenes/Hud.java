@@ -26,7 +26,7 @@ import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreRepairController;
 import com.mygdx.game.Tools.StoreUpgradeController;
 import com.mygdx.game.Tools.TouchpadController;
-import com.mygdx.game.Tools.DrillButtonHandler;
+import com.mygdx.game.Tools.DrillButtonView;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.drill.DrillData;
 import com.mygdx.game.event.drill.DrillListener;
@@ -72,7 +72,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
 
     public TouchpadController tpHandler;
     private StoreRepairController storeRepairController;
-    private DrillButtonHandler dbHandler;
+    private DrillButtonView dbHandler;
     private PauseScreenHandler psHandler;
     private StoreUpgradeController suHandler;
 
@@ -92,7 +92,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
 
         tpHandler = new TouchpadController();
         storeRepairController = new StoreRepairController();
-        dbHandler = new DrillButtonHandler();
+        dbHandler = new DrillButtonView();
         psHandler = new PauseScreenHandler();
         suHandler = new StoreUpgradeController();
         initDrillButtonListener();

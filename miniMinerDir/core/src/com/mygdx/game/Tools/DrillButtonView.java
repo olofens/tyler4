@@ -14,11 +14,11 @@ import com.mygdx.game.event.general.Shout;
  * Created by Olof Enström on 2017-05-16.
  */
 
-public class DrillButtonHandler {
+public class DrillButtonView {
 
     private ImageButton drillButton;
 
-    public DrillButtonHandler() {
+    public DrillButtonView() {
         Texture drillTexture = new Texture("driller_drill_only.png");
 
         Drawable drawable = new TextureRegionDrawable(new TextureRegion(drillTexture));
