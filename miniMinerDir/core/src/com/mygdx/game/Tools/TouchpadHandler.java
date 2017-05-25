@@ -28,26 +28,15 @@ public class TouchpadHandler {
     private DrillData.DrillDirection prevDirection;
     private DrillData.DrillDirection currDirection;
 
-
     public TouchpadHandler() {
-        //Touchpad
 
         Skin touchpadSkin = new Skin();
-        //TODO MOVE TO ASSETHANDLER
         touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchknob.png"));
-        //Create TouchPad Style
         Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
-        //Create Drawable's from TouchPad skin
-        //Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
         Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
 
-
-        //Apply the Drawables to the TouchPad Style
-        //touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
-        //Create new TouchPad with the created style
         touchpad = new Touchpad(0, touchpadStyle);
-        //setBounds(x,y,width,height)
 
         touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
     }
@@ -79,8 +68,6 @@ public class TouchpadHandler {
         checkDirection();
 
         //POOR SOLUTION FOR DESKTOP TESTING
-        //TODO REMOVE
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             DrillListener.BUS.update(new DrillData(getDrillDirection(), false));
         }

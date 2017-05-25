@@ -40,12 +40,6 @@ public class PlayScreen implements Screen {
     private Sprite minerSprite;
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
-    private Vector2 minerPos;
-
-    private Stage stage;
-    private TextButton resumeButton;
-    private Table table;
-
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -54,7 +48,6 @@ public class PlayScreen implements Screen {
 
     // GameModel variables
     private GameModel gameModel;
-
 
     Vector2 v2;
 
@@ -71,25 +64,20 @@ public class PlayScreen implements Screen {
      * @param game Brings in MiniMiner variable in order to get Width and Height of desired screen.
      */
     public PlayScreen(MiniMiner game) {
+
+        state = State.RESUME;
         this.game = game;
-
-
-        SpriteBatch sb = new SpriteBatch();
-
         this.gameModel = new GameModel();
+
         // Our camera and our viewport, this is where the camera focuses during the game
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
 
-        //stage = new Stage(viewPort, ((MiniMiner) game).batch);
-
-
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
-        //TODO MOVE TO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right1.png");
         minerSprite = new Sprite(minerIMG);
 
@@ -98,10 +86,6 @@ public class PlayScreen implements Screen {
 
         minerIMG3 = new Texture("driller_projekt_Rocket1.png");
         minerSpriteRocket = new Sprite(minerIMG3);
-
-        state = State.RESUME;
-
-
     }
 
 
@@ -113,10 +97,8 @@ public class PlayScreen implements Screen {
     private void checkState() {
         if (hud.isPaused()) {
             this.state = State.PAUSE;
-            //System.out.print("GAME IS PAUSED");
         } else {
             this.state = State.RESUME;
-            //System.out.print("RESUME");}
         }
     }
 
@@ -124,64 +106,44 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
-
-
         checkState();
 
         //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
 
-
         gameModel.update(v2);
-
-        //TODO MOVE TO GAMEMODEL
 
         updateCamera(gameCam, getMapPixelWidth(), getMapPixelHeight());
 
         renderer.setView(gameCam);
-
-    }
-
-
-    //TODO REMOVE SOPP
-    public boolean drawUp() {
-        return hud.tpHandler.isTouchingUp();
-    }
-
-    //TODO REMOVE SOPP
-    public boolean drawDown() {
-        return hud.tpHandler.isTouchingDown();
     }
 
 
     @Override
     public void render(float dt) {
 
-        //createNewScreen();
-        //System.out.print(state + "\n");
-
         if (state.equals(State.RESUME)) {
-
             renderResume(dt);
         } else {
             renderPause(dt);
         }
-
-
     }
 
     public void renderResume(float dt) {
         Gdx.input.setInputProcessor(hud.stage);
-
         update(dt);
+
         //render our game map
         renderer.render();
+
         //render miner
         game.batch.begin();
         drawMiner();
         game.batch.end();
+
         //Render b2dr lines
         //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
+
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
@@ -206,6 +168,10 @@ public class PlayScreen implements Screen {
 
         hud.stage2.act();
         hud.stage2.draw();
+        if(hud.isNewScreen()){
+            game.setScreen(new StartMenuScreen(game));
+            hud.setIsNewScreen(false);
+        }
     }
 
 
@@ -221,17 +187,15 @@ public class PlayScreen implements Screen {
         } else {
             mySprite = minerSprite;
         }
+
         game.batch.draw(mySprite, mdo.getX(), mdo.getY(),
                 mdo.getX1(), mdo.getY1());
-
-
     }
 
     private void updateCamera(OrthographicCamera cam, float width, float height) {
 
         float startX = 0;
         float startY = 0;
-
 
         //Divide by PPM since width and height are measurements in pixels and not tiles...
         //... and the camera's position is currently set in tiles. PPM is set to the side
@@ -301,34 +265,17 @@ public class PlayScreen implements Screen {
     @Override
     public void pause() {
         this.state = State.PAUSE;
-
     }
 
     @Override
     public void resume() {
         this.state = State.RESUME;
-
     }
 
     @Override
     public void hide() {
 
     }
-/*
-    public void createNewScreen(){
-        if(hud.isNewScreen()){
-            createMainMenu();
-            hud.setIsNewScreen(false);
-        }
-
-    }
-
-    public void createMainMenu(){
-        //game.setScreen(new StartMenuScreen((MiniMiner)game));
-        game.setScreen(new StartMenuScreen(game));
-
-    }
-    */
 
     @Override
     public void dispose() {

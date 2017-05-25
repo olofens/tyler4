@@ -43,9 +43,7 @@ public class StartMenuScreen implements Screen {
     private Stage stage;
     private Game game;
     private SpriteBatch sb;
-    private Sprite sprite;
     private Texture texture;
-    private MiniMiner game1;
 
     private OrthographicCamera gameCam;
 
@@ -57,32 +55,25 @@ public class StartMenuScreen implements Screen {
 
         sb = new SpriteBatch();
         this.game = game;
-        game1 = new MiniMiner();
-        SpriteBatch batch = new SpriteBatch();
-
 
         gameCam = new OrthographicCamera();
         viewport = new FitViewport(Constants.V_WIDTH,
                 Constants.V_HEIGHT, gameCam);
-
         stage = new Stage(viewport, ((MiniMiner) game).batch);
 
         Gdx.input.setInputProcessor(stage);
 
+
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
-
         texture = new Texture(Gdx.files.internal("minerBackGround.png"));
 
-        //Label.LabelStyle font;
-
-        BitmapFont bitmapFont = new BitmapFont(Gdx.files.internal("skins/font-export.fnt"),Gdx.files.internal("skins/rusty-robot-ui.png"), false);
-
+        BitmapFont bitmapFont = new BitmapFont(Gdx.files.internal("skins/font-export.fnt"),
+                Gdx.files.internal("skins/rusty-robot-ui.png"), false);
         Label.LabelStyle font = new Label.LabelStyle(bitmapFont, Color.WHITE);
-
         Label miniMinerLabel = new Label("MINIMINER", font);
-
         miniMinerLabel.scaleBy(0.5f);
+
 
         startGameButton = new TextButton("Play", storeSkin);
         startGameButton.addListener(new ClickListener() {
@@ -110,33 +101,24 @@ public class StartMenuScreen implements Screen {
         table = new Table(storeSkin);
         table.center();
         table.setBounds(10, 90, 190, 210);
-        System.out.print(table.getWidth());
-        //table.add(miniMinerLabel);
-        //table.row();
         table.add(startGameButton);
         table.row();
         table.add(QuitGameButton);
+
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(3)));
         stage.addActor(table);
 
 
-        //og.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }
 
     public void startGame(){
                 game.setScreen(new PlayScreen((MiniMiner)game));
     }
-    public void handleInput(){
 
-    }
     public void update(float dt){
 
     }
-    public void render(SpriteBatch sb){
 
-
-
-    }
     @Override
     public void show() {
 
@@ -156,8 +138,6 @@ public class StartMenuScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        System.out.print(width);
-
     }
 
     @Override

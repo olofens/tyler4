@@ -73,62 +73,47 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     String message;
 
-
-
-
-
     /**
 
      * Creates the HUD for the framework of the game
      *
      * @param spriteBatch
      */
-
     public Hud(SpriteBatch spriteBatch) {
-
-        Texture myTexture = new Texture(("Pause-26.png"));
-        TextureRegion myTextureRegion = new TextureRegion(myTexture);
-        TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
-        pauseBtn = new ImageButton(myTexRegionDrawable);
-        pauseBtn.scaleBy(0.1f);
-        pauseBtn.addListener(new ClickListener() {
-
-
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.print("CLICK.");
-                psHandler.setPaused(true);
-                return true;
-            }
-
-        })
-        ;
-
-        tpHandler = new TouchpadHandler();
-        storeHandler = new StoreHandler();
-        dbHandler = new DrillButtonHandler();
-        psHandler = new PauseScreenHandler();
-        suHandler = new StoreUpgradeHandler();
-
-
-        initDrillButtonListener();
 
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
         stage2 = new Stage(viewport, spriteBatch);
         stage3 = new Stage(viewport, spriteBatch);
 
+        tpHandler = new TouchpadHandler();
+        storeHandler = new StoreHandler();
+        dbHandler = new DrillButtonHandler();
+        psHandler = new PauseScreenHandler();
+        suHandler = new StoreUpgradeHandler();
+        initDrillButtonListener();
+
+
+        Texture myTexture = new Texture(("Pause-26.png"));
+        TextureRegion myTextureRegion = new TextureRegion(myTexture);
+        TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
+
+        pauseBtn = new ImageButton(myTexRegionDrawable);
+        pauseBtn.scaleBy(0.1f);
+        pauseBtn.addListener(new ClickListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.print("CLICK.");
+                psHandler.setPaused(true);
+                return true;
+            }
+        });
+        pauseBtn.setTransform(true);
+
 
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
 
-
-
-
         //Create a Stage and add TouchPad
-
-        pauseBtn.setTransform(true);
-
-
         stage = new Stage(viewport, spriteBatch);
         stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeHandler.getStorePopup());
@@ -154,37 +139,31 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         table.add(hullLabel).expandX().padTop(5);
         table.add(pauseBtn).expandX().padTop(10);
 
-
         stage.addActor(table);
+
         Listener.BUS.addListener(this);
         HudUpdater.BUS.addListener(this);
 
-        //table.setFillParent(true);
 
         table2 = new Table(storeSkin);
         table2.center();
         table2.setBounds(10, 90, 190, 210);
-        //table.add(miniMinerLabel);
-        //table.row();
         table2.add(psHandler.getResumeButton());
         table2.row();
         table2.add(psHandler.getMenuButton());
+
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
         stage2.addActor(table2);
-        //table2.setVisible(false);
 
         table3 = new Table(storeSkin);
         table3.center();
         table3.setBounds(10, 90, 190, 210);
         table3.add(msgLabel);
         table3.setVisible(false);
+
         stage3.addAction(Actions.sequence(Actions.alpha(1), Actions.fadeOut(3)));
         stage3.addAction(Actions.moveBy(100,3));
         stage3.addActor(table3);
-
-
-
-
     }
 
     private void initDrillButtonListener() {

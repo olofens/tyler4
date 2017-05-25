@@ -28,50 +28,13 @@ public class PauseScreenHandler {
     private TextButton resumeButton;
     private TextButton menuButton;
 
-
-    private Game game;
-
-    private boolean newScreen;
-
+    private boolean newScreen = false;
     private boolean isPaused = false;
-
-    public boolean isNewScreen() {
-        return newScreen;
-    }
-
-    public void setNewScreen(boolean newScreen) {
-        this.newScreen = newScreen;
-    }
-
-    public boolean isPaused() {
-        return isPaused;
-    }
-
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
-    public TextButton getResumeButton() {
-        return resumeButton;
-    }
-    public TextButton getMenuButton() {
-        return menuButton;
-    }
-
-
-    public void createGameScreen(){
-        game.setScreen(new StartMenuScreen((MiniMiner)game));
-        //MiniMiner mm = new MiniMiner();
-        //mm.create();
-    }
 
     public PauseScreenHandler(){
 
-
-
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
-
 
         resumeButton = new TextButton("Resume", storeSkin);
         resumeButton.addListener(new ClickListener() {
@@ -86,12 +49,26 @@ public class PauseScreenHandler {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 newScreen = true;
-                createGameScreen();
-
-
             }
         });
+    }
 
-
+    public boolean isNewScreen() {
+        return newScreen;
+    }
+    public void setNewScreen(boolean newScreen) {
+        this.newScreen = newScreen;
+    }
+    public boolean isPaused() {
+        return isPaused;
+    }
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+    public TextButton getResumeButton() {
+        return resumeButton;
+    }
+    public TextButton getMenuButton() {
+        return menuButton;
     }
 }

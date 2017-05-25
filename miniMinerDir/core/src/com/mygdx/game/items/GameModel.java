@@ -22,17 +22,14 @@ public class GameModel {
     //Miner variables
     private MinerModel minerModel;
 
-
     // Tiledmap variables
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private MapProperties prop;
 
-
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
-
 
     private boolean isFacingRight;
 
@@ -48,16 +45,12 @@ public class GameModel {
         //simple instantiation with the only purpose of adding a listener to MinerWorldContactListener
         new MinerWorldContactListener();
 
-        // Create a new world
         world = new World(new Vector2(0, Constants.GRAVITY), true);
-        //b2dr = new Box2DDebugRenderer();
         new Box2DWorldCreator(world, map);
-        //this.miner = new Miner(world);
         world.setContactListener(new MinerWorldContactListener());
         isFacingRight = true;
 
         this.minerModel = new MinerModel(world);
-
     }
 
     public void adjustSpeedX(float knobPercentage) {
@@ -71,14 +64,6 @@ public class GameModel {
             minerModel.getMiner().b2body.applyLinearImpulse(new Vector2(-0.09f * speedX, 0), minerPos, true);
 
         }
-        //miner.b2body.applyLinearImpulse(new Vector2(0.2f * knobPercentage, 0), minerPos, true);
-        //miner.b2body.applyLinearImpulse(new Vector2(-4f * knobPercentage, 0), minerPos, true);
-        /*if(miner.b2body.getLinearVelocity().x < 10000){
-            miner.b2body.setLinearVelocity(new Vector2(0, miner.b2body.getLinearVelocity().y));
-        }
-        */
-        //System.out.print(miner.b2body.getLinearVelocity().x + "\n");
-
     }
 
     public void adjustSpeedY(float knobPercentage) {
@@ -89,7 +74,6 @@ public class GameModel {
         if (knobPercentage < -0.4 && minerModel.getMiner().b2body.getLinearVelocity().y == 0) {
             minerModel.getMiner().b2body.setLinearVelocity(0, 0);
         }
-
         //max vertical velocity
         if (speedY > 5) {
             minerModel.getMiner().b2body.setLinearVelocity(minerModel.getMiner().b2body.getLinearVelocity().x, 5);
@@ -97,8 +81,6 @@ public class GameModel {
     }
 
     public void update(Vector2 vector2) {
-
-
 
         minerPos = minerModel.getMiner().b2body.getPosition();
 
@@ -114,10 +96,6 @@ public class GameModel {
 
     public boolean gameOver() {
         return !minerModel.isAlive();
-    }
-
-    public boolean gamePaused(){
-        return true;
     }
 
 
@@ -172,9 +150,6 @@ public class GameModel {
         }
     }
 
-    public TmxMapLoader getMapLoader() {
-        return mapLoader;
-    }
 
     public TiledMap getMap() {
         return map;
@@ -188,9 +163,6 @@ public class GameModel {
         return world;
     }
 
-    public Box2DDebugRenderer getB2dr() {
-        return this.b2dr;
-    }
 
     private boolean getIsFacingRight() {
         return isFacingRight;
@@ -208,6 +180,5 @@ public class GameModel {
     public void dispose() {
         map.dispose();
         world.dispose();
-        //b2dr.dispose();
     }
 }
