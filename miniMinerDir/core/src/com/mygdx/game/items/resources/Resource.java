@@ -14,9 +14,7 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Resource implements IResource {
     private TileTemplate tileTemplate;
-    private IResource userData;
     public Resource(World world, TiledMap tiledMap, Rectangle constrains, IResource userData, short bit){
-        this.userData=userData;
         tileTemplate = new TileTemplate(world, tiledMap, constrains);
         initResource( userData, bit);
     }
@@ -24,9 +22,7 @@ public class Resource implements IResource {
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Coal", "Collision");
         tileTemplate.setCategoryFilter(Constants.DESTROYED_BIT);
-        System.out.println("Coal added to inventory");
         tileTemplate.getCell().setTile(null);
     }
     public void initResource(IResource resource, short bit){

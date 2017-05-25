@@ -15,21 +15,17 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public class Lapiz implements IResource {
-    private TileTemplate parent;
+    private Resource parent;
 
     public Lapiz(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap,constrains);
-        parent.initResource(this, Constants.LAPIZ_BIT);
+        parent = new Resource(world, tiledMap, constrains, this, Constants.LAPIZ_BIT);
 
     }
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Lapiz","Collision");
-        parent.setCategoryFilter(Constants.DESTROYED_BIT);
-        System.out.println("Lapiz added to inventory");
-        parent.getCell().setTile(null);
+        parent.onDrillHit();
     }
 
 }

@@ -18,8 +18,7 @@ public class Stone implements IResource {
 
     public Stone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        TileTemplate parent = new TileTemplate(world, tiledMap, constrains);
-        parent.initResource(this, Constants.STONE_BIT);
+        Resource parent = new Resource(world, tiledMap, constrains,this, Constants.STONE_BIT);
     }
 
     @Override

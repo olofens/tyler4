@@ -14,21 +14,18 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public class Redstone implements IResource {
-    private TileTemplate parent;
+    private Resource parent;
 
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains);
-        parent.initResource(this, Constants.REDSTONE_BIT);
+        parent = new Resource(world, tiledMap, constrains, this, Constants.REDSTONE_BIT);
+
 
     }
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Redstone","Collision");
-        parent.setCategoryFilter(Constants.DESTROYED_BIT);
-        System.out.println("Redstone added to inventory");
-        parent.getCell().setTile(null);
+        parent.onDrillHit();
     }
 
 }
