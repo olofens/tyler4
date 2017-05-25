@@ -272,18 +272,6 @@ public class PlayScreen implements Screen {
         cam.update();
     }
 
-    private int getMapPixelWidth() {
-        int mapWidth = gameModel.getProp().get("width", Integer.class);
-        int tilePixelWidth = gameModel.getProp().get("tilewidth", Integer.class);
-        return mapWidth * tilePixelWidth;
-    }
-
-    private int getMapPixelHeight() {
-        int tilePixelHeight = gameModel.getProp().get("tileheight", Integer.class);
-        int mapHeight = gameModel.getProp().get("height", Integer.class);
-        return mapHeight * tilePixelHeight;
-    }
-
     @Override
     public void resize(int width, int height) {
         viewPort.update(width, height);
