@@ -25,12 +25,13 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
 public class PauseScreenController {
 
+    private static PauseScreenController instance;
     private PauseScreenView psv;
 
     private boolean newScreen = false;
     private boolean isPaused = false;
 
-    public PauseScreenController(){
+    private PauseScreenController(){
 
         psv = new PauseScreenView();
 
@@ -47,6 +48,13 @@ public class PauseScreenController {
                 newScreen = true;
             }
         });
+    }
+
+    public static PauseScreenController getInstance() {
+        if (instance == null) {
+            instance = new PauseScreenController();
+        }
+        return instance;
     }
 
     public boolean isNewScreen() {

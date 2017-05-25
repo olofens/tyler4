@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Tools.PauseButtonController;
 import com.mygdx.game.Tools.PauseButtonView;
 import com.mygdx.game.Tools.PauseScreenController;
 import com.mygdx.game.Tools.StoreRepairController;
@@ -68,7 +69,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     private Label msgLabel;
 
     //private ImageButton pauseBtn;
-    PauseButtonView pbv;
+    private PauseButtonController pauseBtnCtrl;
     private Skin storeSkin;
 
 
@@ -88,8 +89,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     public Hud(SpriteBatch spriteBatch) {
 
         hudView = new HudView(spriteBatch);
-
-
+        pauseBtnCtrl = new PauseButtonController();
         
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
@@ -99,7 +99,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         tpHandler = new TouchpadController();
         storeRepairController = new StoreRepairController();
         dbHandler = new DrillButtonView();
-        psHandler = new PauseScreenController();
+        psHandler = PauseScreenController.getInstance();
         suHandler = new StoreUpgradeController();
         initDrillButtonListener();
 
@@ -117,7 +117,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeRepairController.getStorePopup());
         stage.addActor(tpHandler.getTouchpad());
-        stage.addActor(pbv.getPauseButton());
+        stage.addActor(pauseBtnCtrl.getPauseButton());
         stage.addActor(suHandler.getStorePopup());
         Gdx.input.setInputProcessor(stage);
 
@@ -136,7 +136,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         table.add(fuelLabel).expandX().padTop(5);
         table.add(cashLabel).expandX().padTop(5);
         table.add(hullLabel).expandX().padTop(5);
-        table.add(pbv.getPauseButton()).expandX().padTop(10);
+        table.add(pauseBtnCtrl.getPauseButton()).expandX().padTop(10);
 
         stage.addActor(table);
 
