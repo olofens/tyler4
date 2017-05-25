@@ -15,46 +15,28 @@ import com.mygdx.game.event.general.Shout;
  * Created by olofenstrom on 2017-05-20.
  */
 
-public class StoreUpgradeHandler {
+public class StoreUpgradeController {
 
-    private TextButton fillFuel;
-    private Table table;
-    private TextButton fixHull;
+    private StoreView storeView;
 
-    public StoreUpgradeHandler(){
+    public StoreUpgradeController(){
 
-        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
+        storeView = new StoreView("Upgrade fuel", "Upgrade hull");
 
-        fillFuel = new TextButton("Upgrade fuel", storeSkin);
-        fillFuel.addListener(new ClickListener() {
-
+        storeView.getTopButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 Listener.BUS.update(new Shout(Shout.Tag.FUELUPGRADE));
             }
-
         });
 
-        fixHull = new TextButton("Upgrade hull", storeSkin);
-        fixHull.addListener(new ClickListener() {
-
+        storeView.getBottomButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 Listener.BUS.update(new Shout(Shout.Tag.HULLUPGRADE));
             }
         });
-
-
-        table = new Table(storeSkin);
-        table.background(storeSkin.get(Window.WindowStyle.class).background);
-        table.center();
-        table.setBounds(5, 80, 230, 290);
-        table.add(fillFuel).width(150).height(100).pad(30, 0, 0, 0);
-        table.row();
-        table.add(fixHull).width(150).height(100);
-        table.setVisible(false);
     }
 
     public Table getStorePopup(){
-        return table;
+        return storeView.getTable();
     }
 }

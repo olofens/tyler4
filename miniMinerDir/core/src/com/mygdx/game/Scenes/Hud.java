@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreRepairController;
-import com.mygdx.game.Tools.StoreUpgradeHandler;
+import com.mygdx.game.Tools.StoreUpgradeController;
 import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
@@ -74,7 +74,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     private StoreRepairController storeRepairController;
     private DrillButtonHandler dbHandler;
     private PauseScreenHandler psHandler;
-    private StoreUpgradeHandler suHandler;
+    private StoreUpgradeController suHandler;
 
 
     /**
@@ -94,7 +94,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         storeRepairController = new StoreRepairController();
         dbHandler = new DrillButtonHandler();
         psHandler = new PauseScreenHandler();
-        suHandler = new StoreUpgradeHandler();
+        suHandler = new StoreUpgradeController();
         initDrillButtonListener();
 
 
