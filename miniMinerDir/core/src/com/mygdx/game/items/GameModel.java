@@ -29,7 +29,6 @@ public class GameModel {
 
     // Box2D variables
     private World world;
-    private Box2DDebugRenderer b2dr;
 
     private boolean isFacingRight;
 
@@ -53,7 +52,7 @@ public class GameModel {
         this.minerModel = new MinerModel(world);
     }
 
-    public void adjustSpeedX(float knobPercentage) {
+    private void adjustSpeedX(float knobPercentage) {
         float speedX = minerModel.getMiner().b2body.getLinearVelocity().x;
 
         if (knobPercentage != 0) {
@@ -66,7 +65,7 @@ public class GameModel {
         }
     }
 
-    public void adjustSpeedY(float knobPercentage) {
+    private void adjustSpeedY(float knobPercentage) {
         float speedY = minerModel.getMiner().b2body.getLinearVelocity().y;
         if (knobPercentage > 0) {
             minerModel.getMiner().b2body.applyForceToCenter(0, 18f * knobPercentage, true);
@@ -100,7 +99,7 @@ public class GameModel {
 
 
     private boolean drawRight() {
-        //Check touchpad
+
         if (touchpadLocation.x > 0) {
             //RIGHT
             return true;
@@ -108,18 +107,18 @@ public class GameModel {
             //LEFT
             return false;
         }
-        //Check velocity
+
         else if (minerModel.getMiner().b2body.getLinearVelocity().x > 0) {
             //RIGHT
-            isFacingRight = true;
+            setIsFacingRight(true);
             return true;
         } else if (minerModel.getMiner().b2body.getLinearVelocity().x < 0) {
             //LEFT
-            isFacingRight = false;
+            setIsFacingRight(false);
             return false;
         }
-        //Check last direction
-        return isFacingRight;
+
+        return getIsFacingRight();
     }
 
 

@@ -116,10 +116,8 @@ public class PlayScreen implements Screen {
     private void checkState() {
         if (hud.isPaused()) {
             this.state = State.PAUSE;
-            //System.out.print("GAME IS PAUSED");
         } else {
             this.state = State.RESUME;
-            //System.out.print("RESUME");}
         }
     }
 
@@ -127,13 +125,9 @@ public class PlayScreen implements Screen {
      * @param dt
      */
     public void update(float dt) {
-
-
         checkState();
 
-        //The Vector that our Touchpadhandler creates
         v2 = hud.tpHandler.handleInput();
-
 
         gameModel.update(v2);
 
@@ -157,16 +151,12 @@ public class PlayScreen implements Screen {
         Gdx.input.setInputProcessor(hud.stage);
         update(dt);
 
-        //render our game map
         renderer.render();
 
-        //render miner
         game.batch.begin();
         drawMiner();
         game.batch.end();
 
-        //Render b2dr lines
-        //gameModel.getB2dr().render(gameModel.getWorld(), gameCam.combined);
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -223,34 +213,21 @@ public class PlayScreen implements Screen {
         float startX = 0;
         float startY = 0;
 
-
-        //Divide by PPM since width and height are measurements in pixels and not tiles...
-        //... and the camera's position is currently set in tiles. PPM is set to the side
-        //of a tile (32px)
         width /= Constants.PPM;
         height /= Constants.PPM;
 
-        //instantiate a position
         Vector3 position = cam.position;
 
-        //mathematical understanding: startX is the position of the camera, which in turn is the
-        //position of the player. The player is in the middle of the screen at all times.
-        //to get the leftmost bit of the gameCam's view, we get HALF the width of the screen and
-        //add it to startX. Same with startY
         startX += Constants.V_WIDTH / 2 / Constants.PPM;
         startY += Constants.V_HEIGHT / 2 / Constants.PPM;
 
-        //same here but we subtract the width and height
         height -= Constants.V_HEIGHT / 2 / Constants.PPM;
         width -= Constants.V_WIDTH / 2 / Constants.PPM;
 
 
-        //self-explanatory
         position.x = gameModel.getMinerModel().getMiner().b2body.getPosition().x;
         position.y = gameModel.getMinerModel().getMiner().b2body.getPosition().y;
 
-        //if the position of the camera's left most bit is outside of the map, reset the cameras
-        //position to the left most bit of the map
         if (position.x < startX) {
             position.x = startX;
         }
@@ -267,7 +244,6 @@ public class PlayScreen implements Screen {
             position.y = height;
         }
 
-        //set the new camera position
         cam.position.set(position);
         cam.update();
     }
