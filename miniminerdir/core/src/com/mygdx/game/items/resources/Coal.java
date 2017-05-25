@@ -16,20 +16,15 @@ import com.mygdx.game.items.TileTemplate;
 
 public class Coal implements IResource {
 
-    private TileTemplate parent;
+    private Resource parent;
 
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains);
-        parent.initResource( this, Constants.COAL_BIT);
+        parent = new Resource(world, tiledMap, constrains, this ,Constants.COAL_BIT);
     }
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Coal", "Collision");
-        parent.setCategoryFilter(Constants.DESTROYED_BIT);
-        System.out.println("Coal added to inventory");
-        parent.getCell().setTile(null);
+        parent.onDrillHit();
     }
-
 }

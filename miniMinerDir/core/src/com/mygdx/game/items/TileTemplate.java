@@ -50,10 +50,6 @@ public class TileTemplate {
         fixture.setFriction(0f);
 
     }
-    public void initResource(IResource resource, short bit){
-        fixture.setUserData(resource);
-        setCategoryFilter(bit);
-    }
     public void setCategoryFilter(short filterBit){
         //Sets the imported bit in a new filter and sets the fixtures filterData
         Filter filter = new Filter();
