@@ -17,12 +17,15 @@ public class ScreenHandler {
     public ScreenHandler(Game game){
         this.game = game;
     }
+
     public void createPlayScreen(){
         game.setScreen(new PlayScreen((MiniMiner)game));
     }
+
     public void createStartMenuScreen(){
         game.setScreen(new StartMenuScreen(game));
     }
+
     public void createGameOverScreen(){
         game.setScreen(new GameOverScreen(game));
     }
