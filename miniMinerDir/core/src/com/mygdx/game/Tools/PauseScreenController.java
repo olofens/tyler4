@@ -23,14 +23,14 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
  */
 
 
-public class PauseScreenHandler {
+public class PauseScreenController {
 
     private PauseScreenView psv;
 
     private boolean newScreen = false;
     private boolean isPaused = false;
 
-    public PauseScreenHandler(){
+    public PauseScreenController(){
 
         psv = new PauseScreenView();
 
