@@ -40,11 +40,6 @@ public class PlayScreen implements Screen {
     private Sprite minerSprite;
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
-    private Vector2 minerPos;
-
-    private Stage stage;
-    private TextButton resumeButton;
-    private Table table;
 
 
     private OrthogonalTiledMapRenderer renderer;
@@ -76,8 +71,6 @@ public class PlayScreen implements Screen {
         this.game = game;
 
 
-        SpriteBatch sb = new SpriteBatch();
-
         this.gameModel = new GameModel();
 
         // Our camera and our viewport, this is where the camera focuses during the game
@@ -85,8 +78,6 @@ public class PlayScreen implements Screen {
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
-
-        //stage = new Stage(viewPort, ((MiniMiner) game).batch);
 
 
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
@@ -106,7 +97,6 @@ public class PlayScreen implements Screen {
 
 
     }
-
 
     @Override
     public void show() {
@@ -269,21 +259,6 @@ public class PlayScreen implements Screen {
     public void hide() {
 
     }
-/*
-    public void createNewScreen(){
-        if(hud.isNewScreen()){
-            createMainMenu();
-            hud.setIsNewScreen(false);
-        }
-
-    }
-
-    public void createMainMenu(){
-        //game.setScreen(new StartMenuScreen((MiniMiner)game));
-        game.setScreen(new StartMenuScreen(game));
-
-    }
-    */
 
     @Override
     public void dispose() {

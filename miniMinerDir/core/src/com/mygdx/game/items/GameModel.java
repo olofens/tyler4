@@ -18,7 +18,6 @@ import com.mygdx.game.Utils.Constants;
 
 public class GameModel {
 
-
     //Miner variables
     private MinerModel minerModel;
 
@@ -165,19 +164,11 @@ public class GameModel {
         return map;
     }
 
+
     public World getWorld() {
         return world;
     }
 
-
-    private boolean getIsFacingRight() {
-        return isFacingRight;
-    }
-
-    private void setIsFacingRight(boolean value) {
-        this.isFacingRight = value;
-
-    }
 
     public MinerModel getMinerModel() {
         return this.minerModel;
