@@ -25,27 +25,23 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
 
 public class PauseScreenHandler {
 
-    private TextButton resumeButton;
-    private TextButton menuButton;
+    private PauseScreenView psv;
 
     private boolean newScreen = false;
     private boolean isPaused = false;
 
     public PauseScreenHandler(){
 
-        Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
+        psv = new PauseScreenView();
 
-        resumeButton = new TextButton("Resume", storeSkin);
-        resumeButton.addListener(new ClickListener() {
+        psv.getResumeButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 isPaused = false;
             }
         });
 
-        menuButton = new TextButton("Main Menu", storeSkin);
-        menuButton.addListener(new ClickListener() {
+        psv.getMenuButton().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 newScreen = true;
@@ -66,9 +62,9 @@ public class PauseScreenHandler {
         isPaused = paused;
     }
     public TextButton getResumeButton() {
-        return resumeButton;
+        return psv.getResumeButton();
     }
     public TextButton getMenuButton() {
-        return menuButton;
+        return psv.getMenuButton();
     }
 }
