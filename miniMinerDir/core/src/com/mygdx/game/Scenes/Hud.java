@@ -145,15 +145,15 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         MessageListener.BUS.addListener(this);
 
 
-        table2 = new Table(storeSkin);
+        /*table2 = new Table(storeSkin);
         table2.center();
         table2.setBounds(10, 90, 190, 210);
         table2.add(psHandler.getResumeButton());
         table2.row();
-        table2.add(psHandler.getMenuButton());
+        table2.add(psHandler.getMenuButton());*/
 
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
-        stage2.addActor(table2);
+        stage2.addActor(psHandler.getTable());
     }
 
     private void initDrillButtonListener() {
@@ -227,6 +227,10 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     private void toggleActorVisibility(Actor actor) {
         boolean visible = actor.isVisible();
         actor.setVisible(!visible);
+    }
+
+    public Table getTable2() {
+        return psHandler.getTable();
     }
 
 

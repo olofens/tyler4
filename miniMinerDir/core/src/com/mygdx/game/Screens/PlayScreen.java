@@ -173,7 +173,8 @@ public class PlayScreen implements Screen {
 
     private void renderPause(float dt) {
         checkState();
-        hud.table2.setVisible(true);
+
+        hud.getTable2().setVisible(true);
         Gdx.input.setInputProcessor(hud.stage2);
 
         hud.stage2.act();

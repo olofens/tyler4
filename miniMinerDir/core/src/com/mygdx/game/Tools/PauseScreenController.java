@@ -57,6 +57,9 @@ public class PauseScreenController {
         return instance;
     }
 
+    public Table getTable() {
+        return psv.getTable();
+    }
     public boolean isNewScreen() {
         return newScreen;
     }
