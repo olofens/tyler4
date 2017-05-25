@@ -16,19 +16,15 @@ import com.mygdx.game.items.TileTemplate;
  */
 
 public class Iron implements IResource{
-    private TileTemplate parent;
+    private Resource parent;
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
         //Se Dirt-class for commenting
-        parent = new TileTemplate(world, tiledMap, constrains);
-        parent.initResource(this, Constants.IRON_BIT);
+        parent = new Resource(world, tiledMap, constrains,this, Constants.IRON_BIT);
 
     }
 
     @Override
     public void onDrillHit() {
-        Gdx.app.log("Iron", "Collision");
-        parent.setCategoryFilter(Constants.DESTROYED_BIT);
-        System.out.println("Iron added to inventory");
-        parent.getCell().setTile(null);
+       parent.onDrillHit();
     }
 }
