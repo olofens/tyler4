@@ -174,6 +174,14 @@ public class GameModel {
         return this.minerModel;
     }
 
+    private void setIsFacingRight(boolean val) {
+        isFacingRight = val;
+    }
+
+    private boolean getIsFacingRight() {
+        return isFacingRight;
+    }
+
     public void dispose() {
         map.dispose();
         world.dispose();
