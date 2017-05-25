@@ -145,8 +145,4 @@ public class GameModel {
     private boolean getIsFacingRight() {
         return isFacingRight;
     }
-
-    public void dispose() {
-        gameWorld.dispose();
-    }
 }
