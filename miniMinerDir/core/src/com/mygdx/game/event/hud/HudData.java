@@ -10,11 +10,13 @@ import com.badlogic.gdx.graphics.Color;
 public class HudData {
     private String fuel;
     private String hull;
+    private String cash;
     private Color color;
 
-    public HudData(String fuel, String hull, Color color) {
+    public HudData(String fuel, String hull, String cash, Color color) {
         this.fuel = fuel;
         this.hull = hull;
+        this.cash = cash;
         this.color = color;
     }
 
@@ -24,6 +26,10 @@ public class HudData {
 
     public String getHull() {
         return hull;
+    }
+
+    public String getCash() {
+        return cash;
     }
 
     public Color getColor(){

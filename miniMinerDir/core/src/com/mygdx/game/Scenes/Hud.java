@@ -57,7 +57,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     public Integer score;
 
-    private Label scoreLabel;
+    private Label cashLabel;
     private Label fuelLabel;
     private Label hullLabel;
     private Label msgLabel;
@@ -130,12 +130,12 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
 
         fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-        scoreLabel = new Label(String.format("%03d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        cashLabel = new Label("1000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
         msgLabel = new Label(message, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(fuelLabel).expandX().padTop(5);
-        table.add(scoreLabel).expandX().padTop(5);
+        table.add(cashLabel).expandX().padTop(5);
         table.add(hullLabel).expandX().padTop(5);
         table.add(pauseBtn).expandX().padTop(10);
 
@@ -202,6 +202,12 @@ public class Hud implements Disposable, IListener, IHudUpdater {
 
     }
 
+    private void adjustCashLabel(String cashString) {
+        cashLabel.setText(cashString);
+
+    }
+
+
     private void toggleActorVisibility(Actor actor) {
         boolean visible = actor.isVisible();
         actor.setVisible(!visible);
@@ -254,6 +260,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     public void update(HudData data) {
         adjustFuelLabel(data.getColor(), data.getFuel());
         adjustHullLabel(data.getHull());
+        adjustCashLabel(data.getCash());
 
     }
 

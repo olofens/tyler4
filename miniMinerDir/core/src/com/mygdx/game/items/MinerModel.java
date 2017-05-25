@@ -59,7 +59,7 @@ public class MinerModel implements IListener, IOreListener {
         if (minerFell()) hull.adjustHull(previousSpeed);
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
-        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), ft.fuelColor()));
+        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), inventory.getCashString(), ft.fuelColor()));
 
         previousSpeed = miner.b2body.getLinearVelocity().y;
     }

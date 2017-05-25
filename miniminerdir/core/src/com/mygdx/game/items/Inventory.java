@@ -42,6 +42,11 @@ public class Inventory {
         setRedstone(0);
     }
 
+    public String getCashString() {
+        Integer integerCash = (int) cash;
+        return integerCash.toString();
+    }
+
     public void decreaseCash(int cost){
         this.cash -= cost;
     }
