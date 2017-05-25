@@ -172,24 +172,24 @@ public class GameModel {
         }
     }
 
-    public TmxMapLoader getMapLoader() {
-        return mapLoader;
+    public int getMapPixelWidth() {
+        int mapWidth = prop.get("width", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        return mapWidth * tilePixelWidth;
+    }
+
+    public int getMapPixelHeight() {
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        return mapHeight * tilePixelHeight;
     }
 
     public TiledMap getMap() {
         return map;
     }
 
-    public MapProperties getProp() {
-        return prop;
-    }
-
     public World getWorld() {
         return world;
-    }
-
-    public Box2DDebugRenderer getB2dr() {
-        return this.b2dr;
     }
 
     private boolean getIsFacingRight() {
