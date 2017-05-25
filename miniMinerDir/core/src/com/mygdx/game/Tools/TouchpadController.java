@@ -20,7 +20,7 @@ import com.mygdx.game.items.Miner;
  */
 
 
-public class TouchpadHandler {
+public class TouchpadController {
 
     
     private Touchpad touchpad;
@@ -28,17 +28,9 @@ public class TouchpadHandler {
     private DrillData.DrillDirection prevDirection;
     private DrillData.DrillDirection currDirection;
 
-    public TouchpadHandler() {
-
-        Skin touchpadSkin = new Skin();
-        touchpadSkin.add("touchKnob", new Texture("touchPad/rsz_1touchknob.png"));
-        Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
-        Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
-
-        touchpadStyle.knob = touchKnob;
-        touchpad = new Touchpad(0, touchpadStyle);
-
-        touchpad.setBounds(Constants.V_WIDTH - 110, 15, 100, 100);
+    public TouchpadController() {
+        TouchpadView tpv = new TouchpadView();
+        touchpad = tpv.getTouchpad();
     }
 
     public boolean isTouchingUp() {
@@ -96,7 +88,6 @@ public class TouchpadHandler {
 
         prevDirection = currDirection;
     }
-
 }
 
 

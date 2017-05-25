@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Tools.PauseScreenHandler;
 import com.mygdx.game.Tools.StoreHandler;
 import com.mygdx.game.Tools.StoreUpgradeHandler;
-import com.mygdx.game.Tools.TouchpadHandler;
+import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Tools.DrillButtonHandler;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.drill.DrillData;
@@ -65,7 +65,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
     private ImageButton pauseBtn;
 
 
-    public TouchpadHandler tpHandler;
+    public TouchpadController tpHandler;
     private StoreHandler storeHandler;
     private DrillButtonHandler dbHandler;
     private PauseScreenHandler psHandler;
@@ -86,7 +86,7 @@ public class Hud implements Disposable, IListener, IHudUpdater {
         stage2 = new Stage(viewport, spriteBatch);
         stage3 = new Stage(viewport, spriteBatch);
 
-        tpHandler = new TouchpadHandler();
+        tpHandler = new TouchpadController();
         storeHandler = new StoreHandler();
         dbHandler = new DrillButtonHandler();
         psHandler = new PauseScreenHandler();
