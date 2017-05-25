@@ -47,6 +47,7 @@ import com.mygdx.game.event.messages.MessageListener;
 
 public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener {
 
+    private HudView hudView;
 
     public Stage stage;
     public Stage stage2;
@@ -86,14 +87,8 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
      */
     public Hud(SpriteBatch spriteBatch) {
 
-        pbv = new PauseButtonView();
-        pbv.getPauseButton().addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.print("CLICK.");
-                psHandler.setPaused(true);
-                return true;
-            }
-        });
+        hudView = new HudView(spriteBatch);
+
 
         
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
@@ -122,7 +117,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         stage.addActor(dbHandler.getdrillButton());
         stage.addActor(storeRepairController.getStorePopup());
         stage.addActor(tpHandler.getTouchpad());
-        stage.addActor(pauseBtn);
+        stage.addActor(pbv.getPauseButton());
         stage.addActor(suHandler.getStorePopup());
         Gdx.input.setInputProcessor(stage);
 
@@ -141,7 +136,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         table.add(fuelLabel).expandX().padTop(5);
         table.add(cashLabel).expandX().padTop(5);
         table.add(hullLabel).expandX().padTop(5);
-        table.add(pauseBtn).expandX().padTop(10);
+        table.add(pbv.getPauseButton()).expandX().padTop(10);
 
         stage.addActor(table);
 
