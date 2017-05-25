@@ -133,15 +133,15 @@ public class GameModel {
         //Check velocity
         else if (minerModel.getMiner().b2body.getLinearVelocity().x > 0) {
             //RIGHT
-            setIsFacingRight(true);
+            isFacingRight = true;
             return true;
         } else if (minerModel.getMiner().b2body.getLinearVelocity().x < 0) {
             //LEFT
-            setIsFacingRight(false);
+            isFacingRight = false;
             return false;
         }
         //Check last direction
-        return getIsFacingRight();
+        return isFacingRight;
     }
 
 
@@ -190,15 +190,6 @@ public class GameModel {
 
     public World getWorld() {
         return world;
-    }
-
-    private boolean getIsFacingRight() {
-        return isFacingRight;
-    }
-
-    private void setIsFacingRight(boolean value) {
-        this.isFacingRight = value;
-
     }
 
     public MinerModel getMinerModel() {
