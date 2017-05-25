@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Tools.ScreenHandler;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -36,13 +37,15 @@ public class GameOverScreen implements Screen {
     private Table table;
     private Game game;
 
+    private ScreenHandler sh;
+
     public GameOverScreen(Game game) {
 
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((MiniMiner) game).batch);
 
-
+        sh = new ScreenHandler(game);
         Gdx.input.setInputProcessor(stage);
 
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
@@ -52,7 +55,7 @@ public class GameOverScreen implements Screen {
         playAgainButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                createPlayScreen();
+                sh.createPlayScreen();
             }
         });
 
@@ -60,7 +63,7 @@ public class GameOverScreen implements Screen {
         mainMenu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                createMainMenu();
+                sh.createStartMenuScreen();
             }
         });
 
@@ -75,13 +78,7 @@ public class GameOverScreen implements Screen {
         stage.addActor(table);
     }
 
-    public void createPlayScreen(){
-        game.setScreen(new PlayScreen((MiniMiner)game));
-    }
 
-    public void createMainMenu(){
-        game.setScreen(new StartMenuScreen((MiniMiner)game));
-    }
 
 
     @Override

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Screens.StartMenuScreen;
+import com.mygdx.game.Tools.ScreenHandler;
 
 /**
  * This is the main class for our game, this is where the magic happens and where our game is generated,
@@ -16,14 +17,15 @@ import com.mygdx.game.Screens.StartMenuScreen;
 
 public class MiniMiner extends Game {
     
-
+    public ScreenHandler sh;
     public SpriteBatch batch;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        setScreen(new StartMenuScreen(this));
-        //setScreen(new PlayScreen(this));
+
+        sh = new ScreenHandler(this);
+        sh.createStartMenuScreen();
 
     }
 

@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Tools.MinerDrawOptions;
+import com.mygdx.game.Tools.ScreenHandler;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.items.GameWorld;
@@ -42,6 +43,7 @@ public class PlayScreen implements Screen {
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
 
+    private ScreenHandler sh;
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -73,6 +75,8 @@ public class PlayScreen implements Screen {
 
         state = State.RESUME;
         this.game = game;
+
+        sh = new ScreenHandler(game);
 
 
         this.gameModel = new GameModel();
@@ -164,14 +168,13 @@ public class PlayScreen implements Screen {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    game.setScreen(new GameOverScreen(game));
+                    sh.createGameOverScreen();
                 }
             }, 0.2f);
         }
     }
 
     private void renderPause(float dt) {
-        //update(dt);
         checkState();
         hud.table2.setVisible(true);
         Gdx.input.setInputProcessor(hud.stage2);
@@ -179,7 +182,7 @@ public class PlayScreen implements Screen {
         hud.stage2.act();
         hud.stage2.draw();
         if(hud.isNewScreen()){
-            game.setScreen(new StartMenuScreen(game));
+            sh.createStartMenuScreen();
             hud.setIsNewScreen(false);
         }
     }

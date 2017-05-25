@@ -29,6 +29,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
+import com.mygdx.game.Tools.ScreenHandler;
 import com.mygdx.game.Utils.Constants;
 
 import java.awt.Font;
@@ -45,6 +46,8 @@ public class StartMenuScreen implements Screen {
     private SpriteBatch sb;
     private Texture texture;
 
+    private ScreenHandler sh;
+
     private OrthographicCamera gameCam;
 
     private Button startGameButton;
@@ -60,6 +63,8 @@ public class StartMenuScreen implements Screen {
         viewport = new FitViewport(Constants.V_WIDTH,
                 Constants.V_HEIGHT, gameCam);
         stage = new Stage(viewport, ((MiniMiner) game).batch);
+
+        sh = new ScreenHandler(game);
 
         Gdx.input.setInputProcessor(stage);
 
@@ -79,11 +84,10 @@ public class StartMenuScreen implements Screen {
         startGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //
                 Timer.schedule(new Timer.Task(){
                     @Override
                     public void run() {
-                        startGame();
+                        sh.createPlayScreen();
                     }
                 }, 0.2f);
             }
@@ -109,10 +113,6 @@ public class StartMenuScreen implements Screen {
         stage.addActor(table);
 
 
-    }
-
-    public void startGame(){
-                game.setScreen(new PlayScreen((MiniMiner)game));
     }
 
     public void update(float dt){
