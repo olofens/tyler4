@@ -40,11 +40,6 @@ public class PlayScreen implements Screen {
     private Sprite minerSprite;
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
-    private Vector2 minerPos;
-
-    private Stage stage;
-    private TextButton resumeButton;
-    private Table table;
 
 
     private OrthogonalTiledMapRenderer renderer;
@@ -76,8 +71,6 @@ public class PlayScreen implements Screen {
         this.game = game;
 
 
-        SpriteBatch sb = new SpriteBatch();
-
         this.gameModel = new GameModel();
 
         // Our camera and our viewport, this is where the camera focuses during the game
@@ -85,8 +78,6 @@ public class PlayScreen implements Screen {
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
-
-        //stage = new Stage(viewPort, ((MiniMiner) game).batch);
 
 
         renderer = new OrthogonalTiledMapRenderer(gameModel.getMap(), 1 / Constants.PPM);
@@ -107,7 +98,6 @@ public class PlayScreen implements Screen {
 
     }
 
-
     @Override
     public void show() {
 
@@ -116,10 +106,8 @@ public class PlayScreen implements Screen {
     private void checkState() {
         if (hud.isPaused()) {
             this.state = State.PAUSE;
-            //System.out.print("GAME IS PAUSED");
         } else {
             this.state = State.RESUME;
-            //System.out.print("RESUME");}
         }
     }
 
@@ -272,18 +260,6 @@ public class PlayScreen implements Screen {
         cam.update();
     }
 
-    private int getMapPixelWidth() {
-        int mapWidth = gameModel.getProp().get("width", Integer.class);
-        int tilePixelWidth = gameModel.getProp().get("tilewidth", Integer.class);
-        return mapWidth * tilePixelWidth;
-    }
-
-    private int getMapPixelHeight() {
-        int tilePixelHeight = gameModel.getProp().get("tileheight", Integer.class);
-        int mapHeight = gameModel.getProp().get("height", Integer.class);
-        return mapHeight * tilePixelHeight;
-    }
-
     @Override
     public void resize(int width, int height) {
         viewPort.update(width, height);
@@ -305,21 +281,6 @@ public class PlayScreen implements Screen {
     public void hide() {
 
     }
-/*
-    public void createNewScreen(){
-        if(hud.isNewScreen()){
-            createMainMenu();
-            hud.setIsNewScreen(false);
-        }
-
-    }
-
-    public void createMainMenu(){
-        //game.setScreen(new StartMenuScreen((MiniMiner)game));
-        game.setScreen(new StartMenuScreen(game));
-
-    }
-    */
 
     @Override
     public void dispose() {
