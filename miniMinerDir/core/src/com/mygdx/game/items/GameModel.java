@@ -111,15 +111,15 @@ public class GameModel {
         //Check velocity
         else if (minerModel.getMiner().b2body.getLinearVelocity().x > 0) {
             //RIGHT
-            setIsFacingRight(true);
+            isFacingRight = true;
             return true;
         } else if (minerModel.getMiner().b2body.getLinearVelocity().x < 0) {
             //LEFT
-            setIsFacingRight(false);
+            isFacingRight = false;
             return false;
         }
         //Check last direction
-        return getIsFacingRight();
+        return isFacingRight;
     }
 
 
@@ -150,13 +150,20 @@ public class GameModel {
         }
     }
 
+    public int getMapPixelWidth() {
+        int mapWidth = prop.get("width", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        return mapWidth * tilePixelWidth;
+    }
+
+    public int getMapPixelHeight() {
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        return mapHeight * tilePixelHeight;
+    }
 
     public TiledMap getMap() {
         return map;
-    }
-
-    public MapProperties getProp() {
-        return prop;
     }
 
     public World getWorld() {
