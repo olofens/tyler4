@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Tools.PauseButtonView;
 import com.mygdx.game.Tools.PauseScreenController;
 import com.mygdx.game.Tools.StoreRepairController;
 import com.mygdx.game.Tools.StoreUpgradeController;
@@ -65,8 +66,8 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     private Label hullLabel;
     private Label msgLabel;
 
-    private ImageButton pauseBtn;
-
+    //private ImageButton pauseBtn;
+    PauseButtonView pbv;
     private Skin storeSkin;
 
 
@@ -85,6 +86,16 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
      */
     public Hud(SpriteBatch spriteBatch) {
 
+        pbv = new PauseButtonView();
+        pbv.getPauseButton().addListener(new ClickListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.print("CLICK.");
+                psHandler.setPaused(true);
+                return true;
+            }
+        });
+
+        
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, spriteBatch);
         stage2 = new Stage(viewport, spriteBatch);
@@ -98,20 +109,9 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
         initDrillButtonListener();
 
 
-        Texture myTexture = new Texture(("Pause-26.png"));
-        TextureRegion myTextureRegion = new TextureRegion(myTexture);
-        TextureRegionDrawable myTexRegionDrawable = new TextureRegionDrawable(myTextureRegion);
 
-        pauseBtn = new ImageButton(myTexRegionDrawable);
-        pauseBtn.scaleBy(0.1f);
-        pauseBtn.addListener(new ClickListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                System.out.print("CLICK.");
-                psHandler.setPaused(true);
-                return true;
-            }
-        });
-        pauseBtn.setTransform(true);
+
+
 
 
         storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
