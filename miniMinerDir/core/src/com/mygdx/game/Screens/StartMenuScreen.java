@@ -4,18 +4,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -29,10 +22,8 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Tools.ScreenHandler;
+import com.mygdx.game.Tools.ScreenSetter;
 import com.mygdx.game.Utils.Constants;
-
-import java.awt.Font;
 
 /**
  * Created by Omaroueidat on 03/04/17.
@@ -46,7 +37,7 @@ public class StartMenuScreen implements Screen {
     private SpriteBatch sb;
     private Texture texture;
 
-    private ScreenHandler sh;
+    private ScreenSetter sh;
 
     private OrthographicCamera gameCam;
 
@@ -64,7 +55,7 @@ public class StartMenuScreen implements Screen {
                 Constants.V_HEIGHT, gameCam);
         stage = new Stage(viewport, ((MiniMiner) game).batch);
 
-        sh = new ScreenHandler(game);
+        sh = new ScreenSetter(game);
 
         Gdx.input.setInputProcessor(stage);
 

@@ -30,18 +30,7 @@ public class TestClass {
 
 
     }
-    @Test
-    public void mapTest(){
-        //TODO
-        /*
-         TmxMapLoader mapLoader;
-         TiledMap map;
-         OrthogonalTiledMapRenderer renderer;
 
-        mapLoader = new TmxMapLoader();
-        map = mapLoader.load("MiniMinerMap.tmx");
-        */
-    }
     @Test
     public void testUpgrades()throws Exception{
         FuelTank ft = new FuelTank();

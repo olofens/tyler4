@@ -5,13 +5,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,7 +15,7 @@ import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Scenes.HudView;
 import com.mygdx.game.Tools.MinerDrawOptions;
-import com.mygdx.game.Tools.ScreenHandler;
+import com.mygdx.game.Tools.ScreenSetter;
 import com.mygdx.game.items.GameModel;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.items.GameWorld;
@@ -44,7 +40,7 @@ public class PlayScreen implements Screen {
     private Sprite minerSpriteDrillDown;
     private Sprite minerSpriteRocket;
 
-    private ScreenHandler sh;
+    private ScreenSetter sh;
 
     private OrthogonalTiledMapRenderer renderer;
 
@@ -79,7 +75,7 @@ public class PlayScreen implements Screen {
         state = State.RESUME;
         this.game = game;
 
-        sh = new ScreenHandler(game);
+        sh = new ScreenSetter(game);
 
         this.gameModel = new GameModel();
 

@@ -12,4 +12,16 @@ eclipse.project {
 
 dependencies {
     compile 'junit:junit:4.12'
+    compile "org.mockito:mockito-core:2.2.7"
+
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:2.2.7"
+
+
+    compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    testCompile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
 }

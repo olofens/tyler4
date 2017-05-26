@@ -2,10 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Screens.GameOverScreen;
-import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Screens.StartMenuScreen;
-import com.mygdx.game.Tools.ScreenHandler;
+import com.mygdx.game.Tools.ScreenSetter;
 import org.junit.Test;
 
 
@@ -16,13 +13,13 @@ import static org.junit.Assert.assertTrue;
  * Created by erikstrid on 2017-05-25.
  */
 
-public class ScreenHandlerTest {
+public class ScreenSetterTest {
 
     @Test
     public void testPlayScreenCreation(){
 
         Game game = new MiniMiner();
-        ScreenHandler sh = new ScreenHandler(game);
+        ScreenSetter sh = new ScreenSetter(game);
         sh.createPlayScreen();
 
         assertTrue(game.getScreen() instanceof PlayScreen);
@@ -33,7 +30,7 @@ public class ScreenHandlerTest {
     public void testStartMenuScreenCreation(){
 
         Game game = new MiniMiner();
-        ScreenHandler sh = new ScreenHandler(game);
+        ScreenSetter sh = new ScreenSetter(game);
         sh.createStartMenuScreen();
 
         assertTrue(game.getScreen() instanceof StartMenuScreen);
@@ -44,7 +41,7 @@ public class ScreenHandlerTest {
     public void testGameOverScreenCreation(){
 
         Game game = new MiniMiner();
-        ScreenHandler sh = new ScreenHandler(game);
+        ScreenSetter sh = new ScreenSetter(game);
         sh.createGameOverScreen();
 
         assertTrue(game.getScreen() instanceof GameOverScreen);

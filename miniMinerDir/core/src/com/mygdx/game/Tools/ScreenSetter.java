@@ -10,11 +10,11 @@ import com.mygdx.game.Screens.StartMenuScreen;
  * Created by erikstrid on 2017-05-25.
  */
 
-public class ScreenHandler {
+public class ScreenSetter {
 
     private Game game;
 
-    public ScreenHandler(Game game){
+    public ScreenSetter(Game game){
         this.game = game;
     }
 

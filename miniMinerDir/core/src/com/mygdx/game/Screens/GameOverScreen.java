@@ -3,16 +3,11 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Tools.ScreenHandler;
+import com.mygdx.game.Tools.ScreenSetter;
 import com.mygdx.game.Utils.Constants;
 
 /**
@@ -37,7 +32,7 @@ public class GameOverScreen implements Screen {
     private Table table;
     private Game game;
 
-    private ScreenHandler sh;
+    private ScreenSetter sh;
 
     public GameOverScreen(Game game) {
 
@@ -45,7 +40,7 @@ public class GameOverScreen implements Screen {
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((MiniMiner) game).batch);
 
-        sh = new ScreenHandler(game);
+        sh = new ScreenSetter(game);
         Gdx.input.setInputProcessor(stage);
 
         Skin storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
