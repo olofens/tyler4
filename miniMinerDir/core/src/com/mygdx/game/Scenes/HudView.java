@@ -26,6 +26,7 @@ import com.mygdx.game.Tools.StoreUpgradeController;
 import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.general.IListener;
+import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.event.hud.HudData;
 import com.mygdx.game.event.hud.HudUpdater;
@@ -67,6 +68,7 @@ public class HudView implements Disposable, IHudUpdater, IListener {
     private HudView(SpriteBatch spriteBatch) {
 
         HudUpdater.BUS.addListener(this);
+        Listener.BUS.addListener(this);
 
         storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
