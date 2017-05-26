@@ -10,10 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class PauseButtonController {
 
+    private static PauseButtonController instance;
+
     private PauseButtonView pbv;
     private PauseScreenController psc;
 
-    public PauseButtonController() {
+    private PauseButtonController() {
         psc = PauseScreenController.getInstance();
         pbv = new PauseButtonView();
         pbv.getPauseButton().addListener(new ClickListener() {
@@ -23,6 +25,13 @@ public class PauseButtonController {
                 return true;
             }
         });
+    }
+
+    public static PauseButtonController getInstance() {
+        if (instance == null) {
+            instance = new PauseButtonController();
+        }
+        return instance;
     }
 
     public ImageButton getPauseButton() {

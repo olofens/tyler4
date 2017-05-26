@@ -46,181 +46,44 @@ import com.mygdx.game.event.messages.MessageListener;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener {
+public class Hud implements IListener, IHudUpdater, IMessageListener {
 
     private HudView hudView;
 
-    public Stage stage;
-    public Stage stage2;
-    public Stage stage3;
-
-    public Table table;
-    public Table table2;
-    public Table table3;
-
-    private Viewport viewport;
-
-
-    public Integer score;
-
-    private Label cashLabel;
-    private Label fuelLabel;
-    private Label hullLabel;
-    private Label msgLabel;
-
-    //private ImageButton pauseBtn;
-    private PauseButtonController pauseBtnCtrl;
-    private Skin storeSkin;
-
-
-    public TouchpadController tpHandler;
-    private StoreRepairController storeRepairController;
-    private DrillButtonView dbHandler;
-    private PauseScreenController psHandler;
-    private StoreUpgradeController suHandler;
-
-
-    /**
-
-     * Creates the HUD for the framework of the game
-     *
-     * @param spriteBatch
-     */
     public Hud(SpriteBatch spriteBatch) {
 
         hudView = new HudView(spriteBatch);
-        pauseBtnCtrl = new PauseButtonController();
-        
-        viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
-        stage = new Stage(viewport, spriteBatch);
-        stage2 = new Stage(viewport, spriteBatch);
-        stage3 = new Stage(viewport, spriteBatch);
-
-        tpHandler = new TouchpadController();
-        storeRepairController = new StoreRepairController();
-        dbHandler = new DrillButtonView();
-        psHandler = PauseScreenController.getInstance();
-        suHandler = new StoreUpgradeController();
-        initDrillButtonListener();
-
-
-
-
-
-
-
-        storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
-
-        //Create a Stage and add TouchPad
-        stage = new Stage(viewport, spriteBatch);
-        stage.addActor(dbHandler.getdrillButton());
-        stage.addActor(storeRepairController.getStorePopup());
-        stage.addActor(tpHandler.getTouchpad());
-        stage.addActor(pauseBtnCtrl.getPauseButton());
-        stage.addActor(suHandler.getStorePopup());
-        Gdx.input.setInputProcessor(stage);
-
-        score = 0;
-
-        table = new Table();
-        table.top();
-        table.setFillParent(true);
-
-
-        fuelLabel = new Label("100%", new Label.LabelStyle(new BitmapFont(), com.badlogic.gdx.graphics.Color.WHITE));
-        cashLabel = new Label("1000", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hullLabel = new Label("100", new Label.LabelStyle(new BitmapFont(), Color.RED));
-        msgLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-        table.add(fuelLabel).expandX().padTop(5);
-        table.add(cashLabel).expandX().padTop(5);
-        table.add(hullLabel).expandX().padTop(5);
-        table.add(pauseBtnCtrl.getPauseButton()).expandX().padTop(10);
-
-        stage.addActor(table);
 
         Listener.BUS.addListener(this);
         HudUpdater.BUS.addListener(this);
         MessageListener.BUS.addListener(this);
-
-
-        /*table2 = new Table(storeSkin);
-        table2.center();
-        table2.setBounds(10, 90, 190, 210);
-        table2.add(psHandler.getResumeButton());
-        table2.row();
-        table2.add(psHandler.getMenuButton());*/
-
-        stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
-        stage2.addActor(psHandler.getTable());
     }
 
     private void initDrillButtonListener() {
-        dbHandler.getdrillButton().addListener(new ClickListener() {
+        hudView.getDrillButton().addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                DrillListener.BUS.update(new DrillData(tpHandler.getDrillDirection(), false));
+                DrillListener.BUS.update(
+                        new DrillData(hudView.getTouchpadController().getDrillDirection(), false));
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                DrillListener.BUS.update(new DrillData(tpHandler.getDrillDirection(), false));
+                DrillListener.BUS.update(
+                        new DrillData(hudView.getTouchpadController().getDrillDirection(), false));
             }
         });
     }
 
-    private void initMessage(){
-
-        table3 = new Table(storeSkin);
-        table3.center();
-        table3.setBounds(0, 90, Constants.V_WIDTH, 210);
-        table3.add(msgLabel);
-
-        stage3.addAction(Actions.alpha(1));
-        stage3.addAction(Actions.moveBy(0,100,3));
-        stage3.addActor(table3);
-
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                stage3.addAction(Actions.sequence(Actions.fadeOut(2)));
-            }
-        }, 1f);
-
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                stage3.addAction(Actions.moveBy(0, -100));
-            }
-        }, 2f);
-    }
-
     public boolean isPaused(){
-        return psHandler.isPaused();
+        return hudView.getPsHandler().isPaused();
     }
 
     public boolean isNewScreen(){
-        return psHandler.isNewScreen();
+        return hudView.getPsHandler().isNewScreen();
     }
 
     public void setIsNewScreen(boolean val){
-        psHandler.setNewScreen(val);
-    }
-
-    private void adjustFuelLabel(Color color, String fuelString)
-    {
-        fuelLabel.setColor(color);
-        fuelLabel.setText(fuelString);
-    }
-
-    private void adjustHullLabel(String hullString) {
-        hullLabel.setText(hullString);
-
-    }
-
-    private void adjustCashLabel(String cashString) {
-        cashLabel.setText(cashString);
-
+        hudView.getPsHandler().setNewScreen(val);
     }
 
 
@@ -230,7 +93,7 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
     }
 
     public Table getTable2() {
-        return psHandler.getTable();
+        return hudView.getPsHandler().getTable();
     }
 
 
@@ -260,11 +123,6 @@ public class Hud implements Disposable, IListener, IHudUpdater, IMessageListener
             DrillListener.BUS.update(new DrillData(dir, true));
         }
 
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
     }
 
     @Override
