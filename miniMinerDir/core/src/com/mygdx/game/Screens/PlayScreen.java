@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Scenes.HudView;
 import com.mygdx.game.Tools.MinerDrawOptions;
 import com.mygdx.game.Tools.ScreenHandler;
 import com.mygdx.game.items.GameModel;
@@ -49,6 +50,7 @@ public class PlayScreen implements Screen {
 
     // Hud variables
     private Hud hud;
+    private HudView hudView;
 
     // GameModel variables
     private GameModel gameModel;
@@ -86,6 +88,8 @@ public class PlayScreen implements Screen {
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
         hud = new Hud(game.batch);
+        hudView = HudView.getInstance(game.batch);
+
 
         renderer = new OrthogonalTiledMapRenderer(gameWorld.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
@@ -122,7 +126,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         checkState();
 
-        v2 = hud.tpHandler.handleInput();
+        v2 = hud.hudView.getTouchpadController().handleInput();
 
         gameModel.update(v2);
 
@@ -143,7 +147,7 @@ public class PlayScreen implements Screen {
     }
 
     public void renderResume(float dt) {
-        Gdx.input.setInputProcessor(hud.stage);
+        Gdx.input.setInputProcessor(hudView.stage);
         update(dt);
 
         renderer.render();
@@ -153,14 +157,14 @@ public class PlayScreen implements Screen {
         game.batch.end();
 
 
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
-        hud.stage3.act();
-        hud.stage3.draw();
+        game.batch.setProjectionMatrix(hudView.stage.getCamera().combined);
+        hudView.stage.draw();
+        hudView.stage3.act();
+        hudView.stage3.draw();
         game.batch.setProjectionMatrix(gameCam.combined);
 
         if (gameModel.gameOver()) {
-            hud.dispose();
+            hudView.dispose();
             //timer prevents hud sticking on to screen
             Timer.schedule(new Timer.Task() {
                 @Override
@@ -175,10 +179,10 @@ public class PlayScreen implements Screen {
         checkState();
 
         hud.getTable2().setVisible(true);
-        Gdx.input.setInputProcessor(hud.stage2);
+        Gdx.input.setInputProcessor(hudView.stage2);
 
-        hud.stage2.act();
-        hud.stage2.draw();
+        hudView.stage2.act();
+        hudView.stage2.draw();
         if(hud.isNewScreen()){
             sh.createStartMenuScreen();
             hud.setIsNewScreen(false);
@@ -272,7 +276,7 @@ public class PlayScreen implements Screen {
     public void dispose() {
         gameWorld.dispose();
         renderer.dispose();
-        hud.dispose();
+        hud.hudView.dispose();
 
     }
 

@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -23,6 +25,11 @@ import com.mygdx.game.Tools.StoreRepairController;
 import com.mygdx.game.Tools.StoreUpgradeController;
 import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.event.general.IListener;
+import com.mygdx.game.event.general.Shout;
+import com.mygdx.game.event.hud.HudData;
+import com.mygdx.game.event.hud.HudUpdater;
+import com.mygdx.game.event.hud.IHudUpdater;
 
 import javax.swing.text.View;
 
@@ -30,12 +37,14 @@ import javax.swing.text.View;
  * Created by Olof Enström on 2017-05-25.
  */
 
-public class HudView implements Disposable {
+public class HudView implements Disposable, IHudUpdater, IListener {
+
+    private static HudView instance;
 
     private Viewport viewport;
-    private Stage stage;
-    private Stage stage2;
-    private Stage stage3;
+    public Stage stage;
+    public Stage stage2;
+    public Stage stage3;
 
     private PauseButtonController pauseButtonController;
     public TouchpadController tpHandler;
@@ -55,7 +64,9 @@ public class HudView implements Disposable {
 
     private Skin storeSkin;
 
-    public HudView(SpriteBatch spriteBatch) {
+    private HudView(SpriteBatch spriteBatch) {
+
+        HudUpdater.BUS.addListener(this);
 
         storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
@@ -99,24 +110,33 @@ public class HudView implements Disposable {
 
         stage2.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(2)));
         stage2.addActor(psHandler.getTable());
+    }
 
+    public static HudView getInstance(SpriteBatch spriteBatch) {
+        if (instance == null) {
+            instance = new HudView(spriteBatch);
+        }
+        return instance;
+    }
+
+    private void initMessage() {
         table3 = new Table(storeSkin);
         table3.center();
         table3.setBounds(0, 90, Constants.V_WIDTH, 210);
         table3.add(msgLabel);
 
         stage3.addAction(Actions.alpha(1));
-        stage3.addAction(Actions.moveBy(0,100,3));
+        stage3.addAction(Actions.moveBy(0, 100, 3));
         stage3.addActor(table3);
 
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 stage3.addAction(Actions.sequence(Actions.fadeOut(2)));
             }
         }, 1f);
 
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 stage3.addAction(Actions.moveBy(0, -100));
@@ -124,8 +144,7 @@ public class HudView implements Disposable {
         }, 2f);
     }
 
-    private void adjustFuelLabel(Color color, String fuelString)
-    {
+    private void adjustFuelLabel(Color color, String fuelString) {
         fuelLabel.setColor(color);
         fuelLabel.setText(fuelString);
     }
@@ -138,6 +157,23 @@ public class HudView implements Disposable {
     private void adjustCashLabel(String cashString) {
         cashLabel.setText(cashString);
 
+    }
+
+    private void toggleActorVisibility(Actor actor) {
+        boolean visible = actor.isVisible();
+        actor.setVisible(!visible);
+    }
+
+    public void showMessage(String msg) {
+        initMessage();
+        msgLabel.setText(msg);
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                table3.setVisible(false);
+            }
+        }, 2f);
     }
 
     @Override
@@ -155,5 +191,21 @@ public class HudView implements Disposable {
 
     public PauseScreenController getPsHandler() {
         return psHandler;
+    }
+
+    @Override
+    public void update(HudData data) {
+        adjustFuelLabel(data.getColor(), data.getFuel());
+        adjustHullLabel(data.getHull());
+        adjustCashLabel(data.getCash());
+    }
+
+    @Override
+    public void update(Shout shout) {
+        if (shout.getTag() == Shout.Tag.STORE) {
+            toggleActorVisibility(storeRepairController.getStorePopup());
+        } else if (shout.getTag() == Shout.Tag.STORE_UPGRADE) {
+            toggleActorVisibility(suHandler.getStorePopup());
+        }
     }
 }

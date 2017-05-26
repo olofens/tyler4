@@ -46,17 +46,18 @@ import com.mygdx.game.event.messages.MessageListener;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements IListener, IHudUpdater, IMessageListener {
+public class Hud implements IListener, IMessageListener {
 
-    private HudView hudView;
+    public HudView hudView;
 
     public Hud(SpriteBatch spriteBatch) {
 
-        hudView = new HudView(spriteBatch);
+        hudView = HudView.getInstance(spriteBatch);
 
         Listener.BUS.addListener(this);
-        HudUpdater.BUS.addListener(this);
         MessageListener.BUS.addListener(this);
+
+        initDrillButtonListener();
     }
 
     private void initDrillButtonListener() {
@@ -86,12 +87,6 @@ public class Hud implements IListener, IHudUpdater, IMessageListener {
         hudView.getPsHandler().setNewScreen(val);
     }
 
-
-    private void toggleActorVisibility(Actor actor) {
-        boolean visible = actor.isVisible();
-        actor.setVisible(!visible);
-    }
-
     public Table getTable2() {
         return hudView.getPsHandler().getTable();
     }
@@ -99,37 +94,17 @@ public class Hud implements IListener, IHudUpdater, IMessageListener {
 
 
     private void displayMessage(String msg){
-        initMessage();
-        msgLabel.setText(msg);
-
-        Timer.schedule(new Timer.Task(){
-            @Override
-            public void run() {
-                table3.setVisible(false);
-            }
-        }, 2f);
+        hudView.showMessage(msg);
 
     }
 
     @Override
     public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.STORE) {
-            toggleActorVisibility(storeRepairController.getStorePopup());
-        } else if (shout.getTag() == Shout.Tag.STORE_UPGRADE) {
-           toggleActorVisibility(suHandler.getStorePopup());
-        } else if (shout.getTag() == Shout.Tag.NEW_TP_DIR) {
-            DrillData.DrillDirection dir = tpHandler.getDrillDirection();
+        if (shout.getTag() == Shout.Tag.NEW_TP_DIR) {
+            DrillData.DrillDirection dir = hudView.getTouchpadController().getDrillDirection();
 
             DrillListener.BUS.update(new DrillData(dir, true));
         }
-
-    }
-
-    @Override
-    public void update(HudData data) {
-        adjustFuelLabel(data.getColor(), data.getFuel());
-        adjustHullLabel(data.getHull());
-        adjustCashLabel(data.getCash());
 
     }
 
@@ -160,6 +135,4 @@ public class Hud implements IListener, IHudUpdater, IMessageListener {
 
         }
     }
-
-
 }
