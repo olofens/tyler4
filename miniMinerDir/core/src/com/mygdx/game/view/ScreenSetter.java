@@ -1,4 +1,4 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.MiniMiner;

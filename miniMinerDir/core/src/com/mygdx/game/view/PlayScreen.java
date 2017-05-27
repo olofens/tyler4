@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Tools.MinerDrawOptions;
-import com.mygdx.game.Tools.ScreenSetter;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.model.GameWorld;

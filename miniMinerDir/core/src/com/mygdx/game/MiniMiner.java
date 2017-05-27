@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Tools.ScreenSetter;
+import com.mygdx.game.view.ScreenSetter;
 
 /**
  * This is the main class for our game, this is where the magic happens and where our game is generated,
@@ -11,7 +11,7 @@ import com.mygdx.game.Tools.ScreenSetter;
 
 public class MiniMiner extends Game {
     
-    public ScreenSetter sh;
+    private ScreenSetter sh;
     public SpriteBatch batch;
 
     @Override
