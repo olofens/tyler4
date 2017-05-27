@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Scenes.HudView;
 import com.mygdx.game.Tools.DrillButtonView;
 import com.mygdx.game.Tools.TouchpadController;
 import com.mygdx.game.Utils.Constants;
@@ -34,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 public class MinerTest extends GameTest {
 
     @Test
-    public void MinerCreationTest(){
+    public void minerCreationTest(){
 
 
         MinerModel minerModel = new MinerModel(new World(new Vector2(0,0),false));
@@ -46,4 +47,6 @@ public class MinerTest extends GameTest {
         assertTrue(minerModel.getMiner().b2body.getLinearVelocity().x == 0);
         assertTrue(minerModel.getMiner().b2body.getLinearVelocity().y == 0);
     }
+
+
 }
