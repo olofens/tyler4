@@ -1,20 +1,9 @@
-package com.mygdx.game.items;
+package com.mygdx.game.model;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.items.resources.Coal;
-import com.mygdx.game.items.resources.Diamond;
-import com.mygdx.game.items.resources.Gold;
-import com.mygdx.game.items.resources.Iron;
-import com.mygdx.game.items.resources.Lapiz;
-import com.mygdx.game.items.resources.Redstone;
-
-import java.awt.geom.RectangularShape;
 
 /**
  * Created by Omaroueidat on 06/04/17.

@@ -1,7 +1,6 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
 /**

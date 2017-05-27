@@ -1,7 +1,6 @@
 package com.mygdx.game.event.ore;
 
-import com.mygdx.game.items.IResource;
-import com.mygdx.game.items.TileTemplate;
+import com.mygdx.game.items.resources.IResource;
 
 import java.util.ArrayList;
 import java.util.List;

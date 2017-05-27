@@ -1,4 +1,4 @@
-package com.mygdx.game.Screens;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,13 +12,11 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Scenes.Hud;
-import com.mygdx.game.Scenes.HudView;
 import com.mygdx.game.Tools.MinerDrawOptions;
 import com.mygdx.game.Tools.ScreenSetter;
-import com.mygdx.game.items.GameModel;
+import com.mygdx.game.model.GameModel;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.items.GameWorld;
+import com.mygdx.game.model.GameWorld;
 
 /**
  * Created by erikstrid on 2017-04-02.

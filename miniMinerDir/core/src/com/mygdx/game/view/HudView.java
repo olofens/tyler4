@@ -1,10 +1,9 @@
-package com.mygdx.game.Scenes;
+package com.mygdx.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -18,12 +17,11 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Tools.DrillButtonView;
-import com.mygdx.game.Tools.PauseButtonController;
-import com.mygdx.game.Tools.PauseScreenController;
-import com.mygdx.game.Tools.StoreRepairController;
-import com.mygdx.game.Tools.StoreUpgradeController;
-import com.mygdx.game.Tools.TouchpadController;
+import com.mygdx.game.ctrl.PauseButtonController;
+import com.mygdx.game.ctrl.PauseScreenController;
+import com.mygdx.game.ctrl.StoreRepairController;
+import com.mygdx.game.ctrl.StoreUpgradeController;
+import com.mygdx.game.ctrl.TouchpadController;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.event.general.IListener;
 import com.mygdx.game.event.general.Listener;
@@ -31,8 +29,6 @@ import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.event.hud.HudData;
 import com.mygdx.game.event.hud.HudUpdater;
 import com.mygdx.game.event.hud.IHudUpdater;
-
-import javax.swing.text.View;
 
 /**
  * Created by Olof Enström on 2017-05-25.

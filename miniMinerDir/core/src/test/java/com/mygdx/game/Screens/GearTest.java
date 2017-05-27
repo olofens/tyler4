@@ -1,15 +1,6 @@
 package com.mygdx.game.Screens;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.items.*;
 
 import org.junit.Test;
 
@@ -25,7 +16,7 @@ public class GearTest {
     public void fuelTankTest() throws Exception {
 
 
-        FuelTank ft =new FuelTank();
+        com.mygdx.game.model.FuelTank ft =new com.mygdx.game.model.FuelTank();
         assertTrue(ft.getFuel() == 100000);
         ft.adjustFuel(90,0);
         assertTrue(ft.getFuel() != 100000);
@@ -35,7 +26,7 @@ public class GearTest {
 
     @Test
     public void testUpgrades()throws Exception{
-        FuelTank ft = new FuelTank();
+        com.mygdx.game.model.FuelTank ft = new com.mygdx.game.model.FuelTank();
 
         int originalFuel = ft.getFuel();
 
@@ -47,7 +38,7 @@ public class GearTest {
 
     @Test
     public void testHullRepair(){
-        Hull hull = new Hull();
+        com.mygdx.game.model.Hull hull = new com.mygdx.game.model.Hull();
         float originalDamagfactor = hull.getDamageFactor();
 
         assertTrue(originalDamagfactor == 3);
@@ -58,7 +49,7 @@ public class GearTest {
 
     @Test
     public void testInventory(){
-        Inventory inv = new Inventory();
+        com.mygdx.game.model.Inventory inv = new com.mygdx.game.model.Inventory();
 
         inv.setDiamond(2);
         int originalCash = inv.getCash();
@@ -74,7 +65,7 @@ public class GearTest {
     @Test
     public void testUpgradingFuel(){
 
-        FuelTank ft = new FuelTank();
+        com.mygdx.game.model.FuelTank ft = new com.mygdx.game.model.FuelTank();
 
         assertTrue(ft.getUpgradeLevel() == 0);
         ft.upgrade();
@@ -88,7 +79,7 @@ public class GearTest {
     @Test
     public void testUpgradingHull(){
 
-        Hull hull = new Hull();
+        com.mygdx.game.model.Hull hull = new com.mygdx.game.model.Hull();
 
 
         assertTrue(hull.getUpgradeLevel() == 0);
@@ -109,7 +100,7 @@ public class GearTest {
 
     @Test
     public void testDecreaseCash(){
-        Inventory inventory = new Inventory();
+        com.mygdx.game.model.Inventory inventory = new com.mygdx.game.model.Inventory();
 
         assertTrue(inventory.getCash() == 1000);
         inventory.decreaseCash(200);

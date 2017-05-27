@@ -3,6 +3,8 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Game;
 import com.mygdx.game.MiniMiner;
 import com.mygdx.game.Tools.ScreenSetter;
+import com.mygdx.game.view.GameOverScreen;
+import com.mygdx.game.view.PlayScreen;
 import org.junit.Test;
 
 
@@ -33,7 +35,7 @@ public class ScreenSetterTest {
         ScreenSetter sh = new ScreenSetter(game);
         sh.createStartMenuScreen();
 
-        assertTrue(game.getScreen() instanceof StartMenuScreen);
+        assertTrue(game.getScreen() instanceof com.mygdx.game.view.StartMenuScreen);
 
     }
 

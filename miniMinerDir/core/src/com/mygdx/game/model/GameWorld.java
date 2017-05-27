@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.model;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;

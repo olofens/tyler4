@@ -1,19 +1,14 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.mygdx.game.Utils.Constants;
+import com.mygdx.game.view.TouchpadView;
 import com.mygdx.game.event.drill.DrillData;
 import com.mygdx.game.event.drill.DrillListener;
 import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.general.Shout;
-import com.mygdx.game.items.GameModel;
-import com.mygdx.game.items.Miner;
 
 /**
  * Created by erikstrid on 2017-05-10.

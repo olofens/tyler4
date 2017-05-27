@@ -1,22 +1,10 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.ctrl;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.MiniMiner;
-import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Screens.StartMenuScreen;
-
-import static com.badlogic.gdx.scenes.scene2d.ui.Table.Debug.table;
+import com.mygdx.game.view.PauseScreenView;
 
 /**
  * Created by erikstrid on 2017-05-17.

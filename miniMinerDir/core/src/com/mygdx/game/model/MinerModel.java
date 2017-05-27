@@ -1,12 +1,10 @@
-package com.mygdx.game.items;
+package com.mygdx.game.model;
 
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.event.hud.HudData;
 import com.mygdx.game.event.hud.HudUpdater;
-import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.event.general.IListener;
-import com.mygdx.game.event.messages.IMessageListener;
 import com.mygdx.game.event.messages.MessageData;
 import com.mygdx.game.event.messages.MessageListener;
 import com.mygdx.game.event.ore.IOreListener;
@@ -14,6 +12,7 @@ import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.ore.Ore;
 import com.mygdx.game.event.ore.OreListener;
 import com.mygdx.game.event.general.Shout;
+import com.mygdx.game.items.resources.IResource;
 import com.mygdx.game.items.resources.Coal;
 import com.mygdx.game.items.resources.Diamond;
 import com.mygdx.game.items.resources.Gold;

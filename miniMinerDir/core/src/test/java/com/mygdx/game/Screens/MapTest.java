@@ -1,7 +1,6 @@
 package com.mygdx.game.Screens;
 
-import com.mygdx.game.Tools.PauseButtonController;
-import com.mygdx.game.items.GameWorld;
+import com.mygdx.game.model.GameWorld;
 
 import org.junit.Test;
 

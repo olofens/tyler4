@@ -15,8 +15,7 @@ import com.mygdx.game.event.general.Listener;
 import com.mygdx.game.event.ore.Ore;
 import com.mygdx.game.event.ore.OreListener;
 import com.mygdx.game.event.general.Shout;
-import com.mygdx.game.items.IResource;
-import com.mygdx.game.items.TileTemplate;
+import com.mygdx.game.items.resources.IResource;
 
 /**
  * Created by Olof Enström on 2017-04-26.

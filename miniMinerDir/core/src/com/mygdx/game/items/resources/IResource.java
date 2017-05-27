@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.items.resources;
 
 /**
  * Created by Omaroueidat on 03/05/17.

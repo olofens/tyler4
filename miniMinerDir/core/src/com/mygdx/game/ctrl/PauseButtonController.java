@@ -1,8 +1,9 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.view.PauseButtonView;
 
 /**
  * Created by Olof Enström on 2017-05-25.

@@ -1,4 +1,4 @@
-package com.mygdx.game.items;
+package com.mygdx.game.model;
 
 import com.mygdx.game.Utils.Constants;
 
