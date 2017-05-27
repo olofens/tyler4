@@ -15,10 +15,10 @@ import org.mockito.Mockito;
  */
 
 public class GameTest {
-    // This is our "test" application
+    //The test application
     private static Application application;
 
-    // Before running any tests, initialize the application with the headless backend
+    //initialize application with the headless backend
     @BeforeClass
     public static void init() {
         // Note that we don't need to implement any of the listener's methods
@@ -36,10 +36,9 @@ public class GameTest {
         Gdx.gl = Gdx.gl20;
     }
 
-    // After we are done, clean up the application
+    //clean up application
     @AfterClass
     public static void cleanUp() {
-        // Exit the application first
         application.exit();
         application = null;
     }
