@@ -18,7 +18,9 @@ import static org.junit.Assert.*;
 /**
  * Created by walling on 2017-04-10.
  */
-public class TestClass {
+public class GearTest {
+
+
     @org.junit.Test
     public void fuelTankTest() throws Exception {
 

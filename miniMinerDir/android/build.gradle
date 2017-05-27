@@ -82,6 +82,7 @@ eclipse {
         main {
             java.srcDirs "src", 'gen'
         }
+
     }
 
     jdt {

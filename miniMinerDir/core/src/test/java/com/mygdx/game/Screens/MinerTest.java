@@ -39,8 +39,11 @@ public class MinerTest extends GameTest {
 
         MinerModel minerModel = new MinerModel(new World(new Vector2(0,0),false));
 
+        //Make sure miner is alive upon creation
         assertTrue(minerModel.isAlive());
 
-
+        //Make sure miner is not moving upon creation
+        assertTrue(minerModel.getMiner().b2body.getLinearVelocity().x == 0);
+        assertTrue(minerModel.getMiner().b2body.getLinearVelocity().y == 0);
     }
 }
