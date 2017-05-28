@@ -29,7 +29,6 @@ public class PlayScreen implements Screen {
     private Viewport viewPort;
 
     // Miner variables
-    // TODO FIX LISTENER
     private Texture minerIMG;
     private Texture minerIMG2;
     private Texture minerIMG3;
