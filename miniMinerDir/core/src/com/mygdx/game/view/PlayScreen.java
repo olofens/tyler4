@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.ctrl.HudController;
 import com.mygdx.game.model.MinerDrawOptions;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.Utils.Constants;
@@ -40,8 +41,8 @@ public class PlayScreen implements Screen {
 
     private OrthogonalTiledMapRenderer renderer;
 
-    // Hud variables
-    private com.mygdx.game.ctrl.Hud hud;
+    // HudController variables
+    private HudController hudController;
     private HudView hudView;
 
     // GameModel variables
@@ -79,7 +80,7 @@ public class PlayScreen implements Screen {
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
-        hud = new com.mygdx.game.ctrl.Hud(game.batch);
+        hudController = new HudController(game.batch);
         hudView = HudView.getInstance(game.batch);
 
 
@@ -100,7 +101,7 @@ public class PlayScreen implements Screen {
     }
 
     private void checkState() {
-        if (hud.isPaused()) {
+        if (hudController.isPaused()) {
             this.state = State.PAUSE;
         } else {
             this.state = State.RESUME;
@@ -110,7 +111,7 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         checkState();
 
-        v2 = hud.hudView.getTouchpadController().handleInput();
+        v2 = hudController.hudView.getTouchpadController().handleInput();
 
         gameModel.update(v2);
 
@@ -148,7 +149,7 @@ public class PlayScreen implements Screen {
 
         if (gameModel.gameOver()) {
             hudView.dispose();
-            //timer prevents hud sticking on to screen
+            //timer prevents hudController sticking on to screen
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
@@ -161,14 +162,14 @@ public class PlayScreen implements Screen {
     private void renderPause(float dt) {
         checkState();
 
-        hud.getTable2().setVisible(true);
+        hudController.getTable2().setVisible(true);
         Gdx.input.setInputProcessor(hudView.stage2);
 
         hudView.stage2.act();
         hudView.stage2.draw();
-        if(hud.isNewScreen()){
+        if(hudController.isNewScreen()){
             sh.createStartMenuScreen();
-            hud.setIsNewScreen(false);
+            hudController.setIsNewScreen(false);
         }
     }
 
@@ -264,7 +265,7 @@ public class PlayScreen implements Screen {
     public void dispose() {
         gameWorld.dispose();
         renderer.dispose();
-        hud.hudView.dispose();
+        hudController.hudView.dispose();
 
     }
 

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
  * Created by erikstrid on 2017-05-27.
  */
 
-public class HudTest extends GameTest {
+public class HudControllerTest extends GameTest {
 
     @Test
     public void PauseButtonCreationTest() throws Exception {

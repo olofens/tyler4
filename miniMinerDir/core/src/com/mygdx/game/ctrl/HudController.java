@@ -19,11 +19,11 @@ import com.mygdx.game.view.HudView;
  * Created by erikstrid on 2017-04-02.
  */
 
-public class Hud implements IListener, IMessageListener {
+public class HudController implements IListener, IMessageListener {
 
     public HudView hudView;
 
-    public Hud(SpriteBatch spriteBatch) {
+    public HudController(SpriteBatch spriteBatch) {
 
         hudView = HudView.getInstance(spriteBatch);
 
