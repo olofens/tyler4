@@ -1,4 +1,4 @@
-package com.mygdx.game.event.general;
+package com.mygdx.game.model;
 
 /**
  * Created by olofenstrom on 2017-04-27.

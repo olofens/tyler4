@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.event.drill.DrillData;
-import com.mygdx.game.event.drill.DrillListener;
-import com.mygdx.game.event.general.IListener;
-import com.mygdx.game.event.general.Listener;
-import com.mygdx.game.event.general.Shout;
-import com.mygdx.game.event.messages.IMessageListener;
-import com.mygdx.game.event.messages.MessageData;
-import com.mygdx.game.event.messages.MessageListener;
+import com.mygdx.game.model.DrillData;
+import com.mygdx.game.model.DrillListener;
+import com.mygdx.game.model.IListener;
+import com.mygdx.game.model.Listener;
+import com.mygdx.game.model.Shout;
+import com.mygdx.game.model.IMessageListener;
+import com.mygdx.game.model.MessageData;
+import com.mygdx.game.model.MessageListener;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -23,7 +23,7 @@ public class Hud implements IListener, IMessageListener {
 
     public Hud(SpriteBatch spriteBatch) {
 
-        hudView = com.mygdx.game.view.HudView.getInstance(spriteBatch);
+        hudView = HudView.getInstance(spriteBatch);
 
         Listener.BUS.addListener(this);
         MessageListener.BUS.addListener(this);

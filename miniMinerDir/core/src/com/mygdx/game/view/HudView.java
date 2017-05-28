@@ -23,12 +23,12 @@ import com.mygdx.game.ctrl.StoreRepairController;
 import com.mygdx.game.ctrl.StoreUpgradeController;
 import com.mygdx.game.ctrl.TouchpadController;
 import com.mygdx.game.Utils.Constants;
-import com.mygdx.game.event.general.IListener;
-import com.mygdx.game.event.general.Listener;
-import com.mygdx.game.event.general.Shout;
-import com.mygdx.game.event.hud.HudData;
-import com.mygdx.game.event.hud.HudUpdater;
-import com.mygdx.game.event.hud.IHudUpdater;
+import com.mygdx.game.model.IListener;
+import com.mygdx.game.model.Listener;
+import com.mygdx.game.model.Shout;
+import com.mygdx.game.model.HudData;
+import com.mygdx.game.model.HudUpdater;
+import com.mygdx.game.model.IHudUpdater;
 
 /**
  * Created by Olof Enström on 2017-05-25.
