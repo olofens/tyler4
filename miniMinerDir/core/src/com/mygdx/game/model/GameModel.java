@@ -9,16 +9,7 @@ import com.mygdx.game.Utils.Constants;
 
 public class GameModel {
 
-    //Miner variables
     private MinerModel minerModel;
-
-    // Tiledmap variables
-    //private TmxMapLoader mapLoader;
-    //private TiledMap map;
-    //private MapProperties prop;
-
-    // Box2D variables
-    //private World world;
 
     private GameWorld gameWorld;
 
@@ -93,11 +84,9 @@ public class GameModel {
         }
 
         else if (minerModel.getMiner().b2body.getLinearVelocity().x > 0) {
-            //RIGHT
             setIsFacingRight(true);
             return true;
         } else if (minerModel.getMiner().b2body.getLinearVelocity().x < 0) {
-            //LEFT
             setIsFacingRight(false);
             return false;
         }
@@ -108,7 +97,6 @@ public class GameModel {
 
     public MinerDrawOptions decideDirection() {
         if (touchpadLocation.y > 0.4) {
-            //Draw UP
             if (drawRight()) {
                 return new MinerDrawOptions("minerSpriteRocket", minerPos.x - 15 / Constants.PPM,
                         minerPos.y - 30 / Constants.PPM, (79 / 2) / Constants.PPM, (82 / 2) / Constants.PPM);
@@ -118,16 +106,12 @@ public class GameModel {
             }
         }
         if (touchpadLocation.y < -0.4) {
-            //Draw DOWN
             return new MinerDrawOptions("minerSpriteDrillDown", minerPos.x - 12 / Constants.PPM,
                     minerPos.y - 24 / Constants.PPM, (46 / 2) / Constants.PPM, (69 / 2) / Constants.PPM);
         } else if (drawRight()) {
-            //Draw RIGHT
             return new MinerDrawOptions("minerSprite", minerPos.x - 15 / Constants.PPM,
                     minerPos.y - 15 / Constants.PPM, (79 / 2) / Constants.PPM, (51 / 2) / Constants.PPM);
-
         } else {
-            //Draw LEFT
             return new MinerDrawOptions("minerSprite", minerPos.x + 15 / Constants.PPM,
                     minerPos.y - 15 / Constants.PPM, (-79 / 2) / Constants.PPM, (51 / 2) / Constants.PPM);
         }

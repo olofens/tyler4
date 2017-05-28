@@ -21,7 +21,6 @@ import com.mygdx.game.items.resources.Coal;
 public class TileTemplate {
 
     protected TiledMap tiledMap;
-    protected TiledMapTile tile;
     protected Rectangle constrains;
     protected Body body;
 
@@ -37,13 +36,11 @@ public class TileTemplate {
         FixtureDef fixDef = new FixtureDef();
         PolygonShape pShape = new PolygonShape();
 
-        //Creates body and fixture for box2D
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set((constrains.getX() + constrains.getWidth() / 2) / Constants.PPM, (constrains.getY() + constrains.getHeight() / 2) / Constants.PPM);
 
         body = world.createBody(bodyDef);
 
-        //Sets size with constrains
         pShape.setAsBox(constrains.getWidth() / 2 / Constants.PPM, constrains.getHeight() / 2 / Constants.PPM);
         fixDef.shape = pShape;
         fixture = body.createFixture(fixDef);
@@ -51,7 +48,6 @@ public class TileTemplate {
 
     }
     public void setCategoryFilter(short filterBit){
-        //Sets the imported bit in a new filter and sets the fixtures filterData
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);

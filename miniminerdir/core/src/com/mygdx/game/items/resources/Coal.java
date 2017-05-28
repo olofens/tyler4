@@ -14,7 +14,6 @@ public class Coal implements IResource {
     private Resource parent;
 
     public Coal(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Dirt-class for commenting
         parent = new Resource(world, tiledMap, constrains, this ,Constants.COAL_BIT);
     }
 

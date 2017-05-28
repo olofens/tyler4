@@ -6,26 +6,18 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.graphics.Color;
 
-/**
- * The class that dictates the fuel for the miner
- */
+
 public class FuelTank implements IGear {
 
-    /**
-     * The fuel variable
-     */
-    //this is the maximum amount of fuel the Miner can have, can be upgraded to a bigger integer
     private int maxFuel;
     private Integer fuel;
     public final int fuelUpgrade = 50000;
 
-    //This is the variable that decreases the fuel by a certain amount every update
     private int decreaseFuel;
 
-    // String that is sent to hud to paint out
     private String fuelString;
 
-    public final double FUEL_DECREASE_UPGRADE = 0.2;
+    private final double FUEL_DECREASE_UPGRADE = 0.2;
 
     private int upgradeLevel = 0;
 
@@ -34,7 +26,7 @@ public class FuelTank implements IGear {
     private Integer fuelPercentage;
 
     /**
-     * Constructor which gives our default fuel ammount and makes our label with a red color and a certain position
+     * Constructor which gives our default fuel amount and makes our label with a red color and a certain position
      */
     public FuelTank() {
         maxFuel = 100000;

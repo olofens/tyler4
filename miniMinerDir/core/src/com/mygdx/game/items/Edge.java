@@ -24,21 +24,12 @@ public abstract class Edge {
      *      of a rectangle).
      */
     public static void parseTiledObject(World world, MapObjects objects) {
-        //Explanation: this method is used to create a mathematical line, a polyline (which
-        //in essence is just connected lines). In this situation the lines connect to create a
-        //rectangle.
-
-        //in the for-loop, the lines are gotten from the Map and added to a mathematical line.
         for(MapObject object : objects) {
             Shape shape;
             if (object instanceof PolylineMapObject) {
-                //here the lines are added to the polyline
                 shape = createPolyline((PolylineMapObject) object);
-            } else {
-                continue;
-            }
+            } else continue;
 
-            //once the ChainShape is fully created, the body is created in the world
             Body body;
             BodyDef bdef = new BodyDef();
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -49,8 +40,6 @@ public abstract class Edge {
         }
     }
 
-
-    //Method that creates a chain of lines.
     private static ChainShape createPolyline(PolylineMapObject polyline) {
         float[] vertices = polyline.getPolyline().getTransformedVertices();
         Vector2[] worldVertices = new Vector2[vertices.length / 2];

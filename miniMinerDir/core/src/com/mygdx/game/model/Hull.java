@@ -12,9 +12,7 @@ public class Hull implements IGear {
 
 
     private Integer maxHull;
-    /**
-     * Variable for the amount of health
-     */
+
     private float hull;
 
     private float damageFactor;

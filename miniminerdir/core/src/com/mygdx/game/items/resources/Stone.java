@@ -14,7 +14,6 @@ public class Stone implements IResource {
 
 
     public Stone(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Dirt-class for commenting
         Resource parent = new Resource(world, tiledMap, constrains,this, Constants.STONE_BIT);
     }
 

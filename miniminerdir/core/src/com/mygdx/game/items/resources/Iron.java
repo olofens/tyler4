@@ -13,7 +13,6 @@ import com.mygdx.game.Utils.Constants;
 public class Iron implements IResource{
     private Resource parent;
     public Iron(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Dirt-class for commenting
         parent = new Resource(world, tiledMap, constrains,this, Constants.IRON_BIT);
 
     }

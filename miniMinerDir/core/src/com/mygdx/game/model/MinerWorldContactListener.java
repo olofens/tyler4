@@ -21,7 +21,7 @@ import com.mygdx.game.items.resources.IResource;
  * Created by Olof Enström on 2017-04-26.
  */
 
-public class MinerWorldContactListener implements ContactListener, IListener, IDrillListener {
+public class MinerWorldContactListener implements ContactListener, IDrillListener {
     private Fixture a;
     private Fixture b;
     private boolean minerButtonPressed;
@@ -37,7 +37,6 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
 
     public MinerWorldContactListener() {
         minerButtonPressed = false;
-        Listener.BUS.addListener(this);
         DrillListener.BUS.addListener(this);
     }
 
@@ -58,7 +57,6 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
             Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
         }
 
-        //NEW
         if(a.getUserData()=="drill"||b.getUserData()=="drill") {
             setBottomTile(fixtureCheckObject("drill"));
             miner = fixtureCheckSensor("drill");
@@ -73,18 +71,6 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
         if (minerButtonPressed || Gdx.input.isKeyPressed(Input.Keys.A)) {
             drill(lastDirection);
         }
-/*
-        //OLD
-        //Fixturechecks for all three sensors, object sent to resolve contact, which follows upp with drilling etc
-        if(a.getUserData()=="drill"||b.getUserData()=="drill"){
-            resolveContact(fixtureCheckObject("drill"));
-        }
-        else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
-            resolveContact(fixtureCheckObject("rightWing"));
-        }
-        else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
-            resolveContact(fixtureCheckObject("leftWing"));
-        }*/
     }
 
     @Override
@@ -92,7 +78,7 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
 
         a = contact.getFixtureA();
         b = contact.getFixtureB();
-        //Checkout for the store by end of contact (temp?)
+
         if (inContact("miner", "store")) {
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
             System.out.println("Hope to see you soon!");
@@ -145,8 +131,7 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
 
     private Fixture fixtureCheckObject(String id) {
         Fixture minerSensor; Fixture object;
-        //Statements sets minerSensor and object to the fixtures in contact,
-        //returns object
+
         if(id != null){
             minerSensor  = a.getUserData() == id ? a : b;
             object = minerSensor == a ? b : a;
@@ -184,14 +169,6 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
             resolveContact(bottomTile);
             bottomTile = null;
             System.out.println("ran drilldown");
-        }
-    }
-
-
-    @Override
-    public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.DRILL) {
-            //minerButtonPressed = !minerButtonPressed;
         }
     }
 

@@ -13,7 +13,6 @@ public class Dirt implements IResource {
 
     private Resource parent;
     public Dirt(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Uses Resource/TileTemplate to create the fixture and body
         parent = new Resource(world,tiledMap,constrains, this,  Constants.DIRT_BIT);
 
     }

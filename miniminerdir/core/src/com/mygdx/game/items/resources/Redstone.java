@@ -13,7 +13,6 @@ public class Redstone implements IResource {
     private Resource parent;
 
     public Redstone(World world, TiledMap tiledMap, Rectangle constrains) {
-        //Se Dirt-class for commenting
         parent = new Resource(world, tiledMap, constrains, this, Constants.REDSTONE_BIT);
 
 
