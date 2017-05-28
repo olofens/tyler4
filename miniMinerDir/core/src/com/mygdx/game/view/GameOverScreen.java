@@ -32,7 +32,7 @@ public class GameOverScreen implements Screen {
 
     private ScreenSetter sh;
 
-    public GameOverScreen(Game game) {
+    public GameOverScreen(final Game game) {
 
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
