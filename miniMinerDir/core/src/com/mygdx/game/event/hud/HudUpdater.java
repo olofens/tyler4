@@ -1,4 +1,4 @@
-package com.mygdx.game.ev.hud;
+package com.mygdx.game.event.hud;
 
 
 import java.util.ArrayList;

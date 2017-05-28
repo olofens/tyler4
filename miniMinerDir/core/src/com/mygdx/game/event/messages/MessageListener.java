@@ -1,4 +1,4 @@
-package com.mygdx.game.ev.messages;
+package com.mygdx.game.event.messages;
 
 
 import java.util.ArrayList;

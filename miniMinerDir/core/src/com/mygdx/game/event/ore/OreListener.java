@@ -1,4 +1,4 @@
-package com.mygdx.game.ev.ore;
+package com.mygdx.game.event.ore;
 
 import com.mygdx.game.items.resources.IResource;
 

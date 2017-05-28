@@ -1,4 +1,4 @@
-package com.mygdx.game.ev.general;
+package com.mygdx.game.event.general;
 
 import java.util.ArrayList;
 import java.util.List;

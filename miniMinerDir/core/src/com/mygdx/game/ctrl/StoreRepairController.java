@@ -4,8 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.view.StoreView;
-import com.mygdx.game.ev.general.Listener;
-import com.mygdx.game.ev.general.Shout;
+import com.mygdx.game.event.general.Listener;
+import com.mygdx.game.event.general.Shout;
 
 /**
  * Created by erikstrid on 2017-05-10.
