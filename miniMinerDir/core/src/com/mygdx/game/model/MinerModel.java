@@ -34,10 +34,10 @@ public class MinerModel implements IListener, IOreListener {
     private Hull hull;
     private Inventory inventory;
 
-    private int fuelCost = 250;
-    private int hullCost = 250;
-    private int fuelUpgradeCost = 250;
-    private int hullUpgradeCost = 250;
+    private final int fuelCost = 250;
+    private final int hullCost = 250;
+    private final int fuelUpgradeCost = 250;
+    private final int hullUpgradeCost = 250;
 
     private float previousSpeed = 0;
 
@@ -56,11 +56,6 @@ public class MinerModel implements IListener, IOreListener {
         OreListener.ORE.addListener(this);
     }
 
-    /**
-     * Getter for our miner
-     *
-     * @return this.miner
-     */
 
     public void update() {
         if (minerFell()) hull.adjustHull(previousSpeed);
