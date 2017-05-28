@@ -1,4 +1,4 @@
-package com.mygdx.game.event.messages;
+package com.mygdx.game.ev.messages;
 
 /**
  * Created by erikstrid on 2017-05-25.

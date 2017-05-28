@@ -1,4 +1,4 @@
-package com.mygdx.game.event.hud;
+package com.mygdx.game.ev.hud;
 
 /**
  * Created by Omaroueidat on 15/05/17.

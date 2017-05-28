@@ -1,4 +1,4 @@
-package com.mygdx.game.event.drill;
+package com.mygdx.game.ev.drill;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.mygdx.game.event.hud;
+package com.mygdx.game.ev.hud;
 
 import java.awt.*;
 import com.badlogic.gdx.graphics.Color;
