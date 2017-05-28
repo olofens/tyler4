@@ -6,7 +6,7 @@ package com.mygdx.game.model;
 
 public interface IGear {
 
-    public void upgrade();
-    public void repair();
+    void upgrade();
+    void repair();
 
 }

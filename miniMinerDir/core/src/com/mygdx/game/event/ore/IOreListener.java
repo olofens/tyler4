@@ -7,6 +7,6 @@ import com.mygdx.game.items.resources.IResource;
  */
 
 public interface IOreListener {
-    public void update(IResource resource);
-    public void update(Ore ore);
+    void update(IResource resource);
+    void update(Ore ore);
 }

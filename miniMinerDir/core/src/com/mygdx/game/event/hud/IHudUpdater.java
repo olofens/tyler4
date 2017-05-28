@@ -5,5 +5,5 @@ package com.mygdx.game.event.hud;
  */
 public interface IHudUpdater {
 
-    public void update(HudData data);
+    void update(HudData data);
 }

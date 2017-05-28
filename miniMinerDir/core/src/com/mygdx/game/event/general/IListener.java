@@ -5,5 +5,5 @@ package com.mygdx.game.event.general;
  */
 
 public interface IListener {
-    public void update(Shout shout);
+    void update(Shout shout);
 }

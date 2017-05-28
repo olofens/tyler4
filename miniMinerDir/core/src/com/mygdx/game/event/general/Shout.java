@@ -14,7 +14,7 @@ public class Shout {
        FUELREPAIR,
        HULLREPAIR,
        FUELUPGRADE,
-       HULLUPGRADE;
+       HULLUPGRADE
    }
     private final Tag tag;
 

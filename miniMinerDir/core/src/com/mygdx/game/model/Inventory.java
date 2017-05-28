@@ -43,7 +43,7 @@ public class Inventory {
     }
 
     public String getCashString() {
-        Integer integerCash = (int) cash;
+        Integer integerCash = cash;
         return integerCash.toString();
     }
 
