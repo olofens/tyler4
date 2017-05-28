@@ -1,4 +1,4 @@
-package com.mygdx.game.view;
+package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +12,7 @@ import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.event.messages.IMessageListener;
 import com.mygdx.game.event.messages.MessageData;
 import com.mygdx.game.event.messages.MessageListener;
+import com.mygdx.game.view.HudView;
 
 /**
  * Created by erikstrid on 2017-04-02.
