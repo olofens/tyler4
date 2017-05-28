@@ -1,10 +1,6 @@
 package com.mygdx.game.view;
 
 import com.badlogic.gdx.Game;
-import com.mygdx.game.MiniMiner;
-import com.mygdx.game.view.GameOverScreen;
-import com.mygdx.game.view.PlayScreen;
-import com.mygdx.game.view.StartMenuScreen;
 
 /**
  * Created by erikstrid on 2017-05-25.
