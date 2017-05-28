@@ -17,6 +17,8 @@ public class MapTest extends GameTest {
 
         GameWorld gameWorld = GameWorld.getInstance();
 
+
+
         assertTrue(gameWorld.getMap() != null);
 
 
