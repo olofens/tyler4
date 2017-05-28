@@ -52,7 +52,7 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
             System.out.println("Welcome to the store!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
             //Calling Ore-bus to make minerModel sell minerals
-            OreListener.ORE.update(new Ore(Ore.OreSort.SELL));
+            OreListener.ORE.update(new Ore(Ore.OreCommand.SELL));
         } else if (inContact("miner", "storeUpgrade")) {
             System.out.println("Welcome to upgrades!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));

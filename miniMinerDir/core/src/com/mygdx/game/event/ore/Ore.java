@@ -7,10 +7,10 @@ import com.badlogic.gdx.utils.Sort;
  */
 
 public class Ore {
-    public enum OreSort{
+    public enum OreCommand{
         SELL
     }
-    private final OreSort sort;
-    public Ore(OreSort sort){this.sort = sort;}
-    public OreSort getSort(){return this.sort;}
+    private final OreCommand command;
+    public Ore(OreCommand command){this.command = command;}
+    public OreCommand getCommand(){return this.command;}
 }
