@@ -38,13 +38,12 @@ public class HudView implements Disposable, IHudUpdater, IListener {
 
     private static HudView instance;
 
-    private Viewport viewport;
     public Stage stage;
     public Stage stage2;
     public Stage stage3;
 
     private PauseButtonController pauseButtonController;
-    public TouchpadController tpHandler;
+    private TouchpadController tpHandler;
     private StoreRepairController storeRepairController;
     private DrillButtonView dbHandler;
     private PauseScreenController psHandler;
@@ -69,7 +68,7 @@ public class HudView implements Disposable, IHudUpdater, IListener {
         storeSkin = new Skin(Gdx.files.internal("skins/rusty-robot-ui.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rusty-robot-ui.atlas")));
 
-        viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
+        Viewport viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
 
         stage = new Stage(viewport, spriteBatch);
         stage2 = new Stage(viewport, spriteBatch);

@@ -49,8 +49,6 @@ public class PlayScreen implements Screen {
     private GameModel gameModel;
     private GameWorld gameWorld;
 
-
-
     private Vector2 v2;
 
     private enum State {

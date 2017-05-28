@@ -46,14 +46,10 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
         a = contact.getFixtureA();
         b = contact.getFixtureB();
 
-        //Checks the popup for store with the BUS listener
         if (inContact("miner", "store")) {
-            System.out.println("Welcome to the store!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
-            //Calling Ore-bus to make minerModel sell minerals
             OreListener.ORE.update(new Ore(Ore.OreCommand.SELL));
         } else if (inContact("miner", "storeUpgrade")) {
-            System.out.println("Welcome to upgrades!");
             Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
         }
 
@@ -81,7 +77,6 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
 
         if (inContact("miner", "store")) {
             Listener.BUS.update(new Shout(Shout.Tag.STORE));
-            System.out.println("Hope to see you soon!");
         } else if (inContact("miner", "storeUpgrade")) {
             Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
         }
@@ -90,10 +85,8 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
             nullBottomTile();
         } else if (a.getUserData() == "rightWing" || b.getUserData() == "rightWing") {
             rightTile = null;
-            System.out.println("nulled righttile");
         } else if (a.getUserData() == "leftWing" || b.getUserData() == "leftWing") {
             leftTile = null;
-            System.out.println("nulled lefttile");
         }
     }
 
@@ -110,16 +103,13 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
     private void setBottomTile(Fixture newBottomTile) {
         prevBottomTile = bottomTile;
         bottomTile = newBottomTile;
-        System.out.println("Set bottom tile");
     }
 
     private void nullBottomTile() {
         if (prevBottomTile == null) {
             bottomTile = null;
-            System.out.println("nulled current tile");
         } else {
             prevBottomTile = null;
-            System.out.println("nulled prev tile");
         }
     }
 
@@ -168,7 +158,6 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
         } else if (direction == DrillData.DrillDirection.DOWN && bottomTile != null) {
             resolveContact(bottomTile);
             bottomTile = null;
-            System.out.println("ran drilldown");
         }
     }
 
@@ -184,7 +173,6 @@ public class MinerWorldContactListener implements ContactListener, IDrillListene
             }
         } else {
           if (minerButtonPressed) {
-              //drill(drillData.getDrillDirection());
               lastDirection = drillData.getDrillDirection();
           }
         }

@@ -13,6 +13,7 @@ public final class Constants {
     public static final int GRAVITY = -10;
     public static final int V_WIDTH = 240;
     public static final int V_HEIGHT = 400;
+
     //Constants for categorybits in binary
     public static final short DEFAULT_BIT = 1;
     public static final short MINER_BIT = 2;
