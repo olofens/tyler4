@@ -21,7 +21,6 @@ public class TouchpadController {
     private Touchpad touchpad;
 
     private DrillData.DrillDirection prevDirection;
-    private DrillData.DrillDirection currDirection;
 
     public TouchpadController() {
         TouchpadView tpv = new TouchpadView();
@@ -75,7 +74,7 @@ public class TouchpadController {
     }
 
     private void checkDirection() {
-        currDirection = getDrillDirection();
+        DrillData.DrillDirection currDirection = getDrillDirection();
 
         if (prevDirection != currDirection && prevDirection != null) {
             Listener.BUS.update(new Shout(Shout.Tag.NEW_TP_DIR));
