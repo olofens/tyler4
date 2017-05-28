@@ -1,7 +1,6 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Tools.MinerDrawOptions;
 import com.mygdx.game.Utils.Constants;
 
 /**

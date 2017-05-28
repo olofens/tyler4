@@ -2,16 +2,6 @@ package com.mygdx.game.model;
 
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.event.hud.HudData;
-import com.mygdx.game.event.hud.HudUpdater;
-import com.mygdx.game.event.general.IListener;
-import com.mygdx.game.event.messages.MessageData;
-import com.mygdx.game.event.messages.MessageListener;
-import com.mygdx.game.event.ore.IOreListener;
-import com.mygdx.game.event.general.Listener;
-import com.mygdx.game.event.ore.Ore;
-import com.mygdx.game.event.ore.OreListener;
-import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.items.resources.IResource;
 import com.mygdx.game.items.resources.Coal;
 import com.mygdx.game.items.resources.Diamond;
@@ -27,17 +17,17 @@ import com.mygdx.game.items.resources.Redstone;
 /**
  * The class where the logic and calculations of the Miner will occur.
  */
-public class MinerModel implements IListener, IOreListener {
+public class MinerModel implements com.mygdx.game.event.general.IListener, com.mygdx.game.event.ore.IOreListener {
 
     private FuelTank ft;
     private Miner miner;
     private Hull hull;
     private Inventory inventory;
 
-    private int fuelCost = 250;
-    private int hullCost = 250;
-    private int fuelUpgradeCost = 250;
-    private int hullUpgradeCost = 250;
+    private final int fuelCost = 250;
+    private final int hullCost = 250;
+    private final int fuelUpgradeCost = 250;
+    private final int hullUpgradeCost = 250;
 
     private float previousSpeed = 0;
 
@@ -52,21 +42,16 @@ public class MinerModel implements IListener, IOreListener {
         this.hull = new Hull();
         this.miner = new Miner(world);
         this.inventory = new Inventory();
-        Listener.BUS.addListener(this);
-        OreListener.ORE.addListener(this);
+        com.mygdx.game.event.general.Listener.BUS.addListener(this);
+        com.mygdx.game.event.ore.OreListener.ORE.addListener(this);
     }
 
-    /**
-     * Getter for our miner
-     *
-     * @return this.miner
-     */
 
     public void update() {
         if (minerFell()) hull.adjustHull(previousSpeed);
 
         ft.adjustFuel((int) miner.b2body.getLinearVelocity().x, (int) miner.b2body.getLinearVelocity().y);
-        HudUpdater.BUS.updateHud(new HudData(ft.getFuelString(), hull.getHullString(), inventory.getCashString(), ft.fuelColor()));
+        com.mygdx.game.event.hud.HudUpdater.BUS.updateHud(new com.mygdx.game.event.hud.HudData(ft.getFuelString(), hull.getHullString(), inventory.getCashString(), ft.fuelColor()));
 
         previousSpeed = miner.b2body.getLinearVelocity().y;
     }
@@ -106,52 +91,52 @@ public class MinerModel implements IListener, IOreListener {
 
 
     @Override
-    public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.FUELREPAIR) {
+    public void update(com.mygdx.game.event.general.Shout shout) {
+        if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.FUELREPAIR) {
             if(inventory.getCash() >= fuelCost) {
                 ft.repair();
                 inventory.decreaseCash(fuelCost);
-                MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.FUELREPAIR, fuelCost));
+                com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.FUELREPAIR, fuelCost));
             }
             else{
-                MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.ERROR, 0));
+                com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.ERROR, 0));
             }
 
-        } else if (shout.getTag() == Shout.Tag.HULLREPAIR) {
+        } else if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.HULLREPAIR) {
             if(inventory.getCash() >= hullCost) {
                 hull.repair();
                 inventory.decreaseCash(hullCost);
-                MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.HULLREPAIR, hullCost));
+                com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.HULLREPAIR, hullCost));
             }
             else{
-                MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.ERROR, 0));
+                com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.ERROR, 0));
             }
 
-        } else if (shout.getTag() == Shout.Tag.FUELUPGRADE) {
+        } else if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.FUELUPGRADE) {
                 if(inventory.getCash() >= fuelUpgradeCost) {
                     ft.upgrade();
                     inventory.decreaseCash(fuelUpgradeCost);
-                    MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.FUELUPGRADE, fuelUpgradeCost));
+                    com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.FUELUPGRADE, fuelUpgradeCost));
                 }
                 else{
-                    MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.ERROR, 0));
+                    com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.ERROR, 0));
                 }
 
-        } else if (shout.getTag() == Shout.Tag.HULLUPGRADE) {
+        } else if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.HULLUPGRADE) {
                 if(inventory.getCash() >= hullUpgradeCost) {
                     hull.upgrade();
                     inventory.decreaseCash(hullUpgradeCost);
-                    MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.HULLUPGRADE, hullUpgradeCost));
+                    com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.HULLUPGRADE, hullUpgradeCost));
                 }
                 else{
-                    MessageListener.BUS.updateMessage(new MessageData(MessageData.MessageType.ERROR, 0));
+                    com.mygdx.game.event.messages.MessageListener.BUS.updateMessage(new com.mygdx.game.event.messages.MessageData(com.mygdx.game.event.messages.MessageData.MessageType.ERROR, 0));
                 }
         }
     }
 
     @Override
-    public void update(Ore ore) {
-        if (ore.getCommand() == Ore.OreCommand.SELL) {
+    public void update(com.mygdx.game.event.ore.Ore ore) {
+        if (ore.getCommand() == com.mygdx.game.event.ore.Ore.OreCommand.SELL) {
             inventory.sellInventory();
             System.out.println(inventory.getCash());
         }

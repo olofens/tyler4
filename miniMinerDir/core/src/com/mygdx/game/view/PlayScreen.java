@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Tools.MinerDrawOptions;
+import com.mygdx.game.model.MinerDrawOptions;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.Utils.Constants;
 import com.mygdx.game.model.GameWorld;
@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
 
     // Hud variables
-    private Hud hud;
+    private com.mygdx.game.ctrl.Hud hud;
     private HudView hudView;
 
     // GameModel variables
@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
         gameCam = new OrthographicCamera();
         viewPort = new FitViewport(Constants.V_WIDTH / Constants.PPM,
                 Constants.V_HEIGHT / Constants.PPM, gameCam);
-        hud = new Hud(game.batch);
+        hud = new com.mygdx.game.ctrl.Hud(game.batch);
         hudView = HudView.getInstance(game.batch);
 
 

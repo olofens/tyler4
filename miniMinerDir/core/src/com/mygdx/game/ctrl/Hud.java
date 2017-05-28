@@ -1,9 +1,10 @@
-package com.mygdx.game.view;
+package com.mygdx.game.ctrl;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import com.mygdx.game.event.drill.DrillData;
 import com.mygdx.game.event.drill.DrillListener;
 import com.mygdx.game.event.general.IListener;
@@ -12,6 +13,7 @@ import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.event.messages.IMessageListener;
 import com.mygdx.game.event.messages.MessageData;
 import com.mygdx.game.event.messages.MessageListener;
+import com.mygdx.game.view.HudView;
 
 /**
  * Created by erikstrid on 2017-04-02.
@@ -23,7 +25,7 @@ public class Hud implements IListener, IMessageListener {
 
     public Hud(SpriteBatch spriteBatch) {
 
-        hudView = com.mygdx.game.view.HudView.getInstance(spriteBatch);
+        hudView = HudView.getInstance(spriteBatch);
 
         Listener.BUS.addListener(this);
         MessageListener.BUS.addListener(this);

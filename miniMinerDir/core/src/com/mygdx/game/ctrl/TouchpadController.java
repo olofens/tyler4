@@ -17,7 +17,7 @@ import com.mygdx.game.event.general.Shout;
 
 public class TouchpadController {
 
-    
+
     private Touchpad touchpad;
 
     private DrillData.DrillDirection prevDirection;
@@ -28,19 +28,19 @@ public class TouchpadController {
         touchpad = tpv.getTouchpad();
     }
 
-    public boolean isTouchingUp() {
+    private boolean isTouchingUp() {
         return touchpad.getKnobPercentY() > 0.5;
     }
 
-    public boolean isTouchingRight() {
+    private boolean isTouchingRight() {
         return touchpad.getKnobPercentX() > 0;
     }
 
-    public boolean isTouchingLeft() {
+    private boolean isTouchingLeft() {
         return touchpad.getKnobPercentX() < 0;
     }
 
-    public boolean isTouchingDown() {
+    private boolean isTouchingDown() {
         return touchpad.getKnobPercentY() < -0.4;
     }
 

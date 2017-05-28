@@ -1,4 +1,4 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.model;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;

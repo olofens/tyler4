@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Game;
+import com.mygdx.game.view.StartMenuScreen;
 import com.mygdx.game.view.MiniMiner;
 import com.mygdx.game.view.ScreenSetter;
 import com.mygdx.game.view.GameOverScreen;
@@ -35,7 +36,7 @@ public class ScreenSetterTest {
         ScreenSetter sh = new ScreenSetter(game);
         sh.createStartMenuScreen();
 
-        assertTrue(game.getScreen() instanceof com.mygdx.game.view.StartMenuScreen);
+        assertTrue(game.getScreen() instanceof StartMenuScreen);
 
     }
 

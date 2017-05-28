@@ -1,4 +1,4 @@
-package com.mygdx.game.Tools;
+package com.mygdx.game.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,25 +7,17 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.game.event.drill.DrillData;
-import com.mygdx.game.event.drill.DrillListener;
-import com.mygdx.game.event.drill.IDrillListener;
-import com.mygdx.game.event.general.IListener;
-import com.mygdx.game.event.general.Listener;
-import com.mygdx.game.event.ore.Ore;
-import com.mygdx.game.event.ore.OreListener;
-import com.mygdx.game.event.general.Shout;
 import com.mygdx.game.items.resources.IResource;
 
 /**
  * Created by Olof Enström on 2017-04-26.
  */
 
-public class MinerWorldContactListener implements ContactListener, IListener, IDrillListener {
+public class MinerWorldContactListener implements ContactListener, com.mygdx.game.event.general.IListener, com.mygdx.game.event.drill.IDrillListener {
     private Fixture a;
     private Fixture b;
     private boolean minerButtonPressed;
-    private DrillData.DrillDirection lastDirection;
+    private com.mygdx.game.event.drill.DrillData.DrillDirection lastDirection;
 
     private Fixture rightTile;
     private Fixture bottomTile;
@@ -37,8 +29,8 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
 
     public MinerWorldContactListener() {
         minerButtonPressed = false;
-        Listener.BUS.addListener(this);
-        DrillListener.BUS.addListener(this);
+        com.mygdx.game.event.general.Listener.BUS.addListener(this);
+        com.mygdx.game.event.drill.DrillListener.BUS.addListener(this);
     }
 
     @Override
@@ -50,12 +42,12 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
         //Checks the popup for store with the BUS listener
         if (inContact("miner", "store")) {
             System.out.println("Welcome to the store!");
-            Listener.BUS.update(new Shout(Shout.Tag.STORE));
+            com.mygdx.game.event.general.Listener.BUS.update(new com.mygdx.game.event.general.Shout(com.mygdx.game.event.general.Shout.Tag.STORE));
             //Calling Ore-bus to make minerModel sell minerals
-            OreListener.ORE.update(new Ore(Ore.OreCommand.SELL));
+            com.mygdx.game.event.ore.OreListener.ORE.update(new com.mygdx.game.event.ore.Ore(com.mygdx.game.event.ore.Ore.OreCommand.SELL));
         } else if (inContact("miner", "storeUpgrade")) {
             System.out.println("Welcome to upgrades!");
-            Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
+            com.mygdx.game.event.general.Listener.BUS.update(new com.mygdx.game.event.general.Shout(com.mygdx.game.event.general.Shout.Tag.STORE_UPGRADE));
         }
 
         //NEW
@@ -94,10 +86,10 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
         b = contact.getFixtureB();
         //Checkout for the store by end of contact (temp?)
         if (inContact("miner", "store")) {
-            Listener.BUS.update(new Shout(Shout.Tag.STORE));
+            com.mygdx.game.event.general.Listener.BUS.update(new com.mygdx.game.event.general.Shout(com.mygdx.game.event.general.Shout.Tag.STORE));
             System.out.println("Hope to see you soon!");
         } else if (inContact("miner", "storeUpgrade")) {
-            Listener.BUS.update(new Shout(Shout.Tag.STORE_UPGRADE));
+            com.mygdx.game.event.general.Listener.BUS.update(new com.mygdx.game.event.general.Shout(com.mygdx.game.event.general.Shout.Tag.STORE_UPGRADE));
         }
 
         if(a.getUserData()=="drill"||b.getUserData()=="drill") {
@@ -169,18 +161,18 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
         //Calls object for drilling and updates inventory via Ore-bus
         if(object.getUserData() instanceof IResource && minerButtonPressed){
             ((IResource) object.getUserData()).onDrillHit();
-            OreListener.ORE.update((IResource)object.getUserData());
+            com.mygdx.game.event.ore.OreListener.ORE.update((IResource)object.getUserData());
         }
     }
 
-    private void drill(DrillData.DrillDirection direction) {
-        if (direction == DrillData.DrillDirection.RIGHT && rightTile != null) {
+    private void drill(com.mygdx.game.event.drill.DrillData.DrillDirection direction) {
+        if (direction == com.mygdx.game.event.drill.DrillData.DrillDirection.RIGHT && rightTile != null) {
             resolveContact(rightTile);
             rightTile = null;
-        } else if (direction == DrillData.DrillDirection.LEFT && leftTile != null) {
+        } else if (direction == com.mygdx.game.event.drill.DrillData.DrillDirection.LEFT && leftTile != null) {
             resolveContact(leftTile);
             leftTile = null;
-        } else if (direction == DrillData.DrillDirection.DOWN && bottomTile != null) {
+        } else if (direction == com.mygdx.game.event.drill.DrillData.DrillDirection.DOWN && bottomTile != null) {
             resolveContact(bottomTile);
             bottomTile = null;
             System.out.println("ran drilldown");
@@ -189,14 +181,14 @@ public class MinerWorldContactListener implements ContactListener, IListener, ID
 
 
     @Override
-    public void update(Shout shout) {
-        if (shout.getTag() == Shout.Tag.DRILL) {
+    public void update(com.mygdx.game.event.general.Shout shout) {
+        if (shout.getTag() == com.mygdx.game.event.general.Shout.Tag.DRILL) {
             //minerButtonPressed = !minerButtonPressed;
         }
     }
 
     @Override
-    public void update(DrillData drillData) {
+    public void update(com.mygdx.game.event.drill.DrillData drillData) {
         if (!drillData.getNewDirection()) {
             lastDirection = drillData.getDrillDirection();
             minerButtonPressed = !minerButtonPressed;
