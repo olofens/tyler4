@@ -1,4 +1,4 @@
-package com.mygdx.game.model;
+package com.mygdx.game.event.drill;
 
 /**
  * Created by Olof Enström on 2017-05-18.

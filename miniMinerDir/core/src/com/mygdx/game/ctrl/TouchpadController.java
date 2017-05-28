@@ -5,10 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.mygdx.game.view.TouchpadView;
-import com.mygdx.game.model.DrillData;
-import com.mygdx.game.model.DrillListener;
-import com.mygdx.game.model.Listener;
-import com.mygdx.game.model.Shout;
+import com.mygdx.game.event.drill.DrillData;
+import com.mygdx.game.event.drill.DrillListener;
+import com.mygdx.game.event.general.Listener;
+import com.mygdx.game.event.general.Shout;
 
 /**
  * Created by erikstrid on 2017-05-10.
