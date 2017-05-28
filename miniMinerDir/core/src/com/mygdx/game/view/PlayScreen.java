@@ -50,9 +50,9 @@ public class PlayScreen implements Screen {
 
 
 
-    Vector2 v2;
+    private Vector2 v2;
 
-    public enum State {
+    private enum State {
         PAUSE,
         RESUME
     }
@@ -86,7 +86,7 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(gameWorld.getMap(), 1 / Constants.PPM);
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
 
-        //TODO MOVE TO ASSETHANDLER
+        //TODO ASSETHANDLER
         minerIMG = new Texture("driller_neutral_right1.png");
         minerSprite = new Sprite(minerIMG);
 
@@ -99,11 +99,6 @@ public class PlayScreen implements Screen {
         state = State.RESUME;
     }
 
-    @Override
-    public void show() {
-
-    }
-
     private void checkState() {
         if (hud.isPaused()) {
             this.state = State.PAUSE;
@@ -112,9 +107,6 @@ public class PlayScreen implements Screen {
         }
     }
 
-    /**
-     * @param dt
-     */
     public void update(float dt) {
         checkState();
 
@@ -130,7 +122,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float dt) {
-
         if (state.equals(State.RESUME)) {
             renderResume(dt);
         } else {
@@ -138,7 +129,7 @@ public class PlayScreen implements Screen {
         }
     }
 
-    public void renderResume(float dt) {
+    private void renderResume(float dt) {
         Gdx.input.setInputProcessor(hudView.stage);
         update(dt);
 
@@ -256,6 +247,11 @@ public class PlayScreen implements Screen {
     @Override
     public void resume() {
         this.state = State.RESUME;
+
+    }
+
+    @Override
+    public void show() {
 
     }
 
